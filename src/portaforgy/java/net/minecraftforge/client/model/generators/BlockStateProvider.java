@@ -27,8 +27,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import org.apache.logging.log4j.LogManager;

@@ -57,7 +57,6 @@ import net.minecraft.world.level.material.Fluid;
 
 import appeng.api.config.AccessRestriction;
 import appeng.api.config.Actionable;
-import appeng.api.config.PowerMultiplier;
 import appeng.api.config.PowerUnits;
 import appeng.api.config.SearchBoxMode;
 import appeng.api.config.SecurityPermissions;
@@ -66,7 +65,6 @@ import appeng.api.implementations.items.IAEItemPowerStorage;
 import appeng.api.networking.IGrid;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IManagedGridNode;
-import appeng.api.networking.energy.IEnergySource;
 import appeng.api.networking.security.IActionHost;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.stacks.AEItemKey;

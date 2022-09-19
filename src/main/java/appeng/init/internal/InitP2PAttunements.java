@@ -20,8 +20,6 @@ package appeng.init.internal;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 
-import team.reborn.energy.api.EnergyStorage;
-
 import appeng.api.features.P2PTunnelAttunement;
 import appeng.core.definitions.AEParts;
 import appeng.core.localization.GuiText;

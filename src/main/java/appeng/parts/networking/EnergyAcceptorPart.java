@@ -22,7 +22,6 @@ import net.minecraft.resources.ResourceLocation;
 
 import appeng.api.config.AccessRestriction;
 import appeng.api.config.Actionable;
-import appeng.api.config.PowerMultiplier;
 import appeng.api.config.PowerUnits;
 import appeng.api.parts.IPartCollisionHelper;
 import appeng.api.parts.IPartItem;

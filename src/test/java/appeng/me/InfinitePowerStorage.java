@@ -2,7 +2,6 @@ package appeng.me;
 
 import appeng.api.config.AccessRestriction;
 import appeng.api.config.Actionable;
-import appeng.api.config.PowerMultiplier;
 import appeng.api.networking.energy.IAEPowerStorage;
 
 /**

@@ -29,8 +29,6 @@ import net.minecraft.world.phys.AABB;
 import appeng.api.behaviors.PickupSink;
 import appeng.api.behaviors.PickupStrategy;
 import appeng.api.config.Actionable;
-import appeng.api.config.PowerMultiplier;
-import appeng.api.networking.energy.IEnergySource;
 import appeng.api.stacks.AEItemKey;
 import appeng.core.AppEng;
 import appeng.core.sync.packets.BlockTransitionEffectPacket;

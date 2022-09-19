@@ -24,7 +24,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 
-import appeng.api.config.Actionable;
 import appeng.core.AEConfig;
 import appeng.core.AppEng;
 import appeng.core.sync.packets.LightningPacket;

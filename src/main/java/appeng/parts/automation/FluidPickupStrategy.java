@@ -15,7 +15,6 @@ import appeng.api.behaviors.PickupSink;
 import appeng.api.behaviors.PickupStrategy;
 import appeng.api.config.Actionable;
 import appeng.api.ids.AETags;
-import appeng.api.networking.energy.IEnergySource;
 import appeng.api.stacks.AEFluidKey;
 import appeng.core.AppEng;
 import appeng.core.sync.packets.BlockTransitionEffectPacket;

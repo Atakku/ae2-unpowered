@@ -27,8 +27,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import appeng.api.config.Actionable;
-import appeng.api.config.PowerMultiplier;
 import appeng.api.config.YesNo;
 import appeng.api.implementations.items.ISpatialStorageCell;
 import appeng.api.inventories.InternalInventory;

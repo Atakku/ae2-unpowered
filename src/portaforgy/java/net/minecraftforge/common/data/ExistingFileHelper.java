@@ -31,8 +31,6 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
-import net.fabricmc.fabric.impl.resource.loader.FabricModResourcePack;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.resources.ClientPackSource;
 import net.minecraft.client.resources.AssetIndex;
 import net.minecraft.client.resources.DefaultClientPackResources;
@@ -51,8 +49,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ModelBuilder;
 
 import javax.annotation.Nullable;
-
-import static net.fabricmc.loader.api.FabricLoader.getInstance;
 
 /**
  * Enables data providers to check if other data files currently exist. The

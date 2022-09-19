@@ -55,7 +55,6 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult.Type;
 
-import appeng.api.config.Actionable;
 import appeng.api.util.DimensionalBlockPos;
 import appeng.block.misc.TinyTNTBlock;
 import appeng.core.AEConfig;

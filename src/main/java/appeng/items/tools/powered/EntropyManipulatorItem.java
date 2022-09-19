@@ -77,15 +77,8 @@ public class EntropyManipulatorItem extends AEBasePoweredItem implements IBlockT
     }
 
     @Override
-    public double getChargeRate(ItemStack stack) {
-        return 800d;
-    }
-
-    @Override
     public boolean hurtEnemy(ItemStack item, LivingEntity target, LivingEntity hitter) {
-        if (this.getAECurrentPower(item) > ENERGY_PER_USE) {
-            target.setSecondsOnFire(8);
-        }
+        target.setSecondsOnFire(8);
 
         return false;
     }
@@ -134,20 +127,16 @@ public class EntropyManipulatorItem extends AEBasePoweredItem implements IBlockT
             pos = target.getBlockPos();
         }
 
-        if (this.getAECurrentPower(item) > ENERGY_PER_USE) {
-            if (!p.mayUseItemAt(pos, side, item)) {
-                return InteractionResult.FAIL;
-            }
-
-            // Delegate to the server from here on
-            if (!level.isClientSide() && !tryApplyEffect(level, item, pos, side, p, tryBoth)) {
-                return InteractionResult.FAIL;
-            }
-
-            return InteractionResult.sidedSuccess(level.isClientSide());
+        if (!p.mayUseItemAt(pos, side, item)) {
+            return InteractionResult.FAIL;
         }
 
-        return InteractionResult.PASS;
+        // Delegate to the server from here on
+        if (!level.isClientSide() && !tryApplyEffect(level, item, pos, side, p, tryBoth)) {
+            return InteractionResult.FAIL;
+        }
+
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     private boolean tryApplyEffect(Level level, ItemStack item, BlockPos pos, Direction side, Player p,

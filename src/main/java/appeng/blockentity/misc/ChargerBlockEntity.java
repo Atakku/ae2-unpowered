@@ -32,7 +32,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import appeng.api.config.Actionable;
 import appeng.api.config.PowerUnits;
-import appeng.api.implementations.items.IAEItemPowerStorage;
 import appeng.api.inventories.InternalInventory;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.ticking.IGridTickable;
@@ -167,34 +166,7 @@ public class ChargerBlockEntity extends AENetworkPowerBlockEntity implements IGr
 
         if (!myItem.isEmpty()) {
 
-            if (Platform.isChargeable(myItem)) {
-                var ps = (IAEItemPowerStorage) myItem.getItem();
-
-                var currentPower = ps.getAECurrentPower(myItem);
-                var maxPower = ps.getAEMaxPower(myItem);
-                if (currentPower < maxPower) {
-                    // Since we specify the charge rate in "per tick", calculate it per tick of the charger,
-                    // which only ticks once every few actual game ticks.
-                    var chargeRate = ps.getChargeRate(myItem) * ticksSinceLastCall
-                            * AEConfig.instance().getChargerChargeRate();
-
-                    // First charge from the local buffer
-                    double extractedAmount = chargeRate;
-
-                    var missingChargeRate = chargeRate - extractedAmount;
-                    var missingAEPower = maxPower - currentPower;
-                    var toExtract = Math.min(missingChargeRate, missingAEPower);
-
-                    if (extractedAmount > 0) {
-                        var adjustment = ps.injectAEPower(myItem, extractedAmount, Actionable.MODULATE);
-
-                        this.setInternalCurrentPower(this.getInternalCurrentPower() + adjustment);
-
-                        this.working = true;
-                        changed = true;
-                    }
-                }
-            } else if (this.getInternalCurrentPower() > POWER_THRESHOLD
+            if (this.getInternalCurrentPower() > POWER_THRESHOLD
                     && AEItems.CERTUS_QUARTZ_CRYSTAL.isSameAs(myItem)) {
                 this.working = true;
                 if (Platform.getRandomFloat() > 0.8f) {
@@ -234,13 +206,6 @@ public class ChargerBlockEntity extends AENetworkPowerBlockEntity implements IGr
         @Override
         public boolean allowExtract(InternalInventory inv, int slotIndex, int amount) {
             ItemStack extractedItem = inv.getStackInSlot(slotIndex);
-
-            if (Platform.isChargeable(extractedItem)) {
-                final IAEItemPowerStorage ips = (IAEItemPowerStorage) extractedItem.getItem();
-                if (ips.getAECurrentPower(extractedItem) >= ips.getAEMaxPower(extractedItem)) {
-                    return true;
-                }
-            }
 
             return AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED.isSameAs(extractedItem);
         }

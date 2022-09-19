@@ -75,11 +75,6 @@ public class WirelessTerminalItem extends AEBasePoweredItem implements IMenuItem
         super(powerCapacity, props);
     }
 
-    @Override
-    public double getChargeRate(ItemStack stack) {
-        return 800d + 800d * getUpgrades(stack).getInstalledUpgrades(AEItems.ENERGY_CARD);
-    }
-
     /**
      * Open a wireless terminal from a slot in the player inventory, i.e. activated via hotkey.
      * 
@@ -198,7 +193,7 @@ public class WirelessTerminalItem extends AEBasePoweredItem implements IMenuItem
      * @return returns true if there is any power left.
      */
     public boolean hasPower(Player player, double amt, ItemStack is) {
-        return getAECurrentPower(is) >= amt;
+        return true;
     }
 
     /**

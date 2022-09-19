@@ -59,7 +59,6 @@ import appeng.api.config.Actionable;
 import appeng.api.config.SearchBoxMode;
 import appeng.api.config.SecurityPermissions;
 import appeng.api.config.SortOrder;
-import appeng.api.implementations.items.IAEItemPowerStorage;
 import appeng.api.networking.IGrid;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IManagedGridNode;
@@ -272,10 +271,6 @@ public class Platform {
     public static boolean isChargeable(ItemStack i) {
         if (i.isEmpty()) {
             return false;
-        }
-        if (i.getItem() instanceof IAEItemPowerStorage powerStorage) {
-            return powerStorage.getAEMaxPower(i) > 0 &&
-                    powerStorage.getPowerFlow(i) != AccessRestriction.READ;
         }
         return false;
     }

@@ -7,7 +7,6 @@ import team.reborn.energy.api.EnergyStorage;
 
 import appeng.api.behaviors.GenericInternalInventory;
 import appeng.api.implementations.blockentities.ICraftingMachine;
-import appeng.api.implementations.items.IAEItemPowerStorage;
 import appeng.api.inventories.PartApiLookup;
 import appeng.api.storage.IStorageMonitorableAccessor;
 import appeng.blockentity.AEBaseInvBlockEntity;
@@ -41,7 +40,6 @@ public final class InitApiLookup {
         initMEChest();
         initMisc();
         initP2P();
-        initPoweredItem();
 
         ItemStorage.SIDED.registerFallback((world, pos, state, blockEntity, direction) -> {
             if (blockEntity instanceof AEBaseInvBlockEntity baseInvBlockEntity) {
@@ -127,14 +125,4 @@ public final class InitApiLookup {
         PartApiLookup.register(ItemStorage.SIDED, (part, direction) -> part.getLogic().getBlankPatternInv().toStorage(),
                 PatternEncodingTerminalPart.class);
     }
-
-    private static void initPoweredItem() {
-        EnergyStorage.ITEM.registerFallback((itemStack, context) -> {
-            if (itemStack.getItem() instanceof IAEItemPowerStorage) {
-                return new PoweredItemCapabilities(context);
-            }
-            return null;
-        });
-    }
-
 }

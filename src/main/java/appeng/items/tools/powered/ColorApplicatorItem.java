@@ -124,11 +124,6 @@ public class ColorApplicatorItem extends AEBasePoweredItem
     }
 
     @Override
-    public double getChargeRate(ItemStack stack) {
-        return 80d + 80d * getUpgrades(stack).getInstalledUpgrades(AEItems.ENERGY_CARD);
-    }
-
-    @Override
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
@@ -166,7 +161,6 @@ public class ColorApplicatorItem extends AEBasePoweredItem
                 // clean cables.
                 if (p != null
                         && be instanceof IColorableBlockEntity colorableBlockEntity
-                        && this.getAECurrentPower(is) > POWER_PER_USE
                         && colorableBlockEntity.getColor() != AEColor.TRANSPARENT) {
                     if (colorableBlockEntity.recolourBlock(side, AEColor.TRANSPARENT, p)) {
                         consumeItem(is, paintBallKey, false);
@@ -177,7 +171,7 @@ public class ColorApplicatorItem extends AEBasePoweredItem
                 // clean paint balls..
                 final Block testBlk = level.getBlockState(pos.relative(side)).getBlock();
                 final BlockEntity painted = level.getBlockEntity(pos.relative(side));
-                if (this.getAECurrentPower(is) > POWER_PER_USE && testBlk instanceof PaintSplotchesBlock
+                if (testBlk instanceof PaintSplotchesBlock
                         && painted instanceof PaintSplotchesBlockEntity) {
                     consumeItem(is, paintBallKey, false);
                     ((PaintSplotchesBlockEntity) painted).cleanSide(side.getOpposite());
@@ -187,7 +181,6 @@ public class ColorApplicatorItem extends AEBasePoweredItem
                 final AEColor color = this.getColorFromItem(paintBall);
 
                 if (color != null
-                        && this.getAECurrentPower(is) > POWER_PER_USE
                         && color != AEColor.TRANSPARENT
                         && this.recolourBlock(blk, side, level, pos, color, p)) {
                     consumeItem(is, paintBallKey, false);
@@ -545,8 +538,6 @@ public class ColorApplicatorItem extends AEBasePoweredItem
         upgrades.addItems(AEItems.ENERGY_CARD.stack());
         upgrades.addItems(AEItems.ENERGY_CARD.stack());
 
-        // Fill it up with power
-        item.injectAEPower(applicator, item.getAEMaxPower(applicator), Actionable.MODULATE);
         return applicator;
     }
 

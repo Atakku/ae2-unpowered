@@ -27,7 +27,6 @@ import net.minecraft.util.Mth;
 import mcp.mobius.waila.api.IBlockAccessor;
 import mcp.mobius.waila.api.IPluginConfig;
 
-import appeng.api.implementations.items.IAEItemPowerStorage;
 import appeng.blockentity.misc.ChargerBlockEntity;
 import appeng.core.localization.InGameTooltip;
 import appeng.integration.modules.waila.BaseDataProvider;
@@ -48,14 +47,6 @@ public final class ChargerDataProvider extends BaseDataProvider {
             if (!chargingItem.isEmpty()) {
                 tooltip.add(InGameTooltip.Contains.text(
                         chargingItem.getHoverName().copy().withStyle(ChatFormatting.WHITE)));
-
-                if (chargingItem.getItem() instanceof IAEItemPowerStorage powerStorage
-                        && Platform.isChargeable(chargingItem)) {
-                    var fillRate = Mth.floor(powerStorage.getAECurrentPower(chargingItem) * 100 /
-                            powerStorage.getAEMaxPower(chargingItem));
-                    tooltip.add(InGameTooltip.Charged.text(
-                            fillRate));
-                }
             }
         }
 

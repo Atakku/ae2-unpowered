@@ -293,13 +293,6 @@ public abstract class P2PTunnelPart<T extends P2PTunnelPart<T>> extends BasicSta
 
     }
 
-    protected void queueTunnelDrain(PowerUnits unit, double f, TransactionContext transaction) {
-        final double ae_to_tax = unit.convertTo(PowerUnits.AE, f * AEConfig.TUNNEL_POWER_LOSS);
-
-        energyDrainHandler.updateSnapshots(transaction);
-        energyDrainHandler.pendingEnergy += ae_to_tax;
-    }
-
     public short getFrequency() {
         return this.freq;
     }

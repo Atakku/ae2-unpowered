@@ -30,12 +30,9 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
-import appeng.api.config.AccessRestriction;
-import appeng.api.config.Actionable;
-import appeng.api.implementations.items.IAEItemPowerStorage;
 import appeng.core.localization.Tooltips;
 
-public class AEBaseBlockItemChargeable extends AEBaseBlockItem implements IAEItemPowerStorage {
+public class AEBaseBlockItemChargeable extends AEBaseBlockItem {
 
     public AEBaseBlockItemChargeable(Block block, Item.Properties props) {
         super(block, props);
@@ -57,43 +54,6 @@ public class AEBaseBlockItemChargeable extends AEBaseBlockItem implements IAEIte
             lines.add(
                     Tooltips.energyStorageComponent(internalCurrentPower, internalMaxPower));
         }
-    }
-
-    @Override
-    public double injectAEPower(ItemStack is, double amount, Actionable mode) {
-        final double internalCurrentPower = this.getInternal(is);
-        final double internalMaxPower = this.getAEMaxPower(is);
-        final double required = internalMaxPower - internalCurrentPower;
-        final double overflow = Math.max(0, Math.min(amount - required, amount));
-
-        if (mode == Actionable.MODULATE) {
-            final double toAdd = Math.min(required, amount);
-            final double newPowerStored = internalCurrentPower + toAdd;
-
-            this.setInternal(is, newPowerStored);
-        }
-
-        return overflow;
-    }
-
-    @Override
-    public double getAEMaxPower(ItemStack is) {
-        return this.getMaxEnergyCapacity();
-    }
-
-    @Override
-    public double getAECurrentPower(ItemStack is) {
-        return this.getInternal(is);
-    }
-
-    @Override
-    public AccessRestriction getPowerFlow(ItemStack is) {
-        return AccessRestriction.WRITE;
-    }
-
-    @Override
-    public double getChargeRate(ItemStack stack) {
-        return 1600d;
     }
 
     private double getMaxEnergyCapacity() {

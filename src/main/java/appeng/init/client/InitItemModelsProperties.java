@@ -70,8 +70,8 @@ public final class InitItemModelsProperties {
             FabricModelPredicateProviderRegistry.register(chargeable,
                     ENERGY_FILL_LEVEL_ID,
                     (is, level, entity, seed) -> {
-                        double curPower = chargeable.getAECurrentPower(is);
-                        double maxPower = chargeable.getAEMaxPower(is);
+                        double curPower = 1;
+                        double maxPower = 1;
 
                         return (int) Math.round(100 * curPower / maxPower);
                     });

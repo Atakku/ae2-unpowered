@@ -36,11 +36,10 @@ import net.minecraft.world.level.Level;
 
 import appeng.api.config.AccessRestriction;
 import appeng.api.config.Actionable;
-import appeng.api.implementations.items.IAEItemPowerStorage;
 import appeng.core.localization.Tooltips;
 import appeng.items.AEBaseItem;
 
-public abstract class AEBasePoweredItem extends AEBaseItem implements IAEItemPowerStorage {
+public abstract class AEBasePoweredItem extends AEBaseItem {
     // Any energy capacity below this threshold will be clamped to zero
     private static final double MIN_POWER = 0.0001;
     private static final String CURRENT_POWER_NBT_KEY = "internalCurrentPower";
@@ -52,30 +51,12 @@ public abstract class AEBasePoweredItem extends AEBaseItem implements IAEItemPow
         this.powerCapacity = powerCapacity;
     }
 
-    @Environment(EnvType.CLIENT)
-    @Override
-    public void appendHoverText(ItemStack stack, Level level, List<Component> lines,
-            TooltipFlag advancedTooltips) {
-        final CompoundTag tag = stack.getTag();
-        double internalCurrentPower = 0;
-        final double internalMaxPower = this.getAEMaxPower(stack);
-
-        if (tag != null) {
-            internalCurrentPower = tag.getDouble(CURRENT_POWER_NBT_KEY);
-        }
-
-        lines.add(
-                Tooltips.energyStorageComponent(internalCurrentPower, internalMaxPower));
-
-    }
-
     @Override
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
         super.fillItemCategory(group, items);
 
         if (this.allowdedIn(group)) {
             final ItemStack charged = new ItemStack(this, 1);
-            injectAEPower(charged, getAEMaxPower(charged), Actionable.MODULATE);
             items.add(charged);
         }
     }
@@ -87,7 +68,7 @@ public abstract class AEBasePoweredItem extends AEBaseItem implements IAEItemPow
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        double filled = getAECurrentPower(stack) / getAEMaxPower(stack);
+        double filled = 1;
         return Mth.clamp((int) (filled * 13), 0, 13);
     }
 
@@ -95,32 +76,6 @@ public abstract class AEBasePoweredItem extends AEBaseItem implements IAEItemPow
     public int getBarColor(ItemStack stack) {
         // This is the standard green color of full durability bars
         return Mth.hsvToRgb(1 / 3.0F, 1.0F, 1.0F);
-    }
-
-    @Override
-    public double injectAEPower(ItemStack stack, double amount, Actionable mode) {
-        final double maxStorage = this.getAEMaxPower(stack);
-        final double currentStorage = this.getAECurrentPower(stack);
-        final double required = maxStorage - currentStorage;
-        final double overflow = Math.max(0, Math.min(amount - required, amount));
-
-        if (mode == Actionable.MODULATE) {
-            var toAdd = Math.min(amount, required);
-            setAECurrentPower(stack, currentStorage + toAdd);
-        }
-
-        return overflow;
-    }
-
-    @Override
-    public double getAEMaxPower(ItemStack stack) {
-        // Allow per-item-stack overrides of the maximum power storage
-        var tag = stack.getTag();
-        if (tag != null && tag.contains(MAX_POWER_NBT_KEY, Tag.TAG_DOUBLE)) {
-            return tag.getDouble(MAX_POWER_NBT_KEY);
-        }
-
-        return this.powerCapacity.getAsDouble();
     }
 
     /**
@@ -134,12 +89,6 @@ public abstract class AEBasePoweredItem extends AEBaseItem implements IAEItemPow
             maxPower = defaultCapacity;
         } else {
             stack.getOrCreateTag().putDouble(MAX_POWER_NBT_KEY, maxPower);
-        }
-
-        // Clamp current power to be within bounds
-        var currentPower = getAECurrentPower(stack);
-        if (currentPower > maxPower) {
-            setAECurrentPower(stack, maxPower);
         }
     }
 
@@ -163,16 +112,6 @@ public abstract class AEBasePoweredItem extends AEBaseItem implements IAEItemPow
         stack.removeTagKey(MAX_POWER_NBT_KEY);
     }
 
-    @Override
-    public double getAECurrentPower(ItemStack is) {
-        var tag = is.getTag();
-        if (tag != null) {
-            return tag.getDouble(CURRENT_POWER_NBT_KEY);
-        } else {
-            return 0;
-        }
-    }
-
     protected final void setAECurrentPower(ItemStack stack, double power) {
         if (power < MIN_POWER) {
             stack.removeTagKey(CURRENT_POWER_NBT_KEY);
@@ -180,10 +119,4 @@ public abstract class AEBasePoweredItem extends AEBaseItem implements IAEItemPow
             stack.getOrCreateTag().putDouble(CURRENT_POWER_NBT_KEY, power);
         }
     }
-
-    @Override
-    public AccessRestriction getPowerFlow(ItemStack is) {
-        return AccessRestriction.WRITE;
-    }
-
 }

@@ -38,27 +38,18 @@ public class ChargedStaffItem extends AEBasePoweredItem {
 
     @Override
     public boolean hurtEnemy(ItemStack item, LivingEntity target, LivingEntity hitter) {
-        if (this.getAECurrentPower(item) > 300) {
-            if (!target.level.isClientSide()) {
-                for (int x = 0; x < 2; x++) {
-                    final AABB entityBoundingBox = target.getBoundingBox();
-                    final float dx = (float) (Platform.getRandomFloat() * target.getBbWidth() + entityBoundingBox.minX);
-                    final float dy = (float) (Platform.getRandomFloat() * target.getBbHeight()
-                            + entityBoundingBox.minY);
-                    final float dz = (float) (Platform.getRandomFloat() * target.getBbWidth() + entityBoundingBox.minZ);
-                    AppEng.instance().sendToAllNearExcept(null, dx, dy, dz, 32.0, target.level,
-                            new LightningPacket(dx, dy, dz));
-                }
+        if (!target.level.isClientSide()) {
+            for (int x = 0; x < 2; x++) {
+                final AABB entityBoundingBox = target.getBoundingBox();
+                final float dx = (float) (Platform.getRandomFloat() * target.getBbWidth() + entityBoundingBox.minX);
+                final float dy = (float) (Platform.getRandomFloat() * target.getBbHeight()
+                        + entityBoundingBox.minY);
+                final float dz = (float) (Platform.getRandomFloat() * target.getBbWidth() + entityBoundingBox.minZ);
+                AppEng.instance().sendToAllNearExcept(null, dx, dy, dz, 32.0, target.level,
+                        new LightningPacket(dx, dy, dz));
             }
-            target.hurt(DamageSource.MAGIC, 6);
-            return true;
         }
-
-        return false;
-    }
-
-    @Override
-    public double getChargeRate(ItemStack stack) {
-        return 32d;
+        target.hurt(DamageSource.MAGIC, 6);
+        return true;
     }
 }

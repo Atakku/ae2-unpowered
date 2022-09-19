@@ -96,11 +96,6 @@ public class MatterCannonItem extends AEBasePoweredItem implements IBasicCellIte
         super(AEConfig.instance().getMatterCannonBattery(), props);
     }
 
-    @Override
-    public double getChargeRate(ItemStack stack) {
-        return 800d + 800d * getUpgrades(stack).getInstalledUpgrades(AEItems.ENERGY_CARD);
-    }
-
     @Environment(EnvType.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> lines,
@@ -124,10 +119,6 @@ public class MatterCannonItem extends AEBasePoweredItem implements IBasicCellIte
     }
 
     public boolean fireCannon(Level level, ItemStack stack, Player player, LookDirection dir) {
-        if (getAECurrentPower(stack) < ENERGY_PER_SHOT) {
-            return false;
-        }
-
         var inv = StorageCells.getCellInventory(stack, null);
         if (inv == null) {
             return false;

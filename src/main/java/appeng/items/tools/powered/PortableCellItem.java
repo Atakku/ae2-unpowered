@@ -110,11 +110,6 @@ public class PortableCellItem extends AEBasePoweredItem
         this.keyType = keyType;
     }
 
-    @Override
-    public double getChargeRate(ItemStack stack) {
-        return 80d + 80d * getUpgrades(stack).getInstalledUpgrades(AEItems.ENERGY_CARD);
-    }
-
     /**
      * Open a Portable Cell from a slot in the player inventory, i.e. activated via hotkey.
      *
@@ -179,14 +174,8 @@ public class PortableCellItem extends AEBasePoweredItem
         if (inv.getAvailableStacks().isEmpty()) {
             playerInventory.setItem(playerInventory.selected, ItemStack.EMPTY);
 
-            var remainingEnergy = getAECurrentPower(stack);
             for (var ingredient : craftingRecipe.getIngredients()) {
                 var ingredientStack = ingredient.getItems()[0].copy();
-
-                // Dump remaining energy into whatever can accept it
-                if (remainingEnergy > 0 && ingredientStack.getItem() instanceof AEBaseBlockItemChargeable chargeable) {
-                    remainingEnergy = chargeable.injectAEPower(ingredientStack, remainingEnergy, Actionable.MODULATE);
-                }
 
                 playerInventory.placeItemBackInInventory(ingredientStack);
             }
@@ -397,11 +386,6 @@ public class PortableCellItem extends AEBasePoweredItem
 
     public static int getColor(ItemStack stack, int tintIndex) {
         if (tintIndex == 1 && stack.getItem() instanceof PortableCellItem portableCellItem) {
-            // If the cell is out of power, always display empty
-            if (portableCellItem.getAECurrentPower(stack) <= 0) {
-                return CellState.ABSENT.getStateColor();
-            }
-
             // Determine LED color
             var cellInv = StorageCells.getCellInventory(stack, null);
             var cellStatus = cellInv != null ? cellInv.getStatus() : CellState.EMPTY;

@@ -38,11 +38,11 @@ public interface PickupStrategy {
      * Pick up a given entity and place the result into the given pickup sink. Returns true if the entity was picked up
      * successfully. The strategy has to handle removal or modification of the entity itself.
      */
-    boolean pickUpEntity(IEnergySource energySource, PickupSink sink, Entity entity);
+    boolean pickUpEntity(PickupSink sink, Entity entity);
 
-    Result tryStartPickup(IEnergySource energySource, PickupSink sink);
+    Result tryStartPickup(PickupSink sink);
 
-    void completePickup(IEnergySource energySource, PickupSink sink);
+    void completePickup(PickupSink sink);
 
     enum Result {
         /**

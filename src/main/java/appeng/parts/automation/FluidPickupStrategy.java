@@ -48,12 +48,12 @@ public class FluidPickupStrategy implements PickupStrategy {
     }
 
     @Override
-    public boolean pickUpEntity(IEnergySource energySource, PickupSink sink, Entity entity) {
+    public boolean pickUpEntity(PickupSink sink, Entity entity) {
         return false;
     }
 
     @Override
-    public Result tryStartPickup(IEnergySource energySource, PickupSink sink) {
+    public Result tryStartPickup(PickupSink sink) {
         var blockstate = level.getBlockState(pos);
         if (blockstate.getBlock() instanceof BucketPickup bucketPickup) {
             var fluidState = blockstate.getFluidState();
@@ -94,7 +94,7 @@ public class FluidPickupStrategy implements PickupStrategy {
     }
 
     @Override
-    public void completePickup(IEnergySource energySource, PickupSink sink) {
+    public void completePickup(PickupSink sink) {
     }
 
     private boolean storeFluid(PickupSink sink, AEFluidKey what, long amount, boolean modulate) {

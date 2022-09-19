@@ -31,7 +31,7 @@ import appeng.api.networking.IGridNodeService;
 /**
  * Used to access information about AE's various power accepting blocks for monitoring purposes.
  */
-public interface IAEPowerStorage extends IEnergySource, IGridNodeService {
+public interface IAEPowerStorage extends IGridNodeService {
 
     /**
      * Inject amt, power into the device, it will store what it can, and return the amount unable to be stored.

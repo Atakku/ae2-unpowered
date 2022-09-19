@@ -2,7 +2,6 @@ package appeng.api.behaviors;
 
 import org.jetbrains.annotations.ApiStatus;
 
-import appeng.api.networking.energy.IEnergySource;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.networking.storage.IStorageService;
 import appeng.api.stacks.AEItemKey;
@@ -18,8 +17,6 @@ import appeng.util.prioritylist.IPartitionList;
 public interface StackTransferContext {
 
     IStorageService getInternalStorage();
-
-    IEnergySource getEnergySource();
 
     IActionSource getActionSource();
 

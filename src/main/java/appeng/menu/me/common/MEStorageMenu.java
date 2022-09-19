@@ -43,7 +43,6 @@ import appeng.api.config.SortDir;
 import appeng.api.config.SortOrder;
 import appeng.api.config.TypeFilter;
 import appeng.api.config.ViewItems;
-import appeng.api.implementations.blockentities.IMEChest;
 import appeng.api.implementations.blockentities.IViewCellStorage;
 import appeng.api.implementations.menuobjects.IPortableTerminal;
 import appeng.api.implementations.menuobjects.ItemMenuHost;
@@ -51,8 +50,6 @@ import appeng.api.networking.IGrid;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.crafting.ICraftingCPU;
 import appeng.api.networking.crafting.ICraftingService;
-import appeng.api.networking.energy.IEnergyService;
-import appeng.api.networking.energy.IEnergySource;
 import appeng.api.networking.security.IActionHost;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKey;
@@ -126,9 +123,6 @@ public class MEStorageMenu extends AEBaseMenu
     @Nullable
     protected final MEStorage storage;
 
-    @Nullable
-    protected final IEnergySource powerSource;
-
     private final IncrementalUpdateHelper updateHelper = new IncrementalUpdateHelper();
 
     /**
@@ -166,21 +160,16 @@ public class MEStorageMenu extends AEBaseMenu
         this.clientCM.registerSetting(Settings.TYPE_FILTER, TypeFilter.ALL);
         this.clientCM.registerSetting(Settings.SORT_DIRECTION, SortDir.ASCENDING);
 
-        IEnergySource powerSource = null;
         if (isServerSide()) {
             this.serverCM = host.getConfigManager();
 
             this.storage = host.getInventory();
             if (this.storage != null) {
 
-                if (host instanceof IPortableTerminal || host instanceof IMEChest) {
-                    powerSource = (IEnergySource) host;
-                } else if (host instanceof IActionHost actionHost) {
+                if (host instanceof IActionHost actionHost) {
                     var node = actionHost.getActionableNode();
                     if (node != null) {
                         this.networkNode = node;
-                        var g = node.getGrid();
-                        powerSource = new ChannelPowerSrc(this.networkNode, g.getEnergyService());
                     }
                 }
             } else {
@@ -189,7 +178,6 @@ public class MEStorageMenu extends AEBaseMenu
         } else {
             this.storage = null;
         }
-        this.powerSource = powerSource;
 
         // Create slots for the view cells, in case the terminal host supports those
         if (!hideViewCells() && host instanceof IViewCellStorage) {
@@ -342,12 +330,8 @@ public class MEStorageMenu extends AEBaseMenu
     protected void updatePowerStatus() {
         if (this.networkNode != null) {
             this.hasPower = this.networkNode.isActive();
-        } else if (this.powerSource instanceof IEnergyService energyService) {
-            this.hasPower = energyService.isNetworkPowered();
-        } else if (this.powerSource != null) {
-            this.hasPower = true;
         } else {
-            this.hasPower = false;
+            this.hasPower = true;
         }
     }
 
@@ -415,7 +399,7 @@ public class MEStorageMenu extends AEBaseMenu
      * Checks that the inventory monitor is connected, a power source exists and that it is powered.
      */
     protected final boolean canInteractWithGrid() {
-        return this.storage != null && this.powerSource != null && this.isPowered();
+        return this.storage != null && this.isPowered();
     }
 
     @Override

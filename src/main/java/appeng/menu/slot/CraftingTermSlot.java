@@ -33,7 +33,6 @@ import net.minecraft.world.level.Level;
 
 import appeng.api.config.Actionable;
 import appeng.api.inventories.InternalInventory;
-import appeng.api.networking.energy.IEnergySource;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.KeyCounter;
@@ -56,15 +55,13 @@ public class CraftingTermSlot extends AppEngCraftingSlot {
     private final InternalInventory pattern;
 
     private final IActionSource mySrc;
-    private final IEnergySource energySrc;
     private final MEStorage storage;
     private final IMenuCraftingPacket menu;
 
-    public CraftingTermSlot(Player player, IActionSource mySrc, IEnergySource energySrc,
+    public CraftingTermSlot(Player player, IActionSource mySrc,
             MEStorage storage, InternalInventory cMatrix, InternalInventory secondMatrix,
             IMenuCraftingPacket ccp) {
         super(player, cMatrix);
-        this.energySrc = energySrc;
         this.storage = storage;
         this.mySrc = mySrc;
         this.pattern = cMatrix;

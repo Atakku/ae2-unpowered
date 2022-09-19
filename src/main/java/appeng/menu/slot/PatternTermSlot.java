@@ -22,7 +22,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import appeng.api.inventories.InternalInventory;
-import appeng.api.networking.energy.IEnergySource;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.storage.MEStorage;
 import appeng.helpers.IMenuCraftingPacket;
@@ -31,10 +30,10 @@ import appeng.helpers.IMenuCraftingPacket;
  * The crafting result slot in a pattern terminal.
  */
 public class PatternTermSlot extends CraftingTermSlot {
-    public PatternTermSlot(Player player, IActionSource mySrc, IEnergySource energySrc,
+    public PatternTermSlot(Player player, IActionSource mySrc,
             MEStorage storage, InternalInventory cMatrix,
             IMenuCraftingPacket c) {
-        super(player, mySrc, energySrc, storage, cMatrix, InternalInventory.empty(), c);
+        super(player, mySrc, storage, cMatrix, InternalInventory.empty(), c);
     }
 
     @Override

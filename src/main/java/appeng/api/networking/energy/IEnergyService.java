@@ -30,7 +30,7 @@ import appeng.api.networking.IGridService;
 /**
  * AE's Power system.
  */
-public interface IEnergyService extends IGridService, IEnergySource {
+public interface IEnergyService extends IGridService {
 
     /**
      * Return the current calculated idle energy drain each tick, is used internally to drain power for each tick. It's

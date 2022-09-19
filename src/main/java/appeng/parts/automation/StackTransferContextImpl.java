@@ -5,7 +5,6 @@ import java.util.Set;
 
 import appeng.api.behaviors.StackTransferContext;
 import appeng.api.config.Actionable;
-import appeng.api.networking.energy.IEnergySource;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.networking.storage.IStorageService;
 import appeng.api.stacks.AEItemKey;
@@ -18,7 +17,6 @@ import appeng.util.prioritylist.IPartitionList;
  */
 class StackTransferContextImpl implements StackTransferContext {
     private final IStorageService internalStorage;
-    private final IEnergySource energySource;
     private final IActionSource actionSource;
     private final IPartitionList filter;
     private final Set<AEKeyType> keyTypes;
@@ -26,12 +24,11 @@ class StackTransferContextImpl implements StackTransferContext {
     private int operationsRemaining;
     private boolean isInverted;
 
-    public StackTransferContextImpl(IStorageService internalStorage, IEnergySource energySource,
+    public StackTransferContextImpl(IStorageService internalStorage,
             IActionSource actionSource,
             int operationsRemaining,
             IPartitionList filter) {
         this.internalStorage = internalStorage;
-        this.energySource = energySource;
         this.actionSource = actionSource;
         this.filter = filter;
         this.initialOperations = operationsRemaining;
@@ -45,11 +42,6 @@ class StackTransferContextImpl implements StackTransferContext {
     @Override
     public IStorageService getInternalStorage() {
         return internalStorage;
-    }
-
-    @Override
-    public IEnergySource getEnergySource() {
-        return energySource;
     }
 
     @Override

@@ -19,15 +19,12 @@
 package appeng.me.helpers;
 
 import appeng.api.networking.IGridNode;
-import appeng.api.networking.energy.IEnergySource;
 
-public class ChannelPowerSrc implements IEnergySource {
+public class ChannelPowerSrc {
 
     private final IGridNode node;
-    private final IEnergySource realSrc;
 
-    public ChannelPowerSrc(IGridNode networkNode, IEnergySource src) {
+    public ChannelPowerSrc(IGridNode networkNode) {
         this.node = networkNode;
-        this.realSrc = src;
     }
 }

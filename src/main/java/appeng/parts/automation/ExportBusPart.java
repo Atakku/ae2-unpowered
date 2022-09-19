@@ -204,7 +204,6 @@ public class ExportBusPart extends IOBusPart implements ICraftingRequester {
     private StackTransferContext createTransferContext(IStorageService storageService, IEnergyService energyService) {
         return new StackTransferContextImpl(
                 storageService,
-                energyService,
                 this.source,
                 getOperationsPerTick(),
                 DefaultPriorityList.INSTANCE);

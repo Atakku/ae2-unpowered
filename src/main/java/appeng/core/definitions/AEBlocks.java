@@ -65,10 +65,7 @@ import appeng.block.misc.SkyCompassBlock;
 import appeng.block.misc.TinyTNTBlock;
 import appeng.block.networking.CableBusBlock;
 import appeng.block.networking.ControllerBlock;
-import appeng.block.networking.CreativeEnergyCellBlock;
-import appeng.block.networking.DenseEnergyCellBlock;
 import appeng.block.networking.EnergyAcceptorBlock;
-import appeng.block.networking.EnergyCellBlock;
 import appeng.block.networking.WirelessBlock;
 import appeng.block.paint.PaintSplotchesBlock;
 import appeng.block.qnb.QuantumLinkChamberBlock;
@@ -162,9 +159,6 @@ public final class AEBlocks {
     public static final BlockDefinition<CondenserBlock> CONDENSER = block("Matter Condenser", AEBlockIds.CONDENSER, CondenserBlock::new);
     public static final BlockDefinition<EnergyAcceptorBlock> ENERGY_ACCEPTOR = block("Energy Acceptor", AEBlockIds.ENERGY_ACCEPTOR, EnergyAcceptorBlock::new);
     public static final BlockDefinition<QuartzGrowthAcceleratorBlock> QUARTZ_GROWTH_ACCELERATOR = block("Crystal Growth Accelerator", AEBlockIds.QUARTZ_GROWTH_ACCELERATOR, QuartzGrowthAcceleratorBlock::new);
-    public static final BlockDefinition<EnergyCellBlock> ENERGY_CELL = block("Energy Cell", AEBlockIds.ENERGY_CELL, EnergyCellBlock::new, AEBaseBlockItemChargeable::new);
-    public static final BlockDefinition<DenseEnergyCellBlock> DENSE_ENERGY_CELL = block("Dense Energy Cell", AEBlockIds.DENSE_ENERGY_CELL, DenseEnergyCellBlock::new, AEBaseBlockItemChargeable::new);
-    public static final BlockDefinition<CreativeEnergyCellBlock> CREATIVE_ENERGY_CELL = block("Creative Energy Cell", AEBlockIds.CREATIVE_ENERGY_CELL, CreativeEnergyCellBlock::new);
 
     public static final BlockDefinition<CraftingUnitBlock> CRAFTING_UNIT = block("Crafting Unit", AEBlockIds.CRAFTING_UNIT, () -> new CraftingUnitBlock(defaultProps(Material.METAL), CraftingUnitType.UNIT));
     public static final BlockDefinition<CraftingUnitBlock> CRAFTING_ACCELERATOR = craftingBlock("Crafting Co-Processing Unit", AEBlockIds.CRAFTING_ACCELERATOR, () -> new CraftingUnitBlock(defaultProps(Material.METAL), CraftingUnitType.ACCELERATOR), () -> AEItems.ENGINEERING_PROCESSOR);

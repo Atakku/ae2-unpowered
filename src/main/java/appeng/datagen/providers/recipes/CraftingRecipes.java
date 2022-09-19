@@ -9,7 +9,7 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
-
+import net.minecraft.world.level.block.Blocks;
 import appeng.api.ids.AEItemIds;
 import appeng.api.ids.AETags;
 import appeng.api.stacks.AEKeyType;
@@ -99,7 +99,7 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .save(consumer, AppEng.makeId("materials/carddistribution"));
         ShapedRecipeBuilder.shaped(AEItems.ENERGY_CARD)
                 .pattern("ab")
-                .define('a', AEBlocks.DENSE_ENERGY_CELL)
+                .define('a', Blocks.DIRT)
                 .define('b', AEItems.ADVANCED_CARD)
                 .unlockedBy("has_advanced_card", has(AEItems.ADVANCED_CARD))
                 .save(consumer, AppEng.makeId("materials/cardenergy"));
@@ -257,9 +257,8 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .pattern("c")
                 .define('a', AEItems.WIRELESS_RECEIVER)
                 .define('b', AEParts.TERMINAL)
-                .define('c', AEBlocks.DENSE_ENERGY_CELL)
+                .define('c', Blocks.DIRT)
                 .unlockedBy("has_terminal", has(AEParts.TERMINAL))
-                .unlockedBy("has_dense_energy_cell", has(AEBlocks.DENSE_ENERGY_CELL))
                 .unlockedBy("has_wireless_receiver", has(AEItems.WIRELESS_RECEIVER))
                 .save(consumer, AppEng.makeId("network/wireless_terminal"));
         ShapedRecipeBuilder.shaped(AEItems.WIRELESS_CRAFTING_TERMINAL)
@@ -268,9 +267,8 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .pattern("c")
                 .define('a', AEItems.WIRELESS_RECEIVER)
                 .define('b', AEParts.CRAFTING_TERMINAL)
-                .define('c', AEBlocks.DENSE_ENERGY_CELL)
+                .define('c', Blocks.DIRT)
                 .unlockedBy("has_terminal", has(AEParts.CRAFTING_TERMINAL))
-                .unlockedBy("has_dense_energy_cell", has(AEBlocks.DENSE_ENERGY_CELL))
                 .unlockedBy("has_wireless_receiver", has(AEItems.WIRELESS_RECEIVER))
                 .save(consumer, AppEng.makeId("network/wireless_crafting_terminal"));
         ShapelessRecipeBuilder.shapeless(AEItems.WIRELESS_CRAFTING_TERMINAL)
@@ -325,38 +323,10 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .unlockedBy("has_glass_cable", has(AEParts.GLASS_CABLE.item(AEColor.TRANSPARENT)))
                 .unlockedBy("has_quartz_glass", has(AEBlocks.QUARTZ_GLASS))
                 .save(consumer, AppEng.makeId("network/blocks/crystal_processing_quartz_growth_accelerator"));
-        ShapedRecipeBuilder.shaped(AEBlocks.DENSE_ENERGY_CELL)
-                .pattern("aaa")
-                .pattern("aba")
-                .pattern("aaa")
-                .define('a', AEBlocks.ENERGY_CELL)
-                .define('b', AEItems.CALCULATION_PROCESSOR)
-                .unlockedBy("has_energy_cell", has(AEBlocks.ENERGY_CELL))
-                .save(consumer, AppEng.makeId("network/blocks/energy_dense_energy_cell"));
-        ShapedRecipeBuilder.shaped(AEBlocks.ENERGY_ACCEPTOR)
-                .pattern("aba")
-                .pattern("bcb")
-                .pattern("aba")
-                .define('a', ConventionTags.IRON_INGOT)
-                .define('b', AEBlocks.QUARTZ_GLASS)
-                .define('c', ConventionTags.COPPER_INGOT)
-                .unlockedBy("has_crystals/fluix", has(ConventionTags.ALL_FLUIX))
-                .save(consumer, AppEng.makeId("network/blocks/energy_energy_acceptor"));
         ShapelessRecipeBuilder.shapeless(AEBlocks.ENERGY_ACCEPTOR)
                 .requires(AEParts.ENERGY_ACCEPTOR)
                 .unlockedBy("has_cable_energy_acceptor", has(AEParts.ENERGY_ACCEPTOR))
                 .save(consumer, AppEng.makeId("network/blocks/energy_energy_acceptor_alt"));
-        ShapedRecipeBuilder.shaped(AEBlocks.ENERGY_CELL)
-                .pattern("aba")
-                .pattern("bcb")
-                .pattern("aba")
-                .define('a', ConventionTags.ALL_CERTUS_QUARTZ)
-                .define('b', ConventionTags.FLUIX_DUST)
-                .define('c', AEBlocks.QUARTZ_GLASS)
-                .unlockedBy("has_quartz_glass", has(AEBlocks.QUARTZ_GLASS))
-                .unlockedBy("has_dusts/fluix", has(ConventionTags.FLUIX_DUST))
-                .unlockedBy("has_crystals/certus", has(ConventionTags.ALL_CERTUS_QUARTZ))
-                .save(consumer, AppEng.makeId("network/blocks/energy_energy_cell"));
         ShapedRecipeBuilder.shaped(AEBlocks.INSCRIBER)
                 .pattern("aba")
                 .pattern("c a")
@@ -439,10 +409,9 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .define('a', ConventionTags.IRON_INGOT)
                 .define('b', AEItems.LOGIC_PROCESSOR)
                 .define('c', AEItems.ENGINEERING_PROCESSOR)
-                .define('d', AEBlocks.ENERGY_CELL)
+                .define('d', Blocks.COBBLESTONE)
                 .define('e', ConventionTags.SMART_DENSE_CABLE)
                 .unlockedBy("has_fluix_smart_dense_cable", has(ConventionTags.SMART_DENSE_CABLE))
-                .unlockedBy("has_energy_cell", has(AEBlocks.ENERGY_CELL))
                 .unlockedBy("has_logic_processor", has(AEItems.LOGIC_PROCESSOR))
                 .unlockedBy("has_engineering_processor", has(AEItems.ENGINEERING_PROCESSOR))
                 .save(consumer, AppEng.makeId("network/blocks/quantum_ring"));
@@ -824,7 +793,7 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .define('a', ConventionTags.IRON_INGOT)
                 .define('b', AEItems.FORMATION_CORE)
                 .define('c', AEItems.CELL_COMPONENT_4K)
-                .define('d', AEBlocks.ENERGY_CELL)
+                .define('d', Blocks.COBBLESTONE)
                 .unlockedBy("has_formation_core", has(AEItems.FORMATION_CORE))
                 .save(consumer, AppEng.makeId("tools/matter_cannon"));
         ShapedRecipeBuilder.shaped(AEItems.CHARGED_STAFF)
@@ -840,7 +809,7 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .pattern("cd ")
                 .pattern("  d")
                 .define('a', ConventionTags.ALL_FLUIX)
-                .define('b', AEBlocks.ENERGY_CELL)
+                .define('b', Blocks.COBBLESTONE)
                 .define('c', AEItems.ENGINEERING_PROCESSOR)
                 .define('d', ConventionTags.IRON_INGOT)
                 .unlockedBy("has_engineering_processor", has(AEItems.ENGINEERING_PROCESSOR))
@@ -873,9 +842,8 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .define('a', AEItems.FORMATION_CORE)
                 .define('b', ConventionTags.IRON_INGOT)
                 .define('c', AEItems.CELL_COMPONENT_4K)
-                .define('d', AEBlocks.ENERGY_CELL)
+                .define('d', Blocks.COBBLESTONE)
                 .unlockedBy("has_formation_core", has(AEItems.FORMATION_CORE))
-                .unlockedBy("has_energy_cell", has(AEBlocks.ENERGY_CELL))
                 .save(consumer, AppEng.makeId("tools/network_color_applicator"));
 
         ShapedRecipeBuilder.shaped(AEItems.MEMORY_CARDS.item(AEColor.TRANSPARENT))
@@ -931,10 +899,9 @@ public class CraftingRecipes extends AE2RecipeProvider {
         ShapelessRecipeBuilder.shapeless(cell)
                 .requires(AEBlocks.CHEST)
                 .requires(component)
-                .requires(AEBlocks.ENERGY_CELL)
+                .requires(Blocks.COBBLESTONE)
                 .requires(housing)
                 .unlockedBy("has_" + housing.id().getPath(), has(housing))
-                .unlockedBy("has_energy_cell", has(AEBlocks.ENERGY_CELL))
                 .save(consumer, cell.asItem().getRecipeId());
     }
 

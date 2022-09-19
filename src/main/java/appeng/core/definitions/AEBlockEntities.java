@@ -53,10 +53,6 @@ import appeng.blockentity.misc.SecurityStationBlockEntity;
 import appeng.blockentity.misc.SkyCompassBlockEntity;
 import appeng.blockentity.networking.CableBusBlockEntity;
 import appeng.blockentity.networking.ControllerBlockEntity;
-import appeng.blockentity.networking.CreativeEnergyCellBlockEntity;
-import appeng.blockentity.networking.DenseEnergyCellBlockEntity;
-import appeng.blockentity.networking.EnergyAcceptorBlockEntity;
-import appeng.blockentity.networking.EnergyCellBlockEntity;
 import appeng.blockentity.networking.WirelessBlockEntity;
 import appeng.blockentity.qnb.QuantumBridgeBlockEntity;
 import appeng.blockentity.spatial.SpatialAnchorBlockEntity;
@@ -110,18 +106,6 @@ public final class AEBlockEntities {
     public static final BlockEntityType<CondenserBlockEntity> CONDENSER = create("condenser",
             CondenserBlockEntity.class,
             CondenserBlockEntity::new, AEBlocks.CONDENSER);
-    public static final BlockEntityType<EnergyAcceptorBlockEntity> ENERGY_ACCEPTOR = create("energy_acceptor",
-            EnergyAcceptorBlockEntity.class, EnergyAcceptorBlockEntity::new, AEBlocks.ENERGY_ACCEPTOR);
-    public static final BlockEntityType<QuartzGrowthAcceleratorBlockEntity> QUARTZ_GROWTH_ACCELERATOR = create(
-            "quartz_growth_accelerator", QuartzGrowthAcceleratorBlockEntity.class,
-            QuartzGrowthAcceleratorBlockEntity::new, AEBlocks.QUARTZ_GROWTH_ACCELERATOR);
-    public static final BlockEntityType<EnergyCellBlockEntity> ENERGY_CELL = create("energy_cell",
-            EnergyCellBlockEntity.class, EnergyCellBlockEntity::new, AEBlocks.ENERGY_CELL);
-    public static final BlockEntityType<DenseEnergyCellBlockEntity> DENSE_ENERGY_CELL = create("dense_energy_cell",
-            DenseEnergyCellBlockEntity.class, DenseEnergyCellBlockEntity::new, AEBlocks.DENSE_ENERGY_CELL);
-    public static final BlockEntityType<CreativeEnergyCellBlockEntity> CREATIVE_ENERGY_CELL = create(
-            "creative_energy_cell",
-            CreativeEnergyCellBlockEntity.class, CreativeEnergyCellBlockEntity::new, AEBlocks.CREATIVE_ENERGY_CELL);
     public static final BlockEntityType<CraftingBlockEntity> CRAFTING_UNIT = create("crafting_unit",
             CraftingBlockEntity.class, CraftingBlockEntity::new, AEBlocks.CRAFTING_UNIT,
             AEBlocks.CRAFTING_ACCELERATOR);

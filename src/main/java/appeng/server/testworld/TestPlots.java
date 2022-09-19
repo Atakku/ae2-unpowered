@@ -94,7 +94,6 @@ public final class TestPlots {
             .put(AppEng.makeId("p2p_me"), P2PTestPlots::me)
             .put(AppEng.makeId("p2p_items"), P2PTestPlots::item)
             .put(AppEng.makeId("p2p_fluids"), P2PTestPlots::fluid)
-            .put(AppEng.makeId("p2p_energy"), P2PTestPlots::energy)
             .put(AppEng.makeId("p2p_light"), P2PTestPlots::light)
             .put(AppEng.makeId("import_from_cauldron"), TestPlots::importLavaFromCauldron)
             .put(AppEng.makeId("tool_repair_recipe"), TestPlots::toolRepairRecipe)
@@ -139,7 +138,6 @@ public final class TestPlots {
         enchantedPickaxe.enchant(Enchantments.BLOCK_FORTUNE, 3);
         var enchantedPickaxeKey = AEItemKey.of(enchantedPickaxe);
 
-        plot.creativeEnergyCell("0 -1 0");
 
         plot.cable("[-1,0] [0,8] 0", AEParts.COVERED_DENSE_CABLE);
         plot.part("0 [0,8] 0", Direction.WEST, AEParts.CABLE_ANCHOR);
@@ -209,7 +207,6 @@ public final class TestPlots {
             }
             chest.setCell(cellItem);
         });
-        plot.creativeEnergyCell("0 -1 0");
     }
 
     public static void fluidChest(PlotBuilder plot) {
@@ -229,7 +226,6 @@ public final class TestPlots {
             }
             chest.setCell(cellItem);
         });
-        plot.creativeEnergyCell("0 -1 0");
     }
 
     public static void skyCompassRendering(PlotBuilder plot) {
@@ -323,7 +319,6 @@ public final class TestPlots {
             // Add a cell to store the crafting results
             drive.getInternalInventory().addItems(AEItems.ITEM_CELL_64K.stack());
         });
-        plot.block("3 1 6", AEBlocks.CREATIVE_ENERGY_CELL);
         plot.block("3 0 6", AEBlocks.CRAFTING_STORAGE_64K);
 
         // Top subnet for grabbing the crafting results
@@ -343,7 +338,6 @@ public final class TestPlots {
     public static void importExportBus(PlotBuilder plot) {
         plot.chest("1 0 1", new ItemStack(Items.ACACIA_LOG, 16), new ItemStack(Items.ENDER_PEARL, 6));
         plot.block("1 1 1", Blocks.HOPPER);
-        plot.creativeEnergyCell("3 -1 1");
         plot.cable("3 0 1")
                 .part(Direction.NORTH, AEParts.TERMINAL);
         plot.cable("2 0 1")
@@ -366,7 +360,6 @@ public final class TestPlots {
     public static void processorInscriber(PlotBuilder plot, ItemLike processorPress, ItemLike processorMaterial) {
         // Set up the inscriber for the processor print
         plot.filledHopper("-1 3 0", Direction.DOWN, processorMaterial);
-        plot.creativeEnergyCell("-1 2 1");
         plot.blockEntity("-1 2 0", AEBlocks.INSCRIBER, inscriber -> {
             inscriber.getInternalInventory().setItemDirect(0, new ItemStack(processorPress));
             inscriber.setOrientation(Direction.NORTH, Direction.WEST);
@@ -374,7 +367,6 @@ public final class TestPlots {
 
         // Set up the inscriber for the silicon print
         plot.filledHopper("1 3 0", Direction.DOWN, AEItems.SILICON);
-        plot.creativeEnergyCell("1 2 1");
         plot.blockEntity("1 2 0", AEBlocks.INSCRIBER, inscriber -> {
             inscriber.getInternalInventory().setItemDirect(0, AEItems.SILICON_PRESS.stack());
             inscriber.setOrientation(Direction.NORTH, Direction.WEST);
@@ -384,7 +376,6 @@ public final class TestPlots {
         plot.hopper("1 1 0", Direction.WEST);
         plot.hopper("-1 1 0", Direction.EAST);
         plot.filledHopper("0 2 0", Direction.DOWN, Items.REDSTONE);
-        plot.creativeEnergyCell("0 1 1");
         plot.blockEntity("0 1 0", AEBlocks.INSCRIBER, inscriber -> {
             inscriber.setOrientation(Direction.NORTH, Direction.WEST);
         });
@@ -396,7 +387,6 @@ public final class TestPlots {
      * https://github.com/AppliedEnergistics/Applied-Energistics-2/issues/5798
      */
     public static void importAndExportInOneTick(PlotBuilder plot) {
-        plot.creativeEnergyCell("-1 0 0");
         plot.chest("0 0 1"); // Output Chest
         plot.cable("0 0 0")
                 .part(Direction.SOUTH, AEParts.EXPORT_BUS, exportBus -> {
@@ -426,7 +416,6 @@ public final class TestPlots {
      * Export from a chest->storagebus->exportbus->chest to test that it interacts correctly with Fabric transactions.
      */
     public static void exportFromStorageBus(PlotBuilder plot) {
-        plot.creativeEnergyCell("1 0 0");
         plot.cable("0 0 0")
                 .part(Direction.SOUTH, AEParts.EXPORT_BUS, part -> {
                     part.getConfig().addFilter(Items.OAK_PLANKS);
@@ -447,7 +436,6 @@ public final class TestPlots {
      * Import into a storage bus, which tests that the external interaction is correct w.r.t. Fabric transactions.
      */
     public static void importIntoStorageBus(PlotBuilder plot) {
-        plot.creativeEnergyCell("1 0 0");
         plot.cable("0 0 0")
                 .part(Direction.NORTH, AEParts.IMPORT_BUS)
                 .part(Direction.SOUTH, AEParts.STORAGE_BUS);
@@ -472,7 +460,6 @@ public final class TestPlots {
         var origin = BlockPos.ZERO;
         var inputPos = origin.south();
 
-        plot.creativeEnergyCell(origin.west().west());
         plot.storageDrive(origin.west());
         plot.cable(origin)
                 .part(Direction.SOUTH, AEParts.IMPORT_BUS, bus -> {
@@ -525,7 +512,6 @@ public final class TestPlots {
      * getAvailableStacks, and the simulated extraction causes a neighbor update, triggering the import bus.
      */
     public static void importOnPulseTransactionCrash(PlotBuilder plot) {
-        plot.creativeEnergyCell("1 0 0");
         plot.chest("0 0 -1", new ItemStack(Items.OAK_PLANKS)); // Import Chest
         plot.chest("0 0 1"); // Output Chest
         plot.block("0 1 0", Blocks.REDSTONE_BLOCK);
@@ -563,7 +549,6 @@ public final class TestPlots {
         plot.fencedEntity(origin.offset(0, 0, 5), EntityType.COW, entity -> {
             entity.setSilent(true);
         });
-        plot.creativeEnergyCell(origin.below());
         plot.blockEntity(
                 origin,
                 AEBlocks.CHEST,
@@ -572,7 +557,6 @@ public final class TestPlots {
         plot.block("-2 [0,1] 5", Blocks.STONE);
         plot.block("2 [0,1] 5", Blocks.STONE);
 
-        plot.creativeEnergyCell(origin.west().below());
         plot.block(origin.west(), AEBlocks.CHARGER);
 
         matterCannonDispenser(plot.offset(-2, 1, 1), AEItems.COLORED_LUMEN_PAINT_BALL.item(AEColor.PURPLE));
@@ -605,7 +589,6 @@ public final class TestPlots {
      */
     public static void testInsertFluidIntoMEChest(PlotBuilder plot) {
         var origin = BlockPos.ZERO;
-        plot.creativeEnergyCell(origin.below());
         plot.blockEntity(origin, AEBlocks.CHEST, chest -> {
             chest.setCell(AEItems.FLUID_CELL_4K.stack());
         });
@@ -616,7 +599,6 @@ public final class TestPlots {
         plot.blockEntity(origin.east().north(), AEBlocks.DRIVE, drive -> {
             drive.getInternalInventory().addItems(CreativeCellItem.ofFluids(Fluids.WATER));
         });
-        plot.creativeEnergyCell(origin.east().north().below());
 
         plot.test(helper -> helper.succeedWhen(() -> {
             var meChest = (appeng.blockentity.storage.ChestBlockEntity) helper.getBlockEntity(origin);
@@ -625,7 +607,6 @@ public final class TestPlots {
     }
 
     public static void maxChannelsAdHocTest(PlotBuilder plot) {
-        plot.creativeEnergyCell("0 -1 0");
         plot.block("[-3,3] -2 [-3,3]", AEBlocks.DRIVE);
         plot.cable("[-3,3] 0 [-3,3]", AEParts.SMART_DENSE_CABLE);
         plot.cable("[-3,3] [1,64] [-3,2]")
@@ -725,7 +706,6 @@ public final class TestPlots {
      */
     public static void blockingModeSubnetworkChestTest(PlotBuilder plot) {
         // Network itself
-        plot.creativeEnergyCell("0 -1 0");
         plot.block("[0,1] [0,1] [0,1]", AEBlocks.CRAFTING_ACCELERATOR);
         plot.block("0 0 0", AEBlocks.CRAFTING_STORAGE_64K);
         var input = GenericStack.fromItemStack(new ItemStack(Items.GOLD_INGOT));
@@ -742,7 +722,6 @@ public final class TestPlots {
                 .addCreativeCell()
                 .add(input);
         // Subnetwork
-        plot.creativeEnergyCell("3 -1 0");
         plot.cable("3 0 0")
                 .part(Direction.WEST, AEParts.INTERFACE)
                 .part(Direction.EAST, AEParts.STORAGE_BUS);
@@ -770,7 +749,6 @@ public final class TestPlots {
     public static void cancelingJobsFromInterfaceCrash(PlotBuilder plot) {
         var origin = BlockPos.ZERO;
 
-        plot.creativeEnergyCell(origin);
         // Stock 1 oak_plank via crafting
         plot.blockEntity(origin.above(), AEBlocks.INTERFACE, iface -> {
             iface.getUpgrades().addItems(AEItems.CRAFTING_CARD.stack());
@@ -813,7 +791,6 @@ public final class TestPlots {
      */
     public static void terminalFullOfEnchantedItems(PlotBuilder plot) {
         var origin = BlockPos.ZERO;
-        plot.creativeEnergyCell(origin.below());
         plot.cable(origin).part(Direction.NORTH, AEParts.TERMINAL);
         var drive = plot.drive(origin.east());
 
@@ -830,7 +807,6 @@ public final class TestPlots {
 
     public static void importLavaFromCauldron(PlotBuilder plot) {
         var origin = BlockPos.ZERO;
-        plot.creativeEnergyCell(origin.below());
         plot.cable(origin)
                 .part(Direction.EAST, AEParts.IMPORT_BUS, importBus -> {
                     importBus.getUpgrades().addItems(AEItems.SPEED_CARD.stack());
@@ -869,7 +845,6 @@ public final class TestPlots {
             return AEItemKey.of(is);
         });
 
-        plot.creativeEnergyCell("0 0 0");
         var molecularAssemblerPos = new BlockPos(0, 1, 0);
         plot.blockEntity(molecularAssemblerPos, AEBlocks.MOLECULAR_ASSEMBLER, molecularAssembler -> {
             // Get repair recipe
@@ -918,7 +893,6 @@ public final class TestPlots {
         plot.blockState(o.north(), Blocks.CHEST.defaultBlockState().setValue(ChestBlock.TYPE, ChestType.RIGHT));
         plot.blockState(o.north().west(), Blocks.CHEST.defaultBlockState().setValue(ChestBlock.TYPE, ChestType.LEFT));
         plot.cable(o).part(Direction.NORTH, AEParts.STORAGE_BUS);
-        plot.creativeEnergyCell(o.below());
 
         plot.test(helper -> {
             helper.succeedWhen(() -> {
@@ -952,7 +926,6 @@ public final class TestPlots {
         plot.chest(o.south());
         // Second storage bus on double chest
         plot.cable(o.west()).part(Direction.NORTH, AEParts.STORAGE_BUS);
-        plot.creativeEnergyCell(o.below());
 
         plot.test(helper -> {
             helper.succeedWhen(() -> {
@@ -988,7 +961,6 @@ public final class TestPlots {
             iface.getConfig().setStack(0, GenericStack.fromItemStack(new ItemStack(Items.STICK, 64)));
             iface.getConfig().setStack(1, GenericStack.fromItemStack(new ItemStack(Items.STICK, 64)));
         });
-        plot.creativeEnergyCell(o.below());
 
         plot.test(helper -> {
             helper.succeedWhen(() -> {

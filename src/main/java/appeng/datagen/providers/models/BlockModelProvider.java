@@ -12,7 +12,6 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import appeng.block.crafting.AbstractCraftingUnitBlock;
-import appeng.block.networking.EnergyCellBlock;
 import appeng.block.spatial.SpatialAnchorBlock;
 import appeng.block.spatial.SpatialIOPortBlock;
 import appeng.block.storage.IOPortBlock;
@@ -77,10 +76,6 @@ public class BlockModelProvider extends AE2BlockStateProvider {
                 makeId("block/cell_workbench_side"),
                 makeId("block/cell_workbench_bottom"),
                 makeId("block/cell_workbench")));
-
-        energyCell(AEBlocks.ENERGY_CELL, "block/energy_cell");
-        energyCell(AEBlocks.DENSE_ENERGY_CELL, "block/dense_energy_cell");
-        simpleBlockAndItem(AEBlocks.CREATIVE_ENERGY_CELL, "block/creative_energy_cell");
 
         spatialAnchor();
         patternProvider();
@@ -173,28 +168,6 @@ public class BlockModelProvider extends AE2BlockStateProvider {
         model.customLoader((bmb, efh) -> new CustomLoaderBuilder<BlockModelBuilder>(loaderId, bmb, efh) {
         });
         return model;
-    }
-
-    private void energyCell(
-            BlockDefinition<?> block,
-            String baseTexture) {
-
-        var blockBuilder = getVariantBuilder(block.block());
-        var models = new ArrayList<ModelFile>();
-        for (var i = 0; i < 5; i++) {
-            var model = models().cubeAll(modelPath(block) + "_" + i, makeId(baseTexture + "_" + i));
-            blockBuilder.partialState().with(EnergyCellBlock.ENERGY_STORAGE, i).setModels(new ConfiguredModel(model));
-            models.add(model);
-        }
-
-        var item = itemModels().withExistingParent(modelPath(block), models.get(0).getLocation());
-        for (var i = 1; i < models.size(); i++) {
-            // The predicate matches "greater than", meaning for fill-level > 0 the first non-empty texture is used
-            float fillFactor = (i - 1) / (float) (models.size() - 1);
-            item.override()
-                    .predicate(InitItemModelsProperties.ENERGY_FILL_LEVEL_ID, fillFactor)
-                    .model(models.get(i));
-        }
     }
 
     private void craftingModel(BlockDefinition<?> block, String name) {

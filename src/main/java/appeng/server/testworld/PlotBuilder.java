@@ -96,14 +96,6 @@ public interface PlotBuilder {
         addBuildAction(new PartCustomizer<>(bb(bb), side, part, partCustomizer));
     }
 
-    default void creativeEnergyCell(BlockPos pos) {
-        creativeEnergyCell(posToBb(pos));
-    }
-
-    default void creativeEnergyCell(String bb) {
-        block(bb, AEBlocks.CREATIVE_ENERGY_CELL);
-    }
-
     /**
      * place a lever on the side of the given block. returns the levers position.
      */

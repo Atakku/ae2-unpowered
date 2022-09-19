@@ -63,8 +63,6 @@ public final class AEBlockIds {
     public static final ResourceLocation CONDENSER = id("condenser");
     public static final ResourceLocation ENERGY_ACCEPTOR = id("energy_acceptor");
     public static final ResourceLocation QUARTZ_GROWTH_ACCELERATOR = id("quartz_growth_accelerator");
-    public static final ResourceLocation ENERGY_CELL = id("energy_cell");
-    public static final ResourceLocation DENSE_ENERGY_CELL = id("dense_energy_cell");
     public static final ResourceLocation CABLE_BUS = id("cable_bus");
 
     ///
@@ -79,7 +77,6 @@ public final class AEBlockIds {
     ///
     /// AUTO CRAFTING
     ///
-    public static final ResourceLocation CREATIVE_ENERGY_CELL = id("creative_energy_cell");
     public static final ResourceLocation CRAFTING_UNIT = id("crafting_unit");
     public static final ResourceLocation CRAFTING_ACCELERATOR = id("crafting_accelerator");
     public static final ResourceLocation CRAFTING_STORAGE_1K = id("1k_crafting_storage");

@@ -31,8 +31,6 @@ public final class AutoCraftingTestPlot {
     }
 
     public static void create(PlotBuilder plot) {
-        plot.creativeEnergyCell("4 -1 4");
-
         // Cable to CPU / Access / Storage
         plot.cable("4 0 [1,5]");
         plot.cable("[3,6] 0 1");

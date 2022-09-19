@@ -270,35 +270,17 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
     }
 
     @Override
-    protected double extractAEPower(double amt, Actionable mode) {
-        double stash = 0.0;
-
-        var grid = getMainNode().getGrid();
-        if (grid != null) {
-            var eg = grid.getEnergyService();
-            stash = eg.extractAEPower(amt, mode, PowerMultiplier.ONE);
-            if (stash >= amt) {
-                return stash;
-            }
-        }
-
-        // local battery!
-        return super.extractAEPower(amt - stash, mode) + stash;
-    }
-
-    @Override
     public void serverTick() {
         var grid = getMainNode().getGrid();
         if (grid != null) {
             if (!grid.getEnergyService().isNetworkPowered()) {
-                final double powerUsed = this.extractAEPower(idlePowerUsage, Actionable.MODULATE,
-                        PowerMultiplier.CONFIG); // drain
+                final double powerUsed = idlePowerUsage; // drain
                 if (powerUsed + 0.1 >= idlePowerUsage != (this.state & BIT_POWER_MASK) > 0) {
                     this.recalculateDisplay();
                 }
             }
         } else {
-            final double powerUsed = this.extractAEPower(idlePowerUsage, Actionable.MODULATE, PowerMultiplier.CONFIG); // drain
+            final double powerUsed = idlePowerUsage; // drain
             if (powerUsed + 0.1 >= idlePowerUsage != (this.state & BIT_POWER_MASK) > 0) {
                 this.recalculateDisplay();
             }

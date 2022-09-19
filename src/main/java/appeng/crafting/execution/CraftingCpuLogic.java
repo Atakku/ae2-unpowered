@@ -191,12 +191,7 @@ public class CraftingCpuLogic {
 
                 var patternPower = CraftingCpuHelper.calculatePatternPower(craftingContainer);
 
-                if (energyService.extractAEPower(patternPower, Actionable.SIMULATE,
-                        PowerMultiplier.CONFIG) < patternPower - 0.01)
-                    break;
-
                 if (provider.pushPattern(details, craftingContainer)) {
-                    energyService.extractAEPower(patternPower, Actionable.MODULATE, PowerMultiplier.CONFIG);
                     pushedPatterns++;
 
                     for (var expectedOutput : expectedOutputs) {

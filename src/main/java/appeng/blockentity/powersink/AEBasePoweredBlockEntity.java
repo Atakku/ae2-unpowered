@@ -145,34 +145,6 @@ public abstract class AEBasePoweredBlockEntity extends AEBaseInvBlockEntity
         return this.getInternalPowerFlow();
     }
 
-    @Override
-    public final double extractAEPower(double amt, Actionable mode, PowerMultiplier multiplier) {
-        return multiplier.divide(this.extractAEPower(multiplier.multiply(amt), mode));
-    }
-
-    protected double extractAEPower(double amt, Actionable mode) {
-        if (mode == Actionable.SIMULATE) {
-            if (this.getInternalCurrentPower() > amt) {
-                return amt;
-            }
-            return this.getInternalCurrentPower();
-        }
-
-        final boolean wasFull = this.getInternalCurrentPower() >= this.getInternalMaxPower() - 0.001;
-        if (wasFull && amt > 0.001) {
-            this.PowerEvent(PowerEventType.REQUEST_POWER);
-        }
-
-        if (this.getInternalCurrentPower() > amt) {
-            this.setInternalCurrentPower(this.getInternalCurrentPower() - amt);
-            return amt;
-        }
-
-        amt = this.getInternalCurrentPower();
-        this.setInternalCurrentPower(0);
-        return amt;
-    }
-
     public double getInternalCurrentPower() {
         return this.internalCurrentPower;
     }

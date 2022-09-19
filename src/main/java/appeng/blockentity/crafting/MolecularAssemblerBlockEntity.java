@@ -485,8 +485,7 @@ public class MolecularAssemblerBlockEntity extends AENetworkInvBlockEntity
     private int userPower(int ticksPassed, int bonusValue, double acceleratorTax) {
         var grid = getMainNode().getGrid();
         if (grid != null) {
-            return (int) (grid.getEnergyService().extractAEPower(ticksPassed * bonusValue * acceleratorTax,
-                    Actionable.MODULATE, PowerMultiplier.CONFIG) / acceleratorTax);
+            return (int) (ticksPassed * bonusValue * acceleratorTax / acceleratorTax);
         } else {
             return 0;
         }
@@ -543,8 +542,7 @@ public class MolecularAssemblerBlockEntity extends AENetworkInvBlockEntity
 
             var grid = getMainNode().getGrid();
             if (grid != null) {
-                newState = this.getMainNode().isPowered() && grid.getEnergyService().extractAEPower(1,
-                        Actionable.SIMULATE, PowerMultiplier.CONFIG) > 0.0001;
+                newState = this.getMainNode().isPowered();
             }
 
             if (newState != this.isPowered) {

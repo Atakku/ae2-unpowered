@@ -194,17 +194,6 @@ public class WirelessTerminalItem extends AEBasePoweredItem implements IMenuItem
     }
 
     /**
-     * use an amount of power, in AE units
-     *
-     * @param amount is in AE units ( 5 per MJ ), if you return false, the item should be dead and return false for
-     *               hasPower
-     * @return true if wireless terminal uses power
-     */
-    public boolean usePower(Player player, double amount, ItemStack is) {
-        return extractAEPower(is, amount, Actionable.MODULATE) >= amount - 0.5;
-    }
-
-    /**
      * gets the power status of the item.
      *
      * @return returns true if there is any power left.

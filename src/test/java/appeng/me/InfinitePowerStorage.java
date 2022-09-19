@@ -33,9 +33,4 @@ public class InfinitePowerStorage implements IAEPowerStorage {
     public AccessRestriction getPowerFlow() {
         return AccessRestriction.READ;
     }
-
-    @Override
-    public double extractAEPower(double amt, Actionable mode, PowerMultiplier usePowerMultiplier) {
-        return amt;
-    }
 }

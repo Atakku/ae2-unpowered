@@ -120,9 +120,4 @@ public class EnergyAcceptorPart extends AEBasePart implements IExternalPowerSink
     public final AccessRestriction getPowerFlow() {
         return AccessRestriction.READ_WRITE;
     }
-
-    @Override
-    public final double extractAEPower(double amt, Actionable mode, PowerMultiplier multiplier) {
-        return 0;
-    }
 }

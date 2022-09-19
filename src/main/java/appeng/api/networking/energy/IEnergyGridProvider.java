@@ -49,19 +49,6 @@ public interface IEnergyGridProvider extends IGridNodeService {
     Collection<IEnergyGridProvider> providers();
 
     /**
-     * internal use only
-     *
-     * Extracts the requested amount from the provider.
-     *
-     * This should never forward a call to another {@link IEnergyGridProvider}, instead return them via
-     * {@link IEnergyGridProvider#providers()}
-     *
-     * @return the used amount
-     */
-    @Nonnegative
-    double extractProviderPower(@Nonnegative double amt, Actionable mode);
-
-    /**
      * Injects the offered amount into the provider.
      *
      * This should never forward a call to another {@link IEnergyGridProvider}, instead return them via

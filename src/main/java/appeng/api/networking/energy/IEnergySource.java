@@ -29,16 +29,4 @@ import appeng.api.config.Actionable;
 import appeng.api.config.PowerMultiplier;
 
 public interface IEnergySource {
-
-    /**
-     * Extract power from the network.
-     *
-     * @param amt  extracted power
-     * @param mode should the action be simulated or performed?
-     *
-     * @return returns extracted power.
-     */
-    @Nonnegative
-    double extractAEPower(@Nonnegative double amt, Actionable mode,
-            PowerMultiplier usePowerMultiplier);
 }

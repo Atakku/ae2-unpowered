@@ -210,15 +210,7 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
         this.tickInjectionPerTick = 0;
 
         // power information.
-        boolean currentlyHasPower = false;
-
-        if (this.drainPerTick > 0.0001) {
-            final double drained = this.extractAEPower(this.getIdlePowerUsage(), Actionable.MODULATE,
-                    PowerMultiplier.CONFIG);
-            currentlyHasPower = drained >= this.drainPerTick - 0.001;
-        } else {
-            currentlyHasPower = this.extractAEPower(0.1, Actionable.SIMULATE, PowerMultiplier.CONFIG) > 0;
-        }
+        boolean currentlyHasPower = true;
 
         // ticks since change..
         if (currentlyHasPower == this.hasPower) {
@@ -238,31 +230,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
         }
 
         this.availableTicksSinceUpdate++;
-    }
-
-    @Override
-    public double extractAEPower(double amt, Actionable mode, PowerMultiplier pm) {
-        final double toExtract = pm.multiply(amt);
-        final Queue<IEnergyGridProvider> toVisit = new PriorityQueue<>(COMPARATOR_HIGHEST_AMOUNT_STORED_FIRST);
-        final Set<IEnergyGridProvider> visited = new HashSet<>();
-
-        double extracted = 0;
-        toVisit.add(this);
-
-        while (!toVisit.isEmpty() && extracted < toExtract) {
-            final IEnergyGridProvider next = toVisit.poll();
-            visited.add(next);
-
-            extracted += next.extractProviderPower(toExtract - extracted, mode);
-
-            for (IEnergyGridProvider iEnergyGridProvider : next.providers()) {
-                if (!visited.contains(iEnergyGridProvider)) {
-                    toVisit.add(iEnergyGridProvider);
-                }
-            }
-        }
-
-        return pm.divide(extracted);
     }
 
     @Override
@@ -301,43 +268,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
     @Override
     public Collection<IEnergyGridProvider> providers() {
         return this.energyGridProviders;
-    }
-
-    @Override
-    public double extractProviderPower(double amt, Actionable mode) {
-        double extractedPower = 0;
-
-        final Iterator<IAEPowerStorage> it = this.providers.iterator();
-
-        ongoingExtractOperation = true;
-        try {
-            while (extractedPower < amt && it.hasNext()) {
-                final IAEPowerStorage node = it.next();
-
-                final double req = amt - extractedPower;
-                final double newPower = node.extractAEPower(req, mode, PowerMultiplier.ONE);
-                extractedPower += newPower;
-
-                if (newPower < req && mode == Actionable.MODULATE) {
-                    it.remove();
-                }
-            }
-        } finally {
-            ongoingExtractOperation = false;
-        }
-
-        final double result = Math.min(extractedPower, amt);
-
-        if (mode == Actionable.MODULATE) {
-            if (extractedPower > amt) {
-                this.localStorage.addCurrentAEPower(extractedPower - amt);
-            }
-
-            this.globalAvailablePower -= result;
-            this.tickDrainPerTick += result;
-        }
-
-        return result;
     }
 
     @Override
@@ -595,17 +525,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
 
     private class GridPowerStorage implements IAEPowerStorage {
         private double stored = 0;
-
-        @Override
-        public double extractAEPower(double amt, Actionable mode, PowerMultiplier usePowerMultiplier) {
-            double extracted = Math.min(amt, this.stored);
-
-            if (mode == Actionable.MODULATE) {
-                this.removeCurrentAEPower(extracted);
-            }
-
-            return extracted;
-        }
 
         @Override
         public boolean isAEPublicPowerStorage() {

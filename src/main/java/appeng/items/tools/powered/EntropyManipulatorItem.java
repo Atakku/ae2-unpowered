@@ -85,7 +85,6 @@ public class EntropyManipulatorItem extends AEBasePoweredItem implements IBlockT
     @Override
     public boolean hurtEnemy(ItemStack item, LivingEntity target, LivingEntity hitter) {
         if (this.getAECurrentPower(item) > ENERGY_PER_USE) {
-            this.extractAEPower(item, ENERGY_PER_USE, Actionable.MODULATE);
             target.setSecondsOnFire(8);
         }
 
@@ -161,7 +160,6 @@ public class EntropyManipulatorItem extends AEBasePoweredItem implements IBlockT
         if (tryBoth || InteractionUtil.isInAlternateUseMode(p)) {
             EntropyRecipe coolRecipe = findRecipe(level, EntropyMode.COOL, blockState, fluidState);
             if (coolRecipe != null) {
-                this.extractAEPower(item, 1600, Actionable.MODULATE);
                 applyRecipe(coolRecipe, level, pos, blockState, fluidState);
                 return true;
             }
@@ -182,7 +180,6 @@ public class EntropyManipulatorItem extends AEBasePoweredItem implements IBlockT
 
             EntropyRecipe heatRecipe = findRecipe(level, EntropyMode.HEAT, blockState, fluidState);
             if (heatRecipe != null) {
-                this.extractAEPower(item, 1600, Actionable.MODULATE);
                 applyRecipe(heatRecipe, level, pos, blockState, fluidState);
                 return true;
             }
@@ -206,7 +203,6 @@ public class EntropyManipulatorItem extends AEBasePoweredItem implements IBlockT
         }
 
         if (level.isEmptyBlock(offsetPos)) {
-            this.extractAEPower(item, ENERGY_PER_USE, Actionable.MODULATE);
             level.playSound(p, offsetPos.getX() + 0.5D, offsetPos.getY() + 0.5D, offsetPos.getZ() + 0.5D,
                     SoundEvents.FLINTANDSTEEL_USE, SoundSource.PLAYERS, 1.0F,
                     level.random.nextFloat() * 0.4F + 0.8F);
@@ -260,8 +256,6 @@ public class EntropyManipulatorItem extends AEBasePoweredItem implements IBlockT
         if (smeltedBlockState == null && smeltedDrops.isEmpty()) {
             return false; // Block has no drops
         }
-
-        this.extractAEPower(item, ENERGY_PER_USE, Actionable.MODULATE);
 
         level.playSound(p, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
                 SoundEvents.FLINTANDSTEEL_USE, SoundSource.PLAYERS, 1.0F,

@@ -346,7 +346,7 @@ public class MEStorageMenu extends AEBaseMenu
         } else if (this.powerSource instanceof IEnergyService energyService) {
             this.hasPower = energyService.isNetworkPowered();
         } else if (this.powerSource != null) {
-            this.hasPower = this.powerSource.extractAEPower(1, Actionable.SIMULATE, PowerMultiplier.CONFIG) > 0.8;
+            this.hasPower = true;
         } else {
             this.hasPower = false;
         }

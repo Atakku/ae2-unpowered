@@ -70,11 +70,6 @@ public class CreativeEnergyCellBlockEntity extends AENetworkBlockEntity implemen
     }
 
     @Override
-    public double extractAEPower(double amt, Actionable mode, PowerMultiplier pm) {
-        return amt;
-    }
-
-    @Override
     public int getPriority() {
         // MAX_VALUE to move creative cells to the front.
         return Integer.MAX_VALUE;

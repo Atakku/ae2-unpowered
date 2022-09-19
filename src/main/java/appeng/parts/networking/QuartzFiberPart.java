@@ -147,11 +147,6 @@ public class QuartzFiberPart extends AEBasePart {
         }
 
         @Override
-        public double extractProviderPower(double amt, Actionable mode) {
-            return 0;
-        }
-
-        @Override
         public double injectProviderPower(double amt, Actionable mode) {
             return amt;
         }

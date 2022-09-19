@@ -88,17 +88,6 @@ public class WirelessTerminalMenuHost extends ItemMenuHost implements IPortableT
     }
 
     @Override
-    public double extractAEPower(double amt, Actionable mode, PowerMultiplier usePowerMultiplier) {
-        if (this.terminal != null) {
-            if (mode == Actionable.SIMULATE) {
-                return this.terminal.hasPower(getPlayer(), amt, getItemStack()) ? amt : 0;
-            }
-            return this.terminal.usePower(getPlayer(), amt, getItemStack()) ? amt : 0;
-        }
-        return 0.0;
-    }
-
-    @Override
     public IConfigManager getConfigManager() {
         return this.terminal.getConfigManager(getItemStack());
     }

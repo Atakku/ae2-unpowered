@@ -41,14 +41,6 @@ public interface IAEItemPowerStorage {
     double injectAEPower(ItemStack stack, double amount, Actionable mode);
 
     /**
-     * Attempt to extract power from the device, it will extract what it can and return it.
-     *
-     * @param amount to be extracted power from device
-     * @return what it could extract
-     */
-    double extractAEPower(ItemStack stack, double amount, Actionable mode);
-
-    /**
      * @return the current maximum power ( this can change :P )
      */
     double getAEMaxPower(ItemStack stack);

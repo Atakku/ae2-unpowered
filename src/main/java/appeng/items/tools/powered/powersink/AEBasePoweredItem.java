@@ -113,18 +113,6 @@ public abstract class AEBasePoweredItem extends AEBaseItem implements IAEItemPow
     }
 
     @Override
-    public double extractAEPower(ItemStack stack, double amount, Actionable mode) {
-        final double currentStorage = this.getAECurrentPower(stack);
-        final double fulfillable = Math.min(amount, currentStorage);
-
-        if (mode == Actionable.MODULATE) {
-            setAECurrentPower(stack, currentStorage - fulfillable);
-        }
-
-        return fulfillable;
-    }
-
-    @Override
     public double getAEMaxPower(ItemStack stack) {
         // Allow per-item-stack overrides of the maximum power storage
         var tag = stack.getTag();

@@ -302,14 +302,6 @@ public abstract class P2PTunnelPart<T extends P2PTunnelPart<T>> extends BasicSta
         energyDrainHandler.pendingEnergy += ae_to_tax;
     }
 
-    protected void queueTunnelDrain(PowerUnits unit, double f) {
-        final double ae_to_tax = unit.convertTo(PowerUnits.AE, f * AEConfig.TUNNEL_POWER_LOSS);
-
-        getMainNode().ifPresent(grid -> {
-            grid.getEnergyService().extractAEPower(ae_to_tax, Actionable.MODULATE, PowerMultiplier.ONE);
-        });
-    }
-
     public short getFrequency() {
         return this.freq;
     }
@@ -359,9 +351,6 @@ public abstract class P2PTunnelPart<T extends P2PTunnelPart<T>> extends BasicSta
         @Override
         protected void onFinalCommit() {
             if (pendingEnergy > 0) {
-                getMainNode().ifPresent(grid -> {
-                    grid.getEnergyService().extractAEPower(pendingEnergy, Actionable.MODULATE, PowerMultiplier.ONE);
-                });
                 pendingEnergy = 0;
             }
         }

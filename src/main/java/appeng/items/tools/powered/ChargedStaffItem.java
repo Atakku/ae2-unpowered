@@ -40,7 +40,6 @@ public class ChargedStaffItem extends AEBasePoweredItem {
     @Override
     public boolean hurtEnemy(ItemStack item, LivingEntity target, LivingEntity hitter) {
         if (this.getAECurrentPower(item) > 300) {
-            this.extractAEPower(item, 300, Actionable.MODULATE);
             if (!target.level.isClientSide()) {
                 for (int x = 0; x < 2; x++) {
                     final AABB entityBoundingBox = target.getBoundingBox();

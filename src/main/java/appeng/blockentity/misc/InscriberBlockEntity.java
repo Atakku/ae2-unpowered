@@ -257,29 +257,15 @@ public class InscriberBlockEntity extends AENetworkPowerBlockEntity implements I
             }
         } else {
             getMainNode().ifPresent(grid -> {
-                IEnergyService eg = grid.getEnergyService();
-                IEnergySource src = this;
-
                 // Base 1, increase by 1 for each card
                 final int speedFactor = 1 + this.upgrades.getInstalledUpgrades(AEItems.SPEED_CARD);
-                final int powerConsumption = 10 * speedFactor;
-                final double powerThreshold = powerConsumption - 0.01;
-                double powerReq = this.extractAEPower(powerConsumption, Actionable.SIMULATE, PowerMultiplier.CONFIG);
 
-                if (powerReq <= powerThreshold) {
-                    src = eg;
-                    powerReq = eg.extractAEPower(powerConsumption, Actionable.SIMULATE, PowerMultiplier.CONFIG);
+                if (this.getProcessingTime() == 0) {
+                    this.setProcessingTime(this.getProcessingTime() + speedFactor);
+                } else {
+                    this.setProcessingTime(this.getProcessingTime() + ticksSinceLastCall * speedFactor);
                 }
-
-                if (powerReq > powerThreshold) {
-                    src.extractAEPower(powerConsumption, Actionable.MODULATE, PowerMultiplier.CONFIG);
-
-                    if (this.getProcessingTime() == 0) {
-                        this.setProcessingTime(this.getProcessingTime() + speedFactor);
-                    } else {
-                        this.setProcessingTime(this.getProcessingTime() + ticksSinceLastCall * speedFactor);
-                    }
-                }
+                
             });
 
             if (this.getProcessingTime() > this.getMaxProcessingTime()) {

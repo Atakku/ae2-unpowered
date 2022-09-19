@@ -255,8 +255,7 @@ public class ColorApplicatorItem extends AEBasePoweredItem
         }
 
         var mode = simulate ? Actionable.SIMULATE : Actionable.MODULATE;
-        var success = inv.extract(paintItem, 1, mode, new BaseActionSource()) >= 1
-                && this.extractAEPower(applicator, POWER_PER_USE, mode) >= POWER_PER_USE;
+        var success = inv.extract(paintItem, 1, mode, new BaseActionSource()) >= 1;
         // Clear the color once we run out
         if (success
                 && !simulate

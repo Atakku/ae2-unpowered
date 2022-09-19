@@ -150,8 +150,6 @@ public class MatterCannonItem extends AEBasePoweredItem implements IBasicCellIte
         shots = Math.min(shots, (int) req.getLongValue());
 
         for (int sh = 0; sh < shots; sh++) {
-            extractAEPower(stack, ENERGY_PER_SHOT, Actionable.MODULATE);
-
             if (level.isClientSide()) {
                 // Up until this point, we can simulate on the client, after this,
                 // we need to run the server-side version

@@ -161,28 +161,23 @@ public class SpatialIOPortBlockEntity extends AENetworkInvBlockEntity {
                 return;
             }
 
-            var energy = grid.getEnergyService();
             final double req = spc.requiredPower();
-            final double pr = energy.extractAEPower(req, Actionable.SIMULATE, PowerMultiplier.CONFIG);
-            if (Math.abs(pr - req) < req * 0.001) {
-                var evt = grid.postEvent(new GridSpatialEvent(getLevel(), getBlockPos(), req));
-                if (!evt.isTransitionPrevented()) {
-                    // Prefer player id from security system, but if unavailable, use the
-                    // player who placed the grid node (if any)
-                    int playerId;
-                    if (grid.getSecurityService().isAvailable()) {
-                        playerId = grid.getSecurityService().getOwner();
-                    } else {
-                        playerId = node.getOwningPlayerId();
-                    }
+            var evt = grid.postEvent(new GridSpatialEvent(getLevel(), getBlockPos(), req));
+            if (!evt.isTransitionPrevented()) {
+                // Prefer player id from security system, but if unavailable, use the
+                // player who placed the grid node (if any)
+                int playerId;
+                if (grid.getSecurityService().isAvailable()) {
+                    playerId = grid.getSecurityService().getOwner();
+                } else {
+                    playerId = node.getOwningPlayerId();
+                }
 
-                    boolean success = sc.doSpatialTransition(cell, serverLevel, spc.getMin(), spc.getMax(),
-                            playerId);
-                    if (success) {
-                        energy.extractAEPower(req, Actionable.MODULATE, PowerMultiplier.CONFIG);
-                        this.inv.setItemDirect(0, ItemStack.EMPTY);
-                        this.inv.setItemDirect(1, cell);
-                    }
+                boolean success = sc.doSpatialTransition(cell, serverLevel, spc.getMin(), spc.getMax(),
+                        playerId);
+                if (success) {
+                    this.inv.setItemDirect(0, ItemStack.EMPTY);
+                    this.inv.setItemDirect(1, cell);
                 }
             }
         });

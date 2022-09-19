@@ -77,20 +77,6 @@ public class AEBaseBlockItemChargeable extends AEBaseBlockItem implements IAEIte
     }
 
     @Override
-    public double extractAEPower(ItemStack is, double amount, Actionable mode) {
-        final double internalCurrentPower = this.getInternal(is);
-        final double fulfillable = Math.min(amount, internalCurrentPower);
-
-        if (mode == Actionable.MODULATE) {
-            final double newPowerStored = internalCurrentPower - fulfillable;
-
-            this.setInternal(is, newPowerStored);
-        }
-
-        return fulfillable;
-    }
-
-    @Override
     public double getAEMaxPower(ItemStack is) {
         return this.getMaxEnergyCapacity();
     }

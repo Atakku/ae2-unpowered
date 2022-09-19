@@ -180,19 +180,11 @@ public class ChargerBlockEntity extends AENetworkPowerBlockEntity implements IGr
                             * AEConfig.instance().getChargerChargeRate();
 
                     // First charge from the local buffer
-                    double extractedAmount = this.extractAEPower(chargeRate, Actionable.MODULATE,
-                            PowerMultiplier.CONFIG);
+                    double extractedAmount = chargeRate;
 
                     var missingChargeRate = chargeRate - extractedAmount;
                     var missingAEPower = maxPower - currentPower;
                     var toExtract = Math.min(missingChargeRate, missingAEPower);
-
-                    // Then directly extract from the grid
-                    var grid = getMainNode().getGrid();
-                    if (grid != null) {
-                        extractedAmount += grid.getEnergyService().extractAEPower(toExtract, Actionable.MODULATE,
-                                PowerMultiplier.ONE);
-                    }
 
                     if (extractedAmount > 0) {
                         var adjustment = ps.injectAEPower(myItem, extractedAmount, Actionable.MODULATE);
@@ -207,8 +199,6 @@ public class ChargerBlockEntity extends AENetworkPowerBlockEntity implements IGr
                     && AEItems.CERTUS_QUARTZ_CRYSTAL.isSameAs(myItem)) {
                 this.working = true;
                 if (Platform.getRandomFloat() > 0.8f) {
-                    this.extractAEPower(this.getInternalMaxPower(), Actionable.MODULATE, PowerMultiplier.CONFIG);
-
                     ItemStack charged = AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED.stack(myItem.getCount());
                     this.inv.setItemDirect(0, charged);
 
@@ -221,8 +211,7 @@ public class ChargerBlockEntity extends AENetworkPowerBlockEntity implements IGr
         if (this.getInternalCurrentPower() < POWER_THRESHOLD) {
             getMainNode().ifPresent(grid -> {
                 double toExtract = Math.min(800.0, this.getInternalMaxPower() - this.getInternalCurrentPower());
-                final double extracted = grid.getEnergyService().extractAEPower(toExtract, Actionable.MODULATE,
-                        PowerMultiplier.ONE);
+                final double extracted = toExtract;
 
                 this.injectExternalPower(PowerUnits.AE, extracted, Actionable.MODULATE);
             });

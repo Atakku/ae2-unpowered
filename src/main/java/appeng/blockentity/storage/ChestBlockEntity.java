@@ -251,14 +251,7 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
     @Override
     public void serverTick() {
         var grid = getMainNode().getGrid();
-        if (grid != null) {
-            if (!grid.getEnergyService().isNetworkPowered()) {
-                final double powerUsed = idlePowerUsage; // drain
-                if (powerUsed + 0.1 >= idlePowerUsage != (this.state & BIT_POWER_MASK) > 0) {
-                    this.recalculateDisplay();
-                }
-            }
-        } else {
+        if (grid == null) {
             final double powerUsed = idlePowerUsage; // drain
             if (powerUsed + 0.1 >= idlePowerUsage != (this.state & BIT_POWER_MASK) > 0) {
                 this.recalculateDisplay();

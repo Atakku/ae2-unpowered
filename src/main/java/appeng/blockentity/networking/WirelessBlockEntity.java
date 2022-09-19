@@ -85,9 +85,7 @@ public class WirelessBlockEntity extends AENetworkInvBlockEntity implements IWir
         this.setClientFlags(0);
 
         getMainNode().ifPresent((grid, node) -> {
-            if (grid.getEnergyService().isNetworkPowered()) {
-                this.setClientFlags(this.getClientFlags() | POWERED_FLAG);
-            }
+            this.setClientFlags(this.getClientFlags() | POWERED_FLAG);
 
             if (node.meetsChannelRequirements()) {
                 this.setClientFlags(this.getClientFlags() | CHANNEL_FLAG);

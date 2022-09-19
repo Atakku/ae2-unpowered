@@ -127,8 +127,6 @@ public class DebugCardItem extends AEBaseItem implements AEToolItem {
                 this.outputMessage(player, "-- Grid Details");
                 final Grid g = node.getInternalGrid();
                 final IGridNode center = g.getPivot();
-                this.outputPrimaryMessage(player, "Grid Powered",
-                        String.valueOf(g.getEnergyService().isNetworkPowered()));
                 this.outputPrimaryMessage(player, "Grid Booted",
                         String.valueOf(!g.getPathingService().isNetworkBooting()));
                 this.outputPrimaryMessage(player, "Nodes in grid", String.valueOf(Iterables.size(g.getNodes())));

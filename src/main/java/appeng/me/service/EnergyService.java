@@ -290,11 +290,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
     }
 
     @Override
-    public boolean isNetworkPowered() {
-        return this.publicHasPower;
-    }
-
-    @Override
     public double getEnergyDemand(double maxRequired) {
         final Queue<IEnergyGridProvider> toVisit = new PriorityQueue<>(COMPARATOR_LOWEST_PERCENTAGE_FIRST);
         final Set<IEnergyGridProvider> visited = new HashSet<>();

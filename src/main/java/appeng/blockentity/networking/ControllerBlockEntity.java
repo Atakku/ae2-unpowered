@@ -78,12 +78,10 @@ public class ControllerBlockEntity extends AENetworkPowerBlockEntity {
 
         var grid = getMainNode().getGrid();
         if (grid != null) {
-            if (grid.getEnergyService().isNetworkPowered()) {
-                metaState = ControllerBlockState.online;
+            metaState = ControllerBlockState.online;
 
-                if (grid.getPathingService().getControllerState() == ControllerState.CONTROLLER_CONFLICT) {
-                    metaState = ControllerBlockState.conflicted;
-                }
+            if (grid.getPathingService().getControllerState() == ControllerState.CONTROLLER_CONFLICT) {
+                metaState = ControllerBlockState.conflicted;
             }
         } else {
             metaState = ControllerBlockState.offline;

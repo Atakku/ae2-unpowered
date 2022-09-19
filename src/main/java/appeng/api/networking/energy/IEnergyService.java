@@ -60,18 +60,6 @@ public interface IEnergyService extends IGridService {
     double getAvgPowerInjection();
 
     /**
-     * AE maintains an idle draw of power separate from active power draw, it condenses this into a single operation
-     * that determines the networks "powered state" if the network is considered off-line, your machines should not
-     * function.
-     * <p>
-     * Nodes are notified via {@link appeng.api.networking.IGridNodeListener#onStateChanged} when this value changes.
-     * Most machines can simply test the value when they are about to perform work, without listening to this event.
-     *
-     * @return if the network is powered or not.
-     */
-    boolean isNetworkPowered();
-
-    /**
      * Calculation will be capped at maxRequired, this improves performance by limiting the number of nodes needed to
      * calculate the demand.
      *

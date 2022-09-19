@@ -160,12 +160,6 @@ public class Platform {
         var gn = actionHost.getActionableNode();
         if (gn != null) {
             var g = gn.getGrid();
-            if (requirePower) {
-                var eg = g.getEnergyService();
-                if (!eg.isNetworkPowered()) {
-                    return false;
-                }
-            }
 
             var sg = g.getSecurityService();
             if (!sg.hasPermission(player, requiredPermission)) {

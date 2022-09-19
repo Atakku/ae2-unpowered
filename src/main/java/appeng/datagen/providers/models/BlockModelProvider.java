@@ -12,7 +12,6 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import appeng.block.crafting.AbstractCraftingUnitBlock;
-import appeng.block.misc.VibrationChamberBlock;
 import appeng.block.networking.EnergyCellBlock;
 import appeng.block.spatial.SpatialAnchorBlock;
 import appeng.block.spatial.SpatialIOPortBlock;
@@ -83,28 +82,9 @@ public class BlockModelProvider extends AE2BlockStateProvider {
         energyCell(AEBlocks.DENSE_ENERGY_CELL, "block/dense_energy_cell");
         simpleBlockAndItem(AEBlocks.CREATIVE_ENERGY_CELL, "block/creative_energy_cell");
 
-        vibrationChamber();
         spatialAnchor();
         patternProvider();
         ioPorts();
-    }
-
-    private void vibrationChamber() {
-        var offModel = models().orientable(
-                modelPath(AEBlocks.VIBRATION_CHAMBER),
-                makeId("block/vibration_chamber"),
-                makeId("block/vibration_chamber_front"),
-                makeId("block/vibration_chamber"));
-        var onModel = models().orientable(
-                modelPath(AEBlocks.VIBRATION_CHAMBER) + "_on",
-                makeId("block/vibration_chamber"),
-                makeId("block/vibration_chamber_front_on"),
-                makeId("block/vibration_chamber"));
-
-        getVariantBuilder(AEBlocks.VIBRATION_CHAMBER.block())
-                .partialState().with(VibrationChamberBlock.ACTIVE, true).setModels(new ConfiguredModel(onModel))
-                .partialState().with(VibrationChamberBlock.ACTIVE, false).setModels(new ConfiguredModel(offModel));
-        itemModels().withExistingParent(modelPath(AEBlocks.VIBRATION_CHAMBER), offModel.getLocation());
     }
 
     private void spatialAnchor() {
@@ -190,7 +170,7 @@ public class BlockModelProvider extends AE2BlockStateProvider {
     private BlockModelBuilder builtInBlockModel(String name) {
         var model = models().getBuilder("block/" + name);
         var loaderId = AppEng.makeId("block/" + name);
-        model.customLoader((bmb, efh) -> new CustomLoaderBuilder<>(loaderId, bmb, efh) {
+        model.customLoader((bmb, efh) -> new CustomLoaderBuilder<BlockModelBuilder>(loaderId, bmb, efh) {
         });
         return model;
     }

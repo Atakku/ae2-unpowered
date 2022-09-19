@@ -282,7 +282,7 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
     private ItemModelBuilder builtInItemModel(String name) {
         var model = getBuilder("item/" + name);
         var loaderId = AppEng.makeId("item/" + name);
-        model.customLoader((bmb, efh) -> new CustomLoaderBuilder<>(loaderId, bmb, efh) {
+        model.customLoader((bmb, efh) -> new CustomLoaderBuilder<ItemModelBuilder>(loaderId, bmb, efh) {
         });
         return model;
     }

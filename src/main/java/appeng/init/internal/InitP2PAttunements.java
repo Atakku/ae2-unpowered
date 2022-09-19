@@ -33,14 +33,11 @@ public final class InitP2PAttunements {
 
     public static void init() {
         P2PTunnelAttunement.registerAttunementTag(AEParts.ME_P2P_TUNNEL);
-        P2PTunnelAttunement.registerAttunementTag(AEParts.FE_P2P_TUNNEL);
         P2PTunnelAttunement.registerAttunementTag(AEParts.REDSTONE_P2P_TUNNEL);
         P2PTunnelAttunement.registerAttunementTag(AEParts.FLUID_P2P_TUNNEL);
         P2PTunnelAttunement.registerAttunementTag(AEParts.ITEM_P2P_TUNNEL);
         P2PTunnelAttunement.registerAttunementTag(AEParts.LIGHT_P2P_TUNNEL);
 
-        P2PTunnelAttunement.registerAttunementApi(P2PTunnelAttunement.ENERGY_TUNNEL, EnergyStorage.ITEM,
-                GuiText.P2PAttunementEnergy.text());
         P2PTunnelAttunement.registerAttunementApi(P2PTunnelAttunement.FLUID_TUNNEL, FluidStorage.ITEM,
                 GuiText.P2PAttunementFluid.text());
     }

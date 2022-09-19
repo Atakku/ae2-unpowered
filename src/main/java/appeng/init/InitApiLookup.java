@@ -22,7 +22,6 @@ import appeng.parts.crafting.PatternProviderPart;
 import appeng.parts.encoding.PatternEncodingTerminalPart;
 import appeng.parts.misc.InterfacePart;
 import appeng.parts.networking.EnergyAcceptorPart;
-import appeng.parts.p2p.FEP2PTunnelPart;
 import appeng.parts.p2p.FluidP2PTunnelPart;
 import appeng.parts.p2p.ItemP2PTunnelPart;
 
@@ -77,7 +76,6 @@ public final class InitApiLookup {
 
     private static void initP2P() {
         PartApiLookup.register(ItemStorage.SIDED, (part, context) -> part.getExposedApi(), ItemP2PTunnelPart.class);
-        PartApiLookup.register(EnergyStorage.SIDED, (part, context) -> part.getExposedApi(), FEP2PTunnelPart.class);
         PartApiLookup.register(FluidStorage.SIDED, (part, context) -> part.getExposedApi(), FluidP2PTunnelPart.class);
     }
 

@@ -161,7 +161,6 @@ public final class SiteExporter {
 
         var tunnelTypes = new ItemLike[] {
                 P2PTunnelAttunement.ME_TUNNEL,
-                P2PTunnelAttunement.ENERGY_TUNNEL,
                 P2PTunnelAttunement.ITEM_TUNNEL,
                 P2PTunnelAttunement.FLUID_TUNNEL,
                 P2PTunnelAttunement.REDSTONE_TUNNEL,

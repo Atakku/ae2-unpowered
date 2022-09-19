@@ -50,7 +50,6 @@ import appeng.parts.networking.GlassCablePart;
 import appeng.parts.networking.QuartzFiberPart;
 import appeng.parts.networking.SmartCablePart;
 import appeng.parts.networking.SmartDenseCablePart;
-import appeng.parts.p2p.FEP2PTunnelPart;
 import appeng.parts.p2p.FluidP2PTunnelPart;
 import appeng.parts.p2p.ItemP2PTunnelPart;
 import appeng.parts.p2p.LightP2PTunnelPart;
@@ -107,7 +106,6 @@ public final class AEParts {
     public static final ItemDefinition<PartItem<RedstoneP2PTunnelPart>> REDSTONE_P2P_TUNNEL = createPart("Redstone P2P Tunnel", AEPartIds.REDSTONE_P2P_TUNNEL, RedstoneP2PTunnelPart.class, RedstoneP2PTunnelPart::new);
     public static final ItemDefinition<PartItem<ItemP2PTunnelPart>> ITEM_P2P_TUNNEL = createPart("Item P2P Tunnel", AEPartIds.ITEM_P2P_TUNNEL, ItemP2PTunnelPart.class, ItemP2PTunnelPart::new);
     public static final ItemDefinition<PartItem<FluidP2PTunnelPart>> FLUID_P2P_TUNNEL = createPart("Fluid P2P Tunnel", AEPartIds.FLUID_P2P_TUNNEL, FluidP2PTunnelPart.class, FluidP2PTunnelPart::new);
-    public static final ItemDefinition<PartItem<FEP2PTunnelPart>> FE_P2P_TUNNEL = createPart("Energy P2P Tunnel", AEPartIds.FE_P2P_TUNNEL, FEP2PTunnelPart.class, FEP2PTunnelPart::new);
     public static final ItemDefinition<PartItem<LightP2PTunnelPart>> LIGHT_P2P_TUNNEL = createPart("Light P2P Tunnel", AEPartIds.LIGHT_P2P_TUNNEL, LightP2PTunnelPart.class, LightP2PTunnelPart::new);
     // spotless:on
 

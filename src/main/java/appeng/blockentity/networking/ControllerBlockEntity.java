@@ -28,8 +28,6 @@ import appeng.api.networking.GridFlags;
 import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.networking.events.GridControllerChange;
-import appeng.api.networking.events.GridPowerStorageStateChanged;
-import appeng.api.networking.events.GridPowerStorageStateChanged.PowerEventType;
 import appeng.api.networking.pathing.ControllerState;
 import appeng.api.util.AECableType;
 import appeng.block.networking.ControllerBlock;

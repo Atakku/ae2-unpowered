@@ -1,7 +1,5 @@
 package appeng.items.tools.powered;
 
-import java.util.function.DoubleSupplier;
-
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;

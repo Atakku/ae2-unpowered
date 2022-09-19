@@ -64,14 +64,11 @@ import appeng.api.stacks.AEKey;
 import appeng.api.stacks.AEKeyType;
 import appeng.api.storage.StorageCells;
 import appeng.api.storage.cells.IBasicCellItem;
-import appeng.api.upgrades.IUpgradeInventory;
-import appeng.api.upgrades.UpgradeInventories;
 import appeng.api.util.AEColor;
 import appeng.api.util.DimensionalBlockPos;
 import appeng.block.networking.CableBusBlock;
 import appeng.block.paint.PaintSplotchesBlock;
 import appeng.blockentity.misc.PaintSplotchesBlockEntity;
-import appeng.core.AEConfig;
 import appeng.core.definitions.AEItems;
 import appeng.core.localization.GuiText;
 import appeng.datagen.providers.tags.ConventionTags;
@@ -521,9 +518,6 @@ public class ColorApplicatorItem extends AEBaseItem
             dyeStorage.insert(AEItemKey.of(dyeItem), 128, Actionable.MODULATE, new BaseActionSource());
         }
         dyeStorage.insert(AEItemKey.of(Items.SNOWBALL), 128, Actionable.MODULATE, new BaseActionSource());
-
-        // Upgrade energy storage
-        var upgrades = item.getUpgrades(applicator);
 
         return applicator;
     }

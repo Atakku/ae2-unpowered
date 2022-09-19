@@ -3,7 +3,6 @@ package appeng.parts.automation;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,7 +18,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -118,7 +116,6 @@ public class ItemPickupStrategy implements PickupStrategy {
         }
 
         var items = this.obtainBlockDrops(level, pos);
-        var requiredPower = this.calculateEnergyUsage(level, pos, items);
 
         if (!this.breakBlockAndStoreExtraItems(sink, level, pos)) {
             // We failed to actually replace the block with air, or it already was the case
@@ -234,41 +231,6 @@ public class ItemPickupStrategy implements PickupStrategy {
         var drops = Block.getDrops(state, level, pos, blockEntity, fakePlayer, harvestToolItem);
         // Some modded blocks can have empty stacks, filter them out!
         return drops.stream().filter(stack -> !stack.isEmpty()).toList();
-    }
-
-    /**
-     * Checks if this plane can handle the block at the specific coordinates.
-     */
-    protected float calculateEnergyUsage(ServerLevel level, BlockPos pos, List<ItemStack> items) {
-        boolean useEnergy = true;
-
-        var state = level.getBlockState(pos);
-        var hardness = state.getDestroySpeed(level, pos);
-
-        var requiredEnergy = 1 + hardness;
-        for (var is : items) {
-            requiredEnergy += is.getCount();
-        }
-
-        if (enchantments != null) {
-            var efficiencyFactor = 1f;
-            var efficiencyLevel = 0;
-            if (enchantments.containsKey(Enchantments.BLOCK_EFFICIENCY)) {
-                // Reduce total energy usage incurred by other enchantments by 15% per Efficiency level.
-                efficiencyLevel = enchantments.get(Enchantments.BLOCK_EFFICIENCY);
-                efficiencyFactor *= Math.pow(0.85, efficiencyLevel);
-            }
-            if (enchantments.containsKey(Enchantments.UNBREAKING)) {
-                // Give plane only a (100 / (level + 1))% chance to use energy.
-                // This is similar to vanilla Unbreaking behaviour for tools.
-                int randomNumber = ThreadLocalRandom.current().nextInt(enchantments.get(Enchantments.UNBREAKING) + 1);
-                useEnergy = randomNumber == 0;
-            }
-            var levelSum = enchantments.values().stream().reduce(0, Integer::sum) - efficiencyLevel;
-            requiredEnergy *= 8 * levelSum * efficiencyFactor;
-        }
-
-        return useEnergy ? requiredEnergy : 0;
     }
 
     /**

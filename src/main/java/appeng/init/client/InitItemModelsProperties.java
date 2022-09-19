@@ -21,11 +21,9 @@ package appeng.init.client;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 
 import appeng.api.util.AEColor;
-import appeng.block.AEBaseBlockItemChargeable;
 import appeng.core.AppEng;
 import appeng.core.definitions.AEItems;
 import appeng.core.definitions.ItemDefinition;
@@ -60,22 +58,6 @@ public final class InitItemModelsProperties {
 
         registerSeedGrowth(AEItems.CERTUS_CRYSTAL_SEED);
         registerSeedGrowth(AEItems.FLUIX_CRYSTAL_SEED);
-
-        // Register the client-only item model property for chargeable items
-        Registry.ITEM.forEach(item -> {
-            if (!(item instanceof AEBaseBlockItemChargeable chargeable)) {
-                return;
-            }
-
-            FabricModelPredicateProviderRegistry.register(chargeable,
-                    ENERGY_FILL_LEVEL_ID,
-                    (is, level, entity, seed) -> {
-                        double curPower = 1;
-                        double maxPower = 1;
-
-                        return (int) Math.round(100 * curPower / maxPower);
-                    });
-        });
     }
 
     /**

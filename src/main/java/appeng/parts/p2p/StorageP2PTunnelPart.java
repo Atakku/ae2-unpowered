@@ -63,8 +63,6 @@ public abstract class StorageP2PTunnelPart<P extends StorageP2PTunnelPart<P, T>,
                 }
             }
 
-            var energyDrain = ((double) total) / ((double) keyType.getAmountPerOperation());
-
             return total;
         }
 

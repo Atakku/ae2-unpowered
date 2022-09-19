@@ -63,8 +63,6 @@ import appeng.api.stacks.AEKey;
 import appeng.api.stacks.AEKeyType;
 import appeng.api.storage.StorageCells;
 import appeng.api.storage.cells.IBasicCellItem;
-import appeng.api.upgrades.IUpgradeInventory;
-import appeng.api.upgrades.UpgradeInventories;
 import appeng.api.util.AEColor;
 import appeng.api.util.DimensionalBlockPos;
 import appeng.blockentity.misc.PaintSplotchesBlockEntity;
@@ -86,12 +84,6 @@ import appeng.util.LookDirection;
 import appeng.util.Platform;
 
 public class MatterCannonItem extends AEBaseItem implements IBasicCellItem {
-
-    /**
-     * AE energy units consumer per shot fired.
-     */
-    private static final int ENERGY_PER_SHOT = 1600;
-
     public MatterCannonItem(Item.Properties props) {
         super(props);
     }

@@ -56,7 +56,7 @@ public final class StorageHelper {
     }
 
     /**
-     * Extracts items from a {@link MEStorage} respecting power requirements.
+     * Extracts items from a {@link MEStorage}
      *
      * @param inv     Inventory to extract from.
      * @param request Requested item and count.
@@ -69,7 +69,7 @@ public final class StorageHelper {
     }
 
     /**
-     * Extracts items from a {@link MEStorage} respecting power requirements.
+     * Extracts items from a {@link MEStorage}
      *
      * @param inv     Inventory to extract from.
      * @param request Requested item and count.
@@ -105,7 +105,7 @@ public final class StorageHelper {
     }
 
     /**
-     * Inserts items into a {@link MEStorage} respecting power requirements.
+     * Inserts items into a {@link MEStorage}
      *
      * @param inv    Inventory to insert into.
      * @param input  Items to insert.
@@ -118,7 +118,7 @@ public final class StorageHelper {
     }
 
     /**
-     * Inserts items into a {@link MEStorage} respecting power requirements.
+     * Inserts items into a {@link MEStorage}
      *
      * @param inv    Inventory to insert into.
      * @param input  Items to insert.

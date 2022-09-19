@@ -8,7 +8,6 @@ import appeng.api.implementations.blockentities.ICraftingMachine;
 import appeng.api.inventories.PartApiLookup;
 import appeng.api.storage.IStorageMonitorableAccessor;
 import appeng.blockentity.AEBaseInvBlockEntity;
-import appeng.blockentity.powersink.AEBasePoweredBlockEntity;
 import appeng.blockentity.storage.ChestBlockEntity;
 import appeng.blockentity.storage.SkyStoneTankBlockEntity;
 import appeng.core.definitions.AEBlockEntities;

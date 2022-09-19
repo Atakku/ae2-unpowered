@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
-import net.fabricmc.fabric.api.transfer.v1.transaction.base.SnapshotParticipant;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -319,26 +319,5 @@ public abstract class P2PTunnelPart<T extends P2PTunnelPart<T>> extends BasicSta
         }
 
         return ret;
-    }
-
-    private class EnergyDrainHandler extends SnapshotParticipant<Double> {
-        private double pendingEnergy;
-
-        @Override
-        protected Double createSnapshot() {
-            return pendingEnergy;
-        }
-
-        @Override
-        protected void readSnapshot(Double snapshot) {
-            pendingEnergy = snapshot;
-        }
-
-        @Override
-        protected void onFinalCommit() {
-            if (pendingEnergy > 0) {
-                pendingEnergy = 0;
-            }
-        }
     }
 }

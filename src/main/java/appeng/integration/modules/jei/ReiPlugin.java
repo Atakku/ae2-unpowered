@@ -183,7 +183,6 @@ public class ReiPlugin implements REIClientPlugin {
         developerItems = ImmutableList.of(
                 AEBlocks.DEBUG_CUBE_GEN::isSameAs,
                 AEBlocks.DEBUG_CHUNK_LOADER::isSameAs,
-                AEBlocks.DEBUG_ENERGY_GEN::isSameAs,
                 AEBlocks.DEBUG_ITEM_GEN::isSameAs,
                 AEBlocks.DEBUG_PHANTOM_NODE::isSameAs,
 

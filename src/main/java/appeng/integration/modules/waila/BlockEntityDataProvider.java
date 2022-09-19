@@ -35,7 +35,6 @@ import appeng.integration.modules.waila.tile.ChargerDataProvider;
 import appeng.integration.modules.waila.tile.CraftingMonitorDataProvider;
 import appeng.integration.modules.waila.tile.DebugDataProvider;
 import appeng.integration.modules.waila.tile.GridNodeStateDataProvider;
-import appeng.integration.modules.waila.tile.PowerStorageDataProvider;
 
 /**
  * Delegation provider for tiles through {@link mcp.mobius.waila.api.IComponentProvider}
@@ -56,7 +55,6 @@ public final class BlockEntityDataProvider implements IComponentProvider, IServe
     public BlockEntityDataProvider() {
         this.providers = List.of(
                 new ChargerDataProvider(),
-                new PowerStorageDataProvider(),
                 new GridNodeStateDataProvider(),
                 new CraftingMonitorDataProvider(),
                 new DebugDataProvider());

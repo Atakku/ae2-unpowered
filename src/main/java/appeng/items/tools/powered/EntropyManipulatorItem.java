@@ -57,7 +57,6 @@ import net.minecraft.world.phys.HitResult.Type;
 
 import appeng.api.util.DimensionalBlockPos;
 import appeng.block.misc.TinyTNTBlock;
-import appeng.core.AEConfig;
 import appeng.hooks.IBlockTool;
 import appeng.items.AEBaseItem;
 import appeng.recipes.entropy.EntropyMode;
@@ -66,12 +65,6 @@ import appeng.util.InteractionUtil;
 import appeng.util.Platform;
 
 public class EntropyManipulatorItem extends AEBaseItem implements IBlockTool {
-
-    /**
-     * The amount of AE energy consumed per use.
-     */
-    private static final int ENERGY_PER_USE = 1600;
-
     public EntropyManipulatorItem(Item.Properties props) {
         super(props);
     }

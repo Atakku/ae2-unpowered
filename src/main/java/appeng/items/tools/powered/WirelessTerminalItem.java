@@ -20,7 +20,6 @@ package appeng.items.tools.powered;
 
 import java.util.List;
 import java.util.OptionalLong;
-import java.util.function.DoubleSupplier;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -50,11 +49,8 @@ import appeng.api.features.IGridLinkableHandler;
 import appeng.api.features.Locatables;
 import appeng.api.implementations.menuobjects.IMenuItem;
 import appeng.api.implementations.menuobjects.ItemMenuHost;
-import appeng.api.upgrades.IUpgradeInventory;
 import appeng.api.upgrades.IUpgradeableItem;
-import appeng.api.upgrades.UpgradeInventories;
 import appeng.api.util.IConfigManager;
-import appeng.core.definitions.AEItems;
 import appeng.core.localization.GuiText;
 import appeng.core.localization.PlayerMessages;
 import appeng.core.localization.Tooltips;

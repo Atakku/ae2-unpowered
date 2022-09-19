@@ -61,7 +61,6 @@ public final class AEBlockIds {
     public static final ResourceLocation CELL_WORKBENCH = id("cell_workbench");
     public static final ResourceLocation IO_PORT = id("io_port");
     public static final ResourceLocation CONDENSER = id("condenser");
-    public static final ResourceLocation ENERGY_ACCEPTOR = id("energy_acceptor");
     public static final ResourceLocation QUARTZ_GROWTH_ACCELERATOR = id("quartz_growth_accelerator");
     public static final ResourceLocation CABLE_BUS = id("cable_bus");
 

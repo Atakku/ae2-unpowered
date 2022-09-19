@@ -323,10 +323,6 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .unlockedBy("has_glass_cable", has(AEParts.GLASS_CABLE.item(AEColor.TRANSPARENT)))
                 .unlockedBy("has_quartz_glass", has(AEBlocks.QUARTZ_GLASS))
                 .save(consumer, AppEng.makeId("network/blocks/crystal_processing_quartz_growth_accelerator"));
-        ShapelessRecipeBuilder.shapeless(AEBlocks.ENERGY_ACCEPTOR)
-                .requires(AEParts.ENERGY_ACCEPTOR)
-                .unlockedBy("has_cable_energy_acceptor", has(AEParts.ENERGY_ACCEPTOR))
-                .save(consumer, AppEng.makeId("network/blocks/energy_energy_acceptor_alt"));
         ShapedRecipeBuilder.shaped(AEBlocks.INSCRIBER)
                 .pattern("aba")
                 .pattern("c a")
@@ -612,10 +608,6 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .requires(ConventionTags.QUARTZ_KNIFE)
                 .unlockedBy("has_knife", has(ConventionTags.QUARTZ_KNIFE))
                 .save(consumer, AppEng.makeId("network/parts/cable_anchor"));
-        ShapelessRecipeBuilder.shapeless(AEParts.ENERGY_ACCEPTOR)
-                .requires(AEBlocks.ENERGY_ACCEPTOR)
-                .unlockedBy("has_energy_acceptor", has(AEBlocks.ENERGY_ACCEPTOR))
-                .save(consumer, AppEng.makeId("network/parts/energy_acceptor"));
         ShapedRecipeBuilder.shaped(AEParts.ANNIHILATION_PLANE)
                 .pattern("aaa")
                 .pattern("bcb")

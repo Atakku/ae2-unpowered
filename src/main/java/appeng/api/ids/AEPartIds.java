@@ -241,7 +241,6 @@ public final class AEPartIds {
     public static final ResourceLocation PATTERN_PROVIDER = id("cable_pattern_provider");
     public static final ResourceLocation INTERFACE = id("cable_interface");
     public static final ResourceLocation CONVERSION_MONITOR = id("conversion_monitor");
-    public static final ResourceLocation ENERGY_ACCEPTOR = id("cable_energy_acceptor");
 
     ///
     /// Monitors and terminals

@@ -50,7 +50,6 @@ public class BlockModelProvider extends AE2BlockStateProvider {
         generateOreBlock(AEBlocks.DEEPSLATE_QUARTZ_ORE);
 
         simpleBlockAndItem(AEBlocks.CONDENSER);
-        simpleBlockAndItem(AEBlocks.ENERGY_ACCEPTOR);
         simpleBlockAndItem(AEBlocks.INTERFACE);
 
         simpleBlockAndItem(AEBlocks.DEBUG_ITEM_GEN, "block/debug/item_gen");

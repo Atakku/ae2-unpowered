@@ -104,7 +104,6 @@ public class MolecularAssemblerBlockEntity extends AENetworkInvBlockEntity
         super(blockEntityType, pos, blockState);
 
         this.getMainNode()
-                .setIdlePowerUsage(0.0)
                 .addService(IGridTickable.class, this);
         this.upgrades = UpgradeInventories.forMachine(AEBlocks.MOLECULAR_ASSEMBLER, getUpgradeSlots(),
                 this::saveChanges);

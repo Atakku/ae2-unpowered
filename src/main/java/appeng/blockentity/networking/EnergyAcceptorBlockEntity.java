@@ -31,7 +31,6 @@ public class EnergyAcceptorBlockEntity extends AENetworkPowerBlockEntity {
 
     public EnergyAcceptorBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
-        this.getMainNode().setIdlePowerUsage(0.0);
         this.setInternalMaxPower(0);
     }
 

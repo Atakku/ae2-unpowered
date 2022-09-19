@@ -68,9 +68,6 @@ public abstract class AbstractReportingPart extends AEBasePart implements IMonit
 
         if (requireChannel) {
             this.getMainNode().setFlags(GridFlags.REQUIRE_CHANNEL);
-            this.getMainNode().setIdlePowerUsage(1.0 / 2.0);
-        } else {
-            this.getMainNode().setIdlePowerUsage(1.0 / 16.0); // lights drain a little bit.
         }
     }
 

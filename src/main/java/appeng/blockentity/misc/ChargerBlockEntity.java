@@ -57,7 +57,6 @@ public class ChargerBlockEntity extends AENetworkPowerBlockEntity implements IGr
         this.getMainNode()
                 .setExposedOnSides(EnumSet.noneOf(Direction.class))
                 .setFlags()
-                .setIdlePowerUsage(0)
                 .addService(IGridTickable.class, this);
         this.setInternalMaxPower(POWER_MAXIMUM_AMOUNT);
     }

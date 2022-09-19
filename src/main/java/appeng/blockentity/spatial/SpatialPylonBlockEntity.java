@@ -61,7 +61,6 @@ public class SpatialPylonBlockEntity extends AENetworkBlockEntity implements IAE
     public SpatialPylonBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
         this.getMainNode().setFlags(GridFlags.REQUIRE_CHANNEL, GridFlags.MULTIBLOCK)
-                .setIdlePowerUsage(0.5)
                 .addService(IGridMultiblock.class, this::getMultiblockNodes);
     }
 

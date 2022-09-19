@@ -284,7 +284,6 @@ public class SpatialAnchorBlockEntity extends AENetworkBlockEntity
             return;
         }
         int energy = 80 + this.chunks.size() * (this.chunks.size() + 1) / 2;
-        this.getMainNode().setIdlePowerUsage(energy);
     }
 
     /**

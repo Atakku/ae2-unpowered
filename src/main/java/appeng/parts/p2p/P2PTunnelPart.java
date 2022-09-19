@@ -51,11 +51,9 @@ public abstract class P2PTunnelPart<T extends P2PTunnelPart<T>> extends BasicSta
 
     private boolean output;
     private short freq;
-    private final EnergyDrainHandler energyDrainHandler = new EnergyDrainHandler();
 
     public P2PTunnelPart(IPartItem<?> partItem) {
         super(partItem);
-        this.getMainNode().setIdlePowerUsage(this.getPowerDrainPerTick());
     }
 
     protected float getPowerDrainPerTick() {

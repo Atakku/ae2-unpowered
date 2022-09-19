@@ -50,7 +50,6 @@ public class ControllerBlockEntity extends AENetworkPowerBlockEntity {
         super(blockEntityType, pos, blockState);
         this.setInternalMaxPower(8000);
         this.setInternalPublicPowerStorage(true);
-        this.getMainNode().setIdlePowerUsage(3);
         this.getMainNode().setFlags(GridFlags.CANNOT_CARRY, GridFlags.DENSE_CAPACITY);
     }
 

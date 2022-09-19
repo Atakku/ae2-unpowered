@@ -120,23 +120,12 @@ public class WirelessBlockEntity extends AENetworkInvBlockEntity implements IWir
     @Override
     public void onReady() {
         this.getMainNode().setExposedOnSides(EnumSet.of(this.getForward().getOpposite()));
-        this.updatePower();
         super.onReady();
-    }
-
-    private void updatePower() {
-        this.getMainNode().setIdlePowerUsage(AEConfig.instance().wireless_getPowerDrain(this.getBoosters()));
     }
 
     private int getBoosters() {
         final ItemStack boosters = this.inv.getStackInSlot(0);
         return boosters == null ? 0 : boosters.getCount();
-    }
-
-    @Override
-    public void saveChanges() {
-        this.updatePower();
-        super.saveChanges();
     }
 
     @Override

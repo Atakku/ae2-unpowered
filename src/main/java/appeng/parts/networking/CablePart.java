@@ -65,7 +65,6 @@ public class CablePart extends AEBasePart implements ICablePart {
         super(partItem);
         this.getMainNode()
                 .setFlags(GridFlags.PREFERRED)
-                .setIdlePowerUsage(0.0)
                 .setInWorldNode(true)
                 .setExposedOnSides(EnumSet.allOf(Direction.class));
         this.getMainNode().setGridColor(partItem.getColor());

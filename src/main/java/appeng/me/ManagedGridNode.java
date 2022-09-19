@@ -268,16 +268,6 @@ public class ManagedGridNode implements IManagedGridNode {
     }
 
     @Override
-    public ManagedGridNode setIdlePowerUsage(double usagePerTick) {
-        if (node == null) {
-            getInitData().idlePowerUsage = usagePerTick;
-        } else {
-            node.setIdlePowerUsage(usagePerTick);
-        }
-        return this;
-    }
-
-    @Override
     public ManagedGridNode setVisualRepresentation(@Nullable AEItemKey visualRepresentation) {
         if (node == null) {
             getInitData().visualRepresentation = Objects.requireNonNull(visualRepresentation);

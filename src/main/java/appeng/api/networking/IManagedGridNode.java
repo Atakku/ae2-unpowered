@@ -126,11 +126,6 @@ public interface IManagedGridNode {
     IManagedGridNode setExposedOnSides(Set<Direction> directions);
 
     /**
-     * @param usagePerTick The power in AE/t that will be drained by this node.
-     */
-    IManagedGridNode setIdlePowerUsage(@Nonnegative double usagePerTick);
-
-    /**
      * Sets an itemstack that will only be used to represent this grid node in user interfaces. Can be set to
      * <code>null</code> to hide the node from UIs.
      */

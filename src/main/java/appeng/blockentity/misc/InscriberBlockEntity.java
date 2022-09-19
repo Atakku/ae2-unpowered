@@ -89,7 +89,6 @@ public class InscriberBlockEntity extends AENetworkPowerBlockEntity implements I
 
         this.getMainNode()
                 .setExposedOnSides(EnumSet.noneOf(Direction.class))
-                .setIdlePowerUsage(0)
                 .addService(IGridTickable.class, this);
         this.setInternalMaxPower(1600);
 

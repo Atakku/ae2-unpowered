@@ -295,7 +295,6 @@ public class DriveBlockEntity extends AENetworkInvBlockEntity
             for (int slot = 0; slot < this.inv.size(); slot++) {
                 power += updateStateForSlot(slot);
             }
-            this.getMainNode().setIdlePowerUsage(power);
 
             this.isCached = true;
         }

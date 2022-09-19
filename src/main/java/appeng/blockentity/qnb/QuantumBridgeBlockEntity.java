@@ -60,7 +60,6 @@ public class QuantumBridgeBlockEntity extends AENetworkInvBlockEntity
         super(blockEntityType, pos, blockState);
         this.getMainNode().setExposedOnSides(EnumSet.noneOf(Direction.class));
         this.getMainNode().setFlags(GridFlags.DENSE_CAPACITY);
-        this.getMainNode().setIdlePowerUsage(22);
     }
 
     @Override

@@ -193,8 +193,6 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
                 if (newCell != null) {
                     idlePowerUsage = 1.0 + newCell.getIdleDrain();
                     this.cellHandler = this.wrap(newCell);
-
-                    this.getMainNode().setIdlePowerUsage(idlePowerUsage);
                     this.accessor = new Accessor();
 
                     if (this.cellHandler != null) {

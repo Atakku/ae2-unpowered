@@ -79,7 +79,6 @@ public class SecurityStationBlockEntity extends AENetworkBlockEntity implements 
         super(blockEntityType, pos, blockState);
         this.getMainNode()
                 .setFlags(GridFlags.REQUIRE_CHANNEL)
-                .setIdlePowerUsage(2.0)
                 .addService(ISecurityProvider.class, this);
         difference++;
 

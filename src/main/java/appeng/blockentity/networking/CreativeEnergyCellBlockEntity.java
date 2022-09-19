@@ -34,7 +34,6 @@ public class CreativeEnergyCellBlockEntity extends AENetworkBlockEntity implemen
     public CreativeEnergyCellBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
         this.getMainNode()
-                .setIdlePowerUsage(0)
                 .addService(IAEPowerStorage.class, this);
     }
 

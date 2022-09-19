@@ -33,6 +33,11 @@
     "waila:plugins": {
       "id": "ae2_unpowered:waila",
       "initializer": "appeng.integration.modules.waila.WailaModule"
+    },
+    "modmenu": {
+      "links": {
+          "modmenu.discord": "https://discord.gg/6udzwjH"
+      }
     }
   }
 }

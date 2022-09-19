@@ -255,13 +255,8 @@ public final class TestPlots {
         // Lower subnet for formation plane and power for growth accelerators
         plot.cable("[4,6] 1 6", AEParts.GLASS_CABLE);
         plot.part("6 1 6", Direction.UP, AEParts.FORMATION_PLANE);
-        plot.part("5 1 6", Direction.UP, AEParts.QUARTZ_FIBER);
         plot.cable("7 1 6", AEParts.GLASS_CABLE);
-        plot.part("7 1 6", Direction.UP, AEParts.QUARTZ_FIBER);
         plot.cable("6 1 7", AEParts.GLASS_CABLE);
-        plot.part("6 1 7", Direction.UP, AEParts.QUARTZ_FIBER);
-        // Quartz fiber over to main net
-        plot.part("4 1 6", Direction.WEST, AEParts.QUARTZ_FIBER);
 
         // Crystal growth part
         plot.block("5 2 6", AEBlocks.QUARTZ_GROWTH_ACCELERATOR);
@@ -323,7 +318,6 @@ public final class TestPlots {
 
         // Top subnet for grabbing the crafting results
         plot.cable("[4,6] 3 6", AEParts.GLASS_CABLE);
-        plot.part("4 3 6", Direction.WEST, AEParts.QUARTZ_FIBER);
         plot.part("4 3 6", Direction.DOWN, AEParts.STORAGE_BUS, storageBus -> {
             // Ensure only the completed crystals are accepted
             var config = storageBus.getConfig();
@@ -331,7 +325,6 @@ public final class TestPlots {
             config.setStack(1, AEItems.FLUIX_CRYSTAL.genericStack(1));
             config.setStack(2, AEItems.FLUIX_DUST.genericStack(1));
         });
-        plot.part("5 3 6", Direction.DOWN, AEParts.QUARTZ_FIBER);
         plot.part("6 3 6", Direction.DOWN, AEParts.ANNIHILATION_PLANE);
     }
 

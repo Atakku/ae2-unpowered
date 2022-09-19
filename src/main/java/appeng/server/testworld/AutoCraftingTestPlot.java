@@ -140,8 +140,6 @@ public final class AutoCraftingTestPlot {
     }
 
     private static void buildWaterEmittingSource(PlotBuilder plot) {
-        plot.cable("0 0 0")
-                .part(Direction.SOUTH, AEParts.QUARTZ_FIBER);
         plot.cable("0 0 1")
                 .part(Direction.NORTH, AEParts.TOGGLE_BUS);
         plot.cable("0 1 0");
@@ -181,15 +179,11 @@ public final class AutoCraftingTestPlot {
         // Annihilation plane for picking up the obsidian
         // This is on a third subnet to prevent it from picking up the lava before it turns into obsidian
         plot.cable("-2 1 0").part(Direction.DOWN, AEParts.ANNIHILATION_PLANE);
-        // Give power to the net below, but don't connect grids
-        plot.cable("-1 1 0").part(Direction.DOWN, AEParts.QUARTZ_FIBER);
         plot.cable("0 1 0")
                 // Storage channel for return of obsidian
                 .part(Direction.DOWN, AEParts.STORAGE_BUS, part -> {
                     part.getConfig().insert(0, AEItemKey.of(Items.OBSIDIAN), 1, Actionable.MODULATE);
-                })
-                // Take power from controller, but dont connect grids
-                .part(Direction.EAST, AEParts.QUARTZ_FIBER);
+                });
 
         // Non-interactive blocks
         plot.block("-3 0 [-2,0]", Blocks.COBBLESTONE);

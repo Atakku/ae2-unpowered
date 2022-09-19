@@ -248,7 +248,7 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .pattern(" b ")
                 .define('a', AEItems.FLUIX_PEARL)
                 .define('b', ConventionTags.IRON_INGOT)
-                .define('c', AEParts.QUARTZ_FIBER)
+                .define('c', Blocks.DIRT)
                 .unlockedBy("has_fluix_pearl", has(AEItems.FLUIX_PEARL))
                 .save(consumer, AppEng.makeId("network/wireless_part"));
         ShapedRecipeBuilder.shaped(AEItems.WIRELESS_TERMINAL)
@@ -709,14 +709,6 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .requires(AEParts.DARK_MONITOR)
                 .unlockedBy("has_dark_monitor", has(AEParts.DARK_MONITOR))
                 .save(consumer, AppEng.makeId("network/parts/panels_semi_dark_monitor_alt"));
-        ShapedRecipeBuilder.shaped(AEParts.QUARTZ_FIBER, 3)
-                .pattern("aaa")
-                .pattern("bbb")
-                .pattern("aaa")
-                .define('a', ConventionTags.GLASS)
-                .define('b', ConventionTags.ALL_QUARTZ_DUST)
-                .unlockedBy("has_dusts/quartz", has(ConventionTags.ALL_QUARTZ_DUST))
-                .save(consumer, AppEng.makeId("network/parts/quartz_fiber_part"));
         ShapelessRecipeBuilder.shapeless(AEParts.TERMINAL)
                 .requires(AEItems.FORMATION_CORE)
                 .requires(ConventionTags.ILLUMINATED_PANEL)
@@ -1410,10 +1402,9 @@ public class CraftingRecipes extends AE2RecipeProvider {
         }
 
         ShapelessRecipeBuilder.shapeless(AEParts.GLASS_CABLE.item(AEColor.TRANSPARENT), 4)
-                .requires(AEParts.QUARTZ_FIBER)
+                .requires(Blocks.DIRT)
                 .requires(ConventionTags.ALL_FLUIX)
                 .requires(ConventionTags.ALL_FLUIX)
-                .unlockedBy("has_quartz_fiber", has(AEParts.QUARTZ_FIBER))
                 .unlockedBy("has_crystals/fluix", has(ConventionTags.ALL_FLUIX))
                 .save(consumer, AppEng.makeId("network/cables/glass_fluix"));
         ShapelessRecipeBuilder.shapeless(AEParts.GLASS_CABLE.item(AEColor.TRANSPARENT))

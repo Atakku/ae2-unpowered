@@ -46,7 +46,6 @@ import appeng.parts.misc.ToggleBusPart;
 import appeng.parts.networking.CoveredCablePart;
 import appeng.parts.networking.CoveredDenseCablePart;
 import appeng.parts.networking.GlassCablePart;
-import appeng.parts.networking.QuartzFiberPart;
 import appeng.parts.networking.SmartCablePart;
 import appeng.parts.networking.SmartDenseCablePart;
 import appeng.parts.p2p.FluidP2PTunnelPart;
@@ -77,7 +76,6 @@ public final class AEParts {
     public static final ColoredItemDefinition<ColoredPartItem<GlassCablePart>> GLASS_CABLE = constructColoredDefinition("ME Glass Cable", "glass_cable", GlassCablePart.class, GlassCablePart::new);
     public static final ColoredItemDefinition<ColoredPartItem<CoveredDenseCablePart>> COVERED_DENSE_CABLE = constructColoredDefinition("ME Dense Covered Cable", "covered_dense_cable", CoveredDenseCablePart.class, CoveredDenseCablePart::new);
     public static final ColoredItemDefinition<ColoredPartItem<SmartDenseCablePart>> SMART_DENSE_CABLE = constructColoredDefinition("ME Dense Smart Cable", "smart_dense_cable", SmartDenseCablePart.class, SmartDenseCablePart::new);
-    public static final ItemDefinition<PartItem<QuartzFiberPart>> QUARTZ_FIBER = createPart("Quartz Fiber", AEPartIds.QUARTZ_FIBER, QuartzFiberPart.class, QuartzFiberPart::new);
     public static final ItemDefinition<PartItem<ToggleBusPart>> TOGGLE_BUS = createPart("ME Toggle Bus", AEPartIds.TOGGLE_BUS, ToggleBusPart.class, ToggleBusPart::new);
     public static final ItemDefinition<PartItem<InvertedToggleBusPart>> INVERTED_TOGGLE_BUS = createPart("ME Inverted Toggle Bus", AEPartIds.INVERTED_TOGGLE_BUS, InvertedToggleBusPart.class, InvertedToggleBusPart::new);
     public static final ItemDefinition<PartItem<CableAnchorPart>> CABLE_ANCHOR = createPart("Cable Anchor", AEPartIds.CABLE_ANCHOR, CableAnchorPart.class, CableAnchorPart::new);

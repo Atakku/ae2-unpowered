@@ -51,8 +51,7 @@ public class P2PTestPlots {
 
         // Energy connection between the P2P-net and the carrier net
         plot.cable(origin.east().above());
-        plot.cable(origin.east().east().above())
-                .part(Direction.WEST, AEParts.QUARTZ_FIBER);
+        plot.cable(origin.east().east().above());
 
         plot.test(helper -> {
             helper.succeedWhen(() -> {

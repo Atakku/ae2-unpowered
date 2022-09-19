@@ -254,19 +254,11 @@ public class CraftingBlockEntity extends AENetworkBlockEntity
     }
 
     @Override
-    public boolean isPowered() {
-        if (isClientSide()) {
-            return this.level.getBlockState(this.worldPosition).getValue(AbstractCraftingUnitBlock.POWERED);
-        }
-        return this.getMainNode().isActive();
-    }
-
-    @Override
     public boolean isActive() {
         if (!isClientSide()) {
             return this.getMainNode().isActive();
         }
-        return this.isPowered() && this.isFormed();
+        return this.isFormed();
     }
 
     public boolean isCoreBlock() {

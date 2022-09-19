@@ -316,8 +316,8 @@ public class Platform {
         }
 
         // If the node has no grid, it counts as unpowered
-        final boolean a_isSecure = a.isPowered() && a.getLastSecurityKey() != -1;
-        final boolean b_isSecure = b.isPowered() && b.getLastSecurityKey() != -1;
+        final boolean a_isSecure = a.getLastSecurityKey() != -1;
+        final boolean b_isSecure = b.getLastSecurityKey() != -1;
 
         if (AEConfig.instance().isSecurityAuditLogEnabled()) {
             AELog.info(

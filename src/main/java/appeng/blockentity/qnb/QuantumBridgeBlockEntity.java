@@ -231,7 +231,7 @@ public class QuantumBridgeBlockEntity extends AENetworkInvBlockEntity
         }
 
         var node = getMainNode().getNode();
-        return node != null && node.isPowered();
+        return node != null;
     }
 
     public boolean isFormed() {

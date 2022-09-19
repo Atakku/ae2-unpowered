@@ -147,7 +147,7 @@ public class WirelessBlockEntity extends AENetworkInvBlockEntity implements IWir
     @Override
     public boolean isActive() {
         if (isClientSide()) {
-            return this.isPowered() && CHANNEL_FLAG == (this.getClientFlags() & CHANNEL_FLAG);
+            return CHANNEL_FLAG == (this.getClientFlags() & CHANNEL_FLAG);
         }
 
         return this.getMainNode().isOnline();
@@ -156,11 +156,6 @@ public class WirelessBlockEntity extends AENetworkInvBlockEntity implements IWir
     @Override
     public IGrid getGrid() {
         return getMainNode().getGrid();
-    }
-
-    @Override
-    public boolean isPowered() {
-        return POWERED_FLAG == (this.getClientFlags() & POWERED_FLAG);
     }
 
     public int getClientFlags() {

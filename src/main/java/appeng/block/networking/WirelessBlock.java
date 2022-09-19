@@ -78,15 +78,10 @@ public class WirelessBlock extends AEBaseEntityBlock<WirelessBlockEntity> implem
 
     @Override
     protected BlockState updateBlockStateFromBlockEntity(BlockState currentState, WirelessBlockEntity be) {
-        State teState = State.OFF;
-
         if (be.isActive()) {
-            teState = State.HAS_CHANNEL;
-        } else if (be.isPowered()) {
-            teState = State.ON;
+            return currentState.setValue(STATE,  State.HAS_CHANNEL);
         }
-
-        return currentState.setValue(STATE, teState);
+        return currentState.setValue(STATE, State.ON);
     }
 
     @Override

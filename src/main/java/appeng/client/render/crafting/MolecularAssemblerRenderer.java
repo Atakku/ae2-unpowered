@@ -75,9 +75,7 @@ public class MolecularAssemblerRenderer implements BlockEntityRenderer<Molecular
             renderStatus(molecularAssembler, ms, bufferIn, combinedLightIn, status);
         }
 
-        if (molecularAssembler.isPowered()) {
-            renderPowerLight(ms, bufferIn, combinedLightIn, combinedOverlayIn);
-        }
+        renderPowerLight(ms, bufferIn, combinedLightIn, combinedOverlayIn);
     }
 
     private void renderPowerLight(PoseStack ms, MultiBufferSource bufferIn, int combinedLightIn,

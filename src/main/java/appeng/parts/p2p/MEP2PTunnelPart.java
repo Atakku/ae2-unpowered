@@ -140,7 +140,7 @@ public class MEP2PTunnelPart extends P2PTunnelPart<MEP2PTunnelPart> implements I
     public TickRateModulation tickingRequest(IGridNode node, int ticksSinceLastCall) {
         // just move on...
         if (node.hasGridBooted()) {
-            if (!node.isPowered() || !node.isActive()) {
+            if (!node.isActive()) {
                 this.connection.markDestroy();
             } else {
                 this.connection.markCreate();

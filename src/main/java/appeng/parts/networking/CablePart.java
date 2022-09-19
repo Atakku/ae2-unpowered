@@ -282,10 +282,7 @@ public class CablePart extends AEBasePart implements ICablePart {
                 channelsPerSide[side] = getVisualChannels(connection.getUsedChannels());
                 flags |= 1 << side;
             }
-
-            if (n.isPowered()) {
-                flags |= 1 << Direction.values().length;
-            }
+            flags |= 1 << Direction.values().length;
         }
 
         data.writeByte((byte) flags);

@@ -326,7 +326,7 @@ public abstract class P2PTunnelPart<T extends P2PTunnelPart<T>> extends BasicSta
     public Object getRenderAttachmentData() {
         long ret = Short.toUnsignedLong(this.getFrequency());
 
-        if (this.isActive() && this.isPowered()) {
+        if (this.isActive()) {
             ret |= 0x10000L;
         }
 

@@ -155,13 +155,10 @@ public class InterfacePart extends BasicStatePart implements InterfaceLogicHost 
 
     @Override
     public IPartModel getStaticModels() {
-        if (this.isActive() && this.isPowered()) {
+        if (this.isActive()) {
             return MODELS_HAS_CHANNEL;
-        } else if (this.isPowered()) {
-            return MODELS_ON;
-        } else {
-            return MODELS_OFF;
         }
+        return MODELS_ON;
     }
 
     @Nullable

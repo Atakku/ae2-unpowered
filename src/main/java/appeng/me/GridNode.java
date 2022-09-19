@@ -293,7 +293,6 @@ public class GridNode implements IGridNode, IPathItem {
             return;
         }
 
-        boolean wasPowered = isPowered();
         if (this.myGrid != null) {
             this.myGrid.remove(this);
 
@@ -309,9 +308,6 @@ public class GridNode implements IGridNode, IPathItem {
         this.myGrid = grid;
         this.myGrid.add(this);
         callListener(IGridNodeListener::onGridChanged);
-        if (wasPowered != isPowered()) {
-            notifyStatusChange(IGridNodeListener.State.POWER);
-        }
     }
 
     public void destroy() {
@@ -412,14 +408,6 @@ public class GridNode implements IGridNode, IPathItem {
             return false;
         }
         return !myGrid.getPathingService().isNetworkBooting();
-    }
-
-    @Override
-    public boolean isPowered() {
-        if (myGrid == null) {
-            return false;
-        }
-        return myGrid.getEnergyService().isNetworkPowered();
     }
 
     public void loadFromNBT(String name, CompoundTag nodeData) {

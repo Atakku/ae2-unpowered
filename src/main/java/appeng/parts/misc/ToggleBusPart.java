@@ -183,12 +183,11 @@ public class ToggleBusPart extends BasicStatePart {
 
     @Override
     public IPartModel getStaticModels() {
-        if (this.hasRedstoneFlag() && this.isActive() && this.isPowered()) {
+        if (this.hasRedstoneFlag() && this.isActive()) {
             return MODELS_HAS_CHANNEL;
-        } else if (this.hasRedstoneFlag() && this.isPowered()) {
+        } else if (this.hasRedstoneFlag()) {
             return MODELS_ON;
-        } else {
-            return MODELS_OFF;
         }
+        return MODELS_OFF;
     }
 }

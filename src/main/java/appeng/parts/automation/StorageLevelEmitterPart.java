@@ -279,12 +279,10 @@ public class StorageLevelEmitterPart extends AbstractLevelEmitterPart
 
     @Override
     public IPartModel getStaticModels() {
-        if (this.isActive() && this.isPowered()) {
+        if (this.isActive()) {
             return this.isLevelEmitterOn() ? MODEL_ON_HAS_CHANNEL : MODEL_OFF_HAS_CHANNEL;
-        } else if (this.isPowered()) {
-            return this.isLevelEmitterOn() ? MODEL_ON_ON : MODEL_OFF_ON;
         } else {
-            return this.isLevelEmitterOn() ? MODEL_ON_OFF : MODEL_OFF_OFF;
+            return this.isLevelEmitterOn() ? MODEL_ON_ON : MODEL_OFF_ON;
         }
     }
 }

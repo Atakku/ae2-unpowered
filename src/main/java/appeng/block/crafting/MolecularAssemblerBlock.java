@@ -54,7 +54,7 @@ public class MolecularAssemblerBlock extends AEBaseEntityBlock<MolecularAssemble
 
     @Override
     protected BlockState updateBlockStateFromBlockEntity(BlockState currentState, MolecularAssemblerBlockEntity be) {
-        return currentState.setValue(POWERED, be.isPowered());
+        return currentState.setValue(POWERED, true);
     }
 
     @Override

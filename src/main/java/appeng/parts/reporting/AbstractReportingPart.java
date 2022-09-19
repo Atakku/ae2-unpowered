@@ -114,10 +114,7 @@ public abstract class AbstractReportingPart extends AEBasePart implements IMonit
 
         var node = getMainNode().getNode();
         if (node != null) {
-            if (node.isPowered()) {
-                this.clientFlags = this.getClientFlags() | AbstractReportingPart.POWERED_FLAG;
-            }
-
+            this.clientFlags = this.getClientFlags() | AbstractReportingPart.POWERED_FLAG;
             if (node.meetsChannelRequirements()) {
                 this.clientFlags = this.getClientFlags() | AbstractReportingPart.CHANNEL_FLAG;
             }
@@ -187,7 +184,7 @@ public abstract class AbstractReportingPart extends AEBasePart implements IMonit
     public final boolean isPowered() {
         if (!isClientSide()) {
             var node = getMainNode().getNode();
-            return node != null && node.isPowered();
+            return node != null;
         } else {
             return (this.getClientFlags() & PanelPart.POWERED_FLAG) == PanelPart.POWERED_FLAG;
         }

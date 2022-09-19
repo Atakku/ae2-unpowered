@@ -551,11 +551,6 @@ public class MolecularAssemblerBlockEntity extends AENetworkInvBlockEntity
     }
 
     @Override
-    public boolean isPowered() {
-        return this.isPowered;
-    }
-
-    @Override
     public boolean isActive() {
         return this.isPowered;
     }

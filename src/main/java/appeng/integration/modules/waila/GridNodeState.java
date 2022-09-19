@@ -43,7 +43,7 @@ public enum GridNodeState {
 
     public static GridNodeState fromNode(@Nullable IGridNode gridNode) {
         var state = GridNodeState.OFFLINE;
-        if (gridNode != null && gridNode.isPowered()) {
+        if (gridNode != null) {
             if (!gridNode.hasGridBooted()) {
                 state = GridNodeState.NETWORK_BOOTING;
             } else if (!gridNode.meetsChannelRequirements()) {

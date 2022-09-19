@@ -64,10 +64,6 @@ public final class P2PStateDataProvider implements IPartDataProvider {
     @Override
     public void appendServerData(ServerPlayer player, IPart part, CompoundTag partTag) {
         if (part instanceof P2PTunnelPart<?>p2pTunnel) {
-            if (!p2pTunnel.isPowered()) {
-                return;
-            }
-
             // Frequency
             partTag.putShort(TAG_P2P_FREQUENCY, p2pTunnel.getFrequency());
 

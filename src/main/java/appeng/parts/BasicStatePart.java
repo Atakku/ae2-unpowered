@@ -76,9 +76,7 @@ public abstract class BasicStatePart extends AEBasePart implements IPowerChannel
 
         var node = getMainNode().getNode();
         if (node != null) {
-            if (node.isPowered()) {
-                flags |= POWERED_FLAG;
-            }
+            flags |= POWERED_FLAG;
             if (node.meetsChannelRequirements()) {
                 flags |= CHANNEL_FLAG;
             }
@@ -95,11 +93,6 @@ public abstract class BasicStatePart extends AEBasePart implements IPowerChannel
         this.setClientFlags(data.readByte());
 
         return eh || old != this.getClientFlags();
-    }
-
-    @Override
-    public boolean isPowered() {
-        return (this.getClientFlags() & POWERED_FLAG) == POWERED_FLAG;
     }
 
     @Override

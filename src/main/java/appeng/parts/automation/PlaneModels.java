@@ -53,9 +53,8 @@ public class PlaneModels {
     public IPartModel getModel(boolean hasChannel) {
         if (hasChannel) {
             return modelHasChannel;
-        } else {
-            return modelOn;
         }
+        return modelOn;
     }
 
     public List<IPartModel> getModels() {

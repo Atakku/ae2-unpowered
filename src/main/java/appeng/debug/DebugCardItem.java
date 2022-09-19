@@ -244,7 +244,7 @@ public class DebugCardItem extends AEBaseItem implements AEToolItem {
                 if (node != null) {
                     final IEnergyService eg = node.getGrid().getEnergyService();
                     this.outputSecondaryMessage(player, "GridEnergy",
-                            +eg.getStoredPower() + " : " + eg.getEnergyDemand(Double.MAX_VALUE));
+                            " : " + eg.getEnergyDemand(Double.MAX_VALUE));
                 }
             }
         }

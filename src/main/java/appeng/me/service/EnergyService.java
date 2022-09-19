@@ -181,7 +181,7 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
     public void onServerEndTick() {
         if (!this.interests.isEmpty()) {
             final double oldPower = this.lastStoredPower;
-            this.lastStoredPower = this.getStoredPower();
+            this.lastStoredPower = 10000;
 
             final EnergyThreshold low = new EnergyThreshold(Math.min(oldPower, this.lastStoredPower),
                     Integer.MIN_VALUE);
@@ -347,15 +347,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
     }
 
     @Override
-    public double getStoredPower() {
-        if (this.availableTicksSinceUpdate > 90) {
-            this.refreshPower();
-        }
-
-        return Math.max(0.0, this.globalAvailablePower);
-    }
-
-    @Override
     public double getEnergyDemand(double maxRequired) {
         final Queue<IEnergyGridProvider> toVisit = new PriorityQueue<>(COMPARATOR_LOWEST_PERCENTAGE_FIRST);
         final Set<IEnergyGridProvider> visited = new HashSet<>();
@@ -377,11 +368,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
         }
 
         return required;
-    }
-
-    @Override
-    public double getProviderStoredEnergy() {
-        return this.getStoredPower();
     }
 
     @Override

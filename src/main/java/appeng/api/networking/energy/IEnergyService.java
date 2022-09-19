@@ -91,14 +91,6 @@ public interface IEnergyService extends IGridService, IEnergySource {
     double injectPower(@Nonnegative double amt, Actionable mode);
 
     /**
-     * this is should be considered an estimate, and not relied upon for real calculations.
-     *
-     * @return estimated available power.
-     */
-    @Nonnegative
-    double getStoredPower();
-
-    /**
      * Calculation will be capped at maxRequired, this improves performance by limiting the number of nodes needed to
      * calculate the demand.
      *

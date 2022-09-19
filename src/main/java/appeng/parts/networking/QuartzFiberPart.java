@@ -155,11 +155,6 @@ public class QuartzFiberPart extends AEBasePart {
         public double getProviderEnergyDemand(double amt) {
             return 0;
         }
-
-        @Override
-        public double getProviderStoredEnergy() {
-            return 0;
-        }
     }
 
 }

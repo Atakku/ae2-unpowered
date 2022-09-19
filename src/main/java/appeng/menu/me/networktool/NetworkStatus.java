@@ -42,7 +42,6 @@ public class NetworkStatus {
 
     private double averagePowerInjection;
     private double averagePowerUsage;
-    private double storedPower;
     private double channelPower;
     private int channelsUsed;
 
@@ -55,7 +54,6 @@ public class NetworkStatus {
 
         status.averagePowerInjection = eg.getAvgPowerInjection();
         status.averagePowerUsage = eg.getAvgPowerUsage();
-        status.storedPower = eg.getStoredPower();
         status.channelPower = eg.getChannelPowerUsage();
         status.channelsUsed = grid.getPathingService().getUsedChannels();
 
@@ -88,10 +86,6 @@ public class NetworkStatus {
         return averagePowerUsage;
     }
 
-    public double getStoredPower() {
-        return storedPower;
-    }
-
     public double getChannelPower() {
         return channelPower;
     }
@@ -114,7 +108,6 @@ public class NetworkStatus {
         NetworkStatus status = new NetworkStatus();
         status.averagePowerInjection = data.readDouble();
         status.averagePowerUsage = data.readDouble();
-        status.storedPower = data.readDouble();
         status.channelPower = data.readDouble();
         status.channelsUsed = data.readVarInt();
 
@@ -134,7 +127,6 @@ public class NetworkStatus {
     public void write(FriendlyByteBuf data) {
         data.writeDouble(averagePowerInjection);
         data.writeDouble(averagePowerUsage);
-        data.writeDouble(storedPower);
         data.writeDouble(channelPower);
         data.writeVarInt(channelsUsed);
         data.writeVarInt(groupedMachines.size());

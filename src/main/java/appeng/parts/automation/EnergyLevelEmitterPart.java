@@ -73,7 +73,7 @@ public class EnergyLevelEmitterPart extends AbstractLevelEmitterPart {
 
         @Override
         public void onThresholdPass(IEnergyService energyGrid) {
-            lastReportedValue = (long) energyGrid.getStoredPower();
+            lastReportedValue = 10000;
             updateState();
         }
     };
@@ -102,7 +102,7 @@ public class EnergyLevelEmitterPart extends AbstractLevelEmitterPart {
 
         getMainNode().ifPresent(grid -> {
             // update to power...
-            this.lastReportedValue = (long) grid.getEnergyService().getStoredPower();
+            this.lastReportedValue = 10000;
             this.updateState();
         });
     }

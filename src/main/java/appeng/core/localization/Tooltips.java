@@ -14,7 +14,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.*;
 import net.minecraft.world.item.ItemStack;
 
-import appeng.api.config.PowerUnits;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKey;
 import appeng.api.stacks.AmountFormat;
@@ -317,10 +316,6 @@ public final class Tooltips {
         return new TextComponent(s).withStyle(NORMAL_TOOLTIP_TEXT);
     }
 
-    public static MutableComponent of(PowerUnits pU) {
-        return pU.textComponent().copy().withStyle(UNIT_TEXT);
-    }
-
     public static MutableComponent ofPercent(double percent, boolean oneIsGreen) {
         return new TextComponent(MessageFormat.format("{0,number,#.##%}", percent))
                 .withStyle(colorFromRatio(percent, oneIsGreen));
@@ -396,18 +391,6 @@ public final class Tooltips {
             s = s.append(c);
         }
         return s;
-    }
-
-    public static Component energyStorageComponent(double energy, double max) {
-        return Tooltips.of(
-                Tooltips.of(GuiText.StoredEnergy),
-                Tooltips.of(": "),
-                Tooltips.ofNumber(energy, max),
-                Tooltips.of(" "),
-                Tooltips.of(PowerUnits.AE),
-                Tooltips.of(" ("),
-                Tooltips.ofPercent(energy / max),
-                Tooltips.of(")"));
     }
 
     public static Component bytesUsed(long bytes, long max) {

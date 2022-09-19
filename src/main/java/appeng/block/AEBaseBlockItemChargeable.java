@@ -50,9 +50,6 @@ public class AEBaseBlockItemChargeable extends AEBaseBlockItem {
             if (tag != null) {
                 internalCurrentPower = tag.getDouble("internalCurrentPower");
             }
-
-            lines.add(
-                    Tooltips.energyStorageComponent(internalCurrentPower, internalMaxPower));
         }
     }
 

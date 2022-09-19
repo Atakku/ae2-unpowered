@@ -93,13 +93,6 @@ public class SettingToggleButton<T extends Enum<T>> extends IconButton {
             registerApp(Icon.ACCESS_READ_WRITE, Settings.ACCESS, AccessRestriction.READ_WRITE, ButtonToolTips.IOMode,
                     ButtonToolTips.ReadWrite);
 
-            registerApp(Icon.POWER_UNIT_AE, Settings.POWER_UNITS, PowerUnits.AE, ButtonToolTips.PowerUnits,
-                    PowerUnits.AE.textComponent());
-            // registerApp(Icon.POWER_UNIT_EU, Settings.POWER_UNITS, PowerUnits.EU, ButtonToolTips.PowerUnits,
-            // PowerUnits.EU.textComponent());
-            registerApp(Icon.POWER_UNIT_TR, Settings.POWER_UNITS, PowerUnits.TR, ButtonToolTips.PowerUnits,
-                    PowerUnits.TR.textComponent());
-
             registerApp(Icon.REDSTONE_IGNORE, Settings.REDSTONE_CONTROLLED, RedstoneMode.IGNORE,
                     ButtonToolTips.RedstoneMode,
                     ButtonToolTips.AlwaysActive);

@@ -37,7 +37,6 @@ import appeng.client.gui.implementations.CellWorkbenchScreen;
 import appeng.client.gui.implementations.ChestScreen;
 import appeng.client.gui.implementations.CondenserScreen;
 import appeng.client.gui.implementations.DriveScreen;
-import appeng.client.gui.implementations.EnergyLevelEmitterScreen;
 import appeng.client.gui.implementations.FormationPlaneScreen;
 import appeng.client.gui.implementations.IOBusScreen;
 import appeng.client.gui.implementations.IOPortScreen;
@@ -137,7 +136,6 @@ public final class InitScreens {
         register(FormationPlaneMenu.TYPE, FormationPlaneScreen::new, "/screens/formation_plane.json");
         register(PriorityMenu.TYPE, PriorityScreen::new, "/screens/priority.json");
         register(StorageLevelEmitterMenu.TYPE, StorageLevelEmitterScreen::new, "/screens/level_emitter.json");
-        register(EnergyLevelEmitterMenu.TYPE, EnergyLevelEmitterScreen::new, "/screens/energy_level_emitter.json");
         register(SpatialIOPortMenu.TYPE, SpatialIOPortScreen::new, "/screens/spatial_io_port.json");
         register(InscriberMenu.TYPE, InscriberScreen::new, "/screens/inscriber.json");
         register(CellWorkbenchMenu.TYPE, CellWorkbenchScreen::new, "/screens/cell_workbench.json");

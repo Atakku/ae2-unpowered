@@ -164,24 +164,22 @@ class QnbFormedBakedModel implements BakedModel, FabricBakedModel {
             builder.addCube(DEFAULT_RENDER_MIN, DEFAULT_RENDER_MIN, DEFAULT_RENDER_MIN, DEFAULT_RENDER_MAX,
                     DEFAULT_RENDER_MAX, DEFAULT_RENDER_MAX);
 
-            if (formedState.isPowered()) {
-                builder.setTexture(this.lightCornerTexture);
-                builder.setEmissiveMaterial(true);
-                for (Direction facing : Direction.values()) {
-                    // Offset the face by a slight amount so that it is drawn over the already drawn
-                    // ring texture
-                    // (avoids z-fighting)
-                    float xOffset = Math.abs(facing.getStepX() * 0.01f);
-                    float yOffset = Math.abs(facing.getStepY() * 0.01f);
-                    float zOffset = Math.abs(facing.getStepZ() * 0.01f);
+            builder.setTexture(this.lightCornerTexture);
+            builder.setEmissiveMaterial(true);
+            for (Direction facing : Direction.values()) {
+                // Offset the face by a slight amount so that it is drawn over the already drawn
+                // ring texture
+                // (avoids z-fighting)
+                float xOffset = Math.abs(facing.getStepX() * 0.01f);
+                float yOffset = Math.abs(facing.getStepY() * 0.01f);
+                float zOffset = Math.abs(facing.getStepZ() * 0.01f);
 
-                    builder.setDrawFaces(EnumSet.of(facing));
-                    builder.addCube(DEFAULT_RENDER_MIN - xOffset, DEFAULT_RENDER_MIN - yOffset,
-                            DEFAULT_RENDER_MIN - zOffset, DEFAULT_RENDER_MAX + xOffset,
-                            DEFAULT_RENDER_MAX + yOffset, DEFAULT_RENDER_MAX + zOffset);
-                }
-                builder.setEmissiveMaterial(false);
+                builder.setDrawFaces(EnumSet.of(facing));
+                builder.addCube(DEFAULT_RENDER_MIN - xOffset, DEFAULT_RENDER_MIN - yOffset,
+                        DEFAULT_RENDER_MIN - zOffset, DEFAULT_RENDER_MAX + xOffset,
+                        DEFAULT_RENDER_MAX + yOffset, DEFAULT_RENDER_MAX + zOffset);
             }
+            builder.setEmissiveMaterial(false);
         } else {
             builder.setTexture(this.ringTexture);
 
@@ -191,20 +189,18 @@ class QnbFormedBakedModel implements BakedModel, FabricBakedModel {
 
             builder.addCube(DEFAULT_RENDER_MIN, DEFAULT_RENDER_MIN, 0, DEFAULT_RENDER_MAX, DEFAULT_RENDER_MAX, 16);
 
-            if (formedState.isPowered()) {
-                builder.setTexture(this.lightTexture);
-                builder.setEmissiveMaterial(true);
-                for (Direction facing : Direction.values()) {
-                    // Offset the face by a slight amount so that it is drawn over the already drawn
-                    // ring texture
-                    // (avoids z-fighting)
-                    float xOffset = Math.abs(facing.getStepX() * 0.01f);
-                    float yOffset = Math.abs(facing.getStepY() * 0.01f);
-                    float zOffset = Math.abs(facing.getStepZ() * 0.01f);
+            builder.setTexture(this.lightTexture);
+            builder.setEmissiveMaterial(true);
+            for (Direction facing : Direction.values()) {
+                // Offset the face by a slight amount so that it is drawn over the already drawn
+                // ring texture
+                // (avoids z-fighting)
+                float xOffset = Math.abs(facing.getStepX() * 0.01f);
+                float yOffset = Math.abs(facing.getStepY() * 0.01f);
+                float zOffset = Math.abs(facing.getStepZ() * 0.01f);
 
-                    builder.setDrawFaces(EnumSet.of(facing));
-                    builder.addCube(-xOffset, -yOffset, -zOffset, 16 + xOffset, 16 + yOffset, 16 + zOffset);
-                }
+                builder.setDrawFaces(EnumSet.of(facing));
+                builder.addCube(-xOffset, -yOffset, -zOffset, 16 + xOffset, 16 + yOffset, 16 + zOffset);
             }
         }
     }

@@ -271,7 +271,7 @@ public class QuantumBridgeBlockEntity extends AENetworkInvBlockEntity
 
     @Override
     public QnbFormedState getRenderAttachmentData() {
-        return new QnbFormedState(getAdjacentQuantumBridges(), isCorner(), isPowered());
+        return new QnbFormedState(getAdjacentQuantumBridges(), isCorner());
     }
 
 }

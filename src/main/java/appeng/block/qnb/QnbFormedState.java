@@ -28,12 +28,9 @@ public class QnbFormedState {
 
     private final boolean corner;
 
-    private final boolean powered;
-
-    public QnbFormedState(Set<Direction> adjacentQuantumBridges, boolean corner, boolean powered) {
+    public QnbFormedState(Set<Direction> adjacentQuantumBridges, boolean corner) {
         this.adjacentQuantumBridges = adjacentQuantumBridges;
         this.corner = corner;
-        this.powered = powered;
     }
 
     public Set<Direction> getAdjacentQuantumBridges() {
@@ -43,9 +40,4 @@ public class QnbFormedState {
     public boolean isCorner() {
         return this.corner;
     }
-
-    public boolean isPowered() {
-        return this.powered;
-    }
-
 }

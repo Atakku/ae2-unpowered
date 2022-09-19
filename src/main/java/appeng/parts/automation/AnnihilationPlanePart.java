@@ -288,7 +288,7 @@ public class AnnihilationPlanePart extends BasicStatePart implements IGridTickab
         if (grid == null) {
             return 0;
         }
-        return StorageHelper.poweredInsert(grid.getEnergyService(), grid.getStorageService().getInventory(),
+        return StorageHelper.insert(grid.getStorageService().getInventory(),
                 what, amount, this.actionSource, mode);
     }
 

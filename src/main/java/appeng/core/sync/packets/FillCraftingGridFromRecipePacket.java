@@ -168,7 +168,7 @@ public class FillCraftingGridFromRecipePacket extends BasePacket {
                 } else {
                     if (security.hasPermission(player, SecurityPermissions.INJECT)) {
                         var in = AEItemKey.of(currentItem);
-                        var inserted = StorageHelper.poweredInsert(energy, storage, in, currentItem.getCount(),
+                        var inserted = StorageHelper.insert(storage, in, currentItem.getCount(),
                                 cct.getActionSource());
                         if (inserted < currentItem.getCount()) {
                             currentItem = currentItem.copy();
@@ -193,7 +193,7 @@ public class FillCraftingGridFromRecipePacket extends BasePacket {
             if (currentItem.isEmpty() && security.hasPermission(player, SecurityPermissions.EXTRACT)) {
                 var request = findBestMatchingItemStack(ingredient, filter, cachedStorage);
                 for (var what : request) {
-                    var extracted = StorageHelper.poweredExtraction(energy, storage, what, 1, cct.getActionSource());
+                    var extracted = StorageHelper.extraction(storage, what, 1, cct.getActionSource());
                     if (extracted > 0) {
                         currentItem = what.toStack(Ints.saturatedCast(extracted));
                         break;

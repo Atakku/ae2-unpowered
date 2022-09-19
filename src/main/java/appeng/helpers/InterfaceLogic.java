@@ -425,7 +425,7 @@ public class InterfaceLogic implements ICraftingRequester, IUpgradeableObject, I
                 return true; // Replan
             }
 
-            var inserted = (int) StorageHelper.poweredInsert(energySrc, networkInv, what, amount,
+            var inserted = (int) StorageHelper.insert(networkInv, what, amount,
                     this.interfaceRequestSource);
 
             // Remove the items we just injected somewhere else into the network.
@@ -475,7 +475,7 @@ public class InterfaceLogic implements ICraftingRequester, IUpgradeableObject, I
      */
     private boolean acquireFromNetwork(IEnergyService energySrc, MEStorage networkInv, int slot, AEKey what,
             long amount) {
-        var acquired = StorageHelper.poweredExtraction(energySrc, networkInv, what, amount,
+        var acquired = StorageHelper.extraction(networkInv, what, amount,
                 this.interfaceRequestSource);
         if (acquired > 0) {
             var inserted = storage.insert(slot, what, acquired, Actionable.MODULATE);

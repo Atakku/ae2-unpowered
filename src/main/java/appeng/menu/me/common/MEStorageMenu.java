@@ -469,11 +469,11 @@ public class MEStorageMenu extends AEBaseMenu
 
         if (action == InventoryAction.FILL_ITEM) {
             handleFillingHeldItem(
-                    (amount, mode) -> StorageHelper.poweredExtraction(powerSource, storage, clickedKey, amount,
+                    (amount, mode) -> StorageHelper.extraction(storage, clickedKey, amount,
                             getActionSource(), mode),
                     clickedKey);
         } else if (action == InventoryAction.EMPTY_ITEM) {
-            handleEmptyHeldItem((what, amount, mode) -> StorageHelper.poweredInsert(powerSource, storage, what, amount,
+            handleEmptyHeldItem((what, amount, mode) -> StorageHelper.insert(storage, what, amount,
                     getActionSource(), mode));
         } else if (action == InventoryAction.AUTO_CRAFT) {
             var locator = getLocator();
@@ -508,7 +508,7 @@ public class MEStorageMenu extends AEBaseMenu
                 var carried = getCarried();
                 if (!carried.isEmpty()) {
                     var what = AEItemKey.of(carried);
-                    var inserted = StorageHelper.poweredInsert(powerSource, storage, what, 1, this.getActionSource());
+                    var inserted = StorageHelper.insert(storage, what, 1, this.getActionSource());
                     if (inserted > 0) {
                         getCarried().shrink(1);
                     }
@@ -529,7 +529,7 @@ public class MEStorageMenu extends AEBaseMenu
                     }
                 }
 
-                var extracted = StorageHelper.poweredExtraction(powerSource, storage, clickedItem, 1,
+                var extracted = StorageHelper.extraction(storage, clickedItem, 1,
                         this.getActionSource());
                 if (extracted > 0) {
                     if (item.isEmpty()) {
@@ -545,8 +545,7 @@ public class MEStorageMenu extends AEBaseMenu
                 if (!getCarried().isEmpty()) {
                     putCarriedItemIntoNetwork(false);
                 } else {
-                    var extracted = StorageHelper.poweredExtraction(
-                            powerSource,
+                    var extracted = StorageHelper.extraction(
                             storage,
                             clickedItem,
                             clickedItem.getItem().getMaxStackSize(),
@@ -572,7 +571,7 @@ public class MEStorageMenu extends AEBaseMenu
                     if (extracted > 0) {
                         // Half
                         extracted = extracted + 1 >> 1;
-                        extracted = StorageHelper.poweredExtraction(powerSource, storage, clickedItem, extracted,
+                        extracted = StorageHelper.extraction(storage, clickedItem, extracted,
                                 this.getActionSource());
                     }
 
@@ -618,7 +617,7 @@ public class MEStorageMenu extends AEBaseMenu
             amount = 1;
         }
 
-        var inserted = StorageHelper.poweredInsert(powerSource, storage, what, amount,
+        var inserted = StorageHelper.insert(storage, what, amount,
                 this.getActionSource());
         setCarried(Platform.getInsertionRemainder(heldStack, inserted));
     }
@@ -643,7 +642,7 @@ public class MEStorageMenu extends AEBaseMenu
             return false;
         }
 
-        var extracted = StorageHelper.poweredExtraction(powerSource, storage, stack, toExtract, getActionSource());
+        var extracted = StorageHelper.extraction(storage, stack, toExtract, getActionSource());
         if (extracted == 0) {
             return false; // No items available
         }
@@ -698,7 +697,7 @@ public class MEStorageMenu extends AEBaseMenu
             return input;
         }
 
-        var inserted = StorageHelper.poweredInsert(powerSource, storage,
+        var inserted = StorageHelper.insert(storage,
                 key, input.getCount(),
                 this.getActionSource());
         return Platform.getInsertionRemainder(input, inserted);

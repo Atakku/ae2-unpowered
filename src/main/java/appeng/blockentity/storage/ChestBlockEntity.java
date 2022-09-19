@@ -429,7 +429,7 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
                     return;
                 }
 
-                var inserted = StorageHelper.poweredInsert(this, this.cellHandler,
+                var inserted = StorageHelper.insert(this.cellHandler,
                         AEItemKey.of(stack), stack.getCount(), this.mySrc);
 
                 if (inserted >= stack.getCount()) {
@@ -651,8 +651,7 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
         private long pushToNetwork(AEKey what, long amount, Actionable mode) {
             ChestBlockEntity.this.updateHandler();
             if (canAcceptLiquids()) {
-                return StorageHelper.poweredInsert(
-                        ChestBlockEntity.this,
+                return StorageHelper.insert(
                         ChestBlockEntity.this.cellHandler,
                         what,
                         amount,

@@ -296,8 +296,7 @@ public class PortableCellItem extends AEBasePoweredItem
 
         var inv = host.getInventory();
         if (inv != null) {
-            return StorageHelper.poweredInsert(
-                    host,
+            return StorageHelper.insert(
                     inv,
                     what,
                     amount,

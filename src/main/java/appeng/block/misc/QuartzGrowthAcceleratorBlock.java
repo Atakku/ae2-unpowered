@@ -54,7 +54,7 @@ public class QuartzGrowthAcceleratorBlock extends AEBaseEntityBlock<QuartzGrowth
     @Override
     protected BlockState updateBlockStateFromBlockEntity(BlockState currentState,
             QuartzGrowthAcceleratorBlockEntity be) {
-        return currentState.setValue(POWERED, be.isPowered());
+        return currentState.setValue(POWERED, true);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class QuartzGrowthAcceleratorBlock extends AEBaseEntityBlock<QuartzGrowth
 
         final QuartzGrowthAcceleratorBlockEntity cga = this.getBlockEntity(level, pos);
 
-        if (cga != null && cga.isPowered() && AppEngClient.instance().shouldAddParticles(r)) {
+        if (cga != null && AppEngClient.instance().shouldAddParticles(r)) {
             final double d0 = r.nextFloat() - 0.5F;
             final double d1 = r.nextFloat() - 0.5F;
 

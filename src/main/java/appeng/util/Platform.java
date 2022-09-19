@@ -54,7 +54,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.material.Fluid;
 
-import appeng.api.config.AccessRestriction;
 import appeng.api.config.Actionable;
 import appeng.api.config.SearchBoxMode;
 import appeng.api.config.SecurityPermissions;

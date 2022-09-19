@@ -455,11 +455,6 @@ public class GridNode implements IGridNode, IPathItem {
         return flags.contains(flag);
     }
 
-    @Override
-    public double getIdlePowerUsage() {
-        return idlePowerUsage;
-    }
-
     @Nullable
     @Override
     public AEItemKey getVisualRepresentation() {

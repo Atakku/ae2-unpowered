@@ -30,8 +30,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import appeng.api.config.Actionable;
-import appeng.api.config.PowerUnits;
 import appeng.api.inventories.InternalInventory;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.ticking.IGridTickable;
@@ -41,7 +39,6 @@ import appeng.api.stacks.AEItemKey;
 import appeng.api.util.AECableType;
 import appeng.api.util.DimensionalBlockPos;
 import appeng.blockentity.grid.AENetworkPowerBlockEntity;
-import appeng.core.AEConfig;
 import appeng.core.definitions.AEItems;
 import appeng.core.settings.TickRates;
 import appeng.util.Platform;

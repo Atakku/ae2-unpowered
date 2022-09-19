@@ -16,7 +16,6 @@ import appeng.blockentity.storage.SkyStoneTankBlockEntity;
 import appeng.core.definitions.AEBlockEntities;
 import appeng.helpers.externalstorage.GenericStackFluidStorage;
 import appeng.helpers.externalstorage.GenericStackItemStorage;
-import appeng.items.tools.powered.powersink.PoweredItemCapabilities;
 import appeng.parts.crafting.PatternProviderPart;
 import appeng.parts.encoding.PatternEncodingTerminalPart;
 import appeng.parts.misc.InterfacePart;

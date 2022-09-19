@@ -40,8 +40,6 @@ public class ItemMenuHost implements IUpgradeableObject {
     private final Integer slot;
     private final ItemStack itemStack;
     private final IUpgradeInventory upgrades;
-    private int powerTicks = 0;
-    private double powerDrainPerTick = 0.5;
 
     public ItemMenuHost(Player player, @Nullable Integer slot, ItemStack itemStack) {
         this.player = player;
@@ -120,13 +118,6 @@ public class ItemMenuHost implements IUpgradeableObject {
             }
         }
         return false;
-    }
-
-    /**
-     * Sets how much AE is drained per tick.
-     */
-    protected void setPowerDrainPerTick(double powerDrainPerTick) {
-        this.powerDrainPerTick = powerDrainPerTick;
     }
 
     @Override

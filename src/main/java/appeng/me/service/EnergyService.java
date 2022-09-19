@@ -147,14 +147,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
     }
 
     public void nodeIdlePowerChangeHandler(GridPowerIdleChange ev) {
-        // update power usage based on event.
-        final var node = (GridNode) ev.node;
-
-        final double newDraw = node.getIdlePowerUsage();
-        final double diffDraw = newDraw - node.getPreviousDraw();
-        node.setPreviousDraw(newDraw);
-
-        this.drainPerTick += diffDraw;
     }
 
     public void storagePowerChangeHandler(GridPowerStorageStateChanged ev) {
@@ -410,7 +402,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
 
         // idle draw...
         final GridNode gridNode = (GridNode) node;
-        gridNode.setPreviousDraw(node.getIdlePowerUsage());
         this.drainPerTick += gridNode.getPreviousDraw();
 
         // power storage

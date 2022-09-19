@@ -88,7 +88,6 @@ public class SpatialAnchorMenu extends AEBaseMenu {
 
                 var statistics = grid.getService(StatisticsService.class);
 
-                this.powerConsumption = (long) gridNode.getIdlePowerUsage();
                 this.loadedChunks = anchor.countLoadedChunks();
 
                 HashMap<LevelAccessor, Integer> stats = new HashMap<>();

@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.Nonnegative;
 import javax.annotation.Nullable;
 
 import net.minecraft.CrashReportCategory;
@@ -154,12 +153,6 @@ public interface IGridNode {
      * @see appeng.api.features.IPlayerRegistry
      */
     int getOwningPlayerId();
-
-    /**
-     * @return The power in AE/t that will be drained by this node.
-     */
-    @Nonnegative
-    double getIdlePowerUsage();
 
     /**
      * @return True if the grid node is accessible on the given side of the host.

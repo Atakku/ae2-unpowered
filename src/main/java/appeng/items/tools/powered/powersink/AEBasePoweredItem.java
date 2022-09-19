@@ -18,25 +18,15 @@
 
 package appeng.items.tools.powered.powersink;
 
-import java.util.List;
+
 import java.util.function.DoubleSupplier;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 
-import appeng.api.config.AccessRestriction;
-import appeng.api.config.Actionable;
-import appeng.core.localization.Tooltips;
 import appeng.items.AEBaseItem;
 
 public abstract class AEBasePoweredItem extends AEBaseItem {

@@ -192,7 +192,7 @@ public final class GrowingCrystalEntity extends AEBaseItemEntity {
     private boolean isPoweredAccelerator(BlockPos pos) {
         final BlockEntity te = this.level.getBlockEntity(pos);
 
-        return te instanceof ICrystalGrowthAccelerator && ((ICrystalGrowthAccelerator) te).isPowered();
+        return te instanceof ICrystalGrowthAccelerator;
     }
 
     @Override

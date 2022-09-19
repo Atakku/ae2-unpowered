@@ -60,7 +60,6 @@ import appeng.api.storage.cells.IBasicCellItem;
 import appeng.api.upgrades.IUpgradeInventory;
 import appeng.api.upgrades.IUpgradeableItem;
 import appeng.api.upgrades.UpgradeInventories;
-import appeng.block.AEBaseBlockItemChargeable;
 import appeng.core.AEConfig;
 import appeng.core.AELog;
 import appeng.core.AppEng;

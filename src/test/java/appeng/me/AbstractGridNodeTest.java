@@ -1,6 +1,5 @@
 package appeng.me;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Set;

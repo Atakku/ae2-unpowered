@@ -23,7 +23,6 @@ import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.annotation.Nonnegative;
 import javax.annotation.Nullable;
 
 import com.google.common.base.Preconditions;
@@ -302,11 +301,6 @@ public class ManagedGridNode implements IManagedGridNode {
             node.setGridColor(gridColor);
         }
         return this;
-    }
-
-    @Nonnegative
-    public double getIdlePowerUsage() {
-        return node != null ? node.getIdlePowerUsage() : getInitData().idlePowerUsage;
     }
 
     private InitData<?> getInitData() {

@@ -39,9 +39,7 @@ import net.minecraft.world.level.material.Fluid;
 
 import appeng.api.config.CondenserOutput;
 import appeng.api.config.PowerMultiplier;
-import appeng.api.config.PowerUnits;
 import appeng.api.config.SearchBoxMode;
-import appeng.api.config.Settings;
 import appeng.api.config.TerminalStyle;
 import appeng.api.config.YesNo;
 import appeng.api.features.AEWorldGenInternal;
@@ -56,7 +54,6 @@ import appeng.core.config.IntegerOption;
 import appeng.core.config.StringListOption;
 import appeng.core.config.StringOption;
 import appeng.core.settings.TickRates;
-import appeng.util.EnumCycler;
 
 public final class AEConfig {
 
@@ -175,7 +172,6 @@ public final class AEConfig {
     }
 
     private void syncCommonConfig() {
-        PowerUnits.TR.conversionRatio = COMMON.powerRatioTechReborn.get();
         PowerMultiplier.CONFIG.multiplier = COMMON.powerUsageMultiplier.get();
 
         CondenserOutput.MATTER_BALLS.requiredPower = COMMON.condenserMatterBallsPower.get();
@@ -257,16 +253,6 @@ public final class AEConfig {
     }
 
     public void save() {
-    }
-
-    public PowerUnits getSelectedPowerUnit() {
-        return this.CLIENT.selectedPowerUnit.get();
-    }
-
-    public void nextPowerUnit(boolean backwards) {
-        PowerUnits selectedPowerUnit = EnumCycler.rotateEnum(getSelectedPowerUnit(), backwards,
-                Settings.POWER_UNITS.getValues());
-        CLIENT.selectedPowerUnit.set(selectedPowerUnit);
     }
 
     // Getters
@@ -462,7 +448,6 @@ public final class AEConfig {
         public final BooleanOption useColoredCraftingStatus;
         public final BooleanOption disableColoredCableRecipesInJEI;
         public final BooleanOption enableFacadesInJEI;
-        public final EnumOption<PowerUnits> selectedPowerUnit;
         public final BooleanOption debugGuiOverlays;
         public final BooleanOption showPlacementPreview;
 
@@ -478,7 +463,6 @@ public final class AEConfig {
             this.enableEffects = client.addBoolean("enableEffects", true);
             this.useLargeFonts = client.addBoolean("useTerminalUseLargeFont", false);
             this.useColoredCraftingStatus = client.addBoolean("useColoredCraftingStatus", true);
-            this.selectedPowerUnit = client.addEnum("PowerUnit", PowerUnits.AE, "Power unit shown in AE UIs");
             this.debugGuiOverlays = client.addBoolean("showDebugGuiOverlays", false, "Show debugging GUI overlays");
             this.showPlacementPreview = client.addBoolean("showPlacementPreview", true,
                     "Show a preview of part and facade placement");

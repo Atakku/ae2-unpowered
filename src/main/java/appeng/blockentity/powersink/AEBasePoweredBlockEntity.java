@@ -35,7 +35,6 @@ import team.reborn.energy.api.EnergyStorage;
 
 import appeng.api.config.AccessRestriction;
 import appeng.api.config.Actionable;
-import appeng.api.config.PowerUnits;
 import appeng.api.networking.energy.IAEPowerStorage;
 import appeng.api.networking.events.GridPowerStorageStateChanged.PowerEventType;
 import appeng.blockentity.AEBaseInvBlockEntity;

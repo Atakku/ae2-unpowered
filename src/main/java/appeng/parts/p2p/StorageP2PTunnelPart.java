@@ -15,7 +15,6 @@ import net.fabricmc.fabric.api.transfer.v1.storage.base.InsertionOnlyStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.core.Direction;
 
-import appeng.api.config.PowerUnits;
 import appeng.api.parts.IPartItem;
 import appeng.api.stacks.AEKeyType;
 

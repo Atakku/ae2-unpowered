@@ -61,7 +61,6 @@ import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.AEItems;
 import appeng.core.definitions.AEParts;
 import appeng.items.storage.CreativeCellItem;
-import appeng.items.tools.powered.MatterCannonItem;
 import appeng.me.cells.BasicCellInventory;
 import appeng.me.helpers.BaseActionSource;
 import appeng.me.service.PathingService;

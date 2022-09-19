@@ -23,7 +23,6 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
-import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.fabricmc.fabric.api.transfer.v1.transaction.base.SnapshotParticipant;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -34,7 +33,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
-import appeng.api.config.PowerUnits;
 import appeng.api.features.P2PTunnelAttunement;
 import appeng.api.implementations.items.IMemoryCard;
 import appeng.api.implementations.items.MemoryCardMessages;
@@ -42,7 +40,6 @@ import appeng.api.parts.IPart;
 import appeng.api.parts.IPartCollisionHelper;
 import appeng.api.parts.IPartItem;
 import appeng.api.util.AECableType;
-import appeng.core.AEConfig;
 import appeng.me.service.P2PService;
 import appeng.parts.BasicStatePart;
 import appeng.util.Platform;

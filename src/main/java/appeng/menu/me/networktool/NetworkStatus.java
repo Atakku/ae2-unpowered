@@ -69,7 +69,7 @@ public class NetworkStatus {
                     }
 
                     group.setCount(group.getCount() + 1);
-                    group.setIdlePowerUsage(group.getIdlePowerUsage() + machine.getIdlePowerUsage());
+                    group.setIdlePowerUsage(group.getIdlePowerUsage());
                 }
             }
         }

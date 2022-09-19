@@ -35,8 +35,6 @@ import appeng.blockentity.grid.AENetworkBlockEntity;
 public class QuartzGrowthAcceleratorBlockEntity extends AENetworkBlockEntity
         implements IPowerChannelState, ICrystalGrowthAccelerator {
 
-    private boolean hasPower = false;
-
     public QuartzGrowthAcceleratorBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
         this.getMainNode().setExposedOnSides(EnumSet.noneOf(Direction.class));
@@ -59,15 +57,12 @@ public class QuartzGrowthAcceleratorBlockEntity extends AENetworkBlockEntity
     @Override
     public boolean readFromStream(FriendlyByteBuf data) {
         final boolean c = super.readFromStream(data);
-        final boolean hadPower = this.isPowered();
-        this.setPowered(data.readBoolean());
-        return this.isPowered() != hadPower || c;
+        return c;
     }
 
     @Override
     public void writeToStream(FriendlyByteBuf data) {
         super.writeToStream(data);
-        data.writeBoolean(this.getMainNode().isPowered());
     }
 
     @Override
@@ -83,20 +78,7 @@ public class QuartzGrowthAcceleratorBlockEntity extends AENetworkBlockEntity
     }
 
     @Override
-    public boolean isPowered() {
-        if (!isClientSide()) {
-            return this.getMainNode().isPowered();
-        }
-
-        return this.hasPower;
-    }
-
-    @Override
     public boolean isActive() {
-        return this.isPowered();
-    }
-
-    private void setPowered(boolean hasPower) {
-        this.hasPower = hasPower;
+        return true;
     }
 }

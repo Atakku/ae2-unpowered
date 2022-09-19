@@ -22,7 +22,6 @@ import java.util.List;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Mth;
 
 import mcp.mobius.waila.api.IBlockAccessor;
 import mcp.mobius.waila.api.IPluginConfig;
@@ -30,7 +29,6 @@ import mcp.mobius.waila.api.IPluginConfig;
 import appeng.blockentity.misc.ChargerBlockEntity;
 import appeng.core.localization.InGameTooltip;
 import appeng.integration.modules.waila.BaseDataProvider;
-import appeng.util.Platform;
 
 /**
  * Shows the tooltip of the item being charged, which usually includes a charge meter.

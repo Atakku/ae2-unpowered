@@ -38,7 +38,6 @@ import appeng.api.networking.storage.IStorageService;
 import appeng.api.storage.MEStorage;
 import appeng.api.util.IConfigManager;
 import appeng.blockentity.networking.WirelessBlockEntity;
-import appeng.core.AEConfig;
 import appeng.core.localization.PlayerMessages;
 import appeng.items.tools.powered.WirelessTerminalItem;
 import appeng.menu.ISubMenu;
@@ -156,7 +155,6 @@ public class WirelessTerminalMenuHost extends ItemMenuHost implements IPortableT
             return false;
         }
 
-        setPowerDrainPerTick(AEConfig.instance().wireless_getDrainRate(currentDistanceFromGrid));
         return true;
     }
 

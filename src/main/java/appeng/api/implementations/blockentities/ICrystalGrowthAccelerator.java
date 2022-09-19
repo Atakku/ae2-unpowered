@@ -25,5 +25,4 @@ package appeng.api.implementations.blockentities;
 
 public interface ICrystalGrowthAccelerator {
 
-    boolean isPowered();
 }

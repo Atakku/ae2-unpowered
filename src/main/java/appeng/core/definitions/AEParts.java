@@ -86,7 +86,6 @@ public final class AEParts {
     public static final ItemDefinition<PartItem<ImportBusPart>> IMPORT_BUS = createPart("ME Import Bus", AEPartIds.IMPORT_BUS, ImportBusPart.class, ImportBusPart::new);
     public static final ItemDefinition<PartItem<ExportBusPart>> EXPORT_BUS = createPart("ME Export Bus", AEPartIds.EXPORT_BUS, ExportBusPart.class, ExportBusPart::new);
     public static final ItemDefinition<PartItem<StorageLevelEmitterPart>> LEVEL_EMITTER = createPart("ME Level Emitter", AEPartIds.LEVEL_EMITTER, StorageLevelEmitterPart.class, StorageLevelEmitterPart::new);
-    public static final ItemDefinition<PartItem<EnergyLevelEmitterPart>> ENERGY_LEVEL_EMITTER = createPart("ME Energy Level Emitter", AEPartIds.ENERGY_LEVEL_EMITTER, EnergyLevelEmitterPart.class, EnergyLevelEmitterPart::new);
     public static final ItemDefinition<PartItem<AnnihilationPlanePart>> ANNIHILATION_PLANE = createCustomPartItem("ME Annihilation Plane", AEPartIds.ANNIHILATION_PLANE, AnnihilationPlanePart.class, AnnihilationPlanePartItem::new);
     public static final ItemDefinition<PartItem<IdentityAnnihilationPlanePart>> IDENTITY_ANNIHILATION_PLANE = createCustomPartItem("ME Identity Annihilation Plane", AEPartIds.IDENTITY_ANNIHILATION_PLANE, IdentityAnnihilationPlanePart.class, IdentityAnnihilationPlanePartItem::new);
     public static final ItemDefinition<PartItem<FormationPlanePart>> FORMATION_PLANE = createPart("ME Formation Plane", AEPartIds.FORMATION_PLANE, FormationPlanePart.class, FormationPlanePart::new);

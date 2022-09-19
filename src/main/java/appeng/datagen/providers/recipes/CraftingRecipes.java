@@ -657,12 +657,6 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .requires(AEItems.CALCULATION_PROCESSOR)
                 .unlockedBy("has_calculation_processor", has(AEItems.CALCULATION_PROCESSOR))
                 .save(consumer, AppEng.makeId("network/parts/level_emitter"));
-        ShapelessRecipeBuilder.shapeless(AEParts.ENERGY_LEVEL_EMITTER)
-                .requires(Items.REDSTONE_TORCH)
-                .requires(AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED)
-                .requires(AEItems.CALCULATION_PROCESSOR)
-                .unlockedBy("has_calculation_processor", has(AEItems.CALCULATION_PROCESSOR))
-                .save(consumer, AppEng.makeId("network/parts/energy_level_emitter"));
         ShapelessRecipeBuilder.shapeless(AEParts.STORAGE_BUS)
                 .requires(Items.STICKY_PISTON)
                 .requires(ConventionTags.INTERFACE)

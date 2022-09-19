@@ -216,7 +216,6 @@
   "gui.ae2.Empty": "空",
   "gui.ae2.Encoded": "已编码",
   "gui.ae2.EnergyDrain": "被动耗能： %s",
-  "gui.ae2.EnergyLevelEmitter": "ME能源发信器",
   "gui.ae2.Excluded": "黑名单模式",
   "gui.ae2.ExportBus": "ME输出总线",
   "gui.ae2.ExportBusFluids": "ME流体输出总线",

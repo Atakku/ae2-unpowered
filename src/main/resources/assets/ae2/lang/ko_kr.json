@@ -178,7 +178,6 @@
   "gui.ae2.Empty": "비어있음",
   "gui.ae2.Encoded": "기록됨",
   "gui.ae2.EnergyDrain": "에너지 유출: %s",
-  "gui.ae2.EnergyLevelEmitter": "ME 에너지 레벨 측정기",
   "gui.ae2.Excluded": "제외됨",
   "gui.ae2.ExportBus": "ME 반출 버스",
   "gui.ae2.ExportBusFluids": "ME 액체 반출 버스",

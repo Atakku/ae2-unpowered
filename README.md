@@ -20,7 +20,7 @@
 
 ## About
 
-A Mod about Matter, Energy and using them to conquer the world..
+A Mod about Matter and using it to conquer the world..
 
 ## Contacts
 

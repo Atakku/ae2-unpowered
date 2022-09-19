@@ -191,7 +191,6 @@
   "gui.ae2.Empty": "Пустой",
   "gui.ae2.Encoded": "Закодирован",
   "gui.ae2.EnergyDrain": "Пассивное потребление: %s",
-  "gui.ae2.EnergyLevelEmitter": "МЭ излучатель уровня энергии",
   "gui.ae2.Excluded": "Исключить",
   "gui.ae2.ExportBus": "МЭ шина экспорта",
   "gui.ae2.ExportBusFluids": "МЭ жидкостная шина экспорта",

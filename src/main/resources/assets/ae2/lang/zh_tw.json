@@ -183,7 +183,6 @@
   "gui.ae2.Empty": "空",
   "gui.ae2.Encoded": "已編碼",
   "gui.ae2.EnergyDrain": "被動消耗: %s",
-  "gui.ae2.EnergyLevelEmitter": "ME 能量準位發射器",
   "gui.ae2.Excluded": "排除",
   "gui.ae2.ExportBus": "ME輸出匯流排",
   "gui.ae2.ExportBusFluids": "ME流體輸出匯流排",

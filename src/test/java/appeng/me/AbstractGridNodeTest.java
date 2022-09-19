@@ -22,7 +22,6 @@ import appeng.api.networking.ticking.TickRateModulation;
 import appeng.api.networking.ticking.TickingRequest;
 import appeng.core.worlddata.GridStorageSaveData;
 import appeng.core.worlddata.IGridStorageSaveData;
-import appeng.me.service.EnergyService;
 import appeng.util.BootstrapMinecraft;
 import appeng.util.Platform;
 
@@ -64,7 +63,6 @@ abstract class AbstractGridNodeTest {
         var node = makeNode(flags);
         node.addService(IAEPowerStorage.class, new InfinitePowerStorage());
         var grid = node.getInternalGrid();
-        ((EnergyService) grid.getEnergyService()).onServerEndTick();
         node.markReady();
         return node;
     }

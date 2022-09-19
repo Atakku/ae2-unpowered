@@ -34,7 +34,6 @@ import appeng.api.networking.IGrid;
 import appeng.api.networking.crafting.ICraftingLink;
 import appeng.api.networking.crafting.ICraftingPlan;
 import appeng.api.networking.crafting.ICraftingRequester;
-import appeng.api.networking.energy.IEnergyService;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.stacks.AEKey;
 import appeng.api.stacks.GenericStack;
@@ -115,7 +114,7 @@ public class CraftingCpuLogic {
         }
     }
 
-    public void tickCraftingLogic(IEnergyService eg, CraftingService cc) {
+    public void tickCraftingLogic(CraftingService cc) {
         // Don't tick if we're not active.
         if (!cluster.isActive())
             return;
@@ -139,7 +138,7 @@ public class CraftingCpuLogic {
 
         if (remainingOperations > 0) {
             do {
-                var pushedPatterns = executeCrafting(remainingOperations, cc, eg, cluster.getLevel());
+                var pushedPatterns = executeCrafting(remainingOperations, cc, cluster.getLevel());
 
                 if (pushedPatterns > 0) {
                     remainingOperations -= pushedPatterns;
@@ -158,7 +157,7 @@ public class CraftingCpuLogic {
      *
      * @return How many patterns were successfully pushed.
      */
-    public int executeCrafting(int maxPatterns, CraftingService craftingService, IEnergyService energyService,
+    public int executeCrafting(int maxPatterns, CraftingService craftingService,
             Level level) {
         var job = this.job;
         if (job == null)

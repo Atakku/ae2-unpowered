@@ -40,7 +40,6 @@ import appeng.api.networking.IGrid;
 import appeng.api.networking.crafting.ICraftingLink;
 import appeng.api.networking.crafting.ICraftingRequester;
 import appeng.api.networking.crafting.ICraftingService;
-import appeng.api.networking.energy.IEnergyService;
 import appeng.api.networking.storage.IStorageService;
 import appeng.api.parts.IPartCollisionHelper;
 import appeng.api.parts.IPartItem;
@@ -120,7 +119,7 @@ public class ExportBusPart extends IOBusPart implements ICraftingRequester {
         var fzMode = this.getConfigManager().getSetting(Settings.FUZZY_MODE);
         var schedulingMode = this.getConfigManager().getSetting(Settings.SCHEDULING_MODE);
 
-        var context = createTransferContext(storageService, grid.getEnergyService());
+        var context = createTransferContext(storageService);
 
         int x = 0;
         for (x = 0; x < this.availableSlots() && context.hasOperationsLeft(); x++) {
@@ -201,7 +200,7 @@ public class ExportBusPart extends IOBusPart implements ICraftingRequester {
     }
 
     @NotNull
-    private StackTransferContext createTransferContext(IStorageService storageService, IEnergyService energyService) {
+    private StackTransferContext createTransferContext(IStorageService storageService) {
         return new StackTransferContextImpl(
                 storageService,
                 this.source,

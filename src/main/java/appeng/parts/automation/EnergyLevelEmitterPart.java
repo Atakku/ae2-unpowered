@@ -25,7 +25,6 @@ import net.minecraft.world.phys.Vec3;
 
 import appeng.api.config.RedstoneMode;
 import appeng.api.config.Settings;
-import appeng.api.networking.energy.IEnergyService;
 import appeng.api.networking.energy.IEnergyWatcher;
 import appeng.api.networking.energy.IEnergyWatcherNode;
 import appeng.api.parts.IPartItem;
@@ -72,7 +71,7 @@ public class EnergyLevelEmitterPart extends AbstractLevelEmitterPart {
         }
 
         @Override
-        public void onThresholdPass(IEnergyService energyGrid) {
+        public void onThresholdPass() {
             lastReportedValue = 10000;
             updateState();
         }

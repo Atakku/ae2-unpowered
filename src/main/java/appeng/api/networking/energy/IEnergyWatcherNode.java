@@ -40,5 +40,5 @@ public interface IEnergyWatcherNode extends IGridNodeService {
      *
      * @param energyGrid grid
      */
-    void onThresholdPass(IEnergyService energyGrid);
+    void onThresholdPass();
 }

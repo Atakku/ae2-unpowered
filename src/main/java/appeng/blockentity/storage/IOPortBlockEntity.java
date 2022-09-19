@@ -337,7 +337,6 @@ public class IOPortBlockEntity extends AENetworkInvBlockEntity
             destination = cellInv;
         }
 
-        var energy = grid.getEnergyService();
         boolean didStuff;
 
         do {

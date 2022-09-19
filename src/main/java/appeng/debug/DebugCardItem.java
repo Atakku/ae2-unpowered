@@ -42,7 +42,6 @@ import net.minecraft.world.level.Level;
 import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.energy.IAEPowerStorage;
-import appeng.api.networking.energy.IEnergyService;
 import appeng.api.networking.pathing.ControllerState;
 import appeng.api.parts.IPart;
 import appeng.api.parts.IPartHost;

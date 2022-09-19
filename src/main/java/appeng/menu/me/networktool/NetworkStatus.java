@@ -29,7 +29,6 @@ import net.minecraft.network.FriendlyByteBuf;
 
 import appeng.api.networking.IGrid;
 import appeng.api.networking.IGridNode;
-import appeng.api.networking.energy.IEnergyService;
 import appeng.api.stacks.AEItemKey;
 import appeng.client.gui.me.networktool.NetworkStatusScreen;
 
@@ -40,21 +39,13 @@ import appeng.client.gui.me.networktool.NetworkStatusScreen;
  */
 public class NetworkStatus {
 
-    private double averagePowerInjection;
-    private double averagePowerUsage;
-    private double channelPower;
     private int channelsUsed;
 
     private List<MachineGroup> groupedMachines = Collections.emptyList();
 
     public static NetworkStatus fromGrid(IGrid grid) {
-        IEnergyService eg = grid.getEnergyService();
-
         NetworkStatus status = new NetworkStatus();
 
-        status.averagePowerInjection = eg.getAvgPowerInjection();
-        status.averagePowerUsage = eg.getAvgPowerUsage();
-        status.channelPower = eg.getChannelPowerUsage();
         status.channelsUsed = grid.getPathingService().getUsedChannels();
 
         // This is essentially a groupBy machineRepresentation + count, sum(idlePowerUsage)
@@ -78,18 +69,6 @@ public class NetworkStatus {
         return status;
     }
 
-    public double getAveragePowerInjection() {
-        return averagePowerInjection;
-    }
-
-    public double getAveragePowerUsage() {
-        return averagePowerUsage;
-    }
-
-    public double getChannelPower() {
-        return channelPower;
-    }
-
     public int getChannelsUsed() {
         return channelsUsed;
     }
@@ -106,9 +85,6 @@ public class NetworkStatus {
      */
     public static NetworkStatus read(FriendlyByteBuf data) {
         NetworkStatus status = new NetworkStatus();
-        status.averagePowerInjection = data.readDouble();
-        status.averagePowerUsage = data.readDouble();
-        status.channelPower = data.readDouble();
         status.channelsUsed = data.readVarInt();
 
         int count = data.readVarInt();
@@ -125,9 +101,6 @@ public class NetworkStatus {
      * Writes the contents of this object to a packet buffer. Use {@link #read(FriendlyByteBuf)} to restore.
      */
     public void write(FriendlyByteBuf data) {
-        data.writeDouble(averagePowerInjection);
-        data.writeDouble(averagePowerUsage);
-        data.writeDouble(channelPower);
         data.writeVarInt(channelsUsed);
         data.writeVarInt(groupedMachines.size());
         for (MachineGroup machine : groupedMachines) {

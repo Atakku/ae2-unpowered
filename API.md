@@ -153,13 +153,6 @@ using `GridServices`.
 Services can be retrieved by calling `IGrid#getService` by passing the grid service's interface. For getting AE2's
 default services, `IGrid` offers several convenience methods.
 
-#### Energy
-
-**Service Interface:** `IEnergyService`
-
-This service allows energy to be extracted from and injected into the grid's energy storage (i.e. energy cells, the
-grid's internal storage, etc.).
-
 #### Ticking
 
 **Service Interface:** `ITickManager`

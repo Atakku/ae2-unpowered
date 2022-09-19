@@ -140,7 +140,6 @@ public class FillCraftingGridFromRecipePacket extends BasePacket {
         var grid = node.getGrid();
 
         var security = grid.getSecurityService();
-        var energy = grid.getEnergyService();
         var craftMatrix = cct.getCraftingMatrix();
 
         // We'll try to use the best possible ingredients based on what's available in the network

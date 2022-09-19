@@ -141,7 +141,6 @@ public class ConversionMonitorPart extends AbstractMonitorPart {
 
     private void insertItem(Player player, InteractionHand hand, boolean allItems) {
         getMainNode().ifPresent(grid -> {
-            var energy = grid.getEnergyService();
             var cell = grid.getStorageService().getInventory();
 
             if (allItems) {
@@ -181,7 +180,6 @@ public class ConversionMonitorPart extends AbstractMonitorPart {
         }
 
         getMainNode().ifPresent(grid -> {
-            var energy = grid.getEnergyService();
             var cell = grid.getStorageService().getInventory();
 
             var retrieved = StorageHelper.extraction(cell, itemKey, count,

@@ -63,7 +63,7 @@ public class ChestBlock extends AEBaseEntityBlock<ChestBlockEntity> {
             cellState = be.getCellStatus(0);
         }
 
-        return currentState.setValue(LIGHTS_ON, be.isPowered() && cellState != CellState.ABSENT);
+        return currentState.setValue(LIGHTS_ON, cellState != CellState.ABSENT);
     }
 
     @Override

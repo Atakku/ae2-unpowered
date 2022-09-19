@@ -108,10 +108,6 @@ class CellLedRenderer {
             return null;
         }
 
-        if (!drive.isPowered()) {
-            return UNPOWERED_COLOR;
-        }
-
         Vector3f col = STATE_COLORS.get(state);
         if (drive.isCellBlinking(slot)) {
             // 200 ms interval (100ms to get to red, then 100ms back)

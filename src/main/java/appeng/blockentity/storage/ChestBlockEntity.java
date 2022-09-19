@@ -168,10 +168,8 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
         for (int x = 0; x < this.getCellCount(); x++) {
             state |= this.getCellStatus(x).ordinal() << BIT_CELL_STATE_BITS * x;
         }
-
-        if (this.isPowered()) {
-            state |= BIT_POWER_MASK;
-        }
+        
+        state |= BIT_POWER_MASK;
 
         if (oldState != state) {
             this.state = state;
@@ -250,15 +248,6 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
     }
 
     @Override
-    public boolean isPowered() {
-        if (isClientSide()) {
-            return (this.state & BIT_POWER_MASK) == BIT_POWER_MASK;
-        }
-
-        return true;
-    }
-
-    @Override
     public boolean isCellBlinking(int slot) {
         return false;
     }
@@ -294,10 +283,8 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
         for (int x = 0; x < this.getCellCount(); x++) {
             this.state |= this.getCellStatus(x).ordinal() << 3 * x;
         }
-
-        if (this.isPowered()) {
-            this.state |= BIT_POWER_MASK;
-        }
+        
+        this.state |= BIT_POWER_MASK;
 
         data.writeByte(this.state);
         data.writeByte(this.paintedColor.ordinal());
@@ -646,11 +633,8 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
 
         @Override
         public boolean allowInsert(InternalInventory inv, int slot, ItemStack stack) {
-            if (ChestBlockEntity.this.isPowered()) {
-                ChestBlockEntity.this.updateHandler();
-                return ChestBlockEntity.this.cellHandler != null;
-            }
-            return false;
+            ChestBlockEntity.this.updateHandler();
+            return ChestBlockEntity.this.cellHandler != null;
         }
     }
 

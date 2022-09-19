@@ -216,15 +216,6 @@ public class DriveBlockEntity extends AENetworkInvBlockEntity
     }
 
     @Override
-    public boolean isPowered() {
-        if (isClientSide()) {
-            return (this.state & BIT_POWER_MASK) == BIT_POWER_MASK;
-        }
-
-        return this.getMainNode().isOnline();
-    }
-
-    @Override
     public boolean isCellBlinking(int slot) {
         return false;
     }

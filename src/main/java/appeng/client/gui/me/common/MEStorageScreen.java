@@ -703,7 +703,6 @@ public class MEStorageScreen<C extends MEStorageMenu>
     }
 
     private void toggleTerminalSearchMode(SettingToggleButton<SearchBoxMode> btn, boolean backwards) {
-        var currentMode = AEConfig.instance().getTerminalSearchMode();
         SearchBoxMode next = btn.getNextValue(backwards);
         AEConfig.instance().setTerminalSearchMode(next);
         btn.set(next);

@@ -46,11 +46,6 @@ public interface IChestOrDrive extends IOrientable, IActionHost {
     CellState getCellStatus(int slot);
 
     /**
-     * @return if the device is online you should check this before providing any other information.
-     */
-    boolean isPowered();
-
-    /**
      * @param slot slot index
      *
      * @return is the cell currently blinking to show activity.

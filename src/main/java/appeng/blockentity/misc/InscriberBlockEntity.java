@@ -43,7 +43,7 @@ import appeng.api.upgrades.IUpgradeInventory;
 import appeng.api.upgrades.IUpgradeableObject;
 import appeng.api.upgrades.UpgradeInventories;
 import appeng.api.util.AECableType;
-import appeng.blockentity.grid.AENetworkPowerBlockEntity;
+import appeng.blockentity.grid.AENetworkInvBlockEntity;
 import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.AEItems;
 import appeng.core.settings.TickRates;
@@ -60,7 +60,7 @@ import appeng.util.inv.filter.IAEItemFilter;
  * @version rv2
  * @since rv0
  */
-public class InscriberBlockEntity extends AENetworkPowerBlockEntity implements IGridTickable, IUpgradeableObject {
+public class InscriberBlockEntity extends AENetworkInvBlockEntity implements IGridTickable, IUpgradeableObject {
     private final int maxProcessingTime = 100;
 
     private final IUpgradeInventory upgrades;
@@ -90,7 +90,6 @@ public class InscriberBlockEntity extends AENetworkPowerBlockEntity implements I
         this.getMainNode()
                 .setExposedOnSides(EnumSet.noneOf(Direction.class))
                 .addService(IGridTickable.class, this);
-        this.setInternalMaxPower(1600);
 
         this.upgrades = UpgradeInventories.forMachine(AEBlocks.INSCRIBER, 3, this::saveChanges);
 
@@ -159,7 +158,6 @@ public class InscriberBlockEntity extends AENetworkPowerBlockEntity implements I
     public void setOrientation(Direction inForward, Direction inUp) {
         super.setOrientation(inForward, inUp);
         this.getMainNode().setExposedOnSides(EnumSet.complementOf(EnumSet.of(this.getForward())));
-        this.setPowerSides(EnumSet.complementOf(EnumSet.of(this.getForward())));
     }
 
     @Override

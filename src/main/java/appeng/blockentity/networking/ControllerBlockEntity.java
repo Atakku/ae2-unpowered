@@ -34,10 +34,10 @@ import appeng.api.networking.pathing.ControllerState;
 import appeng.api.util.AECableType;
 import appeng.block.networking.ControllerBlock;
 import appeng.block.networking.ControllerBlock.ControllerBlockState;
-import appeng.blockentity.grid.AENetworkPowerBlockEntity;
+import appeng.blockentity.grid.AENetworkInvBlockEntity;
 import appeng.util.Platform;
 
-public class ControllerBlockEntity extends AENetworkPowerBlockEntity {
+public class ControllerBlockEntity extends AENetworkInvBlockEntity {
 
     static {
         GridHelper.addNodeOwnerEventHandler(
@@ -48,8 +48,6 @@ public class ControllerBlockEntity extends AENetworkPowerBlockEntity {
 
     public ControllerBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
-        this.setInternalMaxPower(8000);
-        this.setInternalPublicPowerStorage(true);
         this.getMainNode().setFlags(GridFlags.CANNOT_CARRY, GridFlags.DENSE_CAPACITY);
     }
 
@@ -94,11 +92,6 @@ public class ControllerBlockEntity extends AENetworkPowerBlockEntity {
                     this.level.getBlockState(this.worldPosition).setValue(ControllerBlock.CONTROLLER_STATE, metaState));
         }
 
-    }
-
-    @Override
-    protected void PowerEvent(PowerEventType x) {
-        getMainNode().ifPresent(grid -> grid.postEvent(new GridPowerStorageStateChanged(this, x)));
     }
 
     @Override

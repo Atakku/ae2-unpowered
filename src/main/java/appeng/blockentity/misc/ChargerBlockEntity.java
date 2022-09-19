@@ -38,14 +38,14 @@ import appeng.api.networking.ticking.TickingRequest;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.util.AECableType;
 import appeng.api.util.DimensionalBlockPos;
-import appeng.blockentity.grid.AENetworkPowerBlockEntity;
+import appeng.blockentity.grid.AENetworkInvBlockEntity;
 import appeng.core.definitions.AEItems;
 import appeng.core.settings.TickRates;
 import appeng.util.Platform;
 import appeng.util.inv.AppEngInternalInventory;
 import appeng.util.inv.filter.IAEItemFilter;
 
-public class ChargerBlockEntity extends AENetworkPowerBlockEntity implements IGridTickable {
+public class ChargerBlockEntity extends AENetworkInvBlockEntity implements IGridTickable {
     private static final int POWER_MAXIMUM_AMOUNT = 1600;
     private static final int POWER_THRESHOLD = POWER_MAXIMUM_AMOUNT - 1;
     private boolean working;
@@ -58,7 +58,6 @@ public class ChargerBlockEntity extends AENetworkPowerBlockEntity implements IGr
                 .setExposedOnSides(EnumSet.noneOf(Direction.class))
                 .setFlags()
                 .addService(IGridTickable.class, this);
-        this.setInternalMaxPower(POWER_MAXIMUM_AMOUNT);
     }
 
     @Override
@@ -103,7 +102,6 @@ public class ChargerBlockEntity extends AENetworkPowerBlockEntity implements IGr
     public void setOrientation(Direction inForward, Direction inUp) {
         super.setOrientation(inForward, inUp);
         this.getMainNode().setExposedOnSides(EnumSet.of(this.getUp(), this.getUp().getOpposite()));
-        this.setPowerSides(EnumSet.of(this.getUp(), this.getUp().getOpposite()));
     }
 
     @Override
@@ -162,8 +160,7 @@ public class ChargerBlockEntity extends AENetworkPowerBlockEntity implements IGr
 
         if (!myItem.isEmpty()) {
 
-            if (this.getInternalCurrentPower() > POWER_THRESHOLD
-                    && AEItems.CERTUS_QUARTZ_CRYSTAL.isSameAs(myItem)) {
+            if (AEItems.CERTUS_QUARTZ_CRYSTAL.isSameAs(myItem)) {
                 this.working = true;
                 if (Platform.getRandomFloat() > 0.8f) {
                     ItemStack charged = AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED.stack(myItem.getCount());
@@ -172,16 +169,6 @@ public class ChargerBlockEntity extends AENetworkPowerBlockEntity implements IGr
                     changed = true;
                 }
             }
-        }
-
-        // charge from the network!
-        if (this.getInternalCurrentPower() < POWER_THRESHOLD) {
-            getMainNode().ifPresent(grid -> {
-                double toExtract = Math.min(800.0, this.getInternalMaxPower() - this.getInternalCurrentPower());
-                final double extracted = toExtract;
-            });
-
-            changed = true;
         }
 
         if (changed || this.working != wasWorking) {

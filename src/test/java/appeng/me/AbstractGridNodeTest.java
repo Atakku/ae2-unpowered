@@ -62,7 +62,6 @@ abstract class AbstractGridNodeTest {
     protected GridNode makePoweredNode(GridFlags... flags) {
         var node = makeNode(flags);
         node.addService(IAEPowerStorage.class, new InfinitePowerStorage());
-        var grid = node.getInternalGrid();
         node.markReady();
         return node;
     }

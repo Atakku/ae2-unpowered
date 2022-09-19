@@ -33,7 +33,7 @@ public interface IEnergyWatcherNode extends IGridNodeService {
      *
      * @param newWatcher new watcher
      */
-    void updateWatcher(IEnergyWatcher newWatcher);
+    void updateWatcher();
 
     /**
      * Called when a threshold is crossed.

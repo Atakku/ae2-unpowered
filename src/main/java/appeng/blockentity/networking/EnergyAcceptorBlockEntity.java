@@ -25,13 +25,12 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import appeng.api.inventories.InternalInventory;
 import appeng.api.util.AECableType;
-import appeng.blockentity.grid.AENetworkPowerBlockEntity;
+import appeng.blockentity.grid.AENetworkInvBlockEntity;
 
-public class EnergyAcceptorBlockEntity extends AENetworkPowerBlockEntity {
+public class EnergyAcceptorBlockEntity extends AENetworkInvBlockEntity {
 
     public EnergyAcceptorBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
-        this.setInternalMaxPower(0);
     }
 
     @Override

@@ -77,7 +77,7 @@ import appeng.api.storage.cells.StorageCell;
 import appeng.api.util.AEColor;
 import appeng.api.util.IConfigManager;
 import appeng.blockentity.ServerTickingBlockEntity;
-import appeng.blockentity.grid.AENetworkPowerBlockEntity;
+import appeng.blockentity.grid.AENetworkInvBlockEntity;
 import appeng.core.definitions.AEBlocks;
 import appeng.helpers.IPriorityHost;
 import appeng.me.helpers.MachineSource;
@@ -92,7 +92,7 @@ import appeng.util.inv.AppEngInternalInventory;
 import appeng.util.inv.CombinedInternalInventory;
 import appeng.util.inv.filter.IAEItemFilter;
 
-public class ChestBlockEntity extends AENetworkPowerBlockEntity
+public class ChestBlockEntity extends AENetworkInvBlockEntity
         implements IMEChest, ITerminalHost, IPriorityHost, IColorableBlockEntity,
         ServerTickingBlockEntity, IStorageProvider {
 
@@ -133,9 +133,6 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
         this.config.registerSetting(Settings.TYPE_FILTER, TypeFilter.ALL);
         this.config.registerSetting(Settings.SORT_DIRECTION, SortDir.ASCENDING);
 
-        this.setInternalPublicPowerStorage(true);
-        this.setInternalPowerFlow(AccessRestriction.WRITE);
-
         this.inputInventory.setFilter(new InputInventoryFilter());
         this.cellInventory.setFilter(new CellInventoryFilter());
     }
@@ -146,16 +143,6 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
 
     public void setCell(ItemStack stack) {
         this.cellInventory.setItemDirect(0, Objects.requireNonNull(stack));
-    }
-
-    @Override
-    protected void PowerEvent(PowerEventType x) {
-        if (x == PowerEventType.REQUEST_POWER) {
-            this.getMainNode().ifPresent(
-                    grid -> grid.postEvent(new GridPowerStorageStateChanged(this, PowerEventType.REQUEST_POWER)));
-        } else {
-            this.recalculateDisplay();
-        }
     }
 
     private void recalculateDisplay() {

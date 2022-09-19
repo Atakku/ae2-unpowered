@@ -107,36 +107,6 @@ public class Platform {
         return RANDOM_GENERATOR.nextFloat();
     }
 
-    /**
-     * This displays the value for encoded longs ( double *100 )
-     *
-     * @param n      to be formatted long value
-     * @param isRate if true it adds a /t to the formatted string
-     * @return formatted long value
-     */
-    public static String formatPowerLong(long n, boolean isRate) {
-        return formatPower((double) n / 100, isRate);
-    }
-
-    public static String formatPower(double p, boolean isRate) {
-        var displayUnits = AEConfig.instance().getSelectedPowerUnit();
-        p = PowerUnits.AE.convertTo(displayUnits, p);
-
-        final String[] preFixes = { "k", "M", "G", "T", "P", "T", "P", "E", "Z", "Y" };
-        var unitName = displayUnits.getSymbolName();
-
-        String level = "";
-        int offset = 0;
-        while (p > 1000 && offset < preFixes.length) {
-            p /= 1000;
-            level = preFixes[offset];
-            offset++;
-        }
-
-        final DecimalFormat df = new DecimalFormat("#.##");
-        return df.format(p) + ' ' + level + unitName + (isRate ? "/t" : "");
-    }
-
     public static String formatTimeMeasurement(long nanos) {
         if (nanos <= 0) {
             return "0 ns";

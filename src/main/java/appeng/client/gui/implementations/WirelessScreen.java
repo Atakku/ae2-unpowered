@@ -26,7 +26,6 @@ import appeng.client.gui.AEBaseScreen;
 import appeng.client.gui.style.ScreenStyle;
 import appeng.core.localization.GuiText;
 import appeng.menu.implementations.WirelessMenu;
-import appeng.util.Platform;
 
 public class WirelessScreen extends AEBaseScreen<WirelessMenu> {
 
@@ -40,15 +39,12 @@ public class WirelessScreen extends AEBaseScreen<WirelessMenu> {
         super.updateBeforeRender();
 
         Component rangeText = TextComponent.EMPTY;
-        Component energyUseText = TextComponent.EMPTY;
         if (menu.getRange() > 0) {
             double rangeBlocks = menu.getRange() / 10.0;
             rangeText = GuiText.WirelessRange.text(rangeBlocks);
-            energyUseText = GuiText.PowerUsageRate.text(Platform.formatPowerLong(menu.getDrain(), true));
         }
 
         setTextContent("range", rangeText);
-        setTextContent("energy_use", energyUseText);
     }
 
 }

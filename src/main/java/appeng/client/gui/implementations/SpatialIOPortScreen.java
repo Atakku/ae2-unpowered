@@ -38,12 +38,6 @@ public class SpatialIOPortScreen extends AEBaseScreen<SpatialIOPortMenu> {
     protected void updateBeforeRender() {
         super.updateBeforeRender();
 
-        setTextContent("stored_power",
-                GuiText.StoredPower.text(Platform.formatPowerLong(this.menu.getCurrentPower(), false)));
-        setTextContent("max_power",
-                GuiText.MaxPower.text(Platform.formatPowerLong(this.menu.getMaxPower(), false)));
-        setTextContent("required_power",
-                GuiText.RequiredPower.text(Platform.formatPowerLong(this.menu.getRequiredPower(), false)));
         setTextContent("efficiency", GuiText.Efficiency.text((float) this.menu.getEfficency() / 100));
 
         Component scsSizeText;

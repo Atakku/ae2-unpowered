@@ -66,14 +66,6 @@ public class NetworkStatusScreen extends AEBaseScreen<NetworkStatusMenu> {
         super.updateBeforeRender();
 
         setTextContent("dialog_title", GuiText.NetworkDetails.text(status.getChannelsUsed()));
-        setTextContent("stored_power", GuiText.StoredPower.text(Platform.formatPower(status.getStoredPower(), false)));
-        setTextContent("max_power", GuiText.MaxPower.text(Platform.formatPower(status.getMaxStoredPower(), false)));
-        setTextContent("power_input_rate",
-                GuiText.PowerInputRate.text(Platform.formatPower(status.getAveragePowerInjection(), true)));
-        setTextContent("power_usage_rate",
-                GuiText.PowerUsageRate.text(Platform.formatPower(status.getAveragePowerUsage(), true)));
-        setTextContent("channel_power_rate",
-                GuiText.ChannelEnergyDrain.text(Platform.formatPower(status.getChannelPower(), true)));
     }
 
     @Override
@@ -107,10 +99,6 @@ public class NetworkStatusScreen extends AEBaseScreen<NetworkStatusMenu> {
                 tooltip.add(entry.getDisplay().getDisplayName());
 
                 tooltip.add(GuiText.Installed.text(entry.getCount()));
-                if (entry.getIdlePowerUsage() > 0) {
-                    tooltip.add(GuiText.EnergyDrain
-                            .text(Platform.formatPower(entry.getIdlePowerUsage(), true)));
-                }
             }
 
             if (++x >= COLUMNS) {

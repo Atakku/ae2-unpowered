@@ -18,22 +18,13 @@
 
 package appeng.integration.modules.waila.tile;
 
-import java.util.List;
-
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-import mcp.mobius.waila.api.IBlockAccessor;
-import mcp.mobius.waila.api.IPluginConfig;
-
 import appeng.api.networking.energy.IAEPowerStorage;
-import appeng.core.localization.InGameTooltip;
 import appeng.integration.modules.waila.BaseDataProvider;
-import appeng.util.Platform;
 
 /**
  * Shows stored power and max stored power for an {@link IAEPowerStorage} block entity.
@@ -44,20 +35,6 @@ public final class PowerStorageDataProvider extends BaseDataProvider {
      */
     private static final String TAG_CURRENT_POWER = "currentPower";
     private static final String TAG_MAX_POWER = "maxPower";
-
-    @Override
-    public void appendBody(List<Component> tooltip, IBlockAccessor accessor, IPluginConfig config) {
-        var tag = accessor.getServerData();
-        if (tag.contains(TAG_MAX_POWER, Tag.TAG_DOUBLE)) {
-            var currentPower = tag.getDouble(TAG_CURRENT_POWER);
-            var maxPower = tag.getDouble(TAG_MAX_POWER);
-
-            var formatCurrentPower = Platform.formatPower(currentPower, false);
-            var formatMaxPower = Platform.formatPower(maxPower, false);
-
-            tooltip.add(InGameTooltip.Stored.text(formatCurrentPower, formatMaxPower));
-        }
-    }
 
     @Override
     public void appendServerData(CompoundTag tag, ServerPlayer player, Level level, BlockEntity blockEntity) {

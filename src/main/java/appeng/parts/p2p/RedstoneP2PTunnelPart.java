@@ -164,7 +164,7 @@ public class RedstoneP2PTunnelPart extends P2PTunnelPart<RedstoneP2PTunnelPart> 
 
     @Override
     public IPartModel getStaticModels() {
-        return MODELS.getModel(this.isPowered(), this.isActive());
+        return MODELS.getModel(this.isActive());
     }
 
 }

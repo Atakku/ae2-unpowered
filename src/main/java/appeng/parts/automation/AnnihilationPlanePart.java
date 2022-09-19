@@ -296,7 +296,7 @@ public class AnnihilationPlanePart extends BasicStatePart implements IGridTickab
 
     @Override
     public IPartModel getStaticModels() {
-        return MODELS.getModel(this.isPowered(), this.isActive());
+        return MODELS.getModel(this.isActive());
     }
 
     @Override

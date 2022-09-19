@@ -44,6 +44,6 @@ public class FluidP2PTunnelPart extends StorageP2PTunnelPart<FluidP2PTunnelPart,
 
     @Override
     public IPartModel getStaticModels() {
-        return MODELS.getModel(this.isPowered(), this.isActive());
+        return MODELS.getModel(this.isActive());
     }
 }

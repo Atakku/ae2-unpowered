@@ -33,14 +33,10 @@ import appeng.parts.PartModel;
  */
 public class PlaneModels {
 
-    public static final ResourceLocation MODEL_CHASSIS_OFF = new ResourceLocation(AppEng.MOD_ID,
-            "part/transition_plane_off");
     public static final ResourceLocation MODEL_CHASSIS_ON = new ResourceLocation(AppEng.MOD_ID,
             "part/transition_plane_on");
     public static final ResourceLocation MODEL_CHASSIS_HAS_CHANNEL = new ResourceLocation(AppEng.MOD_ID,
             "part/transition_plane_has_channel");
-
-    private final IPartModel modelOff;
 
     private final IPartModel modelOn;
 
@@ -50,23 +46,20 @@ public class PlaneModels {
         ResourceLocation planeOff = new ResourceLocation(AppEng.MOD_ID, planeOffLocation);
         ResourceLocation planeOn = new ResourceLocation(AppEng.MOD_ID, planeOnLocation);
 
-        this.modelOff = new PartModel(MODEL_CHASSIS_OFF, planeOff);
         this.modelOn = new PartModel(MODEL_CHASSIS_ON, planeOff);
         this.modelHasChannel = new PartModel(MODEL_CHASSIS_HAS_CHANNEL, planeOn);
     }
 
-    public IPartModel getModel(boolean hasPower, boolean hasChannel) {
-        if (hasPower && hasChannel) {
+    public IPartModel getModel(boolean hasChannel) {
+        if (hasChannel) {
             return modelHasChannel;
-        } else if (hasPower) {
-            return modelOn;
         } else {
-            return modelOff;
+            return modelOn;
         }
     }
 
     public List<IPartModel> getModels() {
-        return ImmutableList.of(modelOff, modelOn, modelHasChannel);
+        return ImmutableList.of(modelOn, modelHasChannel);
     }
 
 }

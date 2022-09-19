@@ -46,7 +46,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import appeng.api.config.AccessRestriction;
 import appeng.api.config.Actionable;
-import appeng.api.config.PowerMultiplier;
 import appeng.api.config.SecurityPermissions;
 import appeng.api.config.Settings;
 import appeng.api.config.SortDir;
@@ -126,7 +125,6 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
 
     public ChestBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
-        this.setInternalMaxPower(PowerMultiplier.CONFIG.multiply(500));
         this.getMainNode()
                 .addService(IStorageProvider.class, this)
                 .setFlags(GridFlags.REQUIRE_CHANNEL);

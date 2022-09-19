@@ -38,7 +38,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 
 import appeng.api.config.CondenserOutput;
-import appeng.api.config.PowerMultiplier;
 import appeng.api.config.SearchBoxMode;
 import appeng.api.config.TerminalStyle;
 import appeng.api.config.YesNo;
@@ -172,8 +171,6 @@ public final class AEConfig {
     }
 
     private void syncCommonConfig() {
-        PowerMultiplier.CONFIG.multiplier = COMMON.powerUsageMultiplier.get();
-
         CondenserOutput.MATTER_BALLS.requiredPower = COMMON.condenserMatterBallsPower.get();
         CondenserOutput.SINGULARITY.requiredPower = COMMON.condenserSingularityPower.get();
 

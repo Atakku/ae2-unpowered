@@ -97,17 +97,6 @@ public class ControllerBlockEntity extends AENetworkPowerBlockEntity {
     }
 
     @Override
-    protected double getFunnelPowerDemand(double maxReceived) {
-        var grid = getMainNode().getGrid();
-        if (grid != null) {
-            return grid.getEnergyService().getEnergyDemand(maxReceived);
-        } else {
-            // no grid? use local...
-            return super.getFunnelPowerDemand(maxReceived);
-        }
-    }
-
-    @Override
     protected void PowerEvent(PowerEventType x) {
         getMainNode().ifPresent(grid -> grid.postEvent(new GridPowerStorageStateChanged(this, x)));
     }

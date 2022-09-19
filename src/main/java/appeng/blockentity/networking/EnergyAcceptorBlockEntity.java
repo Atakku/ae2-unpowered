@@ -40,16 +40,6 @@ public class EnergyAcceptorBlockEntity extends AENetworkPowerBlockEntity {
     }
 
     @Override
-    protected double getFunnelPowerDemand(double maxRequired) {
-        var grid = getMainNode().getGrid();
-        if (grid != null) {
-            return grid.getEnergyService().getEnergyDemand(maxRequired);
-        } else {
-            return this.getInternalMaxPower();
-        }
-    }
-
-    @Override
     public InternalInventory getInternalInventory() {
         return InternalInventory.empty();
     }

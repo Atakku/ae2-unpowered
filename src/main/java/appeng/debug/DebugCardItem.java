@@ -236,15 +236,6 @@ public class DebugCardItem extends AEBaseItem implements AEToolItem {
         if (te instanceof IAEPowerStorage ps) {
             this.outputMessage(player, "-- EnergyStorage Details");
             this.outputSecondaryMessage(player, "Energy", ps.getAECurrentPower() + " / " + ps.getAEMaxPower());
-
-            if (gh != null) {
-                final IGridNode node = gh.getGridNode(side);
-                if (node != null) {
-                    final IEnergyService eg = node.getGrid().getEnergyService();
-                    this.outputSecondaryMessage(player, "GridEnergy",
-                            " : " + eg.getEnergyDemand(Double.MAX_VALUE));
-                }
-            }
         }
 
         if (te instanceof AEBaseBlockEntity be) {

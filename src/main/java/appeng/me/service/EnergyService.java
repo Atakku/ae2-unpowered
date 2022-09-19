@@ -290,30 +290,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
     }
 
     @Override
-    public double getEnergyDemand(double maxRequired) {
-        final Queue<IEnergyGridProvider> toVisit = new PriorityQueue<>(COMPARATOR_LOWEST_PERCENTAGE_FIRST);
-        final Set<IEnergyGridProvider> visited = new HashSet<>();
-        toVisit.add(this);
-
-        double required = 0;
-
-        while (!toVisit.isEmpty() && required < maxRequired) {
-            final IEnergyGridProvider next = toVisit.poll();
-            visited.add(next);
-
-            required += next.getProviderEnergyDemand(maxRequired - required);
-
-            for (IEnergyGridProvider iEnergyGridProvider : next.providers()) {
-                if (!visited.contains(iEnergyGridProvider)) {
-                    toVisit.add(iEnergyGridProvider);
-                }
-            }
-        }
-
-        return required;
-    }
-
-    @Override
     public void removeNode(IGridNode node) {
         var gridProvider = node.getService(IEnergyGridProvider.class);
         if (gridProvider != null) {

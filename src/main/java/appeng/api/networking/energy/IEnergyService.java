@@ -58,13 +58,4 @@ public interface IEnergyService extends IGridService {
      */
     @Nonnegative
     double getAvgPowerInjection();
-
-    /**
-     * Calculation will be capped at maxRequired, this improves performance by limiting the number of nodes needed to
-     * calculate the demand.
-     *
-     * @return Amount of power required to charge the grid, in AE.
-     */
-    @Nonnegative
-    double getEnergyDemand(@Nonnegative double maxRequired);
 }

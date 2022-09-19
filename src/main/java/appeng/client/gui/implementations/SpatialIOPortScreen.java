@@ -25,7 +25,6 @@ import appeng.client.gui.AEBaseScreen;
 import appeng.client.gui.style.ScreenStyle;
 import appeng.core.localization.GuiText;
 import appeng.menu.implementations.SpatialIOPortMenu;
-import appeng.util.Platform;
 
 public class SpatialIOPortScreen extends AEBaseScreen<SpatialIOPortMenu> {
 

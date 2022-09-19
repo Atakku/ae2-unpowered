@@ -52,16 +52,6 @@ public class EnergyAcceptorBlockEntity extends AENetworkPowerBlockEntity {
     }
 
     @Override
-    protected double funnelPowerIntoStorage(double power, Actionable mode) {
-        var grid = getMainNode().getGrid();
-        if (grid != null) {
-            return grid.getEnergyService().injectPower(power, mode);
-        } else {
-            return super.funnelPowerIntoStorage(power, mode);
-        }
-    }
-
-    @Override
     public InternalInventory getInternalInventory() {
         return InternalInventory.empty();
     }

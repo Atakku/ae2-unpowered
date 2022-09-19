@@ -29,7 +29,6 @@ import appeng.client.gui.widgets.ServerSettingToggleButton;
 import appeng.client.gui.widgets.SettingToggleButton;
 import appeng.core.localization.GuiText;
 import appeng.menu.implementations.SpatialAnchorMenu;
-import appeng.util.Platform;
 
 public class SpatialAnchorScreen extends AEBaseScreen<SpatialAnchorMenu> {
 

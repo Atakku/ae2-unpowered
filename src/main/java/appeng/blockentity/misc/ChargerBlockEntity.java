@@ -211,8 +211,6 @@ public class ChargerBlockEntity extends AENetworkPowerBlockEntity implements IGr
             getMainNode().ifPresent(grid -> {
                 double toExtract = Math.min(800.0, this.getInternalMaxPower() - this.getInternalCurrentPower());
                 final double extracted = toExtract;
-
-                this.injectExternalPower(PowerUnits.AE, extracted, Actionable.MODULATE);
             });
 
             changed = true;

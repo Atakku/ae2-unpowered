@@ -323,30 +323,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
     }
 
     @Override
-    public double injectPower(double amt, Actionable mode) {
-        final Queue<IEnergyGridProvider> toVisit = new PriorityQueue<>(COMPARATOR_LOWEST_PERCENTAGE_FIRST);
-        final Set<IEnergyGridProvider> visited = new HashSet<>();
-        toVisit.add(this);
-
-        double leftover = amt;
-
-        while (!toVisit.isEmpty() && leftover > 0) {
-            final IEnergyGridProvider next = toVisit.poll();
-            visited.add(next);
-
-            leftover = next.injectProviderPower(leftover, mode);
-
-            for (IEnergyGridProvider iEnergyGridProvider : next.providers()) {
-                if (!visited.contains(iEnergyGridProvider)) {
-                    toVisit.add(iEnergyGridProvider);
-                }
-            }
-        }
-
-        return leftover;
-    }
-
-    @Override
     public double getEnergyDemand(double maxRequired) {
         final Queue<IEnergyGridProvider> toVisit = new PriorityQueue<>(COMPARATOR_LOWEST_PERCENTAGE_FIRST);
         final Set<IEnergyGridProvider> visited = new HashSet<>();

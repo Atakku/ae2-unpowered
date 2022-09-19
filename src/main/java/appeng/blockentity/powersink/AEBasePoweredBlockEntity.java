@@ -89,15 +89,6 @@ public abstract class AEBasePoweredBlockEntity extends AEBaseInvBlockEntity
     }
 
     @Override
-    public final double injectExternalPower(PowerUnits input, double amt, Actionable mode) {
-        return PowerUnits.AE.convertTo(input, this.funnelPowerIntoStorage(input.convertTo(PowerUnits.AE, amt), mode));
-    }
-
-    protected double funnelPowerIntoStorage(double power, Actionable mode) {
-        return this.injectAEPower(power, mode);
-    }
-
-    @Override
     public final double injectAEPower(double amt, Actionable mode) {
         if (amt < 0.000001) {
             return 0;

@@ -36,7 +36,6 @@ import appeng.core.localization.GuiText;
 import appeng.menu.me.networktool.MachineGroup;
 import appeng.menu.me.networktool.NetworkStatus;
 import appeng.menu.me.networktool.NetworkStatusMenu;
-import appeng.util.Platform;
 
 public class NetworkStatusScreen extends AEBaseScreen<NetworkStatusMenu> {
 

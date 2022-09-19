@@ -112,17 +112,6 @@ public class ControllerBlockEntity extends AENetworkPowerBlockEntity {
     }
 
     @Override
-    protected double funnelPowerIntoStorage(double power, Actionable mode) {
-        var grid = getMainNode().getGrid();
-        if (grid != null) {
-            return grid.getEnergyService().injectPower(power, mode);
-        } else {
-            // no grid? use local...
-            return super.funnelPowerIntoStorage(power, mode);
-        }
-    }
-
-    @Override
     protected void PowerEvent(PowerEventType x) {
         getMainNode().ifPresent(grid -> grid.postEvent(new GridPowerStorageStateChanged(this, x)));
     }

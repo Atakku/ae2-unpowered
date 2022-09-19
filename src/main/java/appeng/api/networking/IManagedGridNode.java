@@ -27,7 +27,6 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-import javax.annotation.Nonnegative;
 import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;

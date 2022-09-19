@@ -72,7 +72,6 @@ import appeng.menu.implementations.CellWorkbenchMenu;
 import appeng.menu.implementations.ChestMenu;
 import appeng.menu.implementations.CondenserMenu;
 import appeng.menu.implementations.DriveMenu;
-import appeng.menu.implementations.EnergyLevelEmitterMenu;
 import appeng.menu.implementations.FormationPlaneMenu;
 import appeng.menu.implementations.IOBusMenu;
 import appeng.menu.implementations.IOPortMenu;

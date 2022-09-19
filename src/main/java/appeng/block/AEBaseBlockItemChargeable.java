@@ -30,8 +30,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
-import appeng.core.localization.Tooltips;
-
 public class AEBaseBlockItemChargeable extends AEBaseBlockItem {
 
     public AEBaseBlockItemChargeable(Block block, Item.Properties props) {

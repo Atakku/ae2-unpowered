@@ -67,7 +67,6 @@ import appeng.core.sync.packets.ConfigValuePacket;
 import appeng.core.sync.packets.MEInteractionPacket;
 import appeng.core.sync.packets.MEInventoryUpdatePacket;
 import appeng.helpers.InventoryAction;
-import appeng.me.helpers.ChannelPowerSrc;
 import appeng.menu.AEBaseMenu;
 import appeng.menu.SlotSemantics;
 import appeng.menu.ToolboxMenu;

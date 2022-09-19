@@ -112,13 +112,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
     private final HashMap<IGridNode, IEnergyWatcher> watchers = new HashMap<>();
 
     /**
-     * estimated power available.
-     */
-    private int availableTicksSinceUpdate = 0;
-    private double globalAvailablePower = 0;
-    private double globalMaxPower = MAX_BUFFER_STORAGE;
-
-    /**
      * idle draw.
      */
     private double drainPerTick = 0;
@@ -213,8 +206,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
         } else if (!this.hasPower) {
             this.publicPowerState(false, this.grid);
         }
-
-        this.availableTicksSinceUpdate++;
     }
 
     @Override
@@ -237,17 +228,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
         grid.postEvent(new GridPowerStatusChange());
 
         this.grid.notifyAllNodes(IGridNodeListener.State.POWER);
-    }
-
-    /**
-     * refresh current stored power.
-     */
-    private void refreshPower() {
-        this.availableTicksSinceUpdate = 0;
-        this.globalAvailablePower = 0;
-        for (IAEPowerStorage p : this.providers) {
-            this.globalAvailablePower += p.getAECurrentPower();
-        }
     }
 
     @Override
@@ -353,11 +333,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
         var ps = node.getService(IAEPowerStorage.class);
         if (ps != null) {
             if (ps.isAEPublicPowerStorage()) {
-                if (ps.getPowerFlow() != AccessRestriction.WRITE) {
-                    this.globalMaxPower -= ps.getAEMaxPower();
-                    this.globalAvailablePower -= ps.getAECurrentPower();
-                }
-
                 removeProvider(ps);
                 removeRequester(ps);
             }
@@ -411,12 +386,7 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
                 final double max = ps.getAEMaxPower();
                 final double current = ps.getAECurrentPower();
 
-                if (ps.getPowerFlow() != AccessRestriction.WRITE) {
-                    this.globalMaxPower += ps.getAEMaxPower();
-                }
-
                 if (current > 0 && ps.getPowerFlow() != AccessRestriction.WRITE) {
-                    this.globalAvailablePower += current;
                     addProvider(ps);
                 }
 

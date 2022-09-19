@@ -48,6 +48,7 @@ import appeng.blockentity.misc.InscriberBlockEntity;
 import appeng.blockentity.misc.InterfaceBlockEntity;
 import appeng.blockentity.misc.LightDetectorBlockEntity;
 import appeng.blockentity.misc.PaintSplotchesBlockEntity;
+import appeng.blockentity.misc.QuartzGrowthAcceleratorBlockEntity;
 import appeng.blockentity.misc.SecurityStationBlockEntity;
 import appeng.blockentity.misc.SkyCompassBlockEntity;
 import appeng.blockentity.networking.CableBusBlockEntity;
@@ -104,6 +105,8 @@ public final class AEBlockEntities {
     public static final BlockEntityType<CondenserBlockEntity> CONDENSER = create("condenser",
             CondenserBlockEntity.class,
             CondenserBlockEntity::new, AEBlocks.CONDENSER);
+    public static final BlockEntityType<QuartzGrowthAcceleratorBlockEntity> QUARTZ_GROWTH_ACCELERATOR = create("quartz_growth_accelerator", 
+            QuartzGrowthAcceleratorBlockEntity.class, QuartzGrowthAcceleratorBlockEntity::new, AEBlocks.QUARTZ_GROWTH_ACCELERATOR);
     public static final BlockEntityType<CraftingBlockEntity> CRAFTING_UNIT = create("crafting_unit",
             CraftingBlockEntity.class, CraftingBlockEntity::new, AEBlocks.CRAFTING_UNIT,
             AEBlocks.CRAFTING_ACCELERATOR);

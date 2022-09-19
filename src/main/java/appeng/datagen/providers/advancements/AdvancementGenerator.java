@@ -351,6 +351,24 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 .addCriterion("facade", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.FACADE))
                 .save(consumer, "ae2_unpowered:main/facade");
 
+        var growthAccelerator = Advancement.Builder.advancement()
+                .display(
+                        AEBlocks.QUARTZ_GROWTH_ACCELERATOR,
+                        localization.component("achievement.ae2_unpowered.CrystalGrowthAccelerator",
+                                "Accelerator is an understatement"),
+                        localization.component("achievement.ae2_unpowered.CrystalGrowthAccelerator.desc",
+                                "Craft a Crystal Growth Accelerator"),
+                        null /* background */,
+                        FrameType.TASK,
+                        true /* showToast */,
+                        true /* announceChat */,
+                        false /* hidden */
+                )
+                .parent(fluix)
+                .addCriterion("certus",
+                        InventoryChangeTrigger.TriggerInstance.hasItems(AEBlocks.QUARTZ_GROWTH_ACCELERATOR))
+                .save(consumer, "ae2_unpowered:main/growth_accelerator");
+
         var network1 = Advancement.Builder.advancement()
                 .display(
                         AEParts.COVERED_CABLE.item(AEColor.TRANSPARENT),

@@ -22,14 +22,18 @@ import java.time.Duration;
 import java.util.Random;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
+import appeng.api.implementations.blockentities.ICrystalGrowthAccelerator;
 import appeng.api.implementations.items.IGrowableCrystal;
 import appeng.client.EffectType;
 import appeng.core.AEConfig;
@@ -41,11 +45,23 @@ public final class GrowingCrystalEntity extends AEBaseItemEntity {
 
     private static final Random CLIENT_EFFECTS_RNG = new Random();
 
-    private static final int GROWTH_TICK_PROGRESS = 60;
+    // Growth tick progress per tick by number of adjacent accelerators
+    private static final int[] GROWTH_TICK_PROGRESS = {
+            1, // no accelerators, 20 minutes
+            10, // 1 accelerator, 2 minutes
+            20, // 2 accelerators, 1 minute
+            30, // 3 accelerators, 40 seconds
+            40, // 4 accelerators, 30 seconds
+            50, // 5 accelerators, 24 seconds
+            60 // 6 accelerators, 20 seconds
+    };
 
     public static Duration getGrowthDuration(int accelerators) {
-        int ticks = CrystalSeedItem.GROWTH_TICKS_REQUIRED / GROWTH_TICK_PROGRESS;
-        return Duration.ofMillis(ticks * 1000 / 20);
+        int progressPerTick = GROWTH_TICK_PROGRESS[Math.min(GROWTH_TICK_PROGRESS.length - 1, accelerators)];
+        int ticks = CrystalSeedItem.GROWTH_TICKS_REQUIRED / progressPerTick;
+        return Duration.ofMillis(
+                // Assumes 20 ticks per second
+                ticks * 1000 / 20);
     }
 
     public GrowingCrystalEntity(EntityType<? extends GrowingCrystalEntity> type, Level level) {
@@ -118,18 +134,65 @@ public final class GrowingCrystalEntity extends AEBaseItemEntity {
             } while (loopCounter > 0 && newItem.getItem() == is.getItem());
 
             this.setItem(newItem);
+
+// FIXME FABRIC 117 no equivalent (entity tags? do those exist?)
+//                if (is.getItem() != newItem.getItem()
+//                        && this.getPersistentData().contains(CrystalSeedItem.TAG_PREVENT_MAGNET)) {
+//                    this.getPersistentData().remove(CrystalSeedItem.TAG_PREVENT_MAGNET);
+//                }
         }
     }
 
     private static int getTicksBetweenParticleEffects(int progressPerTick) {
-        return 1;
+        if (progressPerTick >= GROWTH_TICK_PROGRESS[6]) {
+            return 1; // on average 20 times per second
+        } else if (progressPerTick >= GROWTH_TICK_PROGRESS[5]) {
+            return 3;
+        } else if (progressPerTick >= GROWTH_TICK_PROGRESS[4]) {
+            return 7;
+        } else if (progressPerTick >= GROWTH_TICK_PROGRESS[3]) {
+            return 10;
+        } else if (progressPerTick >= GROWTH_TICK_PROGRESS[2]) {
+            return 15;
+        } else if (progressPerTick >= GROWTH_TICK_PROGRESS[1]) {
+            return 20;
+        } else {
+            return 40; // on average every 2 seconds
+        }
     }
 
     /**
      * Gets the extra progress per tick in 1/1000th of a growth tick based on the surrounding accelerators.
      */
     private int getSpeed(BlockPos pos) {
-        return GROWTH_TICK_PROGRESS;
+        int acceleratorCount = getAcceleratorCount(pos);
+
+        if (acceleratorCount < 0) {
+            return GROWTH_TICK_PROGRESS[0];
+        } else if (acceleratorCount >= GROWTH_TICK_PROGRESS.length) {
+            return GROWTH_TICK_PROGRESS[GROWTH_TICK_PROGRESS.length - 1];
+        } else {
+            return GROWTH_TICK_PROGRESS[acceleratorCount];
+        }
+    }
+
+    private int getAcceleratorCount(BlockPos pos) {
+        int count = 0;
+
+        MutableBlockPos testPos = new MutableBlockPos();
+        for (Direction direction : Direction.values()) {
+            if (this.isPoweredAccelerator(testPos.setWithOffset(pos, direction))) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private boolean isPoweredAccelerator(BlockPos pos) {
+        final BlockEntity te = this.level.getBlockEntity(pos);
+
+        return te instanceof ICrystalGrowthAccelerator;
     }
 
     @Override

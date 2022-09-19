@@ -24,16 +24,16 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 
-import appeng.core.AEConfig;
+
 import appeng.core.AppEng;
 import appeng.core.sync.packets.LightningPacket;
-import appeng.items.tools.powered.powersink.AEBasePoweredItem;
+import appeng.items.AEBaseItem;
 import appeng.util.Platform;
 
-public class ChargedStaffItem extends AEBasePoweredItem {
+public class ChargedStaffItem extends AEBaseItem {
 
     public ChargedStaffItem(Item.Properties props) {
-        super(AEConfig.instance().getChargedStaffBattery(), props);
+        super(props);
     }
 
     @Override

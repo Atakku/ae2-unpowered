@@ -69,7 +69,7 @@ import appeng.helpers.FluidContainerHelper;
 import appeng.hooks.AEToolItem;
 import appeng.items.contents.CellConfig;
 import appeng.items.contents.PortableCellMenuHost;
-import appeng.items.tools.powered.powersink.AEBasePoweredItem;
+import appeng.items.AEBaseItem;
 import appeng.me.helpers.PlayerSource;
 import appeng.menu.MenuOpener;
 import appeng.menu.locator.MenuLocators;
@@ -77,7 +77,7 @@ import appeng.util.ConfigInventory;
 import appeng.util.InteractionUtil;
 import appeng.util.fluid.FluidSoundHelper;
 
-public class PortableCellItem extends AEBasePoweredItem
+public class PortableCellItem extends AEBaseItem
         implements IBasicCellItem, IMenuItem, IUpgradeableItem, AEToolItem {
 
     public static final StorageTier SIZE_1K = new StorageTier("1k", 512, 54, 8,
@@ -103,7 +103,7 @@ public class PortableCellItem extends AEBasePoweredItem
     private final MenuType<?> menuType;
 
     public PortableCellItem(AEKeyType keyType, MenuType<?> menuType, StorageTier tier, Properties props) {
-        super(AEConfig.instance().getPortableCellBattery(), props);
+        super(props);
         this.menuType = menuType;
         this.tier = tier;
         this.keyType = keyType;
@@ -230,9 +230,6 @@ public class PortableCellItem extends AEBasePoweredItem
 
     private void onUpgradesChanged(ItemStack stack, IUpgradeInventory upgrades) {
         var energyCards = upgrades.getInstalledUpgrades(AEItems.ENERGY_CARD);
-        // The energy card is crafted with a dense energy cell, while the portable cell just uses a normal energy cell
-        // Since the dense cells capacity is 8x the normal capacity, the result should be 9x normal.
-        setAEMaxPowerMultiplier(stack, 1 + energyCards * 8);
     }
 
     @Override

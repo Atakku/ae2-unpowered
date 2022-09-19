@@ -31,8 +31,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import team.reborn.energy.api.EnergyStorage;
-
 import appeng.api.config.AccessRestriction;
 import appeng.api.config.Actionable;
 import appeng.api.networking.energy.IAEPowerStorage;
@@ -156,10 +154,4 @@ public abstract class AEBasePoweredBlockEntity extends AEBaseInvBlockEntity
     public void setInternalPowerFlow(AccessRestriction internalPowerFlow) {
         this.internalPowerFlow = internalPowerFlow;
     }
-
-    @Nullable
-    public EnergyStorage getEnergyStorage(Direction direction) {
-        return null;
-    }
-
 }

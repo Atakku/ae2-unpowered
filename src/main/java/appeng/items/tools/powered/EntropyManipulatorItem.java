@@ -59,13 +59,13 @@ import appeng.api.util.DimensionalBlockPos;
 import appeng.block.misc.TinyTNTBlock;
 import appeng.core.AEConfig;
 import appeng.hooks.IBlockTool;
-import appeng.items.tools.powered.powersink.AEBasePoweredItem;
+import appeng.items.AEBaseItem;
 import appeng.recipes.entropy.EntropyMode;
 import appeng.recipes.entropy.EntropyRecipe;
 import appeng.util.InteractionUtil;
 import appeng.util.Platform;
 
-public class EntropyManipulatorItem extends AEBasePoweredItem implements IBlockTool {
+public class EntropyManipulatorItem extends AEBaseItem implements IBlockTool {
 
     /**
      * The amount of AE energy consumed per use.
@@ -73,7 +73,7 @@ public class EntropyManipulatorItem extends AEBasePoweredItem implements IBlockT
     private static final int ENERGY_PER_USE = 1600;
 
     public EntropyManipulatorItem(Item.Properties props) {
-        super(AEConfig.instance().getEntropyManipulatorBattery(), props);
+        super(props);
     }
 
     @Override

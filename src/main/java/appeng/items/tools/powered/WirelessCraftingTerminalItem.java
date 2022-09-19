@@ -14,8 +14,8 @@ import appeng.helpers.WirelessCraftingTerminalMenuHost;
 import appeng.menu.me.items.WirelessCraftingTermMenu;
 
 public class WirelessCraftingTerminalItem extends WirelessTerminalItem {
-    public WirelessCraftingTerminalItem(DoubleSupplier powerCapacity, Properties props) {
-        super(powerCapacity, props);
+    public WirelessCraftingTerminalItem(Properties props) {
+        super(props);
     }
 
     @Override

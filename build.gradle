@@ -97,9 +97,6 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
-    include modImplementation("teamreborn:energy:${project.tr_energy_version}") {
-        exclude group: "net.fabricmc.fabric-api"
-    }
 
     // Include No Indium? https://github.com/Luligabi1/NoIndium
     include "me.luligabi:NoIndium:${project.no_indium_version}"

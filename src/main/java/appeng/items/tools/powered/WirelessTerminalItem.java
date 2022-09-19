@@ -59,20 +59,20 @@ import appeng.core.localization.GuiText;
 import appeng.core.localization.PlayerMessages;
 import appeng.core.localization.Tooltips;
 import appeng.helpers.WirelessTerminalMenuHost;
-import appeng.items.tools.powered.powersink.AEBasePoweredItem;
+import appeng.items.AEBaseItem;
 import appeng.menu.MenuOpener;
 import appeng.menu.locator.MenuLocators;
 import appeng.menu.me.common.MEStorageMenu;
 import appeng.util.ConfigManager;
 
-public class WirelessTerminalItem extends AEBasePoweredItem implements IMenuItem, IUpgradeableItem {
+public class WirelessTerminalItem extends AEBaseItem implements IMenuItem, IUpgradeableItem {
 
     public static final IGridLinkableHandler LINKABLE_HANDLER = new LinkableHandler();
 
     private static final String TAG_GRID_KEY = "gridKey";
 
-    public WirelessTerminalItem(DoubleSupplier powerCapacity, Item.Properties props) {
-        super(powerCapacity, props);
+    public WirelessTerminalItem(Item.Properties props) {
+        super(props);
     }
 
     /**
@@ -213,15 +213,6 @@ public class WirelessTerminalItem extends AEBasePoweredItem implements IMenuItem
 
         out.readFromNBT(target.getOrCreateTag().copy());
         return out;
-    }
-
-    @Override
-    public IUpgradeInventory getUpgrades(ItemStack stack) {
-        return UpgradeInventories.forItem(stack, 2, this::onUpgradesChanged);
-    }
-
-    private void onUpgradesChanged(ItemStack stack, IUpgradeInventory upgrades) {
-        setAEMaxPowerMultiplier(stack, 1 + upgrades.getInstalledUpgrades(AEItems.ENERGY_CARD));
     }
 
     private static class LinkableHandler implements IGridLinkableHandler {

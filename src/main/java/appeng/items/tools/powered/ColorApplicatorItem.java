@@ -79,7 +79,7 @@ import appeng.helpers.IMouseWheelItem;
 import appeng.hooks.IBlockTool;
 import appeng.items.contents.CellConfig;
 import appeng.items.misc.PaintBallItem;
-import appeng.items.tools.powered.powersink.AEBasePoweredItem;
+import appeng.items.AEBaseItem;
 import appeng.me.cells.BasicCellHandler;
 import appeng.me.helpers.BaseActionSource;
 import appeng.me.helpers.PlayerSource;
@@ -87,7 +87,7 @@ import appeng.util.ConfigInventory;
 import appeng.util.InteractionUtil;
 import appeng.util.Platform;
 
-public class ColorApplicatorItem extends AEBasePoweredItem
+public class ColorApplicatorItem extends AEBaseItem
         implements IBasicCellItem, IBlockTool, IMouseWheelItem {
 
     private static final double POWER_PER_USE = 100;
@@ -120,7 +120,7 @@ public class ColorApplicatorItem extends AEBasePoweredItem
     private static final String TAG_COLOR = "color";
 
     public ColorApplicatorItem(Item.Properties props) {
-        super(AEConfig.instance().getColorApplicatorBattery(), props);
+        super(props);
     }
 
     @Override
@@ -477,8 +477,6 @@ public class ColorApplicatorItem extends AEBasePoweredItem
 
     private void onUpgradesChanged(ItemStack stack, IUpgradeInventory upgrades) {
         var energyCards = upgrades.getInstalledUpgrades(AEItems.ENERGY_CARD);
-        // Item is crafted with a normal cell, card contains a dense cell (x8)
-        setAEMaxPowerMultiplier(stack, 1 + energyCards * 8);
     }
 
     @Override

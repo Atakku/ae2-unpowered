@@ -77,7 +77,7 @@ import appeng.core.localization.PlayerMessages;
 import appeng.core.sync.packets.MatterCannonPacket;
 import appeng.items.contents.CellConfig;
 import appeng.items.misc.PaintBallItem;
-import appeng.items.tools.powered.powersink.AEBasePoweredItem;
+import appeng.items.AEBaseItem;
 import appeng.me.helpers.PlayerSource;
 import appeng.recipes.mattercannon.MatterCannonAmmo;
 import appeng.util.ConfigInventory;
@@ -85,7 +85,7 @@ import appeng.util.InteractionUtil;
 import appeng.util.LookDirection;
 import appeng.util.Platform;
 
-public class MatterCannonItem extends AEBasePoweredItem implements IBasicCellItem {
+public class MatterCannonItem extends AEBaseItem implements IBasicCellItem {
 
     /**
      * AE energy units consumer per shot fired.
@@ -93,7 +93,7 @@ public class MatterCannonItem extends AEBasePoweredItem implements IBasicCellIte
     private static final int ENERGY_PER_SHOT = 1600;
 
     public MatterCannonItem(Item.Properties props) {
-        super(AEConfig.instance().getMatterCannonBattery(), props);
+        super(props);
     }
 
     @Environment(EnvType.CLIENT)
@@ -378,8 +378,6 @@ public class MatterCannonItem extends AEBasePoweredItem implements IBasicCellIte
 
     private void onUpgradesChanged(ItemStack stack, IUpgradeInventory upgrades) {
         var energyCards = upgrades.getInstalledUpgrades(AEItems.ENERGY_CARD);
-        // Item is crafted with a normal cell, card contains a dense cell (x8)
-        setAEMaxPowerMultiplier(stack, 1 + energyCards * 8);
     }
 
     @Override

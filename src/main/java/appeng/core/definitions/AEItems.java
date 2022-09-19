@@ -132,8 +132,8 @@ public final class AEItems {
     ///
 
     public static final ItemDefinition<EntropyManipulatorItem> ENTROPY_MANIPULATOR = item("Entropy Manipulator", AEItemIds.ENTROPY_MANIPULATOR, p -> new EntropyManipulatorItem(p.stacksTo(1)));
-    public static final ItemDefinition<WirelessTerminalItem> WIRELESS_TERMINAL = item("Wireless Terminal", AEItemIds.WIRELESS_TERMINAL, p -> new WirelessTerminalItem(AEConfig.instance().getWirelessTerminalBattery(), p.stacksTo(1)));
-    public static final ItemDefinition<WirelessTerminalItem> WIRELESS_CRAFTING_TERMINAL = item("Wireless Crafting Terminal", AEItemIds.WIRELESS_CRAFTING_TERMINAL, p -> new WirelessCraftingTerminalItem(AEConfig.instance().getWirelessTerminalBattery(), p.stacksTo(1)));
+    public static final ItemDefinition<WirelessTerminalItem> WIRELESS_TERMINAL = item("Wireless Terminal", AEItemIds.WIRELESS_TERMINAL, p -> new WirelessTerminalItem(p.stacksTo(1)));
+    public static final ItemDefinition<WirelessTerminalItem> WIRELESS_CRAFTING_TERMINAL = item("Wireless Crafting Terminal", AEItemIds.WIRELESS_CRAFTING_TERMINAL, p -> new WirelessCraftingTerminalItem(p.stacksTo(1)));
     public static final ItemDefinition<ChargedStaffItem> CHARGED_STAFF = item("Charged Staff", AEItemIds.CHARGED_STAFF, p -> new ChargedStaffItem(p.stacksTo(1)));
     public static final ItemDefinition<ColorApplicatorItem> COLOR_APPLICATOR = item("Color Applicator", AEItemIds.COLOR_APPLICATOR, p -> new ColorApplicatorItem(p.stacksTo(1)));
     public static final ItemDefinition<MatterCannonItem> MATTER_CANNON = item("Matter Cannon", AEItemIds.MATTER_CANNON, p -> new MatterCannonItem(p.stacksTo(1)));

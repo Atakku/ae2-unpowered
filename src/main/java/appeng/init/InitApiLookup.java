@@ -3,8 +3,6 @@ package appeng.init;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 
-import team.reborn.energy.api.EnergyStorage;
-
 import appeng.api.behaviors.GenericInternalInventory;
 import appeng.api.implementations.blockentities.ICraftingMachine;
 import appeng.api.inventories.PartApiLookup;
@@ -60,13 +58,6 @@ public final class InitApiLookup {
             }
             return null;
         });
-
-        EnergyStorage.SIDED.registerFallback((world, pos, state, blockEntity, direction) -> {
-            if (blockEntity instanceof AEBasePoweredBlockEntity poweredBlockEntity) {
-                return poweredBlockEntity.getEnergyStorage(direction);
-            }
-            return null;
-        });
     }
 
     private static void initP2P() {
@@ -119,7 +110,6 @@ public final class InitApiLookup {
         ItemStorage.SIDED.registerForBlockEntity((blockEntity, context) -> {
             return blockEntity.getItemHandler();
         }, AEBlockEntities.DEBUG_ITEM_GEN);
-        EnergyStorage.SIDED.registerSelf(AEBlockEntities.DEBUG_ENERGY_GEN);
         FluidStorage.SIDED.registerForBlockEntity(SkyStoneTankBlockEntity::getStorage, AEBlockEntities.SKY_STONE_TANK);
         PartApiLookup.register(ItemStorage.SIDED, (part, direction) -> part.getLogic().getBlankPatternInv().toStorage(),
                 PatternEncodingTerminalPart.class);

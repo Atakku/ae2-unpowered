@@ -29,12 +29,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import team.reborn.energy.api.EnergyStorage;
-
 import appeng.blockentity.AEBaseBlockEntity;
 import appeng.blockentity.ServerTickingBlockEntity;
 
-public class EnergyGeneratorBlockEntity extends AEBaseBlockEntity implements ServerTickingBlockEntity, EnergyStorage {
+public class EnergyGeneratorBlockEntity extends AEBaseBlockEntity implements ServerTickingBlockEntity {
     /**
      * The base energy injected each tick. Adjacent energy generators will increase it to pow(base, #generators).
      */
@@ -56,43 +54,5 @@ public class EnergyGeneratorBlockEntity extends AEBaseBlockEntity implements Ser
                 tier++;
             }
         }
-
-        final int energyToInsert = IntMath.pow(BASE_ENERGY, tier);
-
-        for (Direction facing : Direction.values()) {
-            EnergyStorage consumer = EnergyStorage.SIDED.find(getLevel(), getBlockPos().relative(facing),
-                    facing.getOpposite());
-            if (consumer != null) {
-                try (var tx = Transaction.openOuter()) {
-                    consumer.insert(energyToInsert, tx);
-                    tx.commit();
-                }
-            }
-        }
-    }
-
-    @Override
-    public long insert(long maxAmount, TransactionContext transaction) {
-        return 0;
-    }
-
-    @Override
-    public long extract(long maxAmount, TransactionContext transaction) {
-        return maxAmount;
-    }
-
-    @Override
-    public long getAmount() {
-        return Long.MAX_VALUE;
-    }
-
-    @Override
-    public long getCapacity() {
-        return Long.MAX_VALUE;
-    }
-
-    @Override
-    public boolean supportsInsertion() {
-        return false;
     }
 }

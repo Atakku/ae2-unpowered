@@ -41,7 +41,6 @@ public final class InitApiLookup {
         initCondenser();
         initMEChest();
         initMisc();
-        initEnergyAcceptors();
         initP2P();
         initPoweredItem();
 
@@ -77,12 +76,6 @@ public final class InitApiLookup {
     private static void initP2P() {
         PartApiLookup.register(ItemStorage.SIDED, (part, context) -> part.getExposedApi(), ItemP2PTunnelPart.class);
         PartApiLookup.register(FluidStorage.SIDED, (part, context) -> part.getExposedApi(), FluidP2PTunnelPart.class);
-    }
-
-    private static void initEnergyAcceptors() {
-        PartApiLookup.register(EnergyStorage.SIDED, (part, context) -> part.getEnergyAdapter(),
-                EnergyAcceptorPart.class);
-        // The block version is handled by the generic fallback registration for AEBasePoweredBlockEntity
     }
 
     private static void initInterface() {

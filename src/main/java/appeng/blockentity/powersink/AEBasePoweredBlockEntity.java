@@ -39,7 +39,6 @@ import appeng.api.config.PowerUnits;
 import appeng.api.networking.energy.IAEPowerStorage;
 import appeng.api.networking.events.GridPowerStorageStateChanged.PowerEventType;
 import appeng.blockentity.AEBaseInvBlockEntity;
-import appeng.helpers.ForgeEnergyAdapter;
 
 public abstract class AEBasePoweredBlockEntity extends AEBaseInvBlockEntity
         implements IAEPowerStorage, IExternalPowerSink {
@@ -53,12 +52,10 @@ public abstract class AEBasePoweredBlockEntity extends AEBaseInvBlockEntity
     private double internalCurrentPower = 0;
     private static final Set<Direction> ALL_SIDES = ImmutableSet.copyOf(EnumSet.allOf(Direction.class));
     private Set<Direction> internalPowerSides = ALL_SIDES;
-    private final EnergyStorage forgeEnergyAdapter;
     // Cache the optional to not continuously re-allocate it or the supplier
 
     public AEBasePoweredBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
-        this.forgeEnergyAdapter = new ForgeEnergyAdapter(this);
     }
 
     protected final Set<Direction> getPowerSides() {
@@ -178,11 +175,7 @@ public abstract class AEBasePoweredBlockEntity extends AEBaseInvBlockEntity
 
     @Nullable
     public EnergyStorage getEnergyStorage(Direction direction) {
-        if (getPowerSides().contains(direction)) {
-            return forgeEnergyAdapter;
-        } else {
-            return null;
-        }
+        return null;
     }
 
 }

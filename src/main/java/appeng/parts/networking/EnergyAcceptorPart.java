@@ -29,7 +29,6 @@ import appeng.api.parts.IPartModel;
 import appeng.api.util.AECableType;
 import appeng.blockentity.powersink.IExternalPowerSink;
 import appeng.core.AppEng;
-import appeng.helpers.ForgeEnergyAdapter;
 import appeng.items.parts.PartModels;
 import appeng.parts.AEBasePart;
 import appeng.parts.PartModel;
@@ -38,16 +37,10 @@ public class EnergyAcceptorPart extends AEBasePart implements IExternalPowerSink
 
     @PartModels
     private static final IPartModel MODELS = new PartModel(new ResourceLocation(AppEng.MOD_ID, "part/energy_acceptor"));
-    private final ForgeEnergyAdapter energyAdapter;
 
     public EnergyAcceptorPart(IPartItem<?> partItem) {
         super(partItem);
         this.getMainNode().setIdlePowerUsage(0);
-        this.energyAdapter = new ForgeEnergyAdapter(this);
-    }
-
-    public ForgeEnergyAdapter getEnergyAdapter() {
-        return energyAdapter;
     }
 
     @Override

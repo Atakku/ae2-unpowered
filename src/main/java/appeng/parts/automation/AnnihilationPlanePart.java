@@ -250,8 +250,6 @@ public class AnnihilationPlanePart extends BasicStatePart implements IGridTickab
 
     @Override
     public TickRateModulation tickingRequest(IGridNode node, int ticksSinceLastCall) {
-        var grid = node.getGrid();
-
         if (pendingPickupStrategy != null) {
             pendingPickupStrategy.completePickup(this::insertIntoGrid);
             pendingPickupStrategy = null;

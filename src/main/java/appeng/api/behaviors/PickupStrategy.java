@@ -11,7 +11,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-import appeng.api.networking.energy.IEnergySource;
 import appeng.api.stacks.AEKeyType;
 import appeng.parts.automation.StackWorldBehaviors;
 

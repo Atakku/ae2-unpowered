@@ -126,21 +126,6 @@ public class ItemMenuHost implements IUpgradeableObject {
     }
 
     /**
-     * Can only be used with a host that implements {@link IEnergySource} only call once per broadcastChanges()
-     */
-    public boolean drainPower() {
-        if (this instanceof IEnergySource energySource) {
-            this.powerTicks++;
-            if (this.powerTicks > 10) {
-                var amt = this.powerTicks * this.powerDrainPerTick;
-                this.powerTicks = 0;
-                return energySource.extractAEPower(amt, Actionable.MODULATE, PowerMultiplier.CONFIG) > 0;
-            }
-        }
-        return true;
-    }
-
-    /**
      * Sets how much AE is drained per tick.
      */
     protected void setPowerDrainPerTick(double powerDrainPerTick) {

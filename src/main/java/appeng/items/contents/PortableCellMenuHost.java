@@ -64,7 +64,7 @@ public class PortableCellMenuHost extends ItemMenuHost implements IPortableTermi
 
     @Override
     public boolean onBroadcastChanges(AbstractContainerMenu menu) {
-        return ensureItemStillInSlot() && drainPower();
+        return ensureItemStillInSlot();
     }
 
     @Override

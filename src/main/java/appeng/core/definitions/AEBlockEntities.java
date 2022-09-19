@@ -48,7 +48,6 @@ import appeng.blockentity.misc.InscriberBlockEntity;
 import appeng.blockentity.misc.InterfaceBlockEntity;
 import appeng.blockentity.misc.LightDetectorBlockEntity;
 import appeng.blockentity.misc.PaintSplotchesBlockEntity;
-import appeng.blockentity.misc.QuartzGrowthAcceleratorBlockEntity;
 import appeng.blockentity.misc.SecurityStationBlockEntity;
 import appeng.blockentity.misc.SkyCompassBlockEntity;
 import appeng.blockentity.networking.CableBusBlockEntity;

@@ -1,8 +1,0 @@
-{
-  "parent": "block/cube_bottom_top",
-  "textures": {
-    "bottom": "ae2_unpowered:block/quartz_growth_accelerator_on",
-    "side": "ae2_unpowered:block/quartz_growth_accelerator_side_on",
-    "top": "ae2_unpowered:block/quartz_growth_accelerator_on"
-  }
-}

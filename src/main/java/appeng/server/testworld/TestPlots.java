@@ -258,10 +258,7 @@ public final class TestPlots {
         plot.cable("6 1 7", AEParts.GLASS_CABLE);
 
         // Crystal growth part
-        plot.block("5 2 6", AEBlocks.QUARTZ_GROWTH_ACCELERATOR);
-        plot.block("7 2 6", AEBlocks.QUARTZ_GROWTH_ACCELERATOR);
         plot.block("6 2 5", Blocks.GLASS);
-        plot.block("6 2 7", AEBlocks.QUARTZ_GROWTH_ACCELERATOR);
         plot.fluid("6 2 6", Fluids.WATER);
 
         // Interface that will receive the crafting ingredients

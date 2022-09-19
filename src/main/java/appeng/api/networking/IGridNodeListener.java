@@ -74,10 +74,6 @@ public interface IGridNodeListener<T> {
      */
     enum State {
         /**
-         * The node's power status has changed (it either became powered or unpowered).
-         */
-        POWER,
-        /**
          * The node's assigned channels have changed. This might only be relevant for nodes that require channels.
          */
         CHANNEL,

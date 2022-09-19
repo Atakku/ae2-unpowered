@@ -471,15 +471,6 @@ public class ColorApplicatorItem extends AEBaseItem
     }
 
     @Override
-    public IUpgradeInventory getUpgrades(ItemStack is) {
-        return UpgradeInventories.forItem(is, 2, this::onUpgradesChanged);
-    }
-
-    private void onUpgradesChanged(ItemStack stack, IUpgradeInventory upgrades) {
-        var energyCards = upgrades.getInstalledUpgrades(AEItems.ENERGY_CARD);
-    }
-
-    @Override
     public ConfigInventory getConfigInventory(ItemStack is) {
         return CellConfig.create(AEItemKey.filter(), is);
     }
@@ -533,8 +524,6 @@ public class ColorApplicatorItem extends AEBaseItem
 
         // Upgrade energy storage
         var upgrades = item.getUpgrades(applicator);
-        upgrades.addItems(AEItems.ENERGY_CARD.stack());
-        upgrades.addItems(AEItems.ENERGY_CARD.stack());
 
         return applicator;
     }

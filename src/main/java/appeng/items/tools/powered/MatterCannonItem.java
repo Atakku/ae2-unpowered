@@ -372,15 +372,6 @@ public class MatterCannonItem extends AEBaseItem implements IBasicCellItem {
     }
 
     @Override
-    public IUpgradeInventory getUpgrades(ItemStack is) {
-        return UpgradeInventories.forItem(is, 4, this::onUpgradesChanged);
-    }
-
-    private void onUpgradesChanged(ItemStack stack, IUpgradeInventory upgrades) {
-        var energyCards = upgrades.getInstalledUpgrades(AEItems.ENERGY_CARD);
-    }
-
-    @Override
     public ConfigInventory getConfigInventory(ItemStack is) {
         return CellConfig.create(AEItemKey.filter(), is);
     }

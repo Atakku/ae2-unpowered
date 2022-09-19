@@ -95,14 +95,7 @@ public final class InitUpgrades {
         for (var portableCell : portableCells) {
             Upgrades.add(AEItems.FUZZY_CARD, portableCell, 1, portableCellGroup);
             Upgrades.add(AEItems.INVERTER_CARD, portableCell, 1, portableCellGroup);
-            Upgrades.add(AEItems.ENERGY_CARD, portableCell, 2, portableCellGroup);
         }
-
-        Upgrades.add(AEItems.ENERGY_CARD, AEItems.WIRELESS_TERMINAL, 2, GuiText.WirelessTerminals.getTranslationKey());
-        Upgrades.add(AEItems.ENERGY_CARD, AEItems.WIRELESS_CRAFTING_TERMINAL, 2,
-                GuiText.WirelessTerminals.getTranslationKey());
-        Upgrades.add(AEItems.ENERGY_CARD, AEItems.COLOR_APPLICATOR, 2);
-        Upgrades.add(AEItems.ENERGY_CARD, AEItems.MATTER_CANNON, 2);
 
         Upgrades.add(AEItems.FUZZY_CARD, AEItems.VIEW_CELL, 1);
         Upgrades.add(AEItems.INVERTER_CARD, AEItems.VIEW_CELL, 1);

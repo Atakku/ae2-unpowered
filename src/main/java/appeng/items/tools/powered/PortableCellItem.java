@@ -224,15 +224,6 @@ public class PortableCellItem extends AEBaseItem
     }
 
     @Override
-    public IUpgradeInventory getUpgrades(ItemStack is) {
-        return UpgradeInventories.forItem(is, 2, this::onUpgradesChanged);
-    }
-
-    private void onUpgradesChanged(ItemStack stack, IUpgradeInventory upgrades) {
-        var energyCards = upgrades.getInstalledUpgrades(AEItems.ENERGY_CARD);
-    }
-
-    @Override
     public ConfigInventory getConfigInventory(ItemStack is) {
         return CellConfig.create(keyType.filter(), is);
     }

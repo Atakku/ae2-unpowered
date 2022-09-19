@@ -36,7 +36,6 @@ import appeng.api.storage.StorageCells;
 import appeng.api.storage.cells.ICellWorkbenchItem;
 import appeng.api.upgrades.Upgrades;
 import appeng.blockentity.misc.InscriberRecipes;
-import appeng.blockentity.misc.VibrationChamberBlockEntity;
 import appeng.client.gui.Icon;
 import appeng.core.definitions.AEItems;
 import appeng.crafting.pattern.EncodedPatternItem;
@@ -130,8 +129,6 @@ public class RestrictedInputSlot extends AppEngSlot {
 
             case VIEW_CELL:
                 return AEItems.VIEW_CELL.isSameAs(stack);
-            case FUEL:
-                return VibrationChamberBlockEntity.hasBurnTime(stack);
             case POWERED_TOOL:
                 return Platform.isChargeable(stack);
             case QE_SINGULARITY:

@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import appeng.api.util.AEColor;
 import appeng.block.crafting.CraftingUnitBlock;
 import appeng.block.misc.QuartzFixtureBlock;
-import appeng.block.misc.VibrationChamberBlock;
 import appeng.core.AppEng;
 import appeng.core.definitions.AEBlockEntities;
 import appeng.core.definitions.AEBlocks;
@@ -65,8 +64,7 @@ final class SiteExportScenes {
                 singleBlock(AEBlocks.SMOOTH_SKY_STONE_CHEST),
                 singleBlock(AEBlocks.SKY_STONE_BRICK),
                 singleBlock(AEBlocks.SKY_STONE_SMALL_BRICK),
-                singleBlock(AEBlocks.SPATIAL_IO_PORT),
-                singleBlock(AEBlocks.VIBRATION_CHAMBER, b -> b.setValue(VibrationChamberBlock.ACTIVE, true)));
+                singleBlock(AEBlocks.SPATIAL_IO_PORT));
 
         scenes.add(createQnbScene());
         scenes.add(createColoredCablesScene());

@@ -24,7 +24,7 @@ package appeng.menu;
  * Menus can be opened for various in-game objects which do not derive from a common base-class:
  * <ul>
  * <li>Items in the player inventory (i.e. wireless terminals)</li>
- * <li>Block entities in the level (i.e. vibration chamber)</li>
+ * <li>Block entities in the level</li>
  * <li>Parts that are attached to a multi-block block entity</li>
  * </ul>
  * <p/>

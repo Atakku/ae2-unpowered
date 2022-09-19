@@ -51,7 +51,6 @@ import appeng.blockentity.misc.PaintSplotchesBlockEntity;
 import appeng.blockentity.misc.QuartzGrowthAcceleratorBlockEntity;
 import appeng.blockentity.misc.SecurityStationBlockEntity;
 import appeng.blockentity.misc.SkyCompassBlockEntity;
-import appeng.blockentity.misc.VibrationChamberBlockEntity;
 import appeng.blockentity.networking.CableBusBlockEntity;
 import appeng.blockentity.networking.ControllerBlockEntity;
 import appeng.blockentity.networking.CreativeEnergyCellBlockEntity;
@@ -113,8 +112,6 @@ public final class AEBlockEntities {
             CondenserBlockEntity::new, AEBlocks.CONDENSER);
     public static final BlockEntityType<EnergyAcceptorBlockEntity> ENERGY_ACCEPTOR = create("energy_acceptor",
             EnergyAcceptorBlockEntity.class, EnergyAcceptorBlockEntity::new, AEBlocks.ENERGY_ACCEPTOR);
-    public static final BlockEntityType<VibrationChamberBlockEntity> VIBRATION_CHAMBER = create("vibration_chamber",
-            VibrationChamberBlockEntity.class, VibrationChamberBlockEntity::new, AEBlocks.VIBRATION_CHAMBER);
     public static final BlockEntityType<QuartzGrowthAcceleratorBlockEntity> QUARTZ_GROWTH_ACCELERATOR = create(
             "quartz_growth_accelerator", QuartzGrowthAcceleratorBlockEntity.class,
             QuartzGrowthAcceleratorBlockEntity::new, AEBlocks.QUARTZ_GROWTH_ACCELERATOR);

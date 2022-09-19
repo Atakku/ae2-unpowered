@@ -36,8 +36,6 @@ public enum TickRates {
 
     IOPort(1, 5),
 
-    VibrationChamber(10, 40),
-
     StorageBus(5, 60),
 
     ItemTunnel(5, 60),

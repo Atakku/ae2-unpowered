@@ -9,7 +9,7 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
+
 import appeng.api.ids.AEItemIds;
 import appeng.api.ids.AETags;
 import appeng.api.stacks.AEKeyType;
@@ -242,7 +242,7 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .pattern(" b ")
                 .define('a', AEItems.FLUIX_PEARL)
                 .define('b', ConventionTags.IRON_INGOT)
-                .define('c', Blocks.DIRT)
+                .define('c', AEBlocks.QUARTZ_GLASS)
                 .unlockedBy("has_fluix_pearl", has(AEItems.FLUIX_PEARL))
                 .save(consumer, AppEng.makeId("network/wireless_part"));
         ShapedRecipeBuilder.shaped(AEItems.WIRELESS_TERMINAL)
@@ -251,8 +251,9 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .pattern("c")
                 .define('a', AEItems.WIRELESS_RECEIVER)
                 .define('b', AEParts.TERMINAL)
-                .define('c', Blocks.DIRT)
+                .define('c', AEItems.CALCULATION_PROCESSOR)
                 .unlockedBy("has_terminal", has(AEParts.TERMINAL))
+                .unlockedBy("has_calculation_processor", has(AEItems.CALCULATION_PROCESSOR))
                 .unlockedBy("has_wireless_receiver", has(AEItems.WIRELESS_RECEIVER))
                 .save(consumer, AppEng.makeId("network/wireless_terminal"));
         ShapedRecipeBuilder.shaped(AEItems.WIRELESS_CRAFTING_TERMINAL)
@@ -261,8 +262,9 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .pattern("c")
                 .define('a', AEItems.WIRELESS_RECEIVER)
                 .define('b', AEParts.CRAFTING_TERMINAL)
-                .define('c', Blocks.DIRT)
+                .define('c', AEItems.CALCULATION_PROCESSOR)
                 .unlockedBy("has_terminal", has(AEParts.CRAFTING_TERMINAL))
+                .unlockedBy("has_calculation_processor", has(AEItems.CALCULATION_PROCESSOR))
                 .unlockedBy("has_wireless_receiver", has(AEItems.WIRELESS_RECEIVER))
                 .save(consumer, AppEng.makeId("network/wireless_crafting_terminal"));
         ShapelessRecipeBuilder.shapeless(AEItems.WIRELESS_CRAFTING_TERMINAL)
@@ -399,7 +401,7 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .define('a', ConventionTags.IRON_INGOT)
                 .define('b', AEItems.LOGIC_PROCESSOR)
                 .define('c', AEItems.ENGINEERING_PROCESSOR)
-                .define('d', Blocks.COBBLESTONE)
+                .define('d', ConventionTags.FLUIX_DUST)
                 .define('e', ConventionTags.SMART_DENSE_CABLE)
                 .unlockedBy("has_fluix_smart_dense_cable", has(ConventionTags.SMART_DENSE_CABLE))
                 .unlockedBy("has_logic_processor", has(AEItems.LOGIC_PROCESSOR))
@@ -765,7 +767,7 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .define('a', ConventionTags.IRON_INGOT)
                 .define('b', AEItems.FORMATION_CORE)
                 .define('c', AEItems.CELL_COMPONENT_4K)
-                .define('d', Blocks.COBBLESTONE)
+                .define('d', ConventionTags.FLUIX_DUST)
                 .unlockedBy("has_formation_core", has(AEItems.FORMATION_CORE))
                 .save(consumer, AppEng.makeId("tools/matter_cannon"));
         ShapedRecipeBuilder.shaped(AEItems.CHARGED_STAFF)
@@ -781,7 +783,7 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .pattern("cd ")
                 .pattern("  d")
                 .define('a', ConventionTags.ALL_FLUIX)
-                .define('b', Blocks.COBBLESTONE)
+                .define('b', ConventionTags.FLUIX_DUST)
                 .define('c', AEItems.ENGINEERING_PROCESSOR)
                 .define('d', ConventionTags.IRON_INGOT)
                 .unlockedBy("has_engineering_processor", has(AEItems.ENGINEERING_PROCESSOR))
@@ -814,7 +816,7 @@ public class CraftingRecipes extends AE2RecipeProvider {
                 .define('a', AEItems.FORMATION_CORE)
                 .define('b', ConventionTags.IRON_INGOT)
                 .define('c', AEItems.CELL_COMPONENT_4K)
-                .define('d', Blocks.COBBLESTONE)
+                .define('d', ConventionTags.FLUIX_DUST)
                 .unlockedBy("has_formation_core", has(AEItems.FORMATION_CORE))
                 .save(consumer, AppEng.makeId("tools/network_color_applicator"));
 
@@ -871,7 +873,7 @@ public class CraftingRecipes extends AE2RecipeProvider {
         ShapelessRecipeBuilder.shapeless(cell)
                 .requires(AEBlocks.CHEST)
                 .requires(component)
-                .requires(Blocks.COBBLESTONE)
+                .requires(ConventionTags.FLUIX_DUST)
                 .requires(housing)
                 .unlockedBy("has_" + housing.id().getPath(), has(housing))
                 .save(consumer, cell.asItem().getRecipeId());
@@ -1390,7 +1392,7 @@ public class CraftingRecipes extends AE2RecipeProvider {
         }
 
         ShapelessRecipeBuilder.shapeless(AEParts.GLASS_CABLE.item(AEColor.TRANSPARENT), 4)
-                .requires(Blocks.DIRT)
+                .requires(AEBlocks.QUARTZ_GLASS)
                 .requires(ConventionTags.ALL_FLUIX)
                 .requires(ConventionTags.ALL_FLUIX)
                 .unlockedBy("has_crystals/fluix", has(ConventionTags.ALL_FLUIX))

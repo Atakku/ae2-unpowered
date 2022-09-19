@@ -427,7 +427,7 @@ public class Platform {
         }
     }
 
-    public static ItemStack extractItemsByRecipe(IEnergySource energySrc,
+    public static ItemStack extractItemsByRecipe(
             IActionSource mySrc,
             MEStorage src,
             Level level,
@@ -439,39 +439,35 @@ public class Platform {
             KeyCounter items,
             Actionable realForFake,
             IPartitionList filter) {
-        if (energySrc.extractAEPower(1, Actionable.SIMULATE, PowerMultiplier.CONFIG) > 0.9) {
-            if (providedTemplate == null) {
-                return ItemStack.EMPTY;
+        if (providedTemplate == null) {
+            return ItemStack.EMPTY;
+        }
+
+        var ae_req = AEItemKey.of(providedTemplate);
+
+        if (filter == null || filter.isListed(ae_req)) {
+            var extracted = src.extract(ae_req, 1, realForFake, mySrc);
+            if (extracted > 0) {
+                return ae_req.toStack();
             }
+        }
 
-            var ae_req = AEItemKey.of(providedTemplate);
+        var checkFuzzy = providedTemplate.hasTag() || providedTemplate.isDamageableItem();
 
-            if (filter == null || filter.isListed(ae_req)) {
-                var extracted = src.extract(ae_req, 1, realForFake, mySrc);
-                if (extracted > 0) {
-                    energySrc.extractAEPower(1, realForFake, PowerMultiplier.CONFIG);
-                    return ae_req.toStack();
-                }
-            }
-
-            var checkFuzzy = providedTemplate.hasTag() || providedTemplate.isDamageableItem();
-
-            if (items != null && checkFuzzy) {
-                for (var x : items) {
-                    if (x.getKey() instanceof AEItemKey itemKey) {
-                        if (providedTemplate.getItem() == itemKey.getItem() && !itemKey.matches(output)) {
-                            ci.setItem(slot, itemKey.toStack());
-                            if (r.matches(ci, level) && ItemStack.isSame(r.assemble(ci), output)) {
-                                if (filter == null || filter.isListed(itemKey)) {
-                                    var ex = src.extract(itemKey, 1, realForFake, mySrc);
-                                    if (ex > 0) {
-                                        energySrc.extractAEPower(1, realForFake, PowerMultiplier.CONFIG);
-                                        return itemKey.toStack();
-                                    }
+        if (items != null && checkFuzzy) {
+            for (var x : items) {
+                if (x.getKey() instanceof AEItemKey itemKey) {
+                    if (providedTemplate.getItem() == itemKey.getItem() && !itemKey.matches(output)) {
+                        ci.setItem(slot, itemKey.toStack());
+                        if (r.matches(ci, level) && ItemStack.isSame(r.assemble(ci), output)) {
+                            if (filter == null || filter.isListed(itemKey)) {
+                                var ex = src.extract(itemKey, 1, realForFake, mySrc);
+                                if (ex > 0) {
+                                    return itemKey.toStack();
                                 }
                             }
-                            ci.setItem(slot, providedTemplate);
                         }
+                        ci.setItem(slot, providedTemplate);
                     }
                 }
             }

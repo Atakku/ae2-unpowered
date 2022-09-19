@@ -216,7 +216,7 @@ public class CraftingTermSlot extends AppEngCraftingSlot {
                     var filter = ViewCellItem.createItemFilter(this.menu.getViewCells());
                     for (var x = 0; x < this.getPattern().size(); x++) {
                         if (!this.getPattern().getStackInSlot(x).isEmpty()) {
-                            set[x] = Platform.extractItemsByRecipe(this.energySrc, this.mySrc, inv, level, r, is, ic,
+                            set[x] = Platform.extractItemsByRecipe(this.mySrc, inv, level, r, is, ic,
                                     this.getPattern().getStackInSlot(x), x, all, Actionable.MODULATE,
                                     filter);
                             ic.setItem(x, set[x]);

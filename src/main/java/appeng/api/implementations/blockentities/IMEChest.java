@@ -23,8 +23,6 @@
 
 package appeng.api.implementations.blockentities;
 
-import appeng.api.networking.energy.IEnergySource;
-
-public interface IMEChest extends IChestOrDrive, IEnergySource {
+public interface IMEChest extends IChestOrDrive {
 
 }

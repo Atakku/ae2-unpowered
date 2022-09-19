@@ -2,13 +2,10 @@ package appeng.datagen.providers.models;
 
 import static appeng.core.AppEng.makeId;
 
-import java.util.ArrayList;
-
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.CustomLoaderBuilder;
-import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import appeng.block.crafting.AbstractCraftingUnitBlock;
@@ -18,7 +15,6 @@ import appeng.block.storage.IOPortBlock;
 import appeng.core.AppEng;
 import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.BlockDefinition;
-import appeng.init.client.InitItemModelsProperties;
 
 public class BlockModelProvider extends AE2BlockStateProvider {
     public BlockModelProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {

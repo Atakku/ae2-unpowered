@@ -28,7 +28,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -45,7 +44,6 @@ import appeng.api.implementations.blockentities.ICraftingMachine;
 import appeng.api.inventories.ISegmentedInventory;
 import appeng.api.inventories.InternalInventory;
 import appeng.api.networking.IGridNode;
-import appeng.api.networking.IGridNodeListener;
 import appeng.api.networking.ticking.IGridTickable;
 import appeng.api.networking.ticking.TickRateModulation;
 import appeng.api.networking.ticking.TickingRequest;
@@ -88,7 +86,6 @@ public class MolecularAssemblerBlockEntity extends AENetworkInvBlockEntity
     private final InternalInventory gridInvExt = new FilteredInternalInventory(this.gridInv, new CraftingGridFilter());
     private final InternalInventory internalInv = new CombinedInternalInventory(this.gridInv, this.patternInv);
     private final IUpgradeInventory upgrades;
-    private boolean isPowered = false;
     private Direction pushDirection = null;
     private ItemStack myPattern = ItemStack.EMPTY;
     private AECraftingPattern myPlan = null;
@@ -221,20 +218,6 @@ public class MolecularAssemblerBlockEntity extends AENetworkInvBlockEntity
     @Override
     public boolean acceptsPlans() {
         return this.patternInv.isEmpty();
-    }
-
-    @Override
-    protected boolean readFromStream(FriendlyByteBuf data) {
-        final boolean c = super.readFromStream(data);
-        final boolean oldPower = this.isPowered;
-        this.isPowered = data.readBoolean();
-        return this.isPowered != oldPower || c;
-    }
-
-    @Override
-    protected void writeToStream(FriendlyByteBuf data) {
-        super.writeToStream(data);
-        data.writeBoolean(this.isPowered);
     }
 
     @Override
@@ -533,25 +516,8 @@ public class MolecularAssemblerBlockEntity extends AENetworkInvBlockEntity
     }
 
     @Override
-    public void onMainNodeStateChanged(IGridNodeListener.State reason) {
-        if (reason != IGridNodeListener.State.GRID_BOOT) {
-            boolean newState = false;
-
-            var grid = getMainNode().getGrid();
-            if (grid != null) {
-                newState = true;
-            }
-
-            if (newState != this.isPowered) {
-                this.isPowered = newState;
-                this.markForUpdate();
-            }
-        }
-    }
-
-    @Override
     public boolean isActive() {
-        return this.isPowered;
+        return true;
     }
 
     @Environment(EnvType.CLIENT)

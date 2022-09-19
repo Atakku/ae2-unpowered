@@ -165,6 +165,7 @@ public class CableBusBlock extends AEBaseEntityBlock<CableBusBlockEntity> implem
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public boolean canBeReplaced(BlockState state, BlockPlaceContext useContext) {
         // FIXME: Potentially check the fluid one too
         return super.canBeReplaced(state, useContext)
@@ -309,6 +310,7 @@ public class CableBusBlock extends AEBaseEntityBlock<CableBusBlockEntity> implem
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState blockState) {
         return blockState.getValue(WATERLOGGED).booleanValue()
                 ? Fluids.WATER.getSource(false)
@@ -316,6 +318,7 @@ public class CableBusBlock extends AEBaseEntityBlock<CableBusBlockEntity> implem
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public BlockState updateShape(BlockState blockState, Direction facing, BlockState facingState, LevelAccessor level,
             BlockPos currentPos, BlockPos facingPos) {
         if (blockState.getValue(WATERLOGGED)) {

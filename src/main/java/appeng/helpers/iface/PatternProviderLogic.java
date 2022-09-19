@@ -416,6 +416,7 @@ public class PatternProviderLogic implements InternalInventoryHost, ICraftingPro
     // TODO: get rid of this awful code
     private static final Collection<Block> BAD_BLOCKS = new HashSet<>(100);
 
+    @SuppressWarnings({"deprecation", "unused"})
     public Component getTermName() {
         final BlockEntity host = this.host.getBlockEntity();
         final Level hostWorld = host.getLevel();

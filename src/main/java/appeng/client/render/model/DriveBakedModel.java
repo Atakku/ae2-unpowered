@@ -32,7 +32,6 @@ import net.fabricmc.fabric.api.renderer.v1.mesh.Mesh;
 import net.fabricmc.fabric.api.renderer.v1.mesh.MeshBuilder;
 import net.fabricmc.fabric.api.renderer.v1.mesh.MutableQuadView;
 import net.fabricmc.fabric.api.renderer.v1.mesh.QuadEmitter;
-import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel;
 import net.fabricmc.fabric.api.renderer.v1.model.ForwardingBakedModel;
 import net.fabricmc.fabric.api.renderer.v1.model.ModelHelper;
 import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
@@ -46,7 +45,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class DriveBakedModel extends ForwardingBakedModel implements FabricBakedModel {
+public class DriveBakedModel extends ForwardingBakedModel {
     private final Map<Item, BakedModel> cellModels;
     private final Map<Item, Mesh> bakedCells;
     private final BakedModel defaultCellModel;

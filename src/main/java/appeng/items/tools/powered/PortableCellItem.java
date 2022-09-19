@@ -57,7 +57,6 @@ import appeng.api.storage.StorageCells;
 import appeng.api.storage.StorageHelper;
 import appeng.api.storage.cells.CellState;
 import appeng.api.storage.cells.IBasicCellItem;
-import appeng.api.upgrades.IUpgradeableItem;
 import appeng.core.AEConfig;
 import appeng.core.AELog;
 import appeng.core.AppEng;
@@ -75,7 +74,7 @@ import appeng.util.InteractionUtil;
 import appeng.util.fluid.FluidSoundHelper;
 
 public class PortableCellItem extends AEBaseItem
-        implements IBasicCellItem, IMenuItem, IUpgradeableItem, AEToolItem {
+        implements IBasicCellItem, IMenuItem, AEToolItem {
 
     public static final StorageTier SIZE_1K = new StorageTier("1k", 512, 54, 8,
             () -> Registry.ITEM.get(AEItemIds.CELL_COMPONENT_1K));

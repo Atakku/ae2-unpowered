@@ -44,6 +44,7 @@ public final class ItemRendererHooks {
      * This hook will exchange the rendered item model for encoded patterns to the item being crafted by them if shift
      * is held.
      */
+    @SuppressWarnings("resource")
     public static boolean onRenderGuiItemModel(ItemRenderer renderer, ItemStack stack, int x, int y) {
         if (stack.getItem() instanceof EncodedPatternItem) {
             if (OVERRIDING_FOR.get() == stack) {

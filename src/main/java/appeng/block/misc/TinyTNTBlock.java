@@ -64,6 +64,7 @@ public class TinyTNTBlock extends AEBaseBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
             InteractionHand handIn, BlockHitResult hit) {
         ItemStack heldItem = player.getItemInHand(handIn);
@@ -99,6 +100,7 @@ public class TinyTNTBlock extends AEBaseBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
         super.onPlace(state, level, pos, oldState, isMoving);
 

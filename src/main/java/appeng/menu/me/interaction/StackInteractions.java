@@ -75,6 +75,7 @@ public class StackInteractions {
      * @param keyType Desired key type, or null if any is ok.
      */
     @Nullable
+    @SuppressWarnings("unchecked")
     public static ContainerItemContext findCarriedContext(@Nullable AEKeyType keyType, Player player,
             AbstractContainerMenu menu) {
         var candidates = keyType == null ? strategies.getMap().keySet() : List.of(keyType);

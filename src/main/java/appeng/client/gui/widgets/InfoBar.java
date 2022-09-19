@@ -114,7 +114,8 @@ public class InfoBar {
         private final float scale;
         private final int width;
         private final int height;
-
+        
+        @SuppressWarnings("resource")
         public TextWidget(Component text, int color, float scale) {
             this.text = text;
             this.color = color;
@@ -135,6 +136,7 @@ public class InfoBar {
         }
 
         @Override
+        @SuppressWarnings("resource")
         public void render(PoseStack poseStack, int x, int y, int z) {
             var font = Minecraft.getInstance().font;
             poseStack.pushPose();

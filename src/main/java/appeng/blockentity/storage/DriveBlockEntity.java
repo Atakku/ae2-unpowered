@@ -291,17 +291,15 @@ public class DriveBlockEntity extends AENetworkInvBlockEntity
 
     private void updateState() {
         if (!this.isCached) {
-            double power = 2.0;
             for (int slot = 0; slot < this.inv.size(); slot++) {
-                power += updateStateForSlot(slot);
+                updateStateForSlot(slot);
             }
-
             this.isCached = true;
         }
     }
 
     // Returns idle power draw of slot
-    private double updateStateForSlot(int slot) {
+    private void updateStateForSlot(int slot) {
         this.invBySlot[slot] = null;
         this.inv.setHandler(slot, null);
 
@@ -314,12 +312,8 @@ public class DriveBlockEntity extends AENetworkInvBlockEntity
 
                 var driveWatcher = new DriveWatcher(cell, () -> blinkCell(slot));
                 this.invBySlot[slot] = driveWatcher;
-
-                return cell.getIdleDrain();
             }
         }
-
-        return 0;
     }
 
     @Override

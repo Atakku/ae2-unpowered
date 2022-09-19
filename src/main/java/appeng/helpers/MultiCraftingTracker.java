@@ -205,6 +205,7 @@ public class MultiCraftingTracker {
         return this.jobs[slot];
     }
 
+    @SuppressWarnings("unchecked")
     private void setJob(int slot, Future<ICraftingPlan> l) {
         if (this.jobs == null) {
             this.jobs = new Future[this.size];

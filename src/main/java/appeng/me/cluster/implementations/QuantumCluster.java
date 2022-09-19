@@ -162,6 +162,7 @@ public class QuantumCluster implements IAECluster, IActionHost {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private boolean canUseNode(long qe) {
         var locatable = Locatables.quantumNetworkBridges().get(center.getLevel(), qe);
         if (locatable instanceof QuantumCluster qc) {

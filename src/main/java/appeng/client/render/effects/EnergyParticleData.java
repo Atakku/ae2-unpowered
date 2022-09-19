@@ -41,6 +41,7 @@ public class EnergyParticleData implements ParticleOptions {
         this.direction = direction;
     }
 
+    @SuppressWarnings("deprecation")
     public static final Deserializer<EnergyParticleData> DESERIALIZER = new Deserializer<EnergyParticleData>() {
         @Override
         public EnergyParticleData fromCommand(ParticleType<EnergyParticleData> particleTypeIn, StringReader reader)

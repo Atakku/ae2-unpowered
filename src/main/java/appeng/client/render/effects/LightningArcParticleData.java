@@ -39,6 +39,7 @@ public class LightningArcParticleData implements ParticleOptions {
         this.target = target;
     }
 
+    @SuppressWarnings("deprecation")
     public static final Deserializer<LightningArcParticleData> DESERIALIZER = new Deserializer<LightningArcParticleData>() {
         @Override
         public LightningArcParticleData fromCommand(ParticleType<LightningArcParticleData> particleTypeIn,

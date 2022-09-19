@@ -485,6 +485,7 @@ public class Platform {
         return level instanceof ServerLevel serverLevel && serverLevel.shouldTickBlocksAt(ChunkPos.asLong(pos));
     }
 
+    @SuppressWarnings("deprecation")
     public static Transaction openOrJoinTx() {
         return Transaction.openNested(Transaction.getCurrentUnsafe());
     }

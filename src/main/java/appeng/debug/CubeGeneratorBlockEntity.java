@@ -40,6 +40,7 @@ public class CubeGeneratorBlockEntity extends AEBaseBlockEntity implements Serve
     private int size = 3;
     private ItemStack is = ItemStack.EMPTY;
     private int countdown = 20 * 10;
+    @SuppressWarnings("unused")
     private Player who = null;
 
     public CubeGeneratorBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {

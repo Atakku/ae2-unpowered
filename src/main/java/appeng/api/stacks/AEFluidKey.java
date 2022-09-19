@@ -135,7 +135,7 @@ public final class AEFluidKey extends AEKey {
         // Fluids are voided
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "deprecation"})
     @Override
     public boolean isTagged(TagKey<?> tag) {
         // This will just return false for incorrectly cast tags

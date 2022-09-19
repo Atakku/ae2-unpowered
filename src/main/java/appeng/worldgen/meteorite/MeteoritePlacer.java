@@ -304,6 +304,7 @@ public final class MeteoritePlacer {
     /**
      * If it finds a single water block at y62, it will replace any air blocks below the sea level with water.
      */
+    @SuppressWarnings("deprecation")
     private void placeCraterLake() {
         final int maxY = level.getSeaLevel() - 1;
         MutableBlockPos blockPos = new MutableBlockPos();

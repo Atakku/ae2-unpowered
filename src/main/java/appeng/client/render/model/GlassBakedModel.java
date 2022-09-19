@@ -56,6 +56,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import appeng.decorative.solid.GlassState;
 import appeng.decorative.solid.QuartzGlassBlock;
 
+@SuppressWarnings("deprecation")
 class GlassBakedModel implements BakedModel, FabricBakedModel {
 
     private static final byte[][][] OFFSETS = generateOffsets();

@@ -46,6 +46,7 @@ public class CraftingStatusPacket extends BasePacket {
     }
 
     @Override
+    @SuppressWarnings("resource")
     public void clientPacketData(Player player) {
         Screen screen = Minecraft.getInstance().screen;
 

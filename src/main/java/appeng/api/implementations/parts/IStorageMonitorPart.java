@@ -32,7 +32,7 @@ import appeng.api.util.INetworkToolAware;
 /**
  * The Storage monitor is a {@link IPart} located on the sides of a IPartHost
  */
-public interface IStorageMonitorPart extends IMonitorPart, IPart, INetworkToolAware {
+public interface IStorageMonitorPart extends IPart, INetworkToolAware {
 
     /**
      * @return what is being shown on the storage monitor

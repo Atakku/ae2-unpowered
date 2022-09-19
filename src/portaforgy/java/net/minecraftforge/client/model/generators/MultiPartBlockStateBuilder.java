@@ -258,6 +258,7 @@ public final class MultiPartBlockStateBuilder implements IGeneratedBlockstate {
         return groupJson;
     }
 
+    @SuppressWarnings({"rawtypes", "unchecked"})
     private static JsonObject toJson(Multimap<Property<?>, Comparable<?>> conditions, boolean useOr)
     {
         JsonObject groupJson = new JsonObject();

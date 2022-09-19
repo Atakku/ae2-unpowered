@@ -36,7 +36,6 @@ import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -48,7 +47,7 @@ import appeng.client.render.cablebus.CubeBuilder;
 /**
  * Built-in model for annihilation planes that supports connected textures.
  */
-public class PlaneBakedModel implements BakedModel, IDynamicPartBakedModel {
+public class PlaneBakedModel implements IDynamicPartBakedModel {
 
     private static final PlaneConnections DEFAULT_PERMUTATION = PlaneConnections.of(false, false, false, false);
 

@@ -43,7 +43,6 @@ class InscriberRecipeCategory implements DisplayCategory<InscriberRecipeWrapper>
     private static final int SLOT_INPUT_TOP = 0;
     private static final int SLOT_INPUT_MIDDLE = 1;
     private static final int SLOT_INPUT_BOTTOM = 2;
-    private static final int SLOT_OUTPUT = 3;
 
     static final CategoryIdentifier<InscriberRecipeWrapper> ID = CategoryIdentifier
             .of(AppEng.makeId("ae2.inscriber"));

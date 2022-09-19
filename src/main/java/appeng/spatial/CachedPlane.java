@@ -85,14 +85,13 @@ public class CachedPlane {
         this.z_offset = minZ;
 
         final int minCX = minX >> 4;
-        final int minCY = minY >> 4;
+        //final int minCY = minY >> 4;
         final int minCZ = minZ >> 4;
         final int maxCX = maxX >> 4;
-        final int maxCY = maxY >> 4;
+        //final int maxCY = maxY >> 4;
         final int maxCZ = maxZ >> 4;
 
         this.cx_size = maxCX - minCX + 1;
-        final int cy_size = maxCY - minCY + 1;
         this.cz_size = maxCZ - minCZ + 1;
 
         this.myChunks = new LevelChunk[this.cx_size][this.cz_size];
@@ -296,6 +295,7 @@ public class CachedPlane {
         }
     }
 
+    @SuppressWarnings("resource")
     private void updateChunks() {
 
         LevelLightEngine lightManager = level.getLightEngine();

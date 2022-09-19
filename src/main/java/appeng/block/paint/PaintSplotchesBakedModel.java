@@ -53,6 +53,7 @@ import appeng.helpers.Splotch;
  * Renders paint blocks, which render multiple "splotches" that have been applied to the sides of adjacent blocks using
  * a matter cannon with paint balls.
  */
+@SuppressWarnings("deprecation")
 class PaintSplotchesBakedModel implements BakedModel, FabricBakedModel {
 
     private static final Material TEXTURE_PAINT1 = new Material(TextureAtlas.LOCATION_BLOCKS,

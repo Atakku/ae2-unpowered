@@ -116,6 +116,7 @@ public abstract class AEBaseScreen<T extends AEBaseMenu> extends AbstractContain
      */
     private final List<SavedSlotInfo> savedSlotInfos = new ArrayList<>();
 
+    @SuppressWarnings("resource")
     public AEBaseScreen(T menu, Inventory playerInventory, Component title, ScreenStyle style) {
         super(menu, playerInventory, title);
 
@@ -640,12 +641,13 @@ public abstract class AEBaseScreen<T extends AEBaseMenu> extends AbstractContain
         return checkHotbarKeys(InputConstants.getKey(keyCode, scanCode));
     }
 
+    @SuppressWarnings("resource")
     protected LocalPlayer getPlayer() {
         // Our UIs are usually not opened when not in-game, so this should not be a
         // problem
         return Objects.requireNonNull(getMinecraft().player);
     }
-
+    @SuppressWarnings("resource")
     protected boolean checkHotbarKeys(Key input) {
         final Slot theSlot = this.getSlotUnderMouse();
 

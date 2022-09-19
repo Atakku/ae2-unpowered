@@ -32,6 +32,7 @@ import appeng.client.render.tesr.*;
 import appeng.core.definitions.AEBlockEntities;
 
 @Environment(EnvType.CLIENT)
+@SuppressWarnings("deprecation")
 public final class InitBlockEntityRenderers {
 
     private InitBlockEntityRenderers() {

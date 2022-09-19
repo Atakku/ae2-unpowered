@@ -22,6 +22,7 @@ public class CompassException extends RuntimeException {
 
     private static final long serialVersionUID = 8825268683203860877L;
 
+    @SuppressWarnings("unused")
     private final Throwable inner;
 
     public CompassException(Throwable t) {

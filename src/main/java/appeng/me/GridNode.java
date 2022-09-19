@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.annotation.Nonnegative;
 import javax.annotation.Nullable;
 
 import com.google.common.base.Preconditions;
@@ -54,7 +53,6 @@ import appeng.api.networking.IGridNode;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.networking.IGridNodeService;
 import appeng.api.networking.IGridVisitor;
-import appeng.api.networking.events.GridPowerIdleChange;
 import appeng.api.networking.pathing.ChannelMode;
 import appeng.api.parts.IPart;
 import appeng.api.stacks.AEItemKey;
@@ -79,10 +77,6 @@ public class GridNode implements IGridNode, IPathItem {
      */
     private boolean ready;
     protected final List<GridConnection> connections = new ArrayList<>();
-    // old power draw, used to diff
-    private double previousDraw = 0.0;
-    // idle power usage per tick in AE
-    private double idlePowerUsage = 1.0;
     @Nullable
     private AEItemKey visualRepresentation = null;
 
@@ -250,16 +244,6 @@ public class GridNode implements IGridNode, IPathItem {
             if (ready) {
                 callListener(IGridNodeListener::onOwnerChanged);
             }
-        }
-    }
-
-    /**
-     * @param usagePerTick The power in AE/t that will be drained by this node.
-     */
-    public void setIdlePowerUsage(@Nonnegative double usagePerTick) {
-        this.idlePowerUsage = usagePerTick;
-        if (myGrid != null && ready) {
-            myGrid.postEvent(new GridPowerIdleChange(this));
         }
     }
 
@@ -609,14 +593,6 @@ public class GridNode implements IGridNode, IPathItem {
 
     public void setLastSecurityKey(long lastSecurityKey) {
         this.lastSecurityKey = lastSecurityKey;
-    }
-
-    public double getPreviousDraw() {
-        return this.previousDraw;
-    }
-
-    public void setPreviousDraw(double previousDraw) {
-        this.previousDraw = previousDraw;
     }
 
     private static class ConnectionComparator implements Comparator<IGridConnection> {

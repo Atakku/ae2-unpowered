@@ -79,6 +79,7 @@ public class MatterCannonPacket extends BasePacket {
 
     @Override
     @Environment(EnvType.CLIENT)
+    @SuppressWarnings("resource")
     public void clientPacketData(Player player) {
         try {
             for (int a = 1; a < this.len; a++) {

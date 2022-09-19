@@ -21,7 +21,6 @@ package appeng.client.render.model;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel;
 import net.fabricmc.fabric.api.renderer.v1.model.ForwardingBakedModel;
 import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -32,7 +31,7 @@ import appeng.api.implementations.items.IMemoryCard;
 import appeng.api.util.AEColor;
 import appeng.client.render.cablebus.CubeBuilder;
 
-class MemoryCardBakedModel extends ForwardingBakedModel implements FabricBakedModel {
+class MemoryCardBakedModel extends ForwardingBakedModel {
     private static final AEColor[] DEFAULT_COLOR_CODE = new AEColor[] { AEColor.TRANSPARENT, AEColor.TRANSPARENT,
             AEColor.TRANSPARENT, AEColor.TRANSPARENT, AEColor.TRANSPARENT, AEColor.TRANSPARENT, AEColor.TRANSPARENT,
             AEColor.TRANSPARENT, };

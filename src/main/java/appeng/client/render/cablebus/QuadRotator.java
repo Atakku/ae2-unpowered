@@ -73,6 +73,7 @@ public class QuadRotator implements RenderContext.QuadTransform {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public boolean transform(MutableQuadView quad) {
         Vector3f tmp = new Vector3f();
 

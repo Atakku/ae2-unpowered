@@ -126,7 +126,6 @@ public class ReplicatorCardItem extends AEBaseItem implements AEToolItem {
 
                 if (gh != null) {
                     final Direction sideOff = Direction.values()[src_side];
-                    final Direction currentSideOff = side;
                     final IGridNode n = gh.getGridNode(sideOff);
 
                     if (n != null) {

@@ -130,8 +130,10 @@ public class InterfaceTerminalScreen<C extends InterfaceTerminalMenu> extends AE
     private boolean refreshList = false;
     private int numLines = 0;
 
+    @SuppressWarnings("rawtypes")
     private final ServerSettingToggleButton showPatternProviders;
 
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public InterfaceTerminalScreen(C menu, Inventory playerInventory,
             Component title, ScreenStyle style) {
         super(menu, playerInventory, title, style);
@@ -347,6 +349,7 @@ public class InterfaceTerminalScreen<C extends InterfaceTerminalMenu> extends AE
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void updateBeforeRender() {
         this.showPatternProviders.set(this.menu.getShownProviders());
     }

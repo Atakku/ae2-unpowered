@@ -190,6 +190,7 @@ public class RestrictedInputSlot extends AppEngSlot {
         return super.getDisplayStack();
     }
 
+    @SuppressWarnings("deprecation")
     public static boolean isMetalIngot(ItemStack i) {
         return i.getItem().builtInRegistryHolder().is(AETags.METAL_INGOTS);
     }

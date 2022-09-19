@@ -23,7 +23,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 
 import appeng.worldgen.meteorite.CraterType;
 import appeng.worldgen.meteorite.PlacedMeteoriteSettings;
@@ -81,7 +80,7 @@ public class MeteoriteSpawner {
                 testPos.setY(j);
                 for (int k = pos.getZ() - 6; k < pos.getZ() + 6; k++) {
                     testPos.setZ(k);
-                    Block block = level.getBlockState(testPos).getBlock();
+                    //Block block = level.getBlockState(testPos).getBlock();
                     realValidBlocks++;
                 }
             }

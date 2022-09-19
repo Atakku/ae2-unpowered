@@ -66,7 +66,7 @@ import appeng.parts.storagebus.StorageBusPart;
 /**
  * Internal implementation for the API parts
  */
-@SuppressWarnings("unused")
+@SuppressWarnings("deprecation")
 public final class AEParts {
     public static final List<ColoredItemDefinition<?>> COLORED_PARTS = new ArrayList<>();
 

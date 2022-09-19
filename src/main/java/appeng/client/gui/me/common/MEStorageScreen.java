@@ -299,6 +299,7 @@ public class MEStorageScreen<C extends MEStorageMenu>
     }
 
     @Override
+    @SuppressWarnings("resource")
     public void init() {
         getMinecraft().keyboardHandler.setSendRepeatsToGui(true);
 
@@ -446,6 +447,7 @@ public class MEStorageScreen<C extends MEStorageMenu>
     }
 
     @Override
+    @SuppressWarnings("resource")
     public void removed() {
         super.removed();
         getMinecraft().keyboardHandler.setSendRepeatsToGui(false);
@@ -570,6 +572,7 @@ public class MEStorageScreen<C extends MEStorageMenu>
         super.renderTooltip(poseStack, x, y);
     }
 
+    @SuppressWarnings("resource")
     protected void renderGridInventoryEntryTooltip(PoseStack poseStack, GridInventoryEntry entry, int x, int y) {
 
         var currentToolTip = AEStackRendering.getTooltip(entry.getWhat());

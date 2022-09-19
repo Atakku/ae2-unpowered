@@ -42,6 +42,7 @@ public class SkyStoneBlock extends AEBaseBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor level,
             BlockPos currentPos, BlockPos facingPos) {
         if (level instanceof ServerLevel serverLevel) {
@@ -52,6 +53,7 @@ public class SkyStoneBlock extends AEBaseBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (newState.getBlock() == state.getBlock()) {
             return; // Just a block state change

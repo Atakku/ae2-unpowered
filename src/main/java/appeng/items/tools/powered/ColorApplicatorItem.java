@@ -86,9 +86,6 @@ import appeng.util.Platform;
 
 public class ColorApplicatorItem extends AEBaseItem
         implements IBasicCellItem, IBlockTool, IMouseWheelItem {
-
-    private static final double POWER_PER_USE = 100;
-
     private static final Map<TagKey<Item>, AEColor> TAG_TO_COLOR = AEColor.VALID_COLORS.stream()
             .collect(Collectors.toMap(
                     aeColor -> ConventionTags.dye(aeColor.dye),
@@ -264,6 +261,7 @@ public class ColorApplicatorItem extends AEBaseItem
         return getColorFromItem(paintBall.getItem());
     }
 
+    @SuppressWarnings("deprecation")
     private AEColor getColorFromItem(Item paintBall) {
         if (paintBall instanceof SnowballItem) {
             return AEColor.TRANSPARENT;

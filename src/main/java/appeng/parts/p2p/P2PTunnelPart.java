@@ -61,6 +61,7 @@ public abstract class P2PTunnelPart<T extends P2PTunnelPart<T>> extends BasicSta
     }
 
     @Nullable
+    @SuppressWarnings("unchecked")
     public T getInput() {
         if (this.getFrequency() == 0) {
             return null;
@@ -80,6 +81,7 @@ public abstract class P2PTunnelPart<T extends P2PTunnelPart<T>> extends BasicSta
         return getOutputStream().toList();
     }
 
+    @SuppressWarnings("unchecked")
     public Stream<T> getOutputStream() {
         if (this.getMainNode().isActive()) {
             var grid = getMainNode().getGrid();
@@ -135,7 +137,8 @@ public abstract class P2PTunnelPart<T extends P2PTunnelPart<T>> extends BasicSta
         return false;
     }
 
-    @Override
+    @Override    
+    @SuppressWarnings("rawtypes")
     public boolean onPartActivate(Player player, InteractionHand hand, Vec3 pos) {
         if (isClientSide()) {
             return true;

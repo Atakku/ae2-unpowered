@@ -82,6 +82,7 @@ public class MeteoritePlacerItem extends AEBaseItem implements AEToolItem {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
         if (context.getLevel().isClientSide()) {
             return InteractionResult.PASS;

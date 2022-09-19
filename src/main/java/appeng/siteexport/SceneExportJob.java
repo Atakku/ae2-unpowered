@@ -25,6 +25,7 @@ import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.level.block.RenderShape;
 
 public class SceneExportJob {
+    @SuppressWarnings("unused")
     private static final Logger LOGGER = LogManager.getLogger();
 
     private final Path assetFolder;
@@ -95,6 +96,7 @@ public class SceneExportJob {
         return currentScene >= scenes.size();
     }
 
+    @SuppressWarnings("deprecation")
     private void renderScene(Path outputPath, Scene scene) throws Exception {
         var blockRenderer = client.getBlockRenderer();
         var rand = new Random(0);

@@ -56,7 +56,9 @@ public class P2PService implements IGridService, IGridServiceProvider {
     }
 
     private final IGrid myGrid;
+    @SuppressWarnings("rawtypes")
     private final HashMap<Short, P2PTunnelPart> inputs = new HashMap<>();
+    @SuppressWarnings("rawtypes")
     private final Multimap<Short, P2PTunnelPart> outputs = LinkedHashMultimap.create();
     private final Random frequencyGenerator;
 
@@ -112,6 +114,7 @@ public class P2PService implements IGridService, IGridServiceProvider {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     private void updateTunnel(short freq, boolean updateOutputs, boolean configChange) {
         for (P2PTunnelPart p : this.outputs.get(freq)) {
             if (configChange) {
@@ -129,6 +132,7 @@ public class P2PService implements IGridService, IGridServiceProvider {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     public void updateFreq(P2PTunnelPart t, short newFrequency) {
         if (this.outputs.containsValue(t)) {
             this.outputs.remove(t.getFrequency(), t);
@@ -180,6 +184,7 @@ public class P2PService implements IGridService, IGridServiceProvider {
                 .map(c::cast);
     }
 
+    @SuppressWarnings("rawtypes")
     public P2PTunnelPart getInput(short freq) {
         return this.inputs.get(freq);
     }

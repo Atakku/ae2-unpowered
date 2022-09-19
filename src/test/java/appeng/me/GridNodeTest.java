@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import appeng.api.networking.IGridNodeListener;
 import appeng.me.service.PathingService;
 
+@SuppressWarnings("unchecked")
 class GridNodeTest extends AbstractGridNodeTest {
     /**
      * Regression test for the {@link appeng.integration.modules.waila.GridNodeState#NETWORK_BOOTING} notification. It

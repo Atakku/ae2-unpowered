@@ -81,7 +81,6 @@ public class SpatialIOPortMenu extends AEBaseMenu {
                 this.delay = 0;
 
                 var sc = grid.getSpatialService();
-                this.setRequiredPower((long) (100.0 * sc.requiredPower()));
                 this.setEfficency((long) (100.0f * sc.currentEfficiency()));
 
                 var min = sc.getMin();
@@ -100,30 +99,6 @@ public class SpatialIOPortMenu extends AEBaseMenu {
         }
 
         super.broadcastChanges();
-    }
-
-    public long getCurrentPower() {
-        return this.currentPower;
-    }
-
-    private void setCurrentPower(long currentPower) {
-        this.currentPower = currentPower;
-    }
-
-    public long getMaxPower() {
-        return this.maxPower;
-    }
-
-    private void setMaxPower(long maxPower) {
-        this.maxPower = maxPower;
-    }
-
-    public long getRequiredPower() {
-        return this.reqPower;
-    }
-
-    private void setRequiredPower(long reqPower) {
-        this.reqPower = reqPower;
     }
 
     public long getEfficency() {

@@ -50,10 +50,6 @@ public class WirelessTerminalMenuHost extends ItemMenuHost implements IPortableT
     private IStorageService sg;
     private IWirelessAccessPoint myWap;
     private double sqRange = Double.MAX_VALUE;
-    /**
-     * The distance to the currently connected access point in blocks.
-     */
-    private double currentDistanceFromGrid = Double.MAX_VALUE;
 
     public WirelessTerminalMenuHost(Player player, @Nullable Integer slot, ItemStack itemStack,
             BiConsumer<Player, ISubMenu> returnToMainMenu) {
@@ -99,8 +95,6 @@ public class WirelessTerminalMenuHost extends ItemMenuHost implements IPortableT
     }
 
     public boolean rangeCheck() {
-        this.sqRange = this.currentDistanceFromGrid = Double.MAX_VALUE;
-
         if (this.targetGrid != null) {
             if (this.myWap != null) {
                 return this.myWap.getGrid() == this.targetGrid && this.testWap(this.myWap);
@@ -131,7 +125,6 @@ public class WirelessTerminalMenuHost extends ItemMenuHost implements IPortableT
             final double r = offX * offX + offY * offY + offZ * offZ;
             if (r < rangeLimit && this.sqRange > r && wap.isActive()) {
                 this.sqRange = r;
-                this.currentDistanceFromGrid = Math.sqrt(r);
                 return true;
             }
         }

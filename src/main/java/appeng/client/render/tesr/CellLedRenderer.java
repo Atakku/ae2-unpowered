@@ -39,9 +39,6 @@ class CellLedRenderer {
 
     private static final EnumMap<CellState, Vector3f> STATE_COLORS;
 
-    // Color to use if the cell is present but unpowered
-    private static final Vector3f UNPOWERED_COLOR = new Vector3f(0, 0, 0);
-
     // Color used for the cell indicator for blinking during recent activity
     private static final Vector3f BLINK_COLOR = new Vector3f(1, 0.5f, 0.5f);
 

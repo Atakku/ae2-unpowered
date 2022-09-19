@@ -61,7 +61,4 @@ public class CraftingBlockItem extends AEBaseBlockItem {
         }
         return super.use(level, player, hand);
     }
-
-    private void disassemble(ItemStack stack, Player player) {
-    }
 }

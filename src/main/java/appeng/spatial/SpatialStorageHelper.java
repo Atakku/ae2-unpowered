@@ -195,6 +195,7 @@ public class SpatialStorageHelper {
                 new TriggerUpdates(dstLevel));
     }
 
+    @SuppressWarnings("deprecation")
     private static class TriggerUpdates implements ISpatialVisitor {
 
         private final Level dst;

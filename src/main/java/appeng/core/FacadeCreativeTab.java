@@ -63,6 +63,7 @@ public final class FacadeCreativeTab {
         items.addAll(subTypes);
     }
 
+    @SuppressWarnings("deprecation")
     private static void calculateSubTypes() {
         if (subTypes != null) {
             return;

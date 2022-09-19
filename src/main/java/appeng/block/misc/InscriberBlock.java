@@ -100,6 +100,7 @@ public class InscriberBlock extends AEBaseEntityBlock<InscriberBlockEntity> impl
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState blockState) {
         return blockState.getValue(WATERLOGGED).booleanValue()
                 ? Fluids.WATER.getSource(false)
@@ -107,6 +108,7 @@ public class InscriberBlock extends AEBaseEntityBlock<InscriberBlockEntity> impl
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public BlockState updateShape(BlockState blockState, Direction facing, BlockState facingState, LevelAccessor level,
             BlockPos currentPos, BlockPos facingPos) {
         if (blockState.getValue(WATERLOGGED).booleanValue()) {

@@ -71,6 +71,7 @@ public enum CableCoreType {
         return cableMapping.get(cableType);
     }
 
+    @SuppressWarnings("deprecation")
     public Material getTexture(AEColor color) {
         return new Material(TextureAtlas.LOCATION_BLOCKS,
                 new ResourceLocation(AppEng.MOD_ID, this.textureFolder + "/" + color.name().toLowerCase(Locale.ROOT)));

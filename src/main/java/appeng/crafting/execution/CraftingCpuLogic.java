@@ -187,8 +187,6 @@ public class CraftingCpuLogic {
                 if (provider.isBusy())
                     continue;
 
-                var patternPower = CraftingCpuHelper.calculatePatternPower(craftingContainer);
-
                 if (provider.pushPattern(details, craftingContainer)) {
                     pushedPatterns++;
 

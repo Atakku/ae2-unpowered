@@ -85,6 +85,7 @@ public class ChargerBlock extends AEBaseEntityBlock<ChargerBlockEntity> {
 
     @Override
     @Environment(EnvType.CLIENT)
+    @SuppressWarnings("resource")
     public void animateTick(BlockState state, Level level, BlockPos pos, Random r) {
         if (!AEConfig.instance().isEnableEffects()) {
             return;

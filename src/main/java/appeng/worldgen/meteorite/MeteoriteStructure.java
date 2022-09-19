@@ -77,6 +77,7 @@ public class MeteoriteStructure extends StructureFeature<NoneFeatureConfiguratio
         return worldgenRandom.nextBoolean();
     }
 
+    @SuppressWarnings("deprecation")
     private static void generatePieces(StructurePiecesBuilder piecesBuilder,
             PieceGenerator.Context<NoneFeatureConfiguration> context) {
 
@@ -170,6 +171,7 @@ public class MeteoriteStructure extends StructureFeature<NoneFeatureConfiguratio
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     private static CraterType determineCraterType(Holder<Biome> biomeHolder, Random random) {
         // The temperature thresholds below are taken from older Vanilla code
         // (temperature categories)

@@ -66,6 +66,7 @@ public class InterfaceTerminalPacket extends BasePacket {
 
     @Override
     @Environment(EnvType.CLIENT)
+    @SuppressWarnings({"resource", "rawtypes"})
     public void clientPacketData(Player player) {
         if (Minecraft.getInstance().screen instanceof InterfaceTerminalScreen interfaceTerminal) {
             interfaceTerminal.postInventoryUpdate(this.clearExistingData, this.inventoryId, this.in);

@@ -25,7 +25,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -34,7 +33,6 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
 @Environment(EnvType.CLIENT)
@@ -107,6 +105,7 @@ public class LightningFX extends TextureSheetParticle {
     }
 
     @Override
+    @SuppressWarnings("resource")
     public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
         Vec3 Vector3d = renderInfo.getPosition();
         float centerX = (float) (Mth.lerp(partialTicks, this.xo, this.x) - Vector3d.x());
@@ -117,7 +116,6 @@ public class LightningFX extends TextureSheetParticle {
         float red = this.rCol * j * 0.9f;
         float green = this.gCol * j * 0.95f;
         float blue = this.bCol * j;
-        final float alpha = this.alpha;
 
         if (this.age == 3) {
             this.regen();
@@ -134,8 +132,6 @@ public class LightningFX extends TextureSheetParticle {
         double ox = 0;
         double oy = 0;
         double oz = 0;
-
-        final Player p = Minecraft.getInstance().player;
 
         // FIXME: Billboard rotation is not applied to the particle yet,
         // FIXME The old version apparently did this by hand using rX,rZ -> replicate

@@ -26,6 +26,7 @@ import appeng.me.service.CraftingService;
 
 public class CraftingLinkNexus {
 
+    @SuppressWarnings("unused")
     private final String craftID;
     private boolean canceled = false;
     private boolean done = false;

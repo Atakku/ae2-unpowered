@@ -103,6 +103,7 @@ public class BlockTransitionEffectPacket extends BasePacket {
     }
 
     @Environment(EnvType.CLIENT)
+    @SuppressWarnings("resource")
     private void spawnParticles() {
 
         EnergyParticleData data = new EnergyParticleData(false, direction);
@@ -122,6 +123,7 @@ public class BlockTransitionEffectPacket extends BasePacket {
     }
 
     @Environment(EnvType.CLIENT)
+    @SuppressWarnings("deprecation")
     private void playBreakOrPickupSound() {
 
         SoundEvent soundEvent;

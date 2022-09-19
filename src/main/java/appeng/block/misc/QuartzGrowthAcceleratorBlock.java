@@ -65,6 +65,7 @@ public class QuartzGrowthAcceleratorBlock extends AEBaseEntityBlock<QuartzGrowth
 
     @Environment(EnvType.CLIENT)
     @Override
+    @SuppressWarnings("resource")
     public void animateTick(BlockState state, Level level, BlockPos pos, Random r) {
         if (!AEConfig.instance().isEnableEffects()) {
             return;

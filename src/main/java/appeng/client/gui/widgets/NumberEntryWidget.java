@@ -82,6 +82,7 @@ public class NumberEntryWidget extends GuiComponent implements ICompositeWidget 
 
     private Rect2i textFieldBounds = Rects.ZERO;
 
+    @SuppressWarnings("resource")
     public NumberEntryWidget(NumberEntryType type) {
         this.type = Objects.requireNonNull(type, "type");
         this.decimalFormat = new DecimalFormat("#.######", new DecimalFormatSymbols());
@@ -376,6 +377,7 @@ public class NumberEntryWidget extends GuiComponent implements ICompositeWidget 
     }
 
     @Override
+    @SuppressWarnings("resource")
     public void drawBackgroundLayer(PoseStack poseStack, int zIndex, Rect2i bounds, Point mouse) {
         if (type.unit() != null) {
             var font = Minecraft.getInstance().font;

@@ -217,6 +217,7 @@ public class ReiPlugin implements REIClientPlugin {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void registerExclusionZones(ExclusionZones zones) {
         zones.register(AEBaseScreen.class, screen -> {
             return screen != null ? mapRects(screen.getExclusionZones()) : Collections.emptyList();

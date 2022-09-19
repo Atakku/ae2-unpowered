@@ -80,6 +80,7 @@ public class ClassInstantiation<T> {
         return expected == got || expected.isAssignableFrom(got);
     }
 
+    @SuppressWarnings("rawtypes")
     private Class<?> condense(Class<?> expected, Class<?>... wrappers) {
         if (expected.isPrimitive()) {
             for (Class clz : wrappers) {

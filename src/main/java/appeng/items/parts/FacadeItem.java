@@ -137,6 +137,7 @@ public class FacadeItem extends AEBaseItem implements IFacadeItem, AEToolItem {
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
     }
 
+    @SuppressWarnings("deprecation")
     public ItemStack createFacadeForItem(ItemStack itemStack, boolean returnItem) {
         if (itemStack.isEmpty() || itemStack.hasTag() || !(itemStack.getItem() instanceof BlockItem blockItem)) {
             return ItemStack.EMPTY;

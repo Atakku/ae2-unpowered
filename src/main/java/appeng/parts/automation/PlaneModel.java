@@ -40,6 +40,7 @@ public class PlaneModel implements BasicUnbakedModel {
     private final Material sidesTexture;
     private final Material backTexture;
 
+    @SuppressWarnings("deprecation")
     public PlaneModel(ResourceLocation frontTexture, ResourceLocation sidesTexture, ResourceLocation backTexture) {
         this.frontTexture = new Material(TextureAtlas.LOCATION_BLOCKS, frontTexture);
         this.sidesTexture = new Material(TextureAtlas.LOCATION_BLOCKS, sidesTexture);

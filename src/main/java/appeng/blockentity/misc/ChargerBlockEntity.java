@@ -46,8 +46,6 @@ import appeng.util.inv.AppEngInternalInventory;
 import appeng.util.inv.filter.IAEItemFilter;
 
 public class ChargerBlockEntity extends AENetworkInvBlockEntity implements IGridTickable {
-    private static final int POWER_MAXIMUM_AMOUNT = 1600;
-    private static final int POWER_THRESHOLD = POWER_MAXIMUM_AMOUNT - 1;
     private boolean working;
 
     private final AppEngInternalInventory inv = new AppEngInternalInventory(this, 1, 1, new ChargerInvFilter());

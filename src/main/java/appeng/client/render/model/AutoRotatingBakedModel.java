@@ -23,7 +23,6 @@ import java.util.function.Supplier;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel;
 import net.fabricmc.fabric.api.renderer.v1.model.ForwardingBakedModel;
 import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
 import net.fabricmc.fabric.api.rendering.data.v1.RenderAttachedBlockView;
@@ -36,7 +35,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import appeng.client.render.cablebus.QuadRotator;
 
 @Environment(EnvType.CLIENT)
-public class AutoRotatingBakedModel extends ForwardingBakedModel implements FabricBakedModel {
+public class AutoRotatingBakedModel extends ForwardingBakedModel {
 
     public AutoRotatingBakedModel(BakedModel wrapped) {
         this.wrapped = wrapped;

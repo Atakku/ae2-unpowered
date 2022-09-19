@@ -310,10 +310,12 @@ public class ItemPickupStrategy implements PickupStrategy {
         return new HarvestTool(tool, fallback);
     }
 
+    @SuppressWarnings("deprecation")
     public static boolean isBlockBlacklisted(Block b) {
         return b.builtInRegistryHolder().is(BLOCK_BLACKLIST);
     }
 
+    @SuppressWarnings("deprecation")
     public static boolean isItemBlacklisted(Item i) {
         return i.builtInRegistryHolder().is(ITEM_BLACKLIST);
     }

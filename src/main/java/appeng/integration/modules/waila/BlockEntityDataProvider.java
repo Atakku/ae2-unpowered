@@ -43,6 +43,7 @@ import appeng.integration.modules.waila.tile.GridNodeStateDataProvider;
  * @version rv2
  * @since rv2
  */
+@SuppressWarnings("deprecation")
 public final class BlockEntityDataProvider implements IComponentProvider, IServerDataProvider<BlockEntity> {
     /**
      * Contains all providers

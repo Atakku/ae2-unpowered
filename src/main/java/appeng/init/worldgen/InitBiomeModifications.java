@@ -47,6 +47,7 @@ public final class InitBiomeModifications {
     /**
      * @return A predicate that returns true if the modifier should apply to the given biome.
      */
+    @SuppressWarnings("deprecation")
     private static Predicate<BiomeSelectionContext> shouldGenerateIn(AEWorldGenType type) {
         return context -> {
             var id = context.getBiomeKey().location();

@@ -46,6 +46,7 @@ public final class BlockAttackHook {
         return onBlockAttackedOnClient(player, level);
     }
 
+    @SuppressWarnings("resource")
     private static InteractionResult onBlockAttackedOnClient(Player player, Level level) {
         // This shouldn't happen as the attack block logic should only be called if the player is pointing at a block
         // to begin with.

@@ -58,6 +58,7 @@ public class MemoryCardModel implements BasicUnbakedModel {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private static final Material TEXTURE = new Material(TextureAtlas.LOCATION_BLOCKS,
             new ResourceLocation(AppEng.MOD_ID, "item/memory_card_hash"));
 

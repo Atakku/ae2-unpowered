@@ -139,6 +139,7 @@ final class RectanglePacking {
             this.wrapped = wrapped;
         }
 
+        @SuppressWarnings("unused")
         public Rectangle<T> copy() {
             return new Rectangle<>(x, y, w, h, wrapped);
         }

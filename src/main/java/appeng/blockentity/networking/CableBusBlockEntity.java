@@ -262,6 +262,7 @@ public class CableBusBlockEntity extends AEBaseBlockEntity implements AEMultiBlo
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void notifyNeighbors() {
         if (this.level != null && this.level.hasChunkAt(this.worldPosition) && !CableBusContainer.isLoading()) {
             Platform.notifyBlocksOfNeighbors(this.level, this.worldPosition);

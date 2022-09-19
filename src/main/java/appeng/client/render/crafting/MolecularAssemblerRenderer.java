@@ -78,6 +78,7 @@ public class MolecularAssemblerRenderer implements BlockEntityRenderer<Molecular
         renderPowerLight(ms, bufferIn, combinedLightIn, combinedOverlayIn);
     }
 
+    @SuppressWarnings("resource")
     private void renderPowerLight(PoseStack ms, MultiBufferSource bufferIn, int combinedLightIn,
             int combinedOverlayIn) {
         Minecraft minecraft = Minecraft.getInstance();

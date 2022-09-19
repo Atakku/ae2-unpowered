@@ -36,6 +36,7 @@ public class FalloutCopy extends Fallout {
     private final BlockState block;
     private final MeteoriteBlockPutter putter;
 
+    @SuppressWarnings("deprecation")
     public FalloutCopy(LevelAccessor level, BlockPos pos, MeteoriteBlockPutter putter,
             BlockState skyStone, Random random) {
         super(putter, skyStone, random);

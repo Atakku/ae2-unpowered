@@ -127,6 +127,7 @@ public class WrappedGenericStack extends AEBaseItem {
      * Allows picking up the contained fluid with a bucket.
      */
     @Override
+    @SuppressWarnings("resource")
     public boolean overrideOtherStackedOnMe(ItemStack itemInSlot, ItemStack otherStack, Slot slot,
             ClickAction clickAction, Player player, SlotAccess otherItemAccess) {
         if (player.containerMenu == null) {

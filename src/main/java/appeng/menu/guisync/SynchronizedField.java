@@ -55,7 +55,6 @@ public abstract class SynchronizedField<T> {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private T getCurrentValue() {
         try {
             return (T) this.getter.invoke(source);
@@ -87,6 +86,7 @@ public abstract class SynchronizedField<T> {
 
     protected abstract T readValue(FriendlyByteBuf data);
 
+    @SuppressWarnings("unchecked")
     public static SynchronizedField<?> create(Object source, Field field) {
         Class<?> fieldType = field.getType();
 

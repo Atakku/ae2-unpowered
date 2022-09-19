@@ -100,6 +100,7 @@ public class FluidPickupStrategy implements PickupStrategy {
         return sink.insert(what, amount, modulate ? Actionable.MODULATE : Actionable.SIMULATE) >= amount;
     }
 
+    @SuppressWarnings("deprecation")
     private boolean isFluidBlacklisted(Fluid fluid) {
         return fluid.builtInRegistryHolder().is(AETags.ANNIHILATION_PLANE_FLUID_BLACKLIST);
     }

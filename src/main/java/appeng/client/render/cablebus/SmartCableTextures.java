@@ -33,6 +33,7 @@ import appeng.core.AppEng;
  */
 public class SmartCableTextures {
 
+    @SuppressWarnings("deprecation")
     public static final Material[] SMART_CHANNELS_TEXTURES = Arrays
             .stream(new ResourceLocation[] { new ResourceLocation(AppEng.MOD_ID, "part/cable/smart/channels_00"), //
                     new ResourceLocation(AppEng.MOD_ID, "part/cable/smart/channels_01"), //

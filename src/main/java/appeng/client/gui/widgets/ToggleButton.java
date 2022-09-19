@@ -25,7 +25,7 @@ import net.minecraft.network.chat.Component;
 
 import appeng.client.gui.Icon;
 
-public class ToggleButton extends IconButton implements ITooltip {
+public class ToggleButton extends IconButton {
 
     private final Listener listener;
 

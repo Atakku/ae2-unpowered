@@ -277,6 +277,7 @@ public class SettingToggleButton<T extends Enum<T>> extends IconButton {
         }
     }
 
+    @SuppressWarnings("resource")
     private void triggerPress() {
         boolean backwards = false;
         // This isn't great, but we don't get any information about right-clicks

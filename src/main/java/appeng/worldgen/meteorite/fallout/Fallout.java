@@ -40,6 +40,7 @@ public class Fallout {
         this.random = random;
     }
 
+    @SuppressWarnings("deprecation")
     public static FalloutMode fromBiome(Holder<Biome> biome) {
         return switch (Biome.getBiomeCategory(biome)) {
             case MESA -> FalloutMode.TERRACOTTA;

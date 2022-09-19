@@ -107,6 +107,7 @@ public class AEBaseBlockEntity extends BlockEntity
         REPRESENTATIVE_ITEMS.put(type, wat);
     }
 
+    @SuppressWarnings("deprecation")
     public boolean notLoaded() {
         return !this.level.hasChunkAt(this.worldPosition);
     }

@@ -104,6 +104,7 @@ public class AdvancementGenerator implements IAE2DataProvider {
         generateAdvancements(consumer);
     }
 
+    @SuppressWarnings("unused")
     private void generateAdvancements(Consumer<Advancement> consumer) {
 
         var root = Advancement.Builder.advancement()

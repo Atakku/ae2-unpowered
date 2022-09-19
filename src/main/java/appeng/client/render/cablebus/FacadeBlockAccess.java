@@ -39,6 +39,7 @@ public class FacadeBlockAccess implements BlockAndTintGetter {
 
     private final BlockAndTintGetter level;
     private final BlockPos pos;
+    @SuppressWarnings("unused")
     private final Direction side;
     private final BlockState state;
 

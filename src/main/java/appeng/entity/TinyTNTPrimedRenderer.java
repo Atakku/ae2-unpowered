@@ -75,6 +75,7 @@ public class TinyTNTPrimedRenderer extends EntityRenderer<TinyTNTPrimedEntity> {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public ResourceLocation getTextureLocation(TinyTNTPrimedEntity entity) {
         return TextureAtlas.LOCATION_BLOCKS;
     }

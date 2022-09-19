@@ -52,6 +52,7 @@ import appeng.integration.modules.waila.part.P2PStateDataProvider;
 import appeng.integration.modules.waila.part.StorageMonitorDataProvider;
 import appeng.util.Platform;
 
+@SuppressWarnings("deprecation")
 public final class CableBusDataProvider {
 
     private static final List<IPartDataProvider> PROVIDERS = List.of(

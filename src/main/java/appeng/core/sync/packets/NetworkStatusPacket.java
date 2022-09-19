@@ -47,6 +47,7 @@ public class NetworkStatusPacket extends BasePacket {
     }
 
     @Override
+    @SuppressWarnings("resource")
     public void clientPacketData(Player player) {
         final Screen gs = Minecraft.getInstance().screen;
 

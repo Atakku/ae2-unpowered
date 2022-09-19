@@ -62,6 +62,7 @@ public class RenderBlockOutlineHook {
     /*
      * Changes block outline rendering such that it renders only for individual parts, not for the entire part host.
      */
+    @SuppressWarnings("resource")
     private static boolean replaceBlockOutline(ClientLevel level,
             PoseStack poseStack,
             MultiBufferSource buffers,

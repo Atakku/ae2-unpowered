@@ -99,7 +99,6 @@ public class CraftingCpuHelper {
 
         // Extract inputs into the container.
         var inputs = details.getInputs();
-        @SuppressWarnings("unchecked")
         KeyCounter[] inputHolder = new KeyCounter[inputs.length];
         boolean found = true;
 

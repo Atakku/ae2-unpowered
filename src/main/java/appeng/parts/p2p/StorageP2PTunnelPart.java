@@ -24,6 +24,7 @@ import appeng.api.stacks.AEKeyType;
 public abstract class StorageP2PTunnelPart<P extends StorageP2PTunnelPart<P, T>, T extends TransferVariant<?>>
         extends CapabilityP2PTunnelPart<P, Storage<T>> {
 
+    @SuppressWarnings("unused")
     private AEKeyType keyType;
 
     public StorageP2PTunnelPart(IPartItem<?> partItem, BlockApiLookup<Storage<T>, Direction> api, AEKeyType keyType) {

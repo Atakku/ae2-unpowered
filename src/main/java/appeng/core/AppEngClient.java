@@ -89,9 +89,8 @@ import appeng.util.Platform;
  * Client-specific functionality.
  */
 @Environment(EnvType.CLIENT)
+@SuppressWarnings("deprecation")
 public class AppEngClient extends AppEngBase {
-    private final static String KEY_CATEGORY = "key.ae2.category";
-
     private static AppEngClient INSTANCE;
 
     /**
@@ -133,6 +132,7 @@ public class AppEngClient extends AppEngBase {
     }
 
     @Override
+    @SuppressWarnings("resource")
     public Level getClientLevel() {
         return Minecraft.getInstance().level;
     }
@@ -231,6 +231,7 @@ public class AppEngClient extends AppEngBase {
         return false;
     }
 
+    @SuppressWarnings("resource")
     public boolean shouldAddParticles(Random r) {
         return switch (Minecraft.getInstance().options.particles) {
             case ALL -> true;
@@ -240,6 +241,7 @@ public class AppEngClient extends AppEngBase {
     }
 
     @Override
+    @SuppressWarnings("resource")
     public HitResult getCurrentMouseOver() {
         return Minecraft.getInstance().hitResult;
     }
@@ -265,6 +267,7 @@ public class AppEngClient extends AppEngBase {
         }
     }
 
+    @SuppressWarnings("resource")
     private void spawnVibrant(Level level, double x, double y, double z) {
         if (AppEngClient.instance().shouldAddParticles(Platform.getRandom())) {
             final double d0 = (Platform.getRandomFloat() - 0.5F) * 0.26D;
@@ -277,6 +280,7 @@ public class AppEngClient extends AppEngBase {
         }
     }
 
+    @SuppressWarnings("resource")
     private void spawnEnergy(Level level, double posX, double posY, double posZ) {
         final float x = (float) (Platform.getRandomInt() % 100 * 0.01 - 0.5) * 0.7f;
         final float y = (float) (Platform.getRandomInt() % 100 * 0.01 - 0.5) * 0.7f;
@@ -287,6 +291,7 @@ public class AppEngClient extends AppEngBase {
                 -x * 0.1, -y * 0.1, -z * 0.1);
     }
 
+    @SuppressWarnings("resource")
     private void spawnLightning(Level level, double posX, double posY, double posZ) {
         Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.LIGHTNING, posX, posY + 0.3f, posZ, 0.0f,
                 0.0f,

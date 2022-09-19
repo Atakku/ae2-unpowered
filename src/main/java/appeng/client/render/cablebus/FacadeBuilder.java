@@ -338,6 +338,7 @@ public class FacadeBuilder {
      *
      * @return The model.
      */
+    @SuppressWarnings("resource")
     public Mesh buildFacadeItemQuads(ItemStack textureItem, Direction side) {
 
         MeshBuilder meshBuilder = renderer.meshBuilder();

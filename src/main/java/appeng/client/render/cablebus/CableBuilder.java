@@ -81,6 +81,7 @@ class CableBuilder {
         this.smartCableTextures = new SmartCableTextures(bakedTextureGetter);
     }
 
+    @SuppressWarnings("deprecation")
     static Material getConnectionTexture(AECableType cableType, AEColor color) {
         String textureFolder = switch (cableType) {
             case GLASS -> "part/cable/glass/";

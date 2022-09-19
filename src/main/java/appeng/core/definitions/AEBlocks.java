@@ -117,6 +117,7 @@ public final class AEBlocks {
     public static final BlockDefinition<AEDecorativeBlock> CHISELED_QUARTZ_BLOCK = block("Chiseled Certus Quartz Block", AEBlockIds.CHISELED_QUARTZ_BLOCK, () -> new AEDecorativeBlock(QUARTZ_PROPERTIES));
 
     public static final BlockDefinition<QuartzGlassBlock> QUARTZ_GLASS = block("Quartz Glass", AEBlockIds.QUARTZ_GLASS, () -> new QuartzGlassBlock(defaultProps(Material.GLASS).noOcclusion().isValidSpawn(NEVER_ALLOW_SPAWN)));
+    @SuppressWarnings("deprecation")
     public static final BlockDefinition<QuartzLampBlock> QUARTZ_VIBRANT_GLASS = block("Vibrant Quartz Glass", AEBlockIds.QUARTZ_VIBRANT_GLASS, () -> new QuartzLampBlock(defaultProps(Material.GLASS).lightLevel(b -> 15).noOcclusion()
             .isValidSpawn(NEVER_ALLOW_SPAWN)));
 

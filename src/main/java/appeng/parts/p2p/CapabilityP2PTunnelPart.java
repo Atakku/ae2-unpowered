@@ -123,7 +123,7 @@ public abstract class CapabilityP2PTunnelPart<P extends CapabilityP2PTunnelPart<
     /**
      * This specialization is used when the tunnel is not connected.
      */
-    protected class EmptyCapabilityGuard extends CapabilityGuard implements AutoCloseable {
+    protected class EmptyCapabilityGuard extends CapabilityGuard {
         @Override
         public void close() {
         }

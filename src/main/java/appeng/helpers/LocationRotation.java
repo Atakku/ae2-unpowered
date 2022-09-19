@@ -25,6 +25,7 @@ import appeng.api.util.IOrientable;
 
 public class LocationRotation implements IOrientable {
 
+    @SuppressWarnings("unused")
     private final BlockGetter level;
     private final int x;
     private final int y;

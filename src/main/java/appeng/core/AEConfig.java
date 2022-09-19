@@ -102,9 +102,6 @@ public final class AEConfig {
         return result;
     }
 
-    // Default Energy Conversion Rates
-    private static final double DEFAULT_TR_EXCHANGE = 2.0;
-
     // Config instance
     private static AEConfig instance;
 
@@ -537,10 +534,6 @@ public final class AEConfig {
         // Portable Cells
         public final BooleanOption portableCellDisassembly;
 
-        // Power Ratios
-        public final DoubleOption powerRatioTechReborn;
-        public final DoubleOption powerUsageMultiplier;
-
         // Condenser Power Requirement
         public final IntegerOption condenserMatterBallsPower;
         public final IntegerOption condenserSingularityPower;
@@ -638,10 +631,6 @@ public final class AEConfig {
             ConfigSection portableCells = root.subsection("PortableCells");
             portableCellDisassembly = portableCells.addBoolean("allowDisassembly", true,
                     "Allow disassembly of portable cells into the recipe ingredients using shift+right-click");
-
-            ConfigSection PowerRatios = root.subsection("PowerRatios");
-            powerRatioTechReborn = PowerRatios.addDouble("TechReborn", DEFAULT_TR_EXCHANGE);
-            powerUsageMultiplier = PowerRatios.addDouble("UsageMultiplier", 1.0, 0.01, Double.MAX_VALUE);
 
             ConfigSection Condenser = root.subsection("Condenser");
             condenserMatterBallsPower = Condenser.addInt("MatterBalls", 256);

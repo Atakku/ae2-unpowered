@@ -68,6 +68,7 @@ public class ItemTransitionEffectPacket extends BasePacket {
 
     @Override
     @Environment(EnvType.CLIENT)
+    @SuppressWarnings("resource")
     public void clientPacketData(Player player) {
         EnergyParticleData data = new EnergyParticleData(true, this.d);
         for (int zz = 0; zz < 8; zz++) {

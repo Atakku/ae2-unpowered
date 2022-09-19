@@ -48,6 +48,7 @@ import appeng.util.ConfigManager;
 public class PortableCellMenuHost extends ItemMenuHost implements IPortableTerminal {
     private final BiConsumer<Player, ISubMenu> returnMainMenu;
     private final MEStorage cellStorage;
+    @SuppressWarnings("unused")
     private final PortableCellItem item;
 
     public PortableCellMenuHost(Player player, @Nullable Integer slot, PortableCellItem item, ItemStack itemStack,

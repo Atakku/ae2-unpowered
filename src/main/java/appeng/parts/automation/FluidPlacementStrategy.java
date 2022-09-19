@@ -29,6 +29,7 @@ import appeng.api.stacks.AEKey;
 public class FluidPlacementStrategy implements PlacementStrategy {
     private final ServerLevel level;
     private final BlockPos pos;
+    @SuppressWarnings("unused")
     private final Direction side;
     /**
      * The fluids that we tried to place unsuccessfully.
@@ -51,6 +52,7 @@ public class FluidPlacementStrategy implements PlacementStrategy {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public long placeInWorld(AEKey f, long amount, Actionable type, boolean placeAsEntity) {
         if (placeAsEntity || !(f instanceof AEFluidKey fluidKey)) {
             return 0; // Not supported
@@ -106,6 +108,7 @@ public class FluidPlacementStrategy implements PlacementStrategy {
         return AEFluidKey.AMOUNT_BLOCK;
     }
 
+    @SuppressWarnings("deprecation")
     private void playEmptySound(Level level, BlockPos pos, Fluid fluid) {
         if (throttleEffect()) {
             return;

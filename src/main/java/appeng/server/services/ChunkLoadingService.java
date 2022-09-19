@@ -27,6 +27,7 @@ public class ChunkLoadingService {
     private static final ChunkLoadingService INSTANCE = new ChunkLoadingService();
 
     // Flag to ignore a server after it is stopping as grid nodes might reevaluate their grids during a shutdown.
+    @SuppressWarnings("unused")
     private boolean running = true;
 
     public static void register() {

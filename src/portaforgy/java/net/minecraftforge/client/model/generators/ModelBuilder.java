@@ -61,7 +61,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
  *
  * @param <T> Self type, for simpler chaining of methods.
  */
-@SuppressWarnings("deprecation")
 public class ModelBuilder<T extends ModelBuilder<T>> extends ModelFile {
 
     @Nullable
@@ -75,6 +74,7 @@ public class ModelBuilder<T extends ModelBuilder<T>> extends ModelFile {
 
     protected final List<ElementBuilder> elements = new ArrayList<>();
 
+    @SuppressWarnings("rawtypes")
     protected CustomLoaderBuilder customLoader = null;
 
     protected ModelBuilder(ResourceLocation outputLocation, ExistingFileHelper existingFileHelper) {

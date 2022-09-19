@@ -353,11 +353,11 @@ public class CraftingSimulationTest {
         var sourceItem = item(Items.DIAMOND_ORE);
         // Alternative ingredient for output. Not present in the network, but will create a branch in the crafting
         // tree that will force our interesting recipe to be crafted 1 by 1.
-        var alternativeIngredient = item(Items.GOLD_INGOT);
+        //var alternativeIngredient = item(Items.GOLD_INGOT);
 
         var targetPattern = env.addPattern(new ProcessingPatternBuilder(output).addPreciseInput(3, reusedItem).build());
-        var alternativePattern = env
-                .addPattern(new ProcessingPatternBuilder(output).addPreciseInput(1, alternativeIngredient).build());
+        //var alternativePattern = env
+        //        .addPattern(new ProcessingPatternBuilder(output).addPreciseInput(1, alternativeIngredient).build());
         var sourcePattern = env
                 .addPattern(new ProcessingPatternBuilder(mult(reusedItem, 4)).addPreciseInput(1, sourceItem).build());
 
@@ -419,6 +419,7 @@ public class CraftingSimulationTest {
             return patternsMatch(Map.of(p1, t1, p2, t2));
         }
 
+        @SuppressWarnings("unused")
         public CraftingPlanAssert patternsMatch(IPatternDetails p1, long t1, IPatternDetails p2, long t2,
                 IPatternDetails p3, long t3) {
             return patternsMatch(Map.of(p1, t1, p2, t2, p3, t3));

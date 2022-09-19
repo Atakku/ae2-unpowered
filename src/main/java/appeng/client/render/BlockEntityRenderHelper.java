@@ -95,6 +95,7 @@ public class BlockEntityRenderHelper {
      *
      * @param spacing Specifies how far apart the item and the item stack amount are rendered.
      */
+    @SuppressWarnings("resource")
     public static void renderItem2dWithAmount(PoseStack poseStack,
             MultiBufferSource buffers,
             AEKey what,

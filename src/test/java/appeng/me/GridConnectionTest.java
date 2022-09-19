@@ -17,6 +17,7 @@ import appeng.api.exceptions.SecurityConnectionException;
 import appeng.api.networking.IGridNode;
 import appeng.util.Platform;
 
+@SuppressWarnings("unchecked")
 class GridConnectionTest extends AbstractGridNodeTest {
 
     @Test

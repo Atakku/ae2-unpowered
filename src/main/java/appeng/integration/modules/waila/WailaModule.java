@@ -28,6 +28,7 @@ import appeng.integration.modules.waila.tile.CableBusDataProvider;
 
 public class WailaModule implements IWailaPlugin {
 
+    @SuppressWarnings("deprecation")
     public void register(IRegistrar registrar) {
         CableBusDataProvider.register(registrar);
 

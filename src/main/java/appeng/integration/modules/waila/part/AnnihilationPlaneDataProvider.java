@@ -10,6 +10,7 @@ import appeng.core.localization.InGameTooltip;
 import appeng.parts.automation.AnnihilationPlanePart;
 import appeng.parts.automation.IdentityAnnihilationPlanePart;
 
+@SuppressWarnings("deprecation")
 public class AnnihilationPlaneDataProvider implements IPartDataProvider {
 
     @Override

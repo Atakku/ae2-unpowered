@@ -49,7 +49,6 @@ public class SpatialIOPortBlock extends AEBaseEntityBlock<SpatialIOPortBlockEnti
         this.registerDefaultState(this.defaultBlockState().setValue(POWERED, false));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block blockIn, BlockPos fromPos,
             boolean isMoving) {

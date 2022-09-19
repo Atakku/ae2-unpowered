@@ -275,15 +275,6 @@ public class SpatialAnchorBlockEntity extends AENetworkBlockEntity
      */
     public void registerChunk(ChunkPos chunkPos) {
         this.chunks.add(chunkPos);
-        this.updatePowerConsumption();
-    }
-
-    private void updatePowerConsumption() {
-        if (isRemoved()) {
-            // Don't try to update the power usage if the node was already removed, or it will crash.
-            return;
-        }
-        int energy = 80 + this.chunks.size() * (this.chunks.size() + 1) / 2;
     }
 
     /**
@@ -334,7 +325,6 @@ public class SpatialAnchorBlockEntity extends AENetworkBlockEntity
             this.chunks.add(chunkPos);
         }
 
-        this.updatePowerConsumption();
         this.markForUpdate();
 
         return forced;
@@ -348,7 +338,6 @@ public class SpatialAnchorBlockEntity extends AENetworkBlockEntity
             this.chunks.remove(chunkPos);
         }
 
-        this.updatePowerConsumption();
         this.markForUpdate();
 
         return removed;

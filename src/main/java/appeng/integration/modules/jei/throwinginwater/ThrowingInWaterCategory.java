@@ -61,6 +61,7 @@ public class ThrowingInWaterCategory implements DisplayCategory<ThrowingInWaterD
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public List<Widget> setupDisplay(ThrowingInWaterDisplay display, Rectangle bounds) {
 
         List<Widget> widgets = new ArrayList<>();

@@ -28,6 +28,7 @@ public class CableModelProvider extends AE2BlockStateProvider {
 
     }
 
+    @SuppressWarnings("rawtypes")
     private void buildCableItems(ColoredItemDefinition cable, String baseModel, String textureBase) {
         for (AEColor color : AEColor.values()) {
             itemModels().withExistingParent(

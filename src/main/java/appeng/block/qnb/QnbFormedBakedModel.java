@@ -52,6 +52,7 @@ import appeng.client.render.cablebus.CubeBuilder;
 import appeng.core.AppEng;
 import appeng.core.definitions.AEBlocks;
 
+@SuppressWarnings("deprecation")
 class QnbFormedBakedModel implements BakedModel, FabricBakedModel {
 
     private static final Material TEXTURE_LINK = new Material(TextureAtlas.LOCATION_BLOCKS,
@@ -70,12 +71,6 @@ class QnbFormedBakedModel implements BakedModel, FabricBakedModel {
 
     private static final float DEFAULT_RENDER_MIN = 2.0f;
     private static final float DEFAULT_RENDER_MAX = 14.0f;
-
-    private static final float CORNER_POWERED_RENDER_MIN = 3.9f;
-    private static final float CORNER_POWERED_RENDER_MAX = 12.1f;
-
-    private static final float CENTER_POWERED_RENDER_MIN = -0.01f;
-    private static final float CENTER_POWERED_RENDER_MAX = 16.01f;
 
     private final BakedModel baseModel;
 

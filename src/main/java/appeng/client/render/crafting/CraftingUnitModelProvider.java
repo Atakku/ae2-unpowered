@@ -76,6 +76,7 @@ public class CraftingUnitModelProvider extends AbstractCraftingUnitModelProvider
         };
     }
 
+    @SuppressWarnings("deprecation")
     private static Material texture(String name) {
         var mat = new Material(TextureAtlas.LOCATION_BLOCKS,
                 new ResourceLocation(AppEng.MOD_ID, "block/crafting/" + name));

@@ -213,6 +213,7 @@ public class QuartzFixtureBlock extends AEBaseBlock implements IOrientableBlock,
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState blockState) {
         return blockState.getValue(WATERLOGGED).booleanValue()
                 ? Fluids.WATER.getSource(false)

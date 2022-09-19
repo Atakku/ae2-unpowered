@@ -94,7 +94,6 @@ public class ChestBlockEntity extends AENetworkInvBlockEntity
         ServerTickingBlockEntity, IStorageProvider {
 
     private static final int BIT_POWER_MASK = Byte.MIN_VALUE;
-    private static final int BIT_STATE_MASK = 0b111;
 
     private static final int BIT_CELL_STATE_MASK = 0b111;
     private static final int BIT_CELL_STATE_BITS = 3;

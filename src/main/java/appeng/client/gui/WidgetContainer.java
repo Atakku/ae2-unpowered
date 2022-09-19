@@ -373,6 +373,7 @@ public class WidgetContainer {
                 && mouseY >= area.getY() && mouseY < area.getY() + area.getHeight();
     }
 
+    @SuppressWarnings("resource")
     public AETextField addTextField(String id) {
         var searchField = new AETextField(Minecraft.getInstance().font,
                 0, 0, 0, 0);

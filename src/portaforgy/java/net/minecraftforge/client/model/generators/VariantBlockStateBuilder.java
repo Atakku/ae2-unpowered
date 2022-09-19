@@ -299,6 +299,7 @@ public class VariantBlockStateBuilder implements IGeneratedBlockstate {
         }
 
         @Override
+        @SuppressWarnings({"rawtypes", "unchecked"})
         public String toString() {
             StringBuilder ret = new StringBuilder();
             for (Map.Entry<Property<?>, Comparable<?>> entry : setStates.entrySet()) {

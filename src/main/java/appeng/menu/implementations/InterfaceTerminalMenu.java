@@ -200,6 +200,7 @@ public class InterfaceTerminalMenu extends AEBaseMenu {
     }
 
     @Override
+    @SuppressWarnings("incomplete-switch")
     public void doAction(ServerPlayer player, InventoryAction action, int slot, long id) {
         final InvTracker inv = this.byId.get(id);
         if (inv == null) {

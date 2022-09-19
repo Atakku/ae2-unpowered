@@ -40,6 +40,7 @@ import appeng.core.AppEng;
  * A color applicator uses the base model, and extends it with additional layers that are colored according to the
  * selected color of the applicator.
  */
+@SuppressWarnings("deprecation")
 public class ColorApplicatorModel implements BasicUnbakedModel {
 
     private static final ResourceLocation MODEL_BASE = new ResourceLocation(AppEng.MOD_ID,

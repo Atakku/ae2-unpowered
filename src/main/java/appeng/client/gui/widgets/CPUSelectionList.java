@@ -169,6 +169,7 @@ public class CPUSelectionList extends GuiComponent implements ICompositeWidget {
     }
 
     @Override
+    @SuppressWarnings("resource")
     public void drawBackgroundLayer(PoseStack poseStack, int zIndex, Rect2i bounds, Point mouse) {
         var x = bounds.getX() + this.bounds.getX();
         var y = bounds.getY() + this.bounds.getY();

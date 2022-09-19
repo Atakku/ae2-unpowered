@@ -35,6 +35,7 @@ public class QuartzOreBlock extends AEBaseBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void spawnAfterBreak(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos,
             ItemStack itemStack) {
         super.spawnAfterBreak(blockState, serverLevel, blockPos, itemStack);

@@ -38,6 +38,7 @@ import mcp.mobius.waila.api.IServerDataProvider;
  * @version rv2
  * @since rv2
  */
+@SuppressWarnings("deprecation")
 public abstract class BaseDataProvider implements IComponentProvider, IServerDataProvider<BlockEntity> {
 
     public void appendBody(List<Component> tooltip, IBlockAccessor accessor, IPluginConfig config) {

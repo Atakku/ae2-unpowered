@@ -33,6 +33,7 @@ public class SpatialPylonBlock extends AEBaseEntityBlock<SpatialPylonBlockEntity
 
     public static final BooleanProperty POWERED_ON = BooleanProperty.create("powered_on");
 
+    @SuppressWarnings("deprecation")
     public SpatialPylonBlock() {
         super(defaultProps(AEMaterials.GLASS).lightLevel(state -> {
             return state.getValue(POWERED_ON) ? 8 : 0;
@@ -52,7 +53,6 @@ public class SpatialPylonBlock extends AEBaseEntityBlock<SpatialPylonBlockEntity
         return currentState.setValue(SpatialPylonBlock.POWERED_ON, poweredOn);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block blockIn, BlockPos fromPos,
             boolean isMoving) {

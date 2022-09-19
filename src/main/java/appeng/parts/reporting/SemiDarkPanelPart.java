@@ -50,7 +50,7 @@ public class SemiDarkPanelPart extends AbstractPanelPart {
 
     @Override
     public IPartModel getStaticModels() {
-        return this.isPowered() ? MODELS_ON : MODELS_OFF;
+        return MODELS_ON;
     }
 
 }

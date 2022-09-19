@@ -31,7 +31,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
 
 import appeng.api.implementations.IPowerChannelState;
-import appeng.api.implementations.parts.IMonitorPart;
 import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.parts.IPartCollisionHelper;
@@ -54,7 +53,7 @@ import appeng.util.InteractionUtil;
  * @version rv3
  * @since rv3
  */
-public abstract class AbstractReportingPart extends AEBasePart implements IMonitorPart, IPowerChannelState {
+public abstract class AbstractReportingPart extends AEBasePart implements IPowerChannelState {
 
     protected static final int POWERED_FLAG = 4;
     protected static final int CHANNEL_FLAG = 16;
@@ -139,7 +138,7 @@ public abstract class AbstractReportingPart extends AEBasePart implements IMonit
 
     @Override
     public final int getLightLevel() {
-        return this.blockLight(this.isPowered() ? this.isLightSource() ? 15 : 9 : 0);
+        return this.blockLight(this.isLightSource() ? 15 : 9);
     }
 
     @Override
@@ -178,34 +177,20 @@ public abstract class AbstractReportingPart extends AEBasePart implements IMonit
     }
 
     @Override
-    public final boolean isPowered() {
-        if (!isClientSide()) {
-            var node = getMainNode().getNode();
-            return node != null;
-        } else {
-            return (this.getClientFlags() & PanelPart.POWERED_FLAG) == PanelPart.POWERED_FLAG;
-        }
-    }
-
-    @Override
     public final boolean isActive() {
         if (!this.isLightSource()) {
             return (this.getClientFlags()
                     & (PanelPart.CHANNEL_FLAG | PanelPart.POWERED_FLAG)) == (PanelPart.CHANNEL_FLAG
                             | PanelPart.POWERED_FLAG);
-        } else {
-            return this.isPowered();
         }
+        return true;
     }
 
     protected IPartModel selectModel(IPartModel offModels, IPartModel onModels, IPartModel hasChannelModels) {
         if (this.isActive()) {
             return hasChannelModels;
-        } else if (this.isPowered()) {
-            return onModels;
-        } else {
-            return offModels;
         }
+        return onModels;
     }
 
     @Override

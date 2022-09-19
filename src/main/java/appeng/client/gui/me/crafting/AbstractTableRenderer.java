@@ -59,6 +59,7 @@ public abstract class AbstractTableRenderer<T> {
     private final int y;
     private GenericStack hoveredStack;
 
+    @SuppressWarnings("resource")
     public AbstractTableRenderer(AEBaseScreen<?> screen, int x, int y) {
         this.screen = screen;
         this.x = x;

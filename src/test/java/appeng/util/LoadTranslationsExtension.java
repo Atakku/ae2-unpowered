@@ -21,7 +21,6 @@ package appeng.util;
 import java.util.Collections;
 
 import org.junit.jupiter.api.extension.BeforeAllCallback;
-import org.junit.jupiter.api.extension.Extension;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
 import net.minecraft.client.resources.language.ClientLanguage;
@@ -30,7 +29,7 @@ import net.minecraft.locale.Language;
 
 import appeng.client.gui.MockResourceManager;
 
-public class LoadTranslationsExtension implements Extension, BeforeAllCallback {
+public class LoadTranslationsExtension implements BeforeAllCallback {
     @Override
     public void beforeAll(ExtensionContext context) throws Exception {
 

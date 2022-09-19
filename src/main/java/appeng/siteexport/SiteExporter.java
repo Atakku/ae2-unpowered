@@ -192,6 +192,7 @@ public final class SiteExporter {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     private static void dumpColoredItem(ColoredItemDefinition itemDefinition, SiteExportWriter siteExport) {
         var baseItem = itemDefinition.item(AEColor.TRANSPARENT);
         if (baseItem == null) {

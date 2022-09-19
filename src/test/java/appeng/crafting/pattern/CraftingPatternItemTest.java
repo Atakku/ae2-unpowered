@@ -19,7 +19,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -104,50 +103,5 @@ class CraftingPatternItemTest {
 
         return AEItems.CRAFTING_PATTERN.asItem().decode(
                 AEItemKey.of(AEItems.CRAFTING_PATTERN, tag), level);
-    }
-
-    private static class TestRecipe implements CraftingRecipe {
-        public boolean acceptAssemble = true;
-
-        @Override
-        public RecipeType<?> getType() {
-            return RecipeType.CRAFTING;
-        }
-
-        @Override
-        public boolean matches(CraftingContainer container, Level level) {
-            for (int i = 2; i < container.getContainerSize(); i++) {
-                if (!container.getItem(i).isEmpty()) {
-                    return false;
-                }
-            }
-            return container.getItem(0).getItem() == Items.TORCH
-                    && container.getItem(1).getItem() == Items.DIAMOND;
-        }
-
-        @Override
-        public ItemStack assemble(CraftingContainer container) {
-            return getResultItem();
-        }
-
-        @Override
-        public boolean canCraftInDimensions(int width, int height) {
-            return width >= 3 && height >= 3;
-        }
-
-        @Override
-        public ItemStack getResultItem() {
-            return new ItemStack(Items.STICK);
-        }
-
-        @Override
-        public ResourceLocation getId() {
-            return TEST_RECIPE_ID;
-        }
-
-        @Override
-        public RecipeSerializer<?> getSerializer() {
-            throw new UnsupportedOperationException();
-        }
     }
 }

@@ -123,6 +123,7 @@ public abstract class AEBaseEntityBlock<T extends AEBaseBlockEntity> extends AEB
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (newState.getBlock() == state.getBlock()) {
             return; // Just a block state change
@@ -153,6 +154,7 @@ public abstract class AEBaseEntityBlock<T extends AEBaseBlockEntity> extends AEB
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public boolean triggerEvent(BlockState state, Level level, BlockPos pos, int eventID,
             int eventParam) {
         super.triggerEvent(state, level, pos, eventID, eventParam);
@@ -268,6 +270,7 @@ public abstract class AEBaseEntityBlock<T extends AEBaseBlockEntity> extends AEB
      */
     @Override
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+        @SuppressWarnings("deprecation")
         var drops = super.getDrops(state, builder);
         for (var drop : drops) {
             if (drop.getItem() instanceof BlockItem blockItem && blockItem.getBlock() == this) {

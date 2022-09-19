@@ -224,12 +224,6 @@ public class ManagedGridNode implements IManagedGridNode {
     }
 
     @Override
-    public boolean isPowered() {
-        var grid = getGrid();
-        return grid != null && grid.getEnergyService().isNetworkPowered();
-    }
-
-    @Override
     public boolean hasGridBooted() {
         if (this.node == null) {
             return false;

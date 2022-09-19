@@ -255,13 +255,7 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
             return (this.state & BIT_POWER_MASK) == BIT_POWER_MASK;
         }
 
-        boolean gridPowered = this.getAECurrentPower() > 64;
-
-        if (!gridPowered) {
-            gridPowered = this.getMainNode().isPowered();
-        }
-
-        return super.getAECurrentPower() > 1 || gridPowered;
+        return true;
     }
 
     @Override

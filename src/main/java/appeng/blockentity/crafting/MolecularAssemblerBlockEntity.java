@@ -540,7 +540,7 @@ public class MolecularAssemblerBlockEntity extends AENetworkInvBlockEntity
 
             var grid = getMainNode().getGrid();
             if (grid != null) {
-                newState = this.getMainNode().isPowered();
+                newState = true;
             }
 
             if (newState != this.isPowered) {

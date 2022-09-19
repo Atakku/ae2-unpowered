@@ -146,10 +146,7 @@ public class SpatialPylonBlockEntity extends AENetworkBlockEntity implements IAE
                 default -> this.displayBits = 0;
             }
 
-            if (this.getMainNode().isPowered()) {
-                this.displayBits |= DISPLAY_POWERED_ENABLED;
-            }
-
+            this.displayBits |= DISPLAY_POWERED_ENABLED;
             if (this.cluster.isValid() && this.getMainNode().isOnline()) {
                 this.displayBits |= DISPLAY_ENABLED;
             }

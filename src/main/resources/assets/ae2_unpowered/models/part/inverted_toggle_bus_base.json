@@ -1,0 +1,6 @@
+{
+  "parent": "ae2_unpowered:part/toggle_bus_base",
+  "textures": {
+    "bus": "ae2_unpowered:part/inverted_toggle_bus"
+  }
+}

@@ -37,7 +37,7 @@ public class HotkeyPacket extends BasePacket {
         var locatingServices = HotkeyActions.REGISTRY.get(hotkey);
         if (locatingServices == null) {
             player.sendMessage(
-                    PlayerMessages.UnknownHotkey.text().copy().append(new TranslatableComponent("key.ae2." + hotkey)),
+                    PlayerMessages.UnknownHotkey.text().copy().append(new TranslatableComponent("key.ae2_unpowered." + hotkey)),
                     Util.NIL_UUID);
             AELog.warn("Player %s tried using unknown hotkey \"%s\"", player, hotkey);
             return;

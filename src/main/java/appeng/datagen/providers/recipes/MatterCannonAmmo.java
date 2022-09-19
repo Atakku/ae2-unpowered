@@ -39,10 +39,10 @@ record MatterCannonAmmo(ResourceLocation id, TagKey<Item> tag, Item item, float 
         JsonArray conditions = new JsonArray();
         if (tag != null) {
             json.add("ammo", Ingredient.of(tag).toJson());
-            json.addProperty("ae2:has_tag", tag.location().toString());
+            json.addProperty("ae2_unpowered:has_tag", tag.location().toString());
         } else if (item != null) {
             json.add("ammo", Ingredient.of(item).toJson());
-            json.addProperty("ae2:has_item", Registry.ITEM.getKey(item).toString());
+            json.addProperty("ae2_unpowered:has_item", Registry.ITEM.getKey(item).toString());
         }
         json.addProperty("weight", this.weight);
         json.add("conditions", conditions);

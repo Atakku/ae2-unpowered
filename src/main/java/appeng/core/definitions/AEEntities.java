@@ -79,11 +79,11 @@ public final class AEEntities {
             MobCategory classification,
             Consumer<Builder<T>> customizer) {
 
-        String registryLoc = "ae2:" + id;
+        String registryLoc = "ae2_unpowered:" + id;
         ENTITY_ENGLISH_NAMES.put(id, englishName);
         Builder<T> builder = Builder.of(entityFactory, classification);
         customizer.accept(builder);
-        // Temporarily disable the data fixer check to avoid the annoying "no data fixer registered for ae2:xxx".
+        // Temporarily disable the data fixer check to avoid the annoying "no data fixer registered for ae2_unpowered:xxx".
         boolean prev = SharedConstants.CHECK_DATA_FIXER_SCHEMA;
         SharedConstants.CHECK_DATA_FIXER_SCHEMA = false;
         EntityType<T> result = builder.build(registryLoc);

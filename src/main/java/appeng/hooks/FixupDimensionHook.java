@@ -38,8 +38,8 @@ public final class FixupDimensionHook {
         }
 
         var dimensions = worldGenSettings.getCompound("dimensions");
-        if (dimensions.contains("ae2:spatial_storage")) {
-            dimensions.remove("ae2:spatial_storage");
+        if (dimensions.contains("ae2_unpowered:spatial_storage")) {
+            dimensions.remove("ae2_unpowered:spatial_storage");
             AELog.debug("Removed AE2 spatial storage before DFU can 'fix' it");
         } else {
             AELog.warn("AE2 spatial storage dimension missing. It will be re-added.");
@@ -59,15 +59,15 @@ public final class FixupDimensionHook {
         }
 
         var dimensions = worldGenSettings.getCompound("dimensions");
-        if (!dimensions.contains("ae2:spatial_storage")) {
+        if (!dimensions.contains("ae2_unpowered:spatial_storage")) {
             AELog.debug("Re-adding spatial storage NBT to world generation settings");
 
             var spatialStorage = new CompoundTag();
-            spatialStorage.putString("type", "ae2:spatial_storage");
+            spatialStorage.putString("type", "ae2_unpowered:spatial_storage");
             var generator = new CompoundTag();
-            generator.putString("type", "ae2:spatial_storage");
+            generator.putString("type", "ae2_unpowered:spatial_storage");
             spatialStorage.put("generator", generator);
-            dimensions.put("ae2:spatial_storage", spatialStorage);
+            dimensions.put("ae2_unpowered:spatial_storage", spatialStorage);
         }
     }
 }

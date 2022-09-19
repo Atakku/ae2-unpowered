@@ -43,13 +43,13 @@ public class LocalizationProvider implements IAE2DataProvider {
     @Override
     public final void run(HashCache cache) {
         for (var block : AEBlocks.getBlocks()) {
-            add("block.ae2." + block.id().getPath(), block.getEnglishName());
+            add("block.ae2_unpowered." + block.id().getPath(), block.getEnglishName());
         }
         for (var item : AEItems.getItems()) {
-            add("item.ae2." + item.id().getPath(), item.getEnglishName());
+            add("item.ae2_unpowered." + item.id().getPath(), item.getEnglishName());
         }
         for (var entry : AEEntities.ENTITY_ENGLISH_NAMES.entrySet()) {
-            add("entity.ae2." + entry.getKey(), entry.getValue());
+            add("entity.ae2_unpowered." + entry.getKey(), entry.getValue());
         }
 
         addEnum(GuiText.class);
@@ -83,65 +83,65 @@ public class LocalizationProvider implements IAE2DataProvider {
     }
 
     private void generateLocalizations() {
-        add("ae2.permission_denied", "You lack permission to access this.");
-        add("biome.ae2.spatial_storage", "Spatial Storage");
-        add("commands.ae2.ChunkLoggerOff", "Chunk Logging is now off");
-        add("commands.ae2.ChunkLoggerOn", "Chunk Logging is now on");
-        add("commands.ae2.permissions", "You do not have adequate permissions to run this command.");
-        add("commands.ae2.usage",
-                "Commands provided by Applied Energistics 2 - use /ae2 list for a list, and /ae2 help _____ for help with a command.");
-        add("gui.ae2.PatternEncoding.primary_processing_result_hint",
+        add("ae2_unpowered.permission_denied", "You lack permission to access this.");
+        add("biome.ae2_unpowered.spatial_storage", "Spatial Storage");
+        add("commands.ae2_unpowered.ChunkLoggerOff", "Chunk Logging is now off");
+        add("commands.ae2_unpowered.ChunkLoggerOn", "Chunk Logging is now on");
+        add("commands.ae2_unpowered.permissions", "You do not have adequate permissions to run this command.");
+        add("commands.ae2_unpowered.usage",
+                "Commands provided by Applied Energistics 2 - use /ae2_unpowered list for a list, and /ae2_unpowered help _____ for help with a command.");
+        add("gui.ae2_unpowered.PatternEncoding.primary_processing_result_hint",
                 "Can be requested through the automated crafting system.");
-        add("gui.ae2.PatternEncoding.primary_processing_result_tooltip", "Primary Processing Result");
-        add("gui.ae2.PatternEncoding.secondary_processing_result_hint",
+        add("gui.ae2_unpowered.PatternEncoding.primary_processing_result_tooltip", "Primary Processing Result");
+        add("gui.ae2_unpowered.PatternEncoding.secondary_processing_result_hint",
                 "Can not be directly requested through the automated crafting system, but will be used before stored items in multi-step recipes.");
-        add("gui.ae2.PatternEncoding.secondary_processing_result_tooltip", "Secondary Processing Result");
-        add("gui.ae2.security.build.name", "Build");
-        add("gui.ae2.security.build.tip",
+        add("gui.ae2_unpowered.PatternEncoding.secondary_processing_result_tooltip", "Secondary Processing Result");
+        add("gui.ae2_unpowered.security.build.name", "Build");
+        add("gui.ae2_unpowered.security.build.tip",
                 "User can modify the physical structure of the network, and make configuration changes.");
-        add("gui.ae2.security.craft.name", "Craft");
-        add("gui.ae2.security.craft.tip", "User can initiate new crafting jobs.");
-        add("gui.ae2.security.extract.name", "Withdraw");
-        add("gui.ae2.security.extract.tip", "User is allowed to remove items from storage.");
-        add("gui.ae2.security.inject.name", "Deposit");
-        add("gui.ae2.security.inject.tip", "User is allowed to store new items into storage.");
-        add("gui.ae2.security.security.name", "Security");
-        add("gui.ae2.security.security.tip", "User can access and modify the security terminal of the network.");
-        add("gui.ae2.units.appliedenergistics", "AE");
-        add("gui.ae2.units.tr", "E");
-        add("itemGroup.ae2.facades", "Applied Energistics 2 - Facades");
-        add("itemGroup.ae2.main", "Applied Energistics 2");
-        add("key.ae2.category", "Applied Energistics 2");
-        add("key.ae2.portable_fluid_cell", "Open Portable Fluid Cell");
-        add("key.ae2.portable_item_cell", "Open Portable Item Cell");
-        add("key.ae2.wireless_terminal", "Open Wireless Terminal");
+        add("gui.ae2_unpowered.security.craft.name", "Craft");
+        add("gui.ae2_unpowered.security.craft.tip", "User can initiate new crafting jobs.");
+        add("gui.ae2_unpowered.security.extract.name", "Withdraw");
+        add("gui.ae2_unpowered.security.extract.tip", "User is allowed to remove items from storage.");
+        add("gui.ae2_unpowered.security.inject.name", "Deposit");
+        add("gui.ae2_unpowered.security.inject.tip", "User is allowed to store new items into storage.");
+        add("gui.ae2_unpowered.security.security.name", "Security");
+        add("gui.ae2_unpowered.security.security.tip", "User can access and modify the security terminal of the network.");
+        add("gui.ae2_unpowered.units.appliedenergistics", "AE");
+        add("gui.ae2_unpowered.units.tr", "E");
+        add("itemGroup.ae2_unpowered.facades", "Applied Energistics 2 - Facades");
+        add("itemGroup.ae2_unpowered.main", "Applied Energistics 2");
+        add("key.ae2_unpowered.category", "Applied Energistics 2");
+        add("key.ae2_unpowered.portable_fluid_cell", "Open Portable Fluid Cell");
+        add("key.ae2_unpowered.portable_item_cell", "Open Portable Item Cell");
+        add("key.ae2_unpowered.wireless_terminal", "Open Wireless Terminal");
         add("key.toggle_focus.desc", "Toggle search box focus");
-        add("stat.ae2.items_extracted", "Items extracted from ME Storage");
-        add("stat.ae2.items_inserted", "Items added to ME Storage");
-        add("theoneprobe.ae2.channels", "%1$d Channels");
-        add("theoneprobe.ae2.channels_of", "%1$d of %2$d Channels");
-        add("theoneprobe.ae2.contains", "Contains");
-        add("theoneprobe.ae2.crafting", "Crafting: %1$s");
-        add("theoneprobe.ae2.device_missing_channel", "Device Missing Channel");
-        add("theoneprobe.ae2.device_offline", "Device Offline");
-        add("theoneprobe.ae2.device_online", "Device Online");
-        add("theoneprobe.ae2.locked", "Locked");
-        add("theoneprobe.ae2.nested_p2p_tunnel", "Error: Nested P2P Tunnel");
-        add("theoneprobe.ae2.p2p_frequency", "Frequency: %1$s");
-        add("theoneprobe.ae2.p2p_input_many_outputs", "Linked (Input Side) - %d Outputs");
-        add("theoneprobe.ae2.p2p_input_one_output", "Linked (Input Side)");
-        add("theoneprobe.ae2.p2p_output", "Linked (Output Side)");
-        add("theoneprobe.ae2.p2p_unlinked", "Unlinked");
-        add("theoneprobe.ae2.showing", "Showing");
-        add("theoneprobe.ae2.stored_energy", "%1$d / %2$d");
-        add("theoneprobe.ae2.unlocked", "Unlocked");
+        add("stat.ae2_unpowered.items_extracted", "Items extracted from ME Storage");
+        add("stat.ae2_unpowered.items_inserted", "Items added to ME Storage");
+        add("theoneprobe.ae2_unpowered.channels", "%1$d Channels");
+        add("theoneprobe.ae2_unpowered.channels_of", "%1$d of %2$d Channels");
+        add("theoneprobe.ae2_unpowered.contains", "Contains");
+        add("theoneprobe.ae2_unpowered.crafting", "Crafting: %1$s");
+        add("theoneprobe.ae2_unpowered.device_missing_channel", "Device Missing Channel");
+        add("theoneprobe.ae2_unpowered.device_offline", "Device Offline");
+        add("theoneprobe.ae2_unpowered.device_online", "Device Online");
+        add("theoneprobe.ae2_unpowered.locked", "Locked");
+        add("theoneprobe.ae2_unpowered.nested_p2p_tunnel", "Error: Nested P2P Tunnel");
+        add("theoneprobe.ae2_unpowered.p2p_frequency", "Frequency: %1$s");
+        add("theoneprobe.ae2_unpowered.p2p_input_many_outputs", "Linked (Input Side) - %d Outputs");
+        add("theoneprobe.ae2_unpowered.p2p_input_one_output", "Linked (Input Side)");
+        add("theoneprobe.ae2_unpowered.p2p_output", "Linked (Output Side)");
+        add("theoneprobe.ae2_unpowered.p2p_unlinked", "Unlinked");
+        add("theoneprobe.ae2_unpowered.showing", "Showing");
+        add("theoneprobe.ae2_unpowered.stored_energy", "%1$d / %2$d");
+        add("theoneprobe.ae2_unpowered.unlocked", "Unlocked");
     }
 
     private void save(HashCache cache, Map<String, String> localizations) {
         wasSaved = true;
 
         try {
-            var path = this.generator.getOutputFolder().resolve("assets/ae2/lang/en_us.json");
+            var path = this.generator.getOutputFolder().resolve("assets/ae2_unpowered/lang/en_us.json");
 
             // Dump the translation in ascending order
             var sorted = new TreeMap<>(localizations);

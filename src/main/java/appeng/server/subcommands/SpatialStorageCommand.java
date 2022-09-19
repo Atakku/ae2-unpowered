@@ -280,9 +280,9 @@ public class SpatialStorageCommand implements ISubCommand {
             String origin = formatBlockPos(originPos, ",");
 
             Component infoLink = new TextComponent("Plot #" + plot.getId())
-                    .withStyle(makeCommandLink("/ae2 spatial info " + plot.getId(), "Click to show details"));
+                    .withStyle(makeCommandLink("/ae2_unpowered spatial info " + plot.getId(), "Click to show details"));
             Component tpLink = new TextComponent("Origin: " + origin)
-                    .withStyle(makeCommandLink("/ae2 spatial tp " + plot.getId(), "Click to teleport into plot"));
+                    .withStyle(makeCommandLink("/ae2_unpowered spatial tp " + plot.getId(), "Click to teleport into plot"));
 
             MutableComponent message = new TextComponent("").append(infoLink)
                     .append(" Size: " + size + " ").append(tpLink);

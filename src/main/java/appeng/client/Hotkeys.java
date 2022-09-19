@@ -12,7 +12,7 @@ public class Hotkeys {
     private static final HashMap<String, Hotkey> HOTKEYS = new HashMap<>();
 
     private static Hotkey createHotkey(String id) {
-        return new Hotkey(id, new KeyMapping("key.ae2." + id, GLFW.GLFW_KEY_UNKNOWN, "key.ae2.category"));
+        return new Hotkey(id, new KeyMapping("key.ae2_unpowered." + id, GLFW.GLFW_KEY_UNKNOWN, "key.ae2_unpowered.category"));
     }
 
     private static void registerHotkey(Hotkey hotkey) {

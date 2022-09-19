@@ -223,7 +223,7 @@ public enum GuiText implements LocalizationEnum {
     private final Component text;
 
     GuiText(@Nullable String englishText) {
-        this.root = "gui.ae2";
+        this.root = "gui.ae2_unpowered";
         this.englishText = englishText;
         this.text = new TranslatableComponent(getTranslationKey());
     }

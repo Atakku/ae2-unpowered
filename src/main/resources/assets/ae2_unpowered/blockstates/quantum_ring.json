@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "formed=false": {
+      "model": "ae2_unpowered:block/qnb/ring"
+    },
+    "formed=true": {
+      "model": "ae2_unpowered:block/qnb/qnb_formed"
+    }
+  }
+}

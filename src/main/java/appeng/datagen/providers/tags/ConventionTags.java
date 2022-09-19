@@ -50,12 +50,12 @@ public final class ConventionTags {
     public static TagKey<Item> SILICON = tag("c:silicon");
 
     // Includes purified versions of certus/nether and the natural ones
-    public static TagKey<Item> ALL_QUARTZ = tag("ae2:all_quartz");
+    public static TagKey<Item> ALL_QUARTZ = tag("ae2_unpowered:all_quartz");
     // Includes both certus/nether quartz dust
-    public static TagKey<Item> ALL_QUARTZ_DUST = tag("ae2:all_quartz_dust");
+    public static TagKey<Item> ALL_QUARTZ_DUST = tag("ae2_unpowered:all_quartz_dust");
 
     // Includes charged, synthetic/purified and natural certus quartz
-    public static TagKey<Item> ALL_CERTUS_QUARTZ = tag("ae2:all_certus_quartz");
+    public static TagKey<Item> ALL_CERTUS_QUARTZ = tag("ae2_unpowered:all_certus_quartz");
     public static TagKey<Item> CERTUS_QUARTZ = tag("c:certus_quartz");
     public static TagKey<Item> CERTUS_QUARTZ_ORE = tag("c:certus_quartz_ores");
     public static TagKey<Block> CERTUS_QUARTZ_ORE_BLOCK = blockTag("c:certus_quartz_ores");
@@ -63,12 +63,12 @@ public final class ConventionTags {
     public static TagKey<Item> CERTUS_QUARTZ_DUST = tag("c:certus_quartz_dusts");
 
     // Includes synthetic/purified
-    public static TagKey<Item> ALL_NETHER_QUARTZ = tag("ae2:all_nether_quartz");
+    public static TagKey<Item> ALL_NETHER_QUARTZ = tag("ae2_unpowered:all_nether_quartz");
     public static TagKey<Item> NETHER_QUARTZ = tag("c:quartz");
     public static TagKey<Item> NETHER_QUARTZ_ORE = tag("c:quartz_ores");
 
     // Includes synthetic/purified
-    public static TagKey<Item> ALL_FLUIX = tag("ae2:all_fluix");
+    public static TagKey<Item> ALL_FLUIX = tag("ae2_unpowered:all_fluix");
     public static TagKey<Item> FLUIX_DUST = tag("c:fluix_dusts");
     public static TagKey<Item> FLUIX_CRYSTAL = tag("c:fluix");
 
@@ -97,23 +97,23 @@ public final class ConventionTags {
     public static TagKey<Item> COBBLESTONE = tag("c:cobblestone");
     public static TagKey<Item> GLASS = tag("c:glass");
 
-    public static TagKey<Item> GLASS_CABLE = tag("ae2:glass_cable");
-    public static TagKey<Item> SMART_CABLE = tag("ae2:smart_cable");
-    public static TagKey<Item> COVERED_CABLE = tag("ae2:covered_cable");
-    public static TagKey<Item> COVERED_DENSE_CABLE = tag("ae2:covered_dense_cable");
-    public static TagKey<Item> SMART_DENSE_CABLE = tag("ae2:smart_dense_cable");
-    public static TagKey<Item> ILLUMINATED_PANEL = tag("ae2:illuminated_panel");
-    public static TagKey<Item> INTERFACE = tag("ae2:interface");
-    public static TagKey<Item> PATTERN_PROVIDER = tag("ae2:pattern_provider");
-    public static TagKey<Item> QUARTZ_AXE = tag("ae2:quartz_axe");
-    public static TagKey<Item> QUARTZ_HOE = tag("ae2:quartz_hoe");
-    public static TagKey<Item> QUARTZ_PICK = tag("ae2:quartz_pickaxe");
-    public static TagKey<Item> QUARTZ_SHOVEL = tag("ae2:quartz_shovel");
-    public static TagKey<Item> QUARTZ_SWORD = tag("ae2:quartz_sword");
-    public static TagKey<Item> QUARTZ_WRENCH = tag("ae2:quartz_wrench");
-    public static TagKey<Item> QUARTZ_KNIFE = tag("ae2:knife");
-    public static TagKey<Item> PAINT_BALLS = tag("ae2:paint_balls");
-    public static TagKey<Item> MEMORY_CARDS = tag("ae2:memory_cards");
+    public static TagKey<Item> GLASS_CABLE = tag("ae2_unpowered:glass_cable");
+    public static TagKey<Item> SMART_CABLE = tag("ae2_unpowered:smart_cable");
+    public static TagKey<Item> COVERED_CABLE = tag("ae2_unpowered:covered_cable");
+    public static TagKey<Item> COVERED_DENSE_CABLE = tag("ae2_unpowered:covered_dense_cable");
+    public static TagKey<Item> SMART_DENSE_CABLE = tag("ae2_unpowered:smart_dense_cable");
+    public static TagKey<Item> ILLUMINATED_PANEL = tag("ae2_unpowered:illuminated_panel");
+    public static TagKey<Item> INTERFACE = tag("ae2_unpowered:interface");
+    public static TagKey<Item> PATTERN_PROVIDER = tag("ae2_unpowered:pattern_provider");
+    public static TagKey<Item> QUARTZ_AXE = tag("ae2_unpowered:quartz_axe");
+    public static TagKey<Item> QUARTZ_HOE = tag("ae2_unpowered:quartz_hoe");
+    public static TagKey<Item> QUARTZ_PICK = tag("ae2_unpowered:quartz_pickaxe");
+    public static TagKey<Item> QUARTZ_SHOVEL = tag("ae2_unpowered:quartz_shovel");
+    public static TagKey<Item> QUARTZ_SWORD = tag("ae2_unpowered:quartz_sword");
+    public static TagKey<Item> QUARTZ_WRENCH = tag("ae2_unpowered:quartz_wrench");
+    public static TagKey<Item> QUARTZ_KNIFE = tag("ae2_unpowered:knife");
+    public static TagKey<Item> PAINT_BALLS = tag("ae2_unpowered:paint_balls");
+    public static TagKey<Item> MEMORY_CARDS = tag("ae2_unpowered:memory_cards");
 
     /**
      * Used to identify items that act as wrenches.

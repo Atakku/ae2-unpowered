@@ -53,6 +53,6 @@ public enum PlayerMessages implements LocalizationEnum {
 
     @Override
     public String getTranslationKey() {
-        return "chat.ae2." + name();
+        return "chat.ae2_unpowered." + name();
     }
 }

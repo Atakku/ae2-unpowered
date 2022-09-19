@@ -179,7 +179,7 @@ public enum ButtonToolTips implements LocalizationEnum {
 
     @Override
     public String getTranslationKey() {
-        return "gui.tooltips.ae2." + name();
+        return "gui.tooltips.ae2_unpowered." + name();
     }
 
     @Override

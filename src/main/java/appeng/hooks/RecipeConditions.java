@@ -20,7 +20,7 @@ public class RecipeConditions {
             return true;
         }
 
-        var hasTagCondition = recipe.getAsJsonPrimitive("ae2:has_tag");
+        var hasTagCondition = recipe.getAsJsonPrimitive("ae2_unpowered:has_tag");
         if (hasTagCondition != null) {
             var tagId = new ResourceLocation(hasTagCondition.getAsString());
 
@@ -31,7 +31,7 @@ public class RecipeConditions {
             }
         }
 
-        var hasItemCondition = recipe.getAsJsonPrimitive("ae2:has_item");
+        var hasItemCondition = recipe.getAsJsonPrimitive("ae2_unpowered:has_item");
         if (hasItemCondition != null) {
             var itemId = new ResourceLocation(hasItemCondition.getAsString());
             if (!Registry.ITEM.containsKey(itemId)) {

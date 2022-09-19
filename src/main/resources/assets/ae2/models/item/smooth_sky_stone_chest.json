@@ -1,7 +1,0 @@
-{
-  "parent": "ae2:item/sky_stone_chest",
-  "textures": {
-    "particle": "ae2:models/skyblockchest",
-    "0": "ae2:models/skyblockchest"
-  }
-}

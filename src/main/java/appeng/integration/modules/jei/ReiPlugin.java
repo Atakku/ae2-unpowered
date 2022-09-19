@@ -90,7 +90,7 @@ public class ReiPlugin implements REIClientPlugin {
 
     @Override
     public String getPluginProviderName() {
-        return "AE2";
+        return "ae2_unpowered";
     }
 
     @Override

@@ -30,7 +30,7 @@ import appeng.blockentity.AEBaseBlockEntity;
 import appeng.util.Platform;
 
 public final class AELog {
-    private static final String LOGGER_PREFIX = "AE2:";
+    private static final String LOGGER_PREFIX = "ae2_unpowered:";
     private static final String SERVER_SUFFIX = "S";
     private static final String CLIENT_SUFFIX = "C";
 

@@ -1,0 +1,6 @@
+{
+  "parent": "ae2_unpowered:item/p2p_tunnel_base",
+  "textures": {
+    "type": "ae2_unpowered:part/p2p_tunnel_fluid"
+  }
+}

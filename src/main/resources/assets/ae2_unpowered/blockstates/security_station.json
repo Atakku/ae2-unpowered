@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "ae2_unpowered:block/security_station_off"
+    },
+    "powered=true": {
+      "model": "ae2_unpowered:block/security_station_on"
+    }
+  }
+}

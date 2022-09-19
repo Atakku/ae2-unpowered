@@ -1,0 +1,14 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "ae2_unpowered:item/matter_cannon"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [0, -90, 0]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [0, 90, 0]
+    }
+  }
+}

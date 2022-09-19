@@ -57,12 +57,12 @@ public class Crowdin {
     /**
      * Folder where en_us.json is
      */
-    private static final String SOURCE_FOLDER = "src/generated/resources/assets/ae2/lang";
+    private static final String SOURCE_FOLDER = "src/generated/resources/assets/ae2_unpowered/lang";
 
     /**
      * Folder where the translated JSON files are
      */
-    private static final String DESTINATION_FOLDER = "src/main/resources/assets/ae2/lang";
+    private static final String DESTINATION_FOLDER = "src/main/resources/assets/ae2_unpowered/lang";
 
     /**
      * We use a fake translations.csv to store our translations on Crowdin.

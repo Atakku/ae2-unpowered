@@ -46,7 +46,7 @@ import net.minecraft.world.level.ItemLike;
 public final class StorageCellModels {
 
     private static final ResourceLocation MODEL_CELL_DEFAULT = new ResourceLocation(
-            "ae2:block/drive/drive_cell");
+            "ae2_unpowered:block/drive/drive_cell");
 
     private static final Map<Item, ResourceLocation> registry = new IdentityHashMap<>();
 

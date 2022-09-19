@@ -1,0 +1,8 @@
+{
+  "parent": "ae2_unpowered:item/cable_interface",
+  "textures": {
+    "sides": "ae2_unpowered:part/monitor_sides",
+    "back": "ae2_unpowered:part/monitor_back",
+    "front": "ae2_unpowered:part/pattern_provider"
+  }
+}

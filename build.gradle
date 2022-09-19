@@ -199,7 +199,7 @@ dependencies {
 ////////////////////
 // Forge/Minecraft
 loom {
-    accessWidenerPath = file("src/main/resources/ae2.accesswidener")
+    accessWidenerPath = file("src/main/resources/ae2_unpowered.accesswidener")
 
     runs {
         client {
@@ -257,7 +257,7 @@ jar {
                 "Implementation-Version"  : "${project.version}",
                 "Implementation-Vendor"   : "TeamAppliedEnergistics",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : "ae2.mixins.json"
+                "MixinConfigs"            : "ae2_unpowered.mixins.json"
         ])
     }
 }
@@ -359,7 +359,7 @@ publishing {
 //        removeUnusedImports()
 //        toggleOffOn()
 //        eclipse().configFile 'codeformat/codeformat.xml'
-//        importOrderFile 'codeformat/ae2.importorder'
+//        importOrderFile 'codeformat/ae2_unpowered.importorder'
 //    }
 //
 //    format 'json', {

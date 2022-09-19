@@ -83,7 +83,6 @@ public class SpatialIOPortMenu extends AEBaseMenu {
                 var eg = grid.getEnergyService();
                 var sc = grid.getSpatialService();
                 this.setCurrentPower((long) (100.0 * eg.getStoredPower()));
-                this.setMaxPower((long) (100.0 * eg.getMaxStoredPower()));
                 this.setRequiredPower((long) (100.0 * sc.requiredPower()));
                 this.setEfficency((long) (100.0f * sc.currentEfficiency()));
 

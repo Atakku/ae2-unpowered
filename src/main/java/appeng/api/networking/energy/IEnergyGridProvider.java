@@ -92,19 +92,4 @@ public interface IEnergyGridProvider extends IGridNodeService {
      */
     @Nonnegative
     double getProviderStoredEnergy();
-
-    /**
-     * internal use only
-     *
-     * AE currently uses this to enqueue the next visited provider.
-     *
-     * There is no guarantee that this works on in a perfect way. It can be limited to the returns of the past
-     * {@link IEnergyGridProvider#providers()}, but not any future one discovered by visiting further providers.
-     *
-     * E.g. inject into the the lowest one first or extract from the highest one.
-     *
-     * @return the maximum amount stored.
-     */
-    @Nonnegative
-    double getProviderMaxEnergy();
 }

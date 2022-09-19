@@ -76,14 +76,8 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
 
     private static final double MAX_BUFFER_STORAGE = 800;
 
-    private static final Comparator<IEnergyGridProvider> COMPARATOR_HIGHEST_AMOUNT_STORED_FIRST = (o1, o2) -> Double
-            .compare(o2.getProviderStoredEnergy(), o1.getProviderStoredEnergy());
-
     private static final Comparator<IEnergyGridProvider> COMPARATOR_LOWEST_PERCENTAGE_FIRST = (o1, o2) -> {
-        final double percent1 = (o1.getProviderStoredEnergy() + 1) / (o1.getProviderMaxEnergy() + 1);
-        final double percent2 = (o2.getProviderStoredEnergy() + 1) / (o2.getProviderMaxEnergy() + 1);
-
-        return Double.compare(percent1, percent2);
+        return Double.compare(1, 1);
     };
 
     private static final Comparator<IAEPowerStorage> COMPARATOR_HIGHEST_PRIORITY_FIRST = (o1, o2) -> {
@@ -362,11 +356,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
     }
 
     @Override
-    public double getMaxStoredPower() {
-        return this.globalMaxPower;
-    }
-
-    @Override
     public double getEnergyDemand(double maxRequired) {
         final Queue<IEnergyGridProvider> toVisit = new PriorityQueue<>(COMPARATOR_LOWEST_PERCENTAGE_FIRST);
         final Set<IEnergyGridProvider> visited = new HashSet<>();
@@ -393,11 +382,6 @@ public class EnergyService implements IEnergyService, IEnergyGridProvider, IGrid
     @Override
     public double getProviderStoredEnergy() {
         return this.getStoredPower();
-    }
-
-    @Override
-    public double getProviderMaxEnergy() {
-        return this.getMaxStoredPower();
     }
 
     @Override

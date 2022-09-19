@@ -99,14 +99,6 @@ public interface IEnergyService extends IGridService, IEnergySource {
     double getStoredPower();
 
     /**
-     * this is should be considered an estimate, and not relied upon for real calculations.
-     *
-     * @return estimated available power.
-     */
-    @Nonnegative
-    double getMaxStoredPower();
-
-    /**
      * Calculation will be capped at maxRequired, this improves performance by limiting the number of nodes needed to
      * calculate the demand.
      *

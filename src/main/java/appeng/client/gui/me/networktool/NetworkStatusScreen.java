@@ -31,7 +31,6 @@ import appeng.api.client.AEStackRendering;
 import appeng.client.gui.AEBaseScreen;
 import appeng.client.gui.style.PaletteColor;
 import appeng.client.gui.style.ScreenStyle;
-import appeng.client.gui.widgets.CommonButtons;
 import appeng.client.gui.widgets.Scrollbar;
 import appeng.core.localization.GuiText;
 import appeng.menu.me.networktool.MachineGroup;
@@ -60,8 +59,6 @@ public class NetworkStatusScreen extends AEBaseScreen<NetworkStatusMenu> {
             Component title, ScreenStyle style) {
         super(menu, playerInventory, title, style);
         this.scrollbar = widgets.addScrollBar("scrollbar");
-
-        this.addToLeftToolbar(CommonButtons.togglePowerUnit());
     }
 
     @Override

@@ -25,7 +25,6 @@ import appeng.api.config.Settings;
 import appeng.api.config.YesNo;
 import appeng.client.gui.AEBaseScreen;
 import appeng.client.gui.style.ScreenStyle;
-import appeng.client.gui.widgets.CommonButtons;
 import appeng.client.gui.widgets.ServerSettingToggleButton;
 import appeng.client.gui.widgets.SettingToggleButton;
 import appeng.core.localization.GuiText;
@@ -39,7 +38,6 @@ public class SpatialAnchorScreen extends AEBaseScreen<SpatialAnchorMenu> {
     public SpatialAnchorScreen(SpatialAnchorMenu menu, Inventory playerInventory,
             Component title, ScreenStyle style) {
         super(menu, playerInventory, title, style);
-        this.addToLeftToolbar(CommonButtons.togglePowerUnit());
         this.addToLeftToolbar(this.overlayToggle = new ServerSettingToggleButton<>(
                 Settings.OVERLAY_MODE, YesNo.NO));
     }

@@ -572,7 +572,7 @@
   "item.ae2_unpowered.yellow_paint_ball": "Gul färgboll",
   "item.ae2_unpowered.yellow_smart_cable": "Gul smart ME-kabel",
   "item.ae2_unpowered.yellow_smart_dense_cable": "Gul kompakt smart ME-kabel",
-  "itemGroup.ae2_unpowered.facades": "Applied Energistics 2 - Fasader",
+  "itemGroup.ae2_unpowered.facades": "AE2: Unpowered - Fasader",
   "key.toggle_focus.desc": "Växla fokus för sökfältet",
   "stat.ae2_unpowered.items_extracted": "Extraherade föremål från ME-lagringar",
   "stat.ae2_unpowered.items_inserted": "Inmatade föremål i ME-lagringar",

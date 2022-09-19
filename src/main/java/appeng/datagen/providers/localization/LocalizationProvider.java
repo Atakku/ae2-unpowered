@@ -109,9 +109,9 @@ public class LocalizationProvider implements IAE2DataProvider {
         add("gui.ae2_unpowered.security.security.tip", "User can access and modify the security terminal of the network.");
         add("gui.ae2_unpowered.units.appliedenergistics", "AE");
         add("gui.ae2_unpowered.units.tr", "E");
-        add("itemGroup.ae2_unpowered.facades", "Applied Energistics 2 - Facades");
-        add("itemGroup.ae2_unpowered.main", "Applied Energistics 2");
-        add("key.ae2_unpowered.category", "Applied Energistics 2");
+        add("itemGroup.ae2_unpowered.facades", "AE2: Unpowered - Facades");
+        add("itemGroup.ae2_unpowered.main", "AE2: Unpowered");
+        add("key.ae2_unpowered.category", "AE2: Unpowered");
         add("key.ae2_unpowered.portable_fluid_cell", "Open Portable Fluid Cell");
         add("key.ae2_unpowered.portable_item_cell", "Open Portable Item Cell");
         add("key.ae2_unpowered.wireless_terminal", "Open Wireless Terminal");

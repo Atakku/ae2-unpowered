@@ -110,7 +110,7 @@ public class AdvancementGenerator implements IAE2DataProvider {
         var root = Advancement.Builder.advancement()
                 .display(
                         AEItems.CERTUS_QUARTZ_DUST,
-                        localization.component("achievement.ae2_unpowered.Root", "Applied Energistics"),
+                        localization.component("achievement.ae2_unpowered.Root", "AE2: Unpowered"),
                         localization.component("achievement.ae2_unpowered.Root.desc", "When a chest is simply not enough."),
                         AppEng.makeId("textures/block/sky_stone_brick.png"),
                         FrameType.TASK,
@@ -124,7 +124,7 @@ public class AdvancementGenerator implements IAE2DataProvider {
         var quartzCrystal = Advancement.Builder.advancement()
                 .display(
                         AEItems.CERTUS_QUARTZ_CRYSTAL,
-                        localization.component("achievement.ae2_unpowered.QuartzCrystal", "Applied Energistics 2"),
+                        localization.component("achievement.ae2_unpowered.QuartzCrystal", "AE2: Unpowered"),
                         localization.component("achievement.ae2_unpowered.QuartzCrystal.desc",
                                 "Obtain your first Certus Quartz Crystal."),
                         null /* background */,

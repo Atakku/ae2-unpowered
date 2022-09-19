@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "ae2_unpowered",
   "version": "${version}",
-  "name": "Applied Energistics 2",
+  "name": "AE2: Unpowered",
   "description": "A Mod about matter and using it to conquer the world..",
   "authors": ["TeamAppliedEnergistics", "Atakku"],
   "contact": {

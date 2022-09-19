@@ -658,7 +658,7 @@
   "item.ae2_unpowered.yellow_paint_ball": "Шарик с жёлтой краской",
   "item.ae2_unpowered.yellow_smart_cable": "МЭ умный жёлтый кабель",
   "item.ae2_unpowered.yellow_smart_dense_cable": "МЭ непрозрачный умный жёлтый кабель",
-  "itemGroup.ae2_unpowered.facades": "Applied Energistics 2  — Фасады",
+  "itemGroup.ae2_unpowered.facades": "AE2: Unpowered  — Фасады",
   "key.toggle_focus.desc": "Переключить фокусировку на поисковую строку",
   "stat.ae2_unpowered.items_extracted": "Извлечено предметов из МЭ хранилища",
   "stat.ae2_unpowered.items_inserted": "Добавлено предметов в МЭ хранилище",

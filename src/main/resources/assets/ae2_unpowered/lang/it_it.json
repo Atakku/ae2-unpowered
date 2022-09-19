@@ -501,7 +501,7 @@
   "item.ae2_unpowered.yellow_paint_ball": "Giallo Sfera di vernice",
   "item.ae2_unpowered.yellow_smart_cable": "Giallo Cavo intelligente ME",
   "item.ae2_unpowered.yellow_smart_dense_cable": "Giallo Cavo denso ME",
-  "itemGroup.ae2_unpowered.facades": "Applied Energistics 2 - Facciate",
+  "itemGroup.ae2_unpowered.facades": "AE2: Unpowered - Facciate",
   "stat.ae2_unpowered.items_extracted": "Oggetti estratti dal Deposito ME",
   "stat.ae2_unpowered.items_inserted": "Oggetti aggiunti al Deposito ME",
   "theoneprobe.ae2_unpowered.channels_of": "Canali %1$d di %2$d",

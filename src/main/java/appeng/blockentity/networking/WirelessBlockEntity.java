@@ -127,11 +127,6 @@ public class WirelessBlockEntity extends AENetworkInvBlockEntity implements IWir
     }
 
     @Override
-    public double getRange() {
-        return AEConfig.instance().wireless_getMaxRange(this.getBoosters());
-    }
-
-    @Override
     public boolean isActive() {
         if (isClientSide()) {
             return CHANNEL_FLAG == (this.getClientFlags() & CHANNEL_FLAG);

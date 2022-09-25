@@ -24,7 +24,6 @@ import net.minecraft.world.entity.player.Inventory;
 
 import appeng.client.gui.AEBaseScreen;
 import appeng.client.gui.style.ScreenStyle;
-import appeng.core.localization.GuiText;
 import appeng.menu.implementations.WirelessMenu;
 
 public class WirelessScreen extends AEBaseScreen<WirelessMenu> {
@@ -37,14 +36,7 @@ public class WirelessScreen extends AEBaseScreen<WirelessMenu> {
     @Override
     protected void updateBeforeRender() {
         super.updateBeforeRender();
-
-        Component rangeText = TextComponent.EMPTY;
-        if (menu.getRange() > 0) {
-            double rangeBlocks = menu.getRange() / 10.0;
-            rangeText = GuiText.WirelessRange.text(rangeBlocks);
-        }
-
-        setTextContent("range", rangeText);
+        setTextContent("range", new TextComponent("Range: Infinite"));
     }
 
 }

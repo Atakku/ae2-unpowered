@@ -112,23 +112,7 @@ public class WirelessTerminalMenuHost extends ItemMenuHost implements IPortableT
     }
 
     protected boolean testWap(IWirelessAccessPoint wap) {
-        double rangeLimit = wap.getRange();
-        rangeLimit *= rangeLimit;
-
-        var dc = wap.getLocation();
-
-        if (dc.getLevel() == this.getPlayer().level) {
-            var offX = dc.getPos().getX() - this.getPlayer().getX();
-            var offY = dc.getPos().getY() - this.getPlayer().getY();
-            var offZ = dc.getPos().getZ() - this.getPlayer().getZ();
-
-            final double r = offX * offX + offY * offY + offZ * offZ;
-            if (r < rangeLimit && this.sqRange > r && wap.isActive()) {
-                this.sqRange = r;
-                return true;
-            }
-        }
-        return false;
+        return wap.isActive();
     }
 
     @Override

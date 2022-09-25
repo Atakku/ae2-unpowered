@@ -40,10 +40,6 @@ public class WirelessMenu extends AEBaseMenu {
             .build("wireless");
 
     private final RestrictedInputSlot boosterSlot;
-    @GuiSync(1)
-    public long range = 0;
-    @GuiSync(2)
-    public long drain = 0;
 
     public WirelessMenu(int id, Inventory ip, WirelessBlockEntity te) {
         super(TYPE, id, ip, te);
@@ -58,25 +54,6 @@ public class WirelessMenu extends AEBaseMenu {
     public void broadcastChanges() {
         final int boosters = this.boosterSlot.getItem().isEmpty() ? 0 : this.boosterSlot.getItem().getCount();
 
-        this.setRange((long) (10 * AEConfig.instance().wireless_getMaxRange(boosters)));
-        this.setDrain((long) (100 * AEConfig.instance().wireless_getPowerDrain(boosters)));
-
         super.broadcastChanges();
-    }
-
-    public long getRange() {
-        return this.range;
-    }
-
-    private void setRange(long range) {
-        this.range = range;
-    }
-
-    public long getDrain() {
-        return this.drain;
-    }
-
-    private void setDrain(long drain) {
-        this.drain = drain;
     }
 }

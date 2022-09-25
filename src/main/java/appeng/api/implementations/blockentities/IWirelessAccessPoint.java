@@ -37,11 +37,6 @@ public interface IWirelessAccessPoint extends IActionHost {
     DimensionalBlockPos getLocation();
 
     /**
-     * @return max range for this WAP
-     */
-    double getRange();
-
-    /**
      * @return can you use this WAP?
      */
     boolean isActive();

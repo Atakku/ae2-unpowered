@@ -195,12 +195,12 @@ public class PortableCellItem extends AEBaseItem
     }
 
     @Override
-    public int getBytes(ItemStack cellItem) {
+    public long getBytes(ItemStack cellItem) {
         return this.tier.bytes();
     }
 
     @Override
-    public int getBytesPerType(ItemStack cellItem) {
+    public long getBytesPerType(ItemStack cellItem) {
         return this.tier.bytesPerType();
     }
 

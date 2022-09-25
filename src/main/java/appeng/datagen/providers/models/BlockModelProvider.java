@@ -41,6 +41,16 @@ public class BlockModelProvider extends AE2BlockStateProvider {
         builtInBlockModel("crafting/16k_storage_formed");
         builtInBlockModel("crafting/64k_storage_formed");
         builtInBlockModel("crafting/256k_storage_formed");
+        builtInBlockModel("crafting/1m_storage_formed");
+        builtInBlockModel("crafting/4m_storage_formed");
+        builtInBlockModel("crafting/16m_storage_formed");
+        builtInBlockModel("crafting/64m_storage_formed");
+        builtInBlockModel("crafting/256m_storage_formed");
+        builtInBlockModel("crafting/1g_storage_formed");
+        builtInBlockModel("crafting/4g_storage_formed");
+        builtInBlockModel("crafting/16g_storage_formed");
+        builtInBlockModel("crafting/64g_storage_formed");
+        builtInBlockModel("crafting/256g_storage_formed");
 
         // Spatial pylon uses a normal model for the item, special model for block
         simpleBlock(AEBlocks.SPATIAL_PYLON.block(), models().getBuilder(modelPath(AEBlocks.SPATIAL_PYLON)));
@@ -64,6 +74,16 @@ public class BlockModelProvider extends AE2BlockStateProvider {
         craftingModel(AEBlocks.CRAFTING_STORAGE_16K, "16k_storage");
         craftingModel(AEBlocks.CRAFTING_STORAGE_64K, "64k_storage");
         craftingModel(AEBlocks.CRAFTING_STORAGE_256K, "256k_storage");
+        craftingModel(AEBlocks.CRAFTING_STORAGE_1M, "1m_storage");
+        craftingModel(AEBlocks.CRAFTING_STORAGE_4M, "4m_storage");
+        craftingModel(AEBlocks.CRAFTING_STORAGE_16M, "16m_storage");
+        craftingModel(AEBlocks.CRAFTING_STORAGE_64M, "64m_storage");
+        craftingModel(AEBlocks.CRAFTING_STORAGE_256M, "256m_storage");
+        craftingModel(AEBlocks.CRAFTING_STORAGE_1G, "1g_storage");
+        craftingModel(AEBlocks.CRAFTING_STORAGE_4G, "4g_storage");
+        craftingModel(AEBlocks.CRAFTING_STORAGE_16G, "16g_storage");
+        craftingModel(AEBlocks.CRAFTING_STORAGE_64G, "64g_storage");
+        craftingModel(AEBlocks.CRAFTING_STORAGE_256G, "256g_storage");
 
         simpleBlockAndItem(AEBlocks.CELL_WORKBENCH, models().cubeBottomTop(
                 modelPath(AEBlocks.CELL_WORKBENCH),

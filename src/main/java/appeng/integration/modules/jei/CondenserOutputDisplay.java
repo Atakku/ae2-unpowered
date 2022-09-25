@@ -66,13 +66,23 @@ public class CondenserOutputDisplay implements Display {
         this.addViableComponent(condenserOutput, viableComponents, AEItems.CELL_COMPONENT_16K.stack());
         this.addViableComponent(condenserOutput, viableComponents, AEItems.CELL_COMPONENT_64K.stack());
         this.addViableComponent(condenserOutput, viableComponents, AEItems.CELL_COMPONENT_256K.stack());
+        this.addViableComponent(condenserOutput, viableComponents, AEItems.CELL_COMPONENT_1M.stack());
+        this.addViableComponent(condenserOutput, viableComponents, AEItems.CELL_COMPONENT_4M.stack());
+        this.addViableComponent(condenserOutput, viableComponents, AEItems.CELL_COMPONENT_16M.stack());
+        this.addViableComponent(condenserOutput, viableComponents, AEItems.CELL_COMPONENT_64M.stack());
+        this.addViableComponent(condenserOutput, viableComponents, AEItems.CELL_COMPONENT_256M.stack());
+        this.addViableComponent(condenserOutput, viableComponents, AEItems.CELL_COMPONENT_1G.stack());
+        this.addViableComponent(condenserOutput, viableComponents, AEItems.CELL_COMPONENT_4G.stack());
+        this.addViableComponent(condenserOutput, viableComponents, AEItems.CELL_COMPONENT_16G.stack());
+        this.addViableComponent(condenserOutput, viableComponents, AEItems.CELL_COMPONENT_64G.stack());
+        this.addViableComponent(condenserOutput, viableComponents, AEItems.CELL_COMPONENT_256G.stack());
         return viableComponents;
     }
 
     private void addViableComponent(CondenserOutput condenserOutput, List<EntryStack<ItemStack>> viableComponents,
             ItemStack itemStack) {
         IStorageComponent comp = (IStorageComponent) itemStack.getItem();
-        int storage = comp.getBytes(itemStack) * CondenserBlockEntity.BYTE_MULTIPLIER;
+        long storage = comp.getBytes(itemStack) * CondenserBlockEntity.BYTE_MULTIPLIER;
         if (storage >= condenserOutput.requiredPower) {
             viableComponents.add(EntryStacks.of(itemStack));
         }

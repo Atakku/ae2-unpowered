@@ -23,10 +23,8 @@ import net.minecraft.world.inventory.MenuType;
 
 import appeng.api.config.SecurityPermissions;
 import appeng.blockentity.networking.WirelessBlockEntity;
-import appeng.core.AEConfig;
 import appeng.menu.AEBaseMenu;
 import appeng.menu.SlotSemantics;
-import appeng.menu.guisync.GuiSync;
 import appeng.menu.slot.RestrictedInputSlot;
 
 /**

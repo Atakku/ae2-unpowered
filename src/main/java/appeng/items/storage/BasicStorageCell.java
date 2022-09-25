@@ -55,8 +55,8 @@ public class BasicStorageCell extends AEBaseItem implements IBasicCellItem, AETo
     protected final ItemLike coreItem;
     protected final ItemLike housingItem;
     protected final double idleDrain;
-    protected final int totalBytes;
-    protected final int bytesPerType;
+    protected final long totalBytes;
+    protected final long bytesPerType;
     protected final int totalTypes;
     private final AEKeyType keyType;
 
@@ -64,8 +64,8 @@ public class BasicStorageCell extends AEBaseItem implements IBasicCellItem, AETo
             ItemLike coreItem,
             ItemLike housingItem,
             double idleDrain,
-            int kilobytes,
-            int bytesPerType,
+            long kilobytes,
+            long bytesPerType,
             int totalTypes,
             AEKeyType keyType) {
         super(properties);
@@ -93,7 +93,7 @@ public class BasicStorageCell extends AEBaseItem implements IBasicCellItem, AETo
     }
 
     @Override
-    public int getBytes(ItemStack cellItem) {
+    public long getBytes(ItemStack cellItem) {
         return this.totalBytes;
     }
 
@@ -108,7 +108,7 @@ public class BasicStorageCell extends AEBaseItem implements IBasicCellItem, AETo
     }
 
     @Override
-    public int getBytesPerType(ItemStack cellItem) {
+    public long getBytesPerType(ItemStack cellItem) {
         return bytesPerType;
     }
 

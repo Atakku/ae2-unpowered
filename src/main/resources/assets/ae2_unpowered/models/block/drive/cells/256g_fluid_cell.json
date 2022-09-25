@@ -1,0 +1,6 @@
+{
+  "parent": "ae2_unpowered:block/drive/drive_cell",
+  "textures": {
+    "cell": "ae2_unpowered:block/drive/cells/256g_fluid_cell"
+  }
+}

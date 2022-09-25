@@ -56,7 +56,7 @@ public interface IBasicCellItem extends ICellWorkbenchItem {
      * @param cellItem item
      * @return number of bytes
      */
-    int getBytes(ItemStack cellItem);
+    long getBytes(ItemStack cellItem);
 
     /**
      * Determines the number of bytes used for any type included on the cell.
@@ -64,7 +64,7 @@ public interface IBasicCellItem extends ICellWorkbenchItem {
      * @param cellItem item
      * @return number of bytes
      */
-    int getBytesPerType(ItemStack cellItem);
+    long getBytesPerType(ItemStack cellItem);
 
     /**
      * Must be between 1 and 63, indicates how many types can be stored on this type of storage cell.

@@ -69,8 +69,9 @@ public final class InitUpgrades {
 
         // Storage Cells
         var itemCells = List.of(
-                AEItems.ITEM_CELL_1K, AEItems.ITEM_CELL_4K, AEItems.ITEM_CELL_16K, AEItems.ITEM_CELL_64K,
-                AEItems.ITEM_CELL_256K);
+            AEItems.ITEM_CELL_1K, AEItems.ITEM_CELL_4K, AEItems.ITEM_CELL_16K, AEItems.ITEM_CELL_64K, AEItems.ITEM_CELL_256K,
+            AEItems.ITEM_CELL_1M, AEItems.ITEM_CELL_4M, AEItems.ITEM_CELL_16M, AEItems.ITEM_CELL_64M, AEItems.ITEM_CELL_256M,
+            AEItems.ITEM_CELL_1G, AEItems.ITEM_CELL_4G, AEItems.ITEM_CELL_16G, AEItems.ITEM_CELL_64G, AEItems.ITEM_CELL_256G);
         for (var itemCell : itemCells) {
             Upgrades.add(AEItems.FUZZY_CARD, itemCell, 1, storageCellGroup);
             Upgrades.add(AEItems.INVERTER_CARD, itemCell, 1, storageCellGroup);
@@ -79,8 +80,9 @@ public final class InitUpgrades {
         }
 
         var fluidCells = List.of(
-                AEItems.FLUID_CELL_1K, AEItems.FLUID_CELL_4K, AEItems.FLUID_CELL_16K, AEItems.FLUID_CELL_64K,
-                AEItems.FLUID_CELL_256K);
+            AEItems.FLUID_CELL_1K, AEItems.FLUID_CELL_4K, AEItems.FLUID_CELL_16K, AEItems.FLUID_CELL_64K, AEItems.FLUID_CELL_256K,
+            AEItems.FLUID_CELL_1M, AEItems.FLUID_CELL_4M, AEItems.FLUID_CELL_16M, AEItems.FLUID_CELL_64M, AEItems.FLUID_CELL_256M,
+            AEItems.FLUID_CELL_1G, AEItems.FLUID_CELL_4G, AEItems.FLUID_CELL_16G, AEItems.FLUID_CELL_64G, AEItems.FLUID_CELL_256G);
         for (var fluidCell : fluidCells) {
             Upgrades.add(AEItems.INVERTER_CARD, fluidCell, 1, storageCellGroup);
             Upgrades.add(AEItems.EQUAL_DISTRIBUTION_CARD, fluidCell, 1, storageCellGroup);

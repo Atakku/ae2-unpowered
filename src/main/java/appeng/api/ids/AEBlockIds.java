@@ -87,6 +87,18 @@ public final class AEBlockIds {
     public static final ResourceLocation PATTERN_PROVIDER = id("pattern_provider");
     public static final ResourceLocation MOLECULAR_ASSEMBLER = id("molecular_assembler");
 
+    public static final ResourceLocation CRAFTING_STORAGE_1M = id("1m_crafting_storage");
+    public static final ResourceLocation CRAFTING_STORAGE_4M = id("4m_crafting_storage");
+    public static final ResourceLocation CRAFTING_STORAGE_16M = id("16m_crafting_storage");
+    public static final ResourceLocation CRAFTING_STORAGE_64M = id("64m_crafting_storage");
+    public static final ResourceLocation CRAFTING_STORAGE_256M = id("256m_crafting_storage");
+
+    public static final ResourceLocation CRAFTING_STORAGE_1G = id("1g_crafting_storage");
+    public static final ResourceLocation CRAFTING_STORAGE_4G = id("4g_crafting_storage");
+    public static final ResourceLocation CRAFTING_STORAGE_16G= id("16g_crafting_storage");
+    public static final ResourceLocation CRAFTING_STORAGE_64G = id("64g_crafting_storage");
+    public static final ResourceLocation CRAFTING_STORAGE_256G = id("256g_crafting_storage");
+
     ///
     /// DECORATIVE BLOCKS
     ///

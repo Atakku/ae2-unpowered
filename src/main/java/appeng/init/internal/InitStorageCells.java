@@ -57,14 +57,74 @@ public final class InitStorageCells {
             "ae2_unpowered:block/drive/cells/64k_fluid_cell");
     private static final ResourceLocation MODEL_CELL_FLUIDS_256K = new ResourceLocation(
             "ae2_unpowered:block/drive/cells/256k_fluid_cell");
+
+    private static final ResourceLocation MODEL_CELL_ITEMS_1M = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/1m_item_cell");
+    private static final ResourceLocation MODEL_CELL_ITEMS_4M = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/4m_item_cell");
+    private static final ResourceLocation MODEL_CELL_ITEMS_16M = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/16m_item_cell");
+    private static final ResourceLocation MODEL_CELL_ITEMS_64M = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/64m_item_cell");
+    private static final ResourceLocation MODEL_CELL_ITEMS_256M = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/256m_item_cell");
+    private static final ResourceLocation MODEL_CELL_FLUIDS_1M = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/1m_fluid_cell");
+    private static final ResourceLocation MODEL_CELL_FLUIDS_4M = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/4m_fluid_cell");
+    private static final ResourceLocation MODEL_CELL_FLUIDS_16M = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/16m_fluid_cell");
+    private static final ResourceLocation MODEL_CELL_FLUIDS_64M = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/64m_fluid_cell");
+    private static final ResourceLocation MODEL_CELL_FLUIDS_256M = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/256m_fluid_cell");
+
+    private static final ResourceLocation MODEL_CELL_ITEMS_1G = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/1g_item_cell");
+    private static final ResourceLocation MODEL_CELL_ITEMS_4G = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/4g_item_cell");
+    private static final ResourceLocation MODEL_CELL_ITEMS_16G = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/16g_item_cell");
+    private static final ResourceLocation MODEL_CELL_ITEMS_64G = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/64g_item_cell");
+    private static final ResourceLocation MODEL_CELL_ITEMS_256G = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/256g_item_cell");
+    private static final ResourceLocation MODEL_CELL_FLUIDS_1G = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/1g_fluid_cell");
+    private static final ResourceLocation MODEL_CELL_FLUIDS_4G = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/4g_fluid_cell");
+    private static final ResourceLocation MODEL_CELL_FLUIDS_16G = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/16g_fluid_cell");
+    private static final ResourceLocation MODEL_CELL_FLUIDS_64G = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/64g_fluid_cell");
+    private static final ResourceLocation MODEL_CELL_FLUIDS_256G = new ResourceLocation(
+                    "ae2_unpowered:block/drive/cells/256g_fluid_cell");
+
     private static final ResourceLocation MODEL_CELL_CREATIVE = new ResourceLocation(
             "ae2_unpowered:block/drive/cells/creative_cell");
 
     private static final ResourceLocation[] MODELS = { MODEL_BASE, MODEL_CELL_EMPTY,
             StorageCellModels.getDefaultModel(),
-            MODEL_CELL_ITEMS_1K, MODEL_CELL_ITEMS_4K, MODEL_CELL_ITEMS_16K, MODEL_CELL_ITEMS_64K, MODEL_CELL_ITEMS_256K,
-            MODEL_CELL_FLUIDS_1K, MODEL_CELL_FLUIDS_4K, MODEL_CELL_FLUIDS_16K, MODEL_CELL_FLUIDS_64K,
-            MODEL_CELL_FLUIDS_256K, MODEL_CELL_CREATIVE };
+            MODEL_CELL_ITEMS_1K, MODEL_CELL_ITEMS_4K, 
+            MODEL_CELL_ITEMS_16K, MODEL_CELL_ITEMS_64K, 
+            MODEL_CELL_ITEMS_256K,
+            MODEL_CELL_FLUIDS_1K, MODEL_CELL_FLUIDS_4K, 
+            MODEL_CELL_FLUIDS_16K, MODEL_CELL_FLUIDS_64K,
+            MODEL_CELL_FLUIDS_256K, 
+            MODEL_CELL_ITEMS_1M, MODEL_CELL_ITEMS_4M, 
+            MODEL_CELL_ITEMS_16M, MODEL_CELL_ITEMS_64M, 
+            MODEL_CELL_ITEMS_256M,
+            MODEL_CELL_FLUIDS_1M, MODEL_CELL_FLUIDS_4M, 
+            MODEL_CELL_FLUIDS_16M, MODEL_CELL_FLUIDS_64M,
+            MODEL_CELL_FLUIDS_256M, 
+            MODEL_CELL_ITEMS_1G, MODEL_CELL_ITEMS_4G, 
+            MODEL_CELL_ITEMS_16G, MODEL_CELL_ITEMS_64G, 
+            MODEL_CELL_ITEMS_256G,
+            MODEL_CELL_FLUIDS_1G, MODEL_CELL_FLUIDS_4G, 
+            MODEL_CELL_FLUIDS_16G, MODEL_CELL_FLUIDS_64G,
+            MODEL_CELL_FLUIDS_256G, 
+            
+            MODEL_CELL_CREATIVE };
 
     public static Collection<ResourceLocation> getModels() {
         return Arrays.asList(MODELS);
@@ -89,6 +149,29 @@ public final class InitStorageCells {
         StorageCellModels.registerModel(AEItems.FLUID_CELL_16K, MODEL_CELL_FLUIDS_16K);
         StorageCellModels.registerModel(AEItems.FLUID_CELL_64K, MODEL_CELL_FLUIDS_64K);
         StorageCellModels.registerModel(AEItems.FLUID_CELL_256K, MODEL_CELL_FLUIDS_256K);
+
+        StorageCellModels.registerModel(AEItems.ITEM_CELL_1M, MODEL_CELL_ITEMS_1M);
+        StorageCellModels.registerModel(AEItems.ITEM_CELL_4M, MODEL_CELL_ITEMS_4M);
+        StorageCellModels.registerModel(AEItems.ITEM_CELL_16M, MODEL_CELL_ITEMS_16M);
+        StorageCellModels.registerModel(AEItems.ITEM_CELL_64M, MODEL_CELL_ITEMS_64M);
+        StorageCellModels.registerModel(AEItems.ITEM_CELL_256M, MODEL_CELL_ITEMS_256M);
+        StorageCellModels.registerModel(AEItems.FLUID_CELL_1M, MODEL_CELL_FLUIDS_1M);
+        StorageCellModels.registerModel(AEItems.FLUID_CELL_4M, MODEL_CELL_FLUIDS_4M);
+        StorageCellModels.registerModel(AEItems.FLUID_CELL_16M, MODEL_CELL_FLUIDS_16M);
+        StorageCellModels.registerModel(AEItems.FLUID_CELL_64M, MODEL_CELL_FLUIDS_64M);
+        StorageCellModels.registerModel(AEItems.FLUID_CELL_256M, MODEL_CELL_FLUIDS_256M);
+
+        StorageCellModels.registerModel(AEItems.ITEM_CELL_1G, MODEL_CELL_ITEMS_1G);
+        StorageCellModels.registerModel(AEItems.ITEM_CELL_4G, MODEL_CELL_ITEMS_4G);
+        StorageCellModels.registerModel(AEItems.ITEM_CELL_16G, MODEL_CELL_ITEMS_16G);
+        StorageCellModels.registerModel(AEItems.ITEM_CELL_64G, MODEL_CELL_ITEMS_64G);
+        StorageCellModels.registerModel(AEItems.ITEM_CELL_256G, MODEL_CELL_ITEMS_256G);
+        StorageCellModels.registerModel(AEItems.FLUID_CELL_1G, MODEL_CELL_FLUIDS_1G);
+        StorageCellModels.registerModel(AEItems.FLUID_CELL_4G, MODEL_CELL_FLUIDS_4G);
+        StorageCellModels.registerModel(AEItems.FLUID_CELL_16G, MODEL_CELL_FLUIDS_16G);
+        StorageCellModels.registerModel(AEItems.FLUID_CELL_64G, MODEL_CELL_FLUIDS_64G);
+        StorageCellModels.registerModel(AEItems.FLUID_CELL_256G, MODEL_CELL_FLUIDS_256G);
+
         StorageCellModels.registerModel(AEItems.ITEM_CELL_CREATIVE, MODEL_CELL_CREATIVE);
         StorageCellModels.registerModel(AEItems.FLUID_CELL_CREATIVE, MODEL_CELL_CREATIVE);
 

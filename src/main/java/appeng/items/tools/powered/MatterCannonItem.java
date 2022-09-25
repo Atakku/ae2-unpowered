@@ -384,12 +384,12 @@ public class MatterCannonItem extends AEBaseItem implements IBasicCellItem {
     }
 
     @Override
-    public int getBytes(ItemStack cellItem) {
+    public long getBytes(ItemStack cellItem) {
         return 512;
     }
 
     @Override
-    public int getBytesPerType(ItemStack cellItem) {
+    public long getBytesPerType(ItemStack cellItem) {
         return 8;
     }
 

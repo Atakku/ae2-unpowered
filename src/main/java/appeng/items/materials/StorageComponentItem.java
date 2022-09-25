@@ -25,15 +25,15 @@ import appeng.api.implementations.items.IStorageComponent;
 import appeng.items.AEBaseItem;
 
 public class StorageComponentItem extends AEBaseItem implements IStorageComponent {
-    private final int storageInKb;
+    private final long storageInKb;
 
-    public StorageComponentItem(Item.Properties properties, int storageInKb) {
+    public StorageComponentItem(Item.Properties properties, long storageInKb) {
         super(properties);
         this.storageInKb = storageInKb;
     }
 
     @Override
-    public int getBytes(ItemStack is) {
+    public long getBytes(ItemStack is) {
         return this.storageInKb * 1024;
     }
 

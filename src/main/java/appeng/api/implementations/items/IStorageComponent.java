@@ -39,7 +39,7 @@ public interface IStorageComponent {
      *
      * @return number of bytes
      */
-    int getBytes(ItemStack is);
+    long getBytes(ItemStack is);
 
     /**
      * Just true or false for the item stack.

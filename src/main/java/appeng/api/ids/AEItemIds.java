@@ -127,6 +127,40 @@ public final class AEItemIds {
     public static final ResourceLocation PORTABLE_FLUID_CELL64K = id("portable_fluid_cell_64k");
     public static final ResourceLocation PORTABLE_FLUID_CELL256K = id("portable_fluid_cell_256k");
 
+
+    public static final ResourceLocation STORAGE_CELL_1M = id("storage_cell_1m");
+    public static final ResourceLocation STORAGE_CELL_4M = id("storage_cell_4m");
+    public static final ResourceLocation STORAGE_CELL_16M = id("storage_cell_16m");
+    public static final ResourceLocation STORAGE_CELL_64M = id("storage_cell_64m");
+    public static final ResourceLocation STORAGE_CELL_256M = id("storage_cell_256m");
+    public static final ResourceLocation ITEM_CELL_1M = id("item_storage_cell_1m");
+    public static final ResourceLocation ITEM_CELL_4M = id("item_storage_cell_4m");
+    public static final ResourceLocation ITEM_CELL_16M = id("item_storage_cell_16m");
+    public static final ResourceLocation ITEM_CELL_64M = id("item_storage_cell_64m");
+    public static final ResourceLocation ITEM_CELL_256M = id("item_storage_cell_256m");
+    public static final ResourceLocation FLUID_CELL_1M = id("fluid_storage_cell_1m");
+    public static final ResourceLocation FLUID_CELL_4M = id("fluid_storage_cell_4m");
+    public static final ResourceLocation FLUID_CELL_16M = id("fluid_storage_cell_16m");
+    public static final ResourceLocation FLUID_CELL_64M = id("fluid_storage_cell_64m");
+    public static final ResourceLocation FLUID_CELL_256M = id("fluid_storage_cell_256m");
+
+
+    public static final ResourceLocation STORAGE_CELL_1G = id("storage_cell_1g");
+    public static final ResourceLocation STORAGE_CELL_4G = id("storage_cell_4g");
+    public static final ResourceLocation STORAGE_CELL_16G = id("storage_cell_16g");
+    public static final ResourceLocation STORAGE_CELL_64G = id("storage_cell_64g");
+    public static final ResourceLocation STORAGE_CELL_256G = id("storage_cell_256g");
+    public static final ResourceLocation ITEM_CELL_1G = id("item_storage_cell_1g");
+    public static final ResourceLocation ITEM_CELL_4G = id("item_storage_cell_4g");
+    public static final ResourceLocation ITEM_CELL_16G = id("item_storage_cell_16g");
+    public static final ResourceLocation ITEM_CELL_64G = id("item_storage_cell_64g");
+    public static final ResourceLocation ITEM_CELL_256G = id("item_storage_cell_256g");
+    public static final ResourceLocation FLUID_CELL_1G = id("fluid_storage_cell_1g");
+    public static final ResourceLocation FLUID_CELL_4G = id("fluid_storage_cell_4g");
+    public static final ResourceLocation FLUID_CELL_16G = id("fluid_storage_cell_16g");
+    public static final ResourceLocation FLUID_CELL_64G = id("fluid_storage_cell_64g");
+    public static final ResourceLocation FLUID_CELL_256G = id("fluid_storage_cell_256g");
+
     ///
     /// PAINT BALLS
     ///
@@ -269,6 +303,16 @@ public final class AEItemIds {
     public static final ResourceLocation CELL_COMPONENT_16K = id("cell_component_16k");
     public static final ResourceLocation CELL_COMPONENT_64K = id("cell_component_64k");
     public static final ResourceLocation CELL_COMPONENT_256K = id("cell_component_256k");
+    public static final ResourceLocation CELL_COMPONENT_1M = id("cell_component_1m");
+    public static final ResourceLocation CELL_COMPONENT_4M = id("cell_component_4m");
+    public static final ResourceLocation CELL_COMPONENT_16M = id("cell_component_16m");
+    public static final ResourceLocation CELL_COMPONENT_64M = id("cell_component_64m");
+    public static final ResourceLocation CELL_COMPONENT_256M = id("cell_component_256m");
+    public static final ResourceLocation CELL_COMPONENT_1G = id("cell_component_1g");
+    public static final ResourceLocation CELL_COMPONENT_4G = id("cell_component_4g");
+    public static final ResourceLocation CELL_COMPONENT_16G = id("cell_component_16g");
+    public static final ResourceLocation CELL_COMPONENT_64G = id("cell_component_64g");
+    public static final ResourceLocation CELL_COMPONENT_256G = id("cell_component_256g");
     public static final ResourceLocation ITEM_CELL_HOUSING = id("item_cell_housing");
     public static final ResourceLocation FLUID_CELL_HOUSING = id("fluid_cell_housing");
     public static final ResourceLocation WIRELESS_RECEIVER = id("wireless_receiver");

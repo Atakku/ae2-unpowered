@@ -88,6 +88,29 @@ public final class InitBuiltInModels {
                 () -> new CraftingCubeModel(new CraftingUnitModelProvider(CraftingUnitType.STORAGE_64K)));
         addBuiltInModel("block/crafting/256k_storage_formed",
                 () -> new CraftingCubeModel(new CraftingUnitModelProvider(CraftingUnitType.STORAGE_256K)));
+
+        addBuiltInModel("block/crafting/1m_storage_formed",
+                        () -> new CraftingCubeModel(new CraftingUnitModelProvider(CraftingUnitType.STORAGE_1M)));
+        addBuiltInModel("block/crafting/4m_storage_formed",
+                        () -> new CraftingCubeModel(new CraftingUnitModelProvider(CraftingUnitType.STORAGE_4M)));
+        addBuiltInModel("block/crafting/16m_storage_formed",
+                        () -> new CraftingCubeModel(new CraftingUnitModelProvider(CraftingUnitType.STORAGE_16M)));
+        addBuiltInModel("block/crafting/64m_storage_formed",
+                        () -> new CraftingCubeModel(new CraftingUnitModelProvider(CraftingUnitType.STORAGE_64M)));
+        addBuiltInModel("block/crafting/256m_storage_formed",
+                        () -> new CraftingCubeModel(new CraftingUnitModelProvider(CraftingUnitType.STORAGE_256M)));
+
+        addBuiltInModel("block/crafting/1g_storage_formed",
+                        () -> new CraftingCubeModel(new CraftingUnitModelProvider(CraftingUnitType.STORAGE_1G)));
+        addBuiltInModel("block/crafting/4g_storage_formed",
+                        () -> new CraftingCubeModel(new CraftingUnitModelProvider(CraftingUnitType.STORAGE_4G)));
+        addBuiltInModel("block/crafting/16g_storage_formed",
+                        () -> new CraftingCubeModel(new CraftingUnitModelProvider(CraftingUnitType.STORAGE_16G)));
+        addBuiltInModel("block/crafting/64g_storage_formed",
+                        () -> new CraftingCubeModel(new CraftingUnitModelProvider(CraftingUnitType.STORAGE_64G)));
+        addBuiltInModel("block/crafting/256g_storage_formed",
+                        () -> new CraftingCubeModel(new CraftingUnitModelProvider(CraftingUnitType.STORAGE_256G)));
+                        
         addBuiltInModel("block/crafting/accelerator_formed",
                 () -> new CraftingCubeModel(new CraftingUnitModelProvider(CraftingUnitType.ACCELERATOR)));
         addBuiltInModel("block/crafting/monitor_formed",

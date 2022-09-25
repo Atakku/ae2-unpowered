@@ -52,11 +52,23 @@ public final class InitItemColors {
                 AEItems.PORTABLE_ITEM_CELL64K, AEItems.PORTABLE_FLUID_CELL64K,
                 AEItems.PORTABLE_ITEM_CELL256K, AEItems.PORTABLE_FLUID_CELL256K);
 
-        itemColors.register(BasicStorageCell::getColor, AEItems.ITEM_CELL_1K, AEItems.FLUID_CELL_1K,
+        itemColors.register(BasicStorageCell::getColor, 
+                AEItems.ITEM_CELL_1K, AEItems.FLUID_CELL_1K,
                 AEItems.ITEM_CELL_4K, AEItems.FLUID_CELL_4K,
                 AEItems.ITEM_CELL_16K, AEItems.FLUID_CELL_16K,
                 AEItems.ITEM_CELL_64K, AEItems.FLUID_CELL_64K,
-                AEItems.ITEM_CELL_256K, AEItems.FLUID_CELL_256K);
+                AEItems.ITEM_CELL_256K, AEItems.FLUID_CELL_256K,
+                AEItems.ITEM_CELL_1M, AEItems.FLUID_CELL_1M,
+                AEItems.ITEM_CELL_4M, AEItems.FLUID_CELL_4M,
+                AEItems.ITEM_CELL_16M, AEItems.FLUID_CELL_16M,
+                AEItems.ITEM_CELL_64M, AEItems.FLUID_CELL_64M,
+                AEItems.ITEM_CELL_256M, AEItems.FLUID_CELL_256M,
+                AEItems.ITEM_CELL_1G, AEItems.FLUID_CELL_1G,
+                AEItems.ITEM_CELL_4G, AEItems.FLUID_CELL_4G,
+                AEItems.ITEM_CELL_16G, AEItems.FLUID_CELL_16G,
+                AEItems.ITEM_CELL_64G, AEItems.FLUID_CELL_64G,
+                AEItems.ITEM_CELL_256G, AEItems.FLUID_CELL_256G
+        );
 
         // Automatically register colors for certain items we register
         for (ItemDefinition<?> definition : AEItems.getItems()) {

@@ -308,7 +308,7 @@ public class BasicCellInventory implements StorageCell {
         return this.cellType.getUpgrades(this.i);
     }
 
-    public int getBytesPerType() {
+    public long getBytesPerType() {
         return this.cellType.getBytesPerType(this.i);
     }
 

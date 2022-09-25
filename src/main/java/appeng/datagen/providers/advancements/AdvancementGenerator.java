@@ -235,6 +235,18 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 .addCriterion("c16k", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_16K))
                 .addCriterion("c64k", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_64K))
                 .addCriterion("c256k", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_256K))
+
+                .addCriterion("c1m", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_1M))
+                .addCriterion("c4m", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_4M))
+                .addCriterion("c16m", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_16M))
+                .addCriterion("c64m", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_64M))
+                .addCriterion("c256m", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_256M))
+
+                .addCriterion("c1g", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_1G))
+                .addCriterion("c4g", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_4G))
+                .addCriterion("c16g", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_16G))
+                .addCriterion("c64g", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_64G))
+                .addCriterion("c256g", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_256G))
                 .requirements(RequirementsStrategy.OR)
                 .save(consumer, "ae2_unpowered:main/storage_cell");
 
@@ -301,6 +313,18 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 .addCriterion("c16k", InventoryChangeTrigger.TriggerInstance.hasItems(AEBlocks.CRAFTING_STORAGE_16K))
                 .addCriterion("c64k", InventoryChangeTrigger.TriggerInstance.hasItems(AEBlocks.CRAFTING_STORAGE_64K))
                 .addCriterion("c256k", InventoryChangeTrigger.TriggerInstance.hasItems(AEBlocks.CRAFTING_STORAGE_256K))
+
+                .addCriterion("c1m", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_1M))
+                .addCriterion("c4m", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_4M))
+                .addCriterion("c16m", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_16M))
+                .addCriterion("c64m", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_64M))
+                .addCriterion("c256m", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_256M))
+
+                .addCriterion("c1g", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_1G))
+                .addCriterion("c4g", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_4G))
+                .addCriterion("c16g", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_16G))
+                .addCriterion("c64g", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_64G))
+                .addCriterion("c256g", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_256G))
                 .requirements(RequirementsStrategy.OR)
                 .save(consumer, "ae2_unpowered:main/crafting_cpu");
 

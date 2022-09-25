@@ -57,6 +57,16 @@ public final class InitRenderTypes {
             AEBlocks.CRAFTING_STORAGE_16K,
             AEBlocks.CRAFTING_STORAGE_64K,
             AEBlocks.CRAFTING_STORAGE_256K,
+            AEBlocks.CRAFTING_STORAGE_1M,
+            AEBlocks.CRAFTING_STORAGE_4M,
+            AEBlocks.CRAFTING_STORAGE_16M,
+            AEBlocks.CRAFTING_STORAGE_64M,
+            AEBlocks.CRAFTING_STORAGE_256M,
+            AEBlocks.CRAFTING_STORAGE_1G,
+            AEBlocks.CRAFTING_STORAGE_4G,
+            AEBlocks.CRAFTING_STORAGE_16G,
+            AEBlocks.CRAFTING_STORAGE_64G,
+            AEBlocks.CRAFTING_STORAGE_256G,
             AEBlocks.SPATIAL_PYLON,
             AEBlocks.SKY_STONE_TANK
     };

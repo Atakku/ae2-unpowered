@@ -21,7 +21,7 @@ public final class AEKeyTypesInternal {
     }
 
     public static Registry<AEKeyType> getRegistry() {
-        Preconditions.checkState(registry != null, "AE2 isn't initialized yet.");
+        Preconditions.checkState(registry != null, "AE2: Unpowered isn't initialized yet.");
         return registry;
     }
 

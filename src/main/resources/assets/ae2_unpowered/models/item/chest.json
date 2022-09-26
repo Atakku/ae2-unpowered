@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "up": "ae2_unpowered:block/chest/top_item",
+    "down": "ae2_unpowered:block/chest/bottom",
+    "north": "ae2_unpowered:block/chest/front_item",
+    "east": "ae2_unpowered:block/chest/side",
+    "south": "ae2_unpowered:block/chest/side",
+    "west": "ae2_unpowered:block/chest/side"
+  }
+}

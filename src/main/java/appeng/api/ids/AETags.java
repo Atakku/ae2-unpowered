@@ -41,7 +41,7 @@ public final class AETags {
      * Used by the quartz knife to decide which ingots can be crafted into nameplates, as well as the crafting recipe
      * for cable anchors.
      */
-    public static TagKey<Item> METAL_INGOTS = itemTag("ae2:metal_ingots");
+    public static TagKey<Item> METAL_INGOTS = itemTag("ae2_unpowered:metal_ingots");
 
     private static TagKey<Item> itemTag(String name) {
         return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(name));

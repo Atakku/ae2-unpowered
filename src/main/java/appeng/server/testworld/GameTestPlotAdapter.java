@@ -30,8 +30,8 @@ public class GameTestPlotAdapter {
             }
 
             result.add(new TestFunction(
-                    "ae2",
-                    "ae2." + plot.getId().getPath(),
+                    "ae2_unpowered",
+                    "ae2_unpowered." + plot.getId().getPath(),
                     plot.getId().toString(),
                     Rotation.NONE,
                     test.maxTicks,

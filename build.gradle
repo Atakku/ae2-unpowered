@@ -174,7 +174,7 @@ test {
 ////////////////////
 // Forge/Minecraft
 loom {
-    accessWidenerPath = file("src/main/resources/ae2.accesswidener")
+    accessWidenerPath = file("src/main/resources/ae2_unpowered.aw")
 
     runs {
         client {
@@ -225,14 +225,14 @@ jar {
 
     manifest {
         attributes([
-                "Specification-Title"     : "Applied Energistics 2",
+                "Specification-Title"     : "AE2: Unpowered",
                 "Specification-Vendor"    : "TeamAppliedEnergistics",
                 "Specification-Version"   : "${project.version}",
                 "Implementation-Title"    : "${project.name}",
                 "Implementation-Version"  : "${project.version}",
                 "Implementation-Vendor"   : "TeamAppliedEnergistics",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : "ae2.mixins.json"
+                "MixinConfigs"            : "ae2_unpowered.mixins.json"
         ])
     }
 }

@@ -32,7 +32,7 @@ public final class AECommand {
 
     public void register(CommandDispatcher<CommandSourceStack> dispatcher) {
 
-        LiteralArgumentBuilder<CommandSourceStack> builder = literal("ae2");
+        LiteralArgumentBuilder<CommandSourceStack> builder = literal("ae2_unpowered");
         for (Commands command : Commands.values()) {
             if (command.test && !AEConfig.instance().isDebugToolsEnabled()) {
                 continue;

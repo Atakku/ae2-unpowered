@@ -36,7 +36,7 @@ import appeng.core.sync.BasePacket;
 
 public interface AppEng {
 
-    String MOD_NAME = "Applied Energistics 2";
+    String MOD_NAME = "AE2: Unpowered";
     String MOD_ID = AEConstants.MOD_ID;
 
     static AppEng instance() {

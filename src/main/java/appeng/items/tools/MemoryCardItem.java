@@ -81,7 +81,7 @@ public class MemoryCardItem extends AEBaseItem implements IMemoryCard, AEToolIte
             final short freq = data.getShort("freq");
             final String freqTooltip = ChatFormatting.BOLD + Platform.p2p().toHexString(freq);
 
-            lines.add(Tooltips.of(new TranslatableComponent("gui.tooltips.ae2.P2PFrequency", freqTooltip)));
+            lines.add(Tooltips.of(new TranslatableComponent("gui.tooltips.ae2_unpowered.P2PFrequency", freqTooltip)));
         }
     }
 

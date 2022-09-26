@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "ae2_unpowered:block/pattern_provider",
+    "down": "ae2_unpowered:block/pattern_provider_alternate",
+    "up": "ae2_unpowered:block/pattern_provider",
+    "north": "ae2_unpowered:block/pattern_provider_alternate_arrow",
+    "south": "ae2_unpowered:block/pattern_provider_alternate_arrow",
+    "east": "ae2_unpowered:block/pattern_provider_alternate_arrow",
+    "west": "ae2_unpowered:block/pattern_provider_alternate_arrow"
+  }
+}

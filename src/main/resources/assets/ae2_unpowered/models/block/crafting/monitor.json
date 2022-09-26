@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "ae2_unpowered:block/crafting/monitor",
+    "north": "ae2_unpowered:block/crafting/monitor",
+    "east": "ae2_unpowered:block/crafting/unit",
+    "west": "ae2_unpowered:block/crafting/unit",
+    "south": "ae2_unpowered:block/crafting/unit",
+    "up": "ae2_unpowered:block/crafting/unit",
+    "down": "ae2_unpowered:block/crafting/unit"
+  }
+}

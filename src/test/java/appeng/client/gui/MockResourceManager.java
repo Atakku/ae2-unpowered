@@ -95,7 +95,7 @@ public final class MockResourceManager {
 
             @Override
             public String getSourceName() {
-                return "ae2";
+                return "ae2_unpowered";
             }
 
             @Override

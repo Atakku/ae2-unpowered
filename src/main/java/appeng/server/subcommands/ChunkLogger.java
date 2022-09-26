@@ -75,9 +75,9 @@ public class ChunkLogger implements ISubCommand {
         this.enabled = !this.enabled;
 
         if (this.enabled) {
-            sender.sendSuccess(new TranslatableComponent("commands.ae2.ChunkLoggerOn"), true);
+            sender.sendSuccess(new TranslatableComponent("commands.ae2_unpowered.ChunkLoggerOn"), true);
         } else {
-            sender.sendSuccess(new TranslatableComponent("commands.ae2.ChunkLoggerOff"), true);
+            sender.sendSuccess(new TranslatableComponent("commands.ae2_unpowered.ChunkLoggerOff"), true);
         }
     }
 }

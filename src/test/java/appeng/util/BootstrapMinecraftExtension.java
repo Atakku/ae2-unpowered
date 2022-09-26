@@ -36,7 +36,7 @@ public class BootstrapMinecraftExtension implements BeforeAllCallback, AfterAllC
             keyTypesInitialized = true;
         }
 
-        configDir = Files.createTempDirectory("ae2config");
+        configDir = Files.createTempDirectory("ae2_unpowered");
         if (AEConfig.instance() == null) {
             AEConfig.load(configDir);
         }

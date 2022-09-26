@@ -36,6 +36,6 @@ public enum ItemModText implements LocalizationEnum {
 
     @Override
     public String getTranslationKey() {
-        return "ae2.rei_jei_integration." + name().toLowerCase(Locale.ROOT);
+        return "ae2_unpowered.rei_jei_integration." + name().toLowerCase(Locale.ROOT);
     }
 }

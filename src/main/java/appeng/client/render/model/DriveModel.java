@@ -43,9 +43,9 @@ import appeng.init.internal.InitStorageCells;
 public class DriveModel implements BasicUnbakedModel {
 
     private static final ResourceLocation MODEL_BASE = new ResourceLocation(
-            "ae2:block/drive/drive_base");
+            "ae2_unpowered:block/drive/drive_base");
     private static final ResourceLocation MODEL_CELL_EMPTY = new ResourceLocation(
-            "ae2:block/drive/drive_cell_empty");
+            "ae2_unpowered:block/drive/drive_cell_empty");
 
     @Nullable
     @Override

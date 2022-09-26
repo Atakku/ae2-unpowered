@@ -107,8 +107,8 @@ public class AdvancementGenerator implements IAE2DataProvider {
         var root = Advancement.Builder.advancement()
                 .display(
                         AEItems.CERTUS_QUARTZ_DUST,
-                        localization.component("achievement.ae2.Root", "Applied Energistics"),
-                        localization.component("achievement.ae2.Root.desc", "When a chest is simply not enough."),
+                        localization.component("achievement.ae2_unpowered.Root", "Applied Energistics"),
+                        localization.component("achievement.ae2_unpowered.Root.desc", "When a chest is simply not enough."),
                         AppEng.makeId("textures/block/sky_stone_brick.png"),
                         FrameType.TASK,
                         false /* showToast */,
@@ -116,13 +116,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                         false /* hidden */
                 )
                 .addCriterion("certus", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.CERTUS_QUARTZ_DUST))
-                .save(consumer, "ae2:main/root");
+                .save(consumer, "ae2_unpowered:main/root");
 
         var quartzCrystal = Advancement.Builder.advancement()
                 .display(
                         AEItems.CERTUS_QUARTZ_CRYSTAL,
-                        localization.component("achievement.ae2.QuartzCrystal", "Applied Energistics 2"),
-                        localization.component("achievement.ae2.QuartzCrystal.desc",
+                        localization.component("achievement.ae2_unpowered.QuartzCrystal", "AE2: Unpowered"),
+                        localization.component("achievement.ae2_unpowered.QuartzCrystal.desc",
                                 "Obtain your first Certus Quartz Crystal."),
                         null /* background */,
                         FrameType.TASK,
@@ -133,13 +133,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 .parent(root)
                 .addCriterion("certus",
                         InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.CERTUS_QUARTZ_CRYSTAL))
-                .save(consumer, "ae2:main/quartz_crystal");
+                .save(consumer, "ae2_unpowered:main/quartz_crystal");
 
         var compass = Advancement.Builder.advancement()
                 .display(
                         AEBlocks.SKY_COMPASS,
-                        localization.component("achievement.ae2.Compass", "Meteorite Hunter"),
-                        localization.component("achievement.ae2.Compass.desc", "Craft a Meteorite Compass"),
+                        localization.component("achievement.ae2_unpowered.Compass", "Meteorite Hunter"),
+                        localization.component("achievement.ae2_unpowered.Compass.desc", "Craft a Meteorite Compass"),
                         null /* background */,
                         FrameType.TASK,
                         true /* showToast */,
@@ -148,13 +148,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 )
                 .parent(quartzCrystal)
                 .addCriterion("compass", InventoryChangeTrigger.TriggerInstance.hasItems(AEBlocks.SKY_COMPASS))
-                .save(consumer, "ae2:main/compass");
+                .save(consumer, "ae2_unpowered:main/compass");
 
         var pressesBuilder = Advancement.Builder.advancement()
                 .display(
                         AEItems.LOGIC_PROCESSOR_PRESS,
-                        localization.component("achievement.ae2.Presses", "Unknown Technology"),
-                        localization.component("achievement.ae2.Presses.desc", "Find all Processor Presses"),
+                        localization.component("achievement.ae2_unpowered.Presses", "Unknown Technology"),
+                        localization.component("achievement.ae2_unpowered.Presses.desc", "Find all Processor Presses"),
                         null /* background */,
                         FrameType.TASK,
                         true /* showToast */,
@@ -173,8 +173,8 @@ public class AdvancementGenerator implements IAE2DataProvider {
         var controller = Advancement.Builder.advancement()
                 .display(
                         AEBlocks.CONTROLLER,
-                        localization.component("achievement.ae2.Controller", "Networking Switchboard"),
-                        localization.component("achievement.ae2.Controller.desc", "Craft a Controller"),
+                        localization.component("achievement.ae2_unpowered.Controller", "Networking Switchboard"),
+                        localization.component("achievement.ae2_unpowered.Controller.desc", "Craft a Controller"),
                         null /* background */,
                         FrameType.TASK,
                         true /* showToast */,
@@ -183,13 +183,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 )
                 .parent(presses)
                 .addCriterion("certus", InventoryChangeTrigger.TriggerInstance.hasItems(AEBlocks.CONTROLLER))
-                .save(consumer, "ae2:main/controller");
+                .save(consumer, "ae2_unpowered:main/controller");
 
         var storageCell = Advancement.Builder.advancement()
                 .display(
                         AEItems.ITEM_CELL_64K,
-                        localization.component("achievement.ae2.StorageCell", "Better Than Chests"),
-                        localization.component("achievement.ae2.StorageCell.desc", "Craft a Storage Cell"),
+                        localization.component("achievement.ae2_unpowered.StorageCell", "Better Than Chests"),
+                        localization.component("achievement.ae2_unpowered.StorageCell.desc", "Craft a Storage Cell"),
                         null /* background */,
                         FrameType.TASK,
                         false,
@@ -202,13 +202,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 .addCriterion("c64k", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_64K))
                 .addCriterion("c256k", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.ITEM_CELL_256K))
                 .requirements(RequirementsStrategy.OR)
-                .save(consumer, "ae2:main/storage_cell");
+                .save(consumer, "ae2_unpowered:main/storage_cell");
 
         var ioport = Advancement.Builder.advancement()
                 .display(
                         AEBlocks.IO_PORT,
-                        localization.component("achievement.ae2.IOPort", "Storage Cell Shuffle"),
-                        localization.component("achievement.ae2.IOPort.desc", "Craft an IO Port"),
+                        localization.component("achievement.ae2_unpowered.IOPort", "Storage Cell Shuffle"),
+                        localization.component("achievement.ae2_unpowered.IOPort.desc", "Craft an IO Port"),
                         null /* background */,
                         FrameType.TASK,
                         true /* showToast */,
@@ -217,13 +217,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 )
                 .parent(storageCell)
                 .addCriterion("certus", InventoryChangeTrigger.TriggerInstance.hasItems(AEBlocks.IO_PORT))
-                .save(consumer, "ae2:main/ioport");
+                .save(consumer, "ae2_unpowered:main/ioport");
 
         var craftingTerminal = Advancement.Builder.advancement()
                 .display(
                         AEParts.CRAFTING_TERMINAL,
-                        localization.component("achievement.ae2.CraftingTerminal", "A (Much) Bigger Table"),
-                        localization.component("achievement.ae2.CraftingTerminal.desc", "Craft a Crafting Terminal"),
+                        localization.component("achievement.ae2_unpowered.CraftingTerminal", "A (Much) Bigger Table"),
+                        localization.component("achievement.ae2_unpowered.CraftingTerminal.desc", "Craft a Crafting Terminal"),
                         null /* background */,
                         FrameType.TASK,
                         true /* showToast */,
@@ -232,13 +232,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 )
                 .parent(controller)
                 .addCriterion("certus", InventoryChangeTrigger.TriggerInstance.hasItems(AEParts.CRAFTING_TERMINAL))
-                .save(consumer, "ae2:main/crafting_terminal");
+                .save(consumer, "ae2_unpowered:main/crafting_terminal");
 
         var patternTerminal = Advancement.Builder.advancement()
                 .display(
                         AEParts.PATTERN_ENCODING_TERMINAL,
-                        localization.component("achievement.ae2.PatternTerminal", "Crafting Maestro"),
-                        localization.component("achievement.ae2.PatternTerminal.desc",
+                        localization.component("achievement.ae2_unpowered.PatternTerminal", "Crafting Maestro"),
+                        localization.component("achievement.ae2_unpowered.PatternTerminal.desc",
                                 "Craft a Pattern Encoding Terminal"),
                         null /* background */,
                         FrameType.TASK,
@@ -249,13 +249,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 .parent(craftingTerminal)
                 .addCriterion("certus",
                         InventoryChangeTrigger.TriggerInstance.hasItems(AEParts.PATTERN_ENCODING_TERMINAL))
-                .save(consumer, "ae2:main/pattern_encoding_terminal");
+                .save(consumer, "ae2_unpowered:main/pattern_encoding_terminal");
 
         var craftingCpu = Advancement.Builder.advancement()
                 .display(
                         AEBlocks.CRAFTING_STORAGE_64K,
-                        localization.component("achievement.ae2.CraftingCPU", "Next Gen Crafting"),
-                        localization.component("achievement.ae2.CraftingCPU.desc", "Craft a Crafting Unit"),
+                        localization.component("achievement.ae2_unpowered.CraftingCPU", "Next Gen Crafting"),
+                        localization.component("achievement.ae2_unpowered.CraftingCPU.desc", "Craft a Crafting Unit"),
                         null /* background */,
                         FrameType.TASK,
                         false,
@@ -264,13 +264,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 .parent(patternTerminal)
                 .addCriterion("cu", InventoryChangeTrigger.TriggerInstance.hasItems(AEBlocks.CRAFTING_UNIT))
                 .requirements(RequirementsStrategy.OR)
-                .save(consumer, "ae2:main/crafting_cpu");
+                .save(consumer, "ae2_unpowered:main/crafting_cpu");
 
         var fluix = Advancement.Builder.advancement()
                 .display(
                         AEItems.FLUIX_DUST,
-                        localization.component("achievement.ae2.Fluix", "Unnatural"),
-                        localization.component("achievement.ae2.Fluix.desc", "Create Fluix Dust"),
+                        localization.component("achievement.ae2_unpowered.Fluix", "Unnatural"),
+                        localization.component("achievement.ae2_unpowered.Fluix.desc", "Create Fluix Dust"),
                         null /* background */,
                         FrameType.TASK,
                         true /* showToast */,
@@ -279,13 +279,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 )
                 .parent(quartzCrystal)
                 .addCriterion("certus", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.FLUIX_DUST))
-                .save(consumer, "ae2:main/fluix");
+                .save(consumer, "ae2_unpowered:main/fluix");
 
         var glassCable = Advancement.Builder.advancement()
                 .display(
                         AEParts.GLASS_CABLE.item(AEColor.TRANSPARENT),
-                        localization.component("achievement.ae2.GlassCable", "Fluix Energy Connection"),
-                        localization.component("achievement.ae2.GlassCable.desc", "Craft ME Glass Cable"),
+                        localization.component("achievement.ae2_unpowered.GlassCable", "Fluix Energy Connection"),
+                        localization.component("achievement.ae2_unpowered.GlassCable.desc", "Craft ME Glass Cable"),
                         null /* background */,
                         FrameType.TASK,
                         true /* showToast */,
@@ -296,14 +296,14 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 .addCriterion("certus",
                         InventoryChangeTrigger.TriggerInstance
                                 .hasItems(ItemPredicate.Builder.item().of(ConventionTags.GLASS_CABLE).build()))
-                .save(consumer, "ae2:main/glass_cable");
+                .save(consumer, "ae2_unpowered:main/glass_cable");
 
         var growthAccelerator = Advancement.Builder.advancement()
                 .display(
                         AEBlocks.QUARTZ_GROWTH_ACCELERATOR,
-                        localization.component("achievement.ae2.CrystalGrowthAccelerator",
+                        localization.component("achievement.ae2_unpowered.CrystalGrowthAccelerator",
                                 "Accelerator is an understatement"),
-                        localization.component("achievement.ae2.CrystalGrowthAccelerator.desc",
+                        localization.component("achievement.ae2_unpowered.CrystalGrowthAccelerator.desc",
                                 "Craft a Crystal Growth Accelerator"),
                         null /* background */,
                         FrameType.TASK,
@@ -314,13 +314,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 .parent(fluix)
                 .addCriterion("certus",
                         InventoryChangeTrigger.TriggerInstance.hasItems(AEBlocks.QUARTZ_GROWTH_ACCELERATOR))
-                .save(consumer, "ae2:main/growth_accelerator");
+                .save(consumer, "ae2_unpowered:main/growth_accelerator");
 
         var network1 = Advancement.Builder.advancement()
                 .display(
                         AEParts.COVERED_CABLE.item(AEColor.TRANSPARENT),
-                        localization.component("achievement.ae2.Networking1", "Network Apprentice"),
-                        localization.component("achievement.ae2.Networking1.desc",
+                        localization.component("achievement.ae2_unpowered.Networking1", "Network Apprentice"),
+                        localization.component("achievement.ae2_unpowered.Networking1.desc",
                                 "Reach 8 channels using devices on a network."),
                         null /* background */,
                         FrameType.TASK,
@@ -330,13 +330,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 )
                 .parent(glassCable)
                 .addCriterion("cable", AdvancementTriggers.NETWORK_APPRENTICE.instance())
-                .save(consumer, "ae2:main/network1");
+                .save(consumer, "ae2_unpowered:main/network1");
 
         var network2 = Advancement.Builder.advancement()
                 .display(
                         AEParts.SMART_CABLE.item(AEColor.TRANSPARENT),
-                        localization.component("achievement.ae2.Networking2", "Network Engineer"),
-                        localization.component("achievement.ae2.Networking2.desc",
+                        localization.component("achievement.ae2_unpowered.Networking2", "Network Engineer"),
+                        localization.component("achievement.ae2_unpowered.Networking2.desc",
                                 "Reach 128 channels using devices on a network."),
                         null /* background */,
                         FrameType.TASK,
@@ -346,13 +346,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 )
                 .parent(network1)
                 .addCriterion("cable", AdvancementTriggers.NETWORK_ENGINEER.instance())
-                .save(consumer, "ae2:main/network2");
+                .save(consumer, "ae2_unpowered:main/network2");
 
         var network3 = Advancement.Builder.advancement()
                 .display(
                         AEParts.SMART_DENSE_CABLE.item(AEColor.TRANSPARENT),
-                        localization.component("achievement.ae2.Networking3", "Network Administrator"),
-                        localization.component("achievement.ae2.Networking3.desc",
+                        localization.component("achievement.ae2_unpowered.Networking3", "Network Administrator"),
+                        localization.component("achievement.ae2_unpowered.Networking3.desc",
                                 "Reach 2048 channels using devices on a network."),
                         null /* background */,
                         FrameType.TASK,
@@ -362,13 +362,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 )
                 .parent(network2)
                 .addCriterion("cable", AdvancementTriggers.NETWORK_ADMIN.instance())
-                .save(consumer, "ae2:main/network3");;
+                .save(consumer, "ae2_unpowered:main/network3");;
 
         var p2p = Advancement.Builder.advancement()
                 .display(
                         AEParts.ME_P2P_TUNNEL,
-                        localization.component("achievement.ae2.P2P", "Point to Point Networking"),
-                        localization.component("achievement.ae2.P2P.desc", "Craft a P2P Tunnel"),
+                        localization.component("achievement.ae2_unpowered.P2P", "Point to Point Networking"),
+                        localization.component("achievement.ae2_unpowered.P2P.desc", "Craft a P2P Tunnel"),
                         null /* background */,
                         FrameType.TASK,
                         true /* showToast */,
@@ -377,13 +377,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 )
                 .parent(glassCable)
                 .addCriterion("certus", InventoryChangeTrigger.TriggerInstance.hasItems(AEParts.ME_P2P_TUNNEL))
-                .save(consumer, "ae2:main/p2p");
+                .save(consumer, "ae2_unpowered:main/p2p");
 
         var storageBus = Advancement.Builder.advancement()
                 .display(
                         AEParts.STORAGE_BUS,
-                        localization.component("achievement.ae2.StorageBus", "Limitless Potential"),
-                        localization.component("achievement.ae2.StorageBus.desc", "Craft a Storage Bus"),
+                        localization.component("achievement.ae2_unpowered.StorageBus", "Limitless Potential"),
+                        localization.component("achievement.ae2_unpowered.StorageBus.desc", "Craft a Storage Bus"),
                         null /* background */,
                         FrameType.TASK,
                         true /* showToast */,
@@ -392,13 +392,13 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 )
                 .parent(glassCable)
                 .addCriterion("part", InventoryChangeTrigger.TriggerInstance.hasItems(AEParts.STORAGE_BUS))
-                .save(consumer, "ae2:main/storage_bus");
+                .save(consumer, "ae2_unpowered:main/storage_bus");
 
         var storageBusOnInterface = Advancement.Builder.advancement()
                 .display(
                         AEBlocks.INTERFACE,
-                        localization.component("achievement.ae2.Recursive", "Recursive Networking"),
-                        localization.component("achievement.ae2.Recursive.desc",
+                        localization.component("achievement.ae2_unpowered.Recursive", "Recursive Networking"),
+                        localization.component("achievement.ae2_unpowered.Recursive.desc",
                                 "Place a Storage Bus on an Interface."),
                         null /* background */,
                         FrameType.TASK,
@@ -408,7 +408,7 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 )
                 .parent(storageBus)
                 .addCriterion("recursive", AdvancementTriggers.RECURSIVE.instance())
-                .save(consumer, "ae2:main/recursive");
+                .save(consumer, "ae2_unpowered:main/recursive");
 
     }
 

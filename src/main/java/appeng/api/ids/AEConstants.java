@@ -28,6 +28,6 @@ package appeng.api.ids;
  */
 public class AEConstants {
 
-    public static final String MOD_ID = "ae2";
+    public static final String MOD_ID = "ae2_unpowered";
 
 }

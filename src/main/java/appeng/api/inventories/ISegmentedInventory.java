@@ -38,22 +38,22 @@ public interface ISegmentedInventory {
      * Identifies an inventory that contains fake items for the purpose of configuring a filter or interface
      * auto-stocking.
      */
-    ResourceLocation CONFIG = new ResourceLocation("ae2:config");
+    ResourceLocation CONFIG = new ResourceLocation("ae2_unpowered:config");
 
     /**
      * Identifies the sub-inventory that contains installed upgrades. See {@link IUpgradeInventory}.
      */
-    ResourceLocation UPGRADES = new ResourceLocation("ae2:upgrades");
+    ResourceLocation UPGRADES = new ResourceLocation("ae2_unpowered:upgrades");
 
     /**
      * Identifies the sub-inventory used locally by the machine to store items.
      */
-    ResourceLocation STORAGE = new ResourceLocation("ae2:storage");
+    ResourceLocation STORAGE = new ResourceLocation("ae2_unpowered:storage");
 
     /**
      * Identifies the sub-inventory used to store storage cells in machines such as the cell workbench, drive, ME chest.
      */
-    ResourceLocation CELLS = new ResourceLocation("ae2:cells");
+    ResourceLocation CELLS = new ResourceLocation("ae2_unpowered:cells");
 
     /**
      * Access an internal inventory, note, not all inventories contain real items, some may be ghost items, and treating

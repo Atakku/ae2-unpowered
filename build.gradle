@@ -358,7 +358,8 @@ spotless {
 
         endWithNewline()
         indentWithSpaces()
-        removeUnusedImports()
+        // I can handle this myself
+        //removeUnusedImports()
         toggleOffOn()
         eclipse().configFile 'codeformat/codeformat.xml'
         importOrderFile 'codeformat/ae2.importorder'

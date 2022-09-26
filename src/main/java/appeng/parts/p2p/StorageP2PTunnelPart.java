@@ -15,7 +15,6 @@ import net.fabricmc.fabric.api.transfer.v1.storage.base.InsertionOnlyStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.core.Direction;
 
-import appeng.api.config.PowerUnits;
 import appeng.api.parts.IPartItem;
 import appeng.api.stacks.AEKeyType;
 
@@ -64,9 +63,6 @@ public abstract class StorageP2PTunnelPart<P extends StorageP2PTunnelPart<P, T>,
                 }
             }
 
-            var energyDrain = ((double) total) / ((double) keyType.getAmountPerOperation());
-            queueTunnelDrain(PowerUnits.AE, energyDrain, transaction);
-
             return total;
         }
 
@@ -80,12 +76,7 @@ public abstract class StorageP2PTunnelPart<P extends StorageP2PTunnelPart<P, T>,
         @Override
         public long extract(T resource, long maxAmount, TransactionContext transaction) {
             try (CapabilityGuard input = getInputCapability()) {
-                long extracted = input.get().extract(resource, maxAmount, transaction);
-
-                var energyDrain = ((double) extracted) / ((double) keyType.getAmountPerOperation());
-                queueTunnelDrain(PowerUnits.AE, energyDrain, transaction);
-
-                return extracted;
+                return input.get().extract(resource, maxAmount, transaction);
             }
         }
 
@@ -94,7 +85,7 @@ public abstract class StorageP2PTunnelPart<P extends StorageP2PTunnelPart<P, T>,
             try (CapabilityGuard input = getInputCapability()) {
                 return Iterators.transform(
                         input.get().iterator(transaction),
-                        PowerDrainingStorageView::new);
+                        P2PStorageView::new);
             }
         }
     }
@@ -102,21 +93,16 @@ public abstract class StorageP2PTunnelPart<P extends StorageP2PTunnelPart<P, T>,
     /**
      * Queues power drain when resources are extracted through this.
      */
-    private class PowerDrainingStorageView implements StorageView<T> {
+    private class P2PStorageView implements StorageView<T> {
         private final StorageView<T> delegate;
 
-        public PowerDrainingStorageView(StorageView<T> delegate) {
+        public P2PStorageView(StorageView<T> delegate) {
             this.delegate = delegate;
         }
 
         @Override
         public long extract(T resource, long maxAmount, TransactionContext transaction) {
-            long extracted = delegate.extract(resource, maxAmount, transaction);
-
-            var energyDrain = ((double) extracted) / ((double) keyType.getAmountPerOperation());
-            queueTunnelDrain(PowerUnits.AE, energyDrain, transaction);
-
-            return extracted;
+            return delegate.extract(resource, maxAmount, transaction);
         }
 
         @Override

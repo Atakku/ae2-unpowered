@@ -23,8 +23,6 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
-import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
-import net.fabricmc.fabric.api.transfer.v1.transaction.base.SnapshotParticipant;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -34,9 +32,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
-import appeng.api.config.Actionable;
-import appeng.api.config.PowerMultiplier;
-import appeng.api.config.PowerUnits;
 import appeng.api.features.P2PTunnelAttunement;
 import appeng.api.implementations.items.IMemoryCard;
 import appeng.api.implementations.items.MemoryCardMessages;
@@ -44,7 +39,6 @@ import appeng.api.parts.IPart;
 import appeng.api.parts.IPartCollisionHelper;
 import appeng.api.parts.IPartItem;
 import appeng.api.util.AECableType;
-import appeng.core.AEConfig;
 import appeng.me.service.P2PService;
 import appeng.parts.BasicStatePart;
 import appeng.util.Platform;
@@ -56,11 +50,9 @@ public abstract class P2PTunnelPart<T extends P2PTunnelPart<T>> extends BasicSta
 
     private boolean output;
     private short freq;
-    private final EnergyDrainHandler energyDrainHandler = new EnergyDrainHandler();
 
     public P2PTunnelPart(IPartItem<?> partItem) {
         super(partItem);
-        this.getMainNode().setIdlePowerUsage(this.getPowerDrainPerTick());
     }
 
     protected float getPowerDrainPerTick() {
@@ -186,7 +178,7 @@ public abstract class P2PTunnelPart<T extends P2PTunnelPart<T>> extends BasicSta
 
             // If we were able to replace the tunnel part, copy over frequency/output state
             var tunnel = getHost().replacePart(partItem, getSide(), player, hand);
-            if (tunnel instanceof P2PTunnelPart newTunnel) {
+            if (tunnel instanceof P2PTunnelPart<?>newTunnel) {
                 newTunnel.setOutput(oldOutput);
                 newTunnel.onTunnelNetworkChange();
 
@@ -295,21 +287,6 @@ public abstract class P2PTunnelPart<T extends P2PTunnelPart<T>> extends BasicSta
 
     }
 
-    protected void queueTunnelDrain(PowerUnits unit, double f, TransactionContext transaction) {
-        final double ae_to_tax = unit.convertTo(PowerUnits.AE, f * AEConfig.TUNNEL_POWER_LOSS);
-
-        energyDrainHandler.updateSnapshots(transaction);
-        energyDrainHandler.pendingEnergy += ae_to_tax;
-    }
-
-    protected void queueTunnelDrain(PowerUnits unit, double f) {
-        final double ae_to_tax = unit.convertTo(PowerUnits.AE, f * AEConfig.TUNNEL_POWER_LOSS);
-
-        getMainNode().ifPresent(grid -> {
-            grid.getEnergyService().extractAEPower(ae_to_tax, Actionable.MODULATE, PowerMultiplier.ONE);
-        });
-    }
-
     public short getFrequency() {
         return this.freq;
     }
@@ -341,29 +318,5 @@ public abstract class P2PTunnelPart<T extends P2PTunnelPart<T>> extends BasicSta
         }
 
         return ret;
-    }
-
-    private class EnergyDrainHandler extends SnapshotParticipant<Double> {
-        private double pendingEnergy;
-
-        @Override
-        protected Double createSnapshot() {
-            return pendingEnergy;
-        }
-
-        @Override
-        protected void readSnapshot(Double snapshot) {
-            pendingEnergy = snapshot;
-        }
-
-        @Override
-        protected void onFinalCommit() {
-            if (pendingEnergy > 0) {
-                getMainNode().ifPresent(grid -> {
-                    grid.getEnergyService().extractAEPower(pendingEnergy, Actionable.MODULATE, PowerMultiplier.ONE);
-                });
-                pendingEnergy = 0;
-            }
-        }
     }
 }

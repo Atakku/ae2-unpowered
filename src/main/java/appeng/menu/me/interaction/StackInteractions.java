@@ -11,7 +11,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 
 import appeng.api.behaviors.ContainerItemStrategy;
-import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.AEKey;
 import appeng.api.stacks.AEKeyType;
 import appeng.api.stacks.GenericStack;
@@ -19,10 +18,6 @@ import appeng.util.CowMap;
 
 public class StackInteractions {
     private static final CowMap<AEKeyType, ContainerItemStrategy<?, ?>> strategies = CowMap.identityHashMap();
-
-    static {
-        register(AEKeyType.fluids(), AEFluidKey.class, new FluidContainerItemStrategy());
-    }
 
     public static <T extends AEKey> void register(AEKeyType type, Class<T> keyClass,
             ContainerItemStrategy<T, ?> strategy) {

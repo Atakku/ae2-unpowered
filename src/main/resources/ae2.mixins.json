@@ -4,9 +4,6 @@
   "package": "appeng.mixins",
   "compatibilityLevel": "JAVA_11",
   "mixins": [
-    "spatial.DimensionTypeMixin",
-    "spatial.WorldGenSettingsMixin",
-    "spatial.FixupDimensionsMixin",
     "feature.LevelLightEngineMixin",
     "EarlyStartupMixin",
     "EnchantmentHelperMixin",
@@ -14,12 +11,9 @@
     "OnNeighborUpdateMixin",
     "ServerLevelCustomItemEntityMixin",
     "BreakSpeedMixin",
-    "AnnihilationPlaneEnchantmentMixin",
     "tests.StructureUtilsMixin"
   ],
   "client": [
-    "spatial.SkyRenderMixin",
-    "spatial.SkyPropertiesMixin",
     "unlitquad.ModelBakeryMixin",
     "unlitquad.BlockModelMixin",
     "unlitquad.BlockPartFaceDeserializerMixin",
@@ -29,8 +23,7 @@
     "MouseWheelMixin",
     "ItemRendererMixin",
     "WrappedGenericStackTooltipModIdMixin",
-    "ResizableSlotHighlightMixin",
-    "PickColorMixin"
+    "ResizableSlotHighlightMixin"
   ],
   "server": [],
   "injectors": {

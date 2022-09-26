@@ -45,12 +45,6 @@ import appeng.api.util.DimensionalBlockPos;
  * Do Not Implement
  */
 public interface IPartHost extends ICustomCableConnection {
-
-    /**
-     * @return the facade container
-     */
-    IFacadeContainer getFacadeContainer();
-
     /**
      * Get a part attached to the host based on the location it's attached to.
      *
@@ -201,7 +195,7 @@ public interface IPartHost extends ICustomCableConnection {
     boolean hasRedstone();
 
     /**
-     * returns false if this block contains any parts or facades, true other wise.
+     * returns false if this block contains any parts, true other wise.
      */
     boolean isEmpty();
 

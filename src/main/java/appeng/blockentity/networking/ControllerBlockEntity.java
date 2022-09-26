@@ -23,22 +23,19 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import appeng.api.config.Actionable;
 import appeng.api.inventories.InternalInventory;
 import appeng.api.networking.GridFlags;
 import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.networking.events.GridControllerChange;
-import appeng.api.networking.events.GridPowerStorageStateChanged;
-import appeng.api.networking.events.GridPowerStorageStateChanged.PowerEventType;
 import appeng.api.networking.pathing.ControllerState;
 import appeng.api.util.AECableType;
 import appeng.block.networking.ControllerBlock;
 import appeng.block.networking.ControllerBlock.ControllerBlockState;
-import appeng.blockentity.grid.AENetworkPowerBlockEntity;
+import appeng.blockentity.grid.AENetworkInvBlockEntity;
 import appeng.util.Platform;
 
-public class ControllerBlockEntity extends AENetworkPowerBlockEntity {
+public class ControllerBlockEntity extends AENetworkInvBlockEntity {
 
     static {
         GridHelper.addNodeOwnerEventHandler(
@@ -49,9 +46,6 @@ public class ControllerBlockEntity extends AENetworkPowerBlockEntity {
 
     public ControllerBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
-        this.setInternalMaxPower(8000);
-        this.setInternalPublicPowerStorage(true);
-        this.getMainNode().setIdlePowerUsage(3);
         this.getMainNode().setFlags(GridFlags.CANNOT_CARRY, GridFlags.DENSE_CAPACITY);
     }
 
@@ -80,12 +74,10 @@ public class ControllerBlockEntity extends AENetworkPowerBlockEntity {
 
         var grid = getMainNode().getGrid();
         if (grid != null) {
-            if (grid.getEnergyService().isNetworkPowered()) {
-                metaState = ControllerBlockState.online;
+            metaState = ControllerBlockState.online;
 
-                if (grid.getPathingService().getControllerState() == ControllerState.CONTROLLER_CONFLICT) {
-                    metaState = ControllerBlockState.conflicted;
-                }
+            if (grid.getPathingService().getControllerState() == ControllerState.CONTROLLER_CONFLICT) {
+                metaState = ControllerBlockState.conflicted;
             }
         } else {
             metaState = ControllerBlockState.offline;
@@ -98,33 +90,6 @@ public class ControllerBlockEntity extends AENetworkPowerBlockEntity {
                     this.level.getBlockState(this.worldPosition).setValue(ControllerBlock.CONTROLLER_STATE, metaState));
         }
 
-    }
-
-    @Override
-    protected double getFunnelPowerDemand(double maxReceived) {
-        var grid = getMainNode().getGrid();
-        if (grid != null) {
-            return grid.getEnergyService().getEnergyDemand(maxReceived);
-        } else {
-            // no grid? use local...
-            return super.getFunnelPowerDemand(maxReceived);
-        }
-    }
-
-    @Override
-    protected double funnelPowerIntoStorage(double power, Actionable mode) {
-        var grid = getMainNode().getGrid();
-        if (grid != null) {
-            return grid.getEnergyService().injectPower(power, mode);
-        } else {
-            // no grid? use local...
-            return super.funnelPowerIntoStorage(power, mode);
-        }
-    }
-
-    @Override
-    protected void PowerEvent(PowerEventType x) {
-        getMainNode().ifPresent(grid -> grid.postEvent(new GridPowerStorageStateChanged(this, x)));
     }
 
     @Override

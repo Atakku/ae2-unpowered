@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiCache;
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.TransferVariant;
@@ -51,8 +50,7 @@ public class StorageExportStrategy<V extends TransferVariant<?>> implements Stac
 
         var inv = context.getInternalStorage();
 
-        var extracted = StorageHelper.poweredExtraction(
-                context.getEnergySource(),
+        var extracted = StorageHelper.extract(
                 inv.getInventory(),
                 what,
                 amount,
@@ -73,8 +71,7 @@ public class StorageExportStrategy<V extends TransferVariant<?>> implements Stac
             // Now *really* extract if we're modulating because the simulate may have
             // returned more items than we can actually get (i.e. two storage buses
             // on the same chest).
-            extracted = StorageHelper.poweredExtraction(
-                    context.getEnergySource(),
+            extracted = StorageHelper.extract(
                     inv.getInventory(),
                     what,
                     wasInserted,
@@ -124,15 +121,6 @@ public class StorageExportStrategy<V extends TransferVariant<?>> implements Stac
         return new StorageExportStrategy<>(
                 ItemStorage.SIDED,
                 IVariantConversion.ITEM,
-                level,
-                fromPos,
-                fromSide);
-    }
-
-    public static StackExportStrategy createFluid(ServerLevel level, BlockPos fromPos, Direction fromSide) {
-        return new StorageExportStrategy<>(
-                FluidStorage.SIDED,
-                IVariantConversion.FLUID,
                 level,
                 fromPos,
                 fromSide);

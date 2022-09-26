@@ -25,14 +25,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 
-import appeng.api.parts.IFacadePart;
 import appeng.api.parts.IPart;
 import appeng.api.parts.IPartHost;
 import appeng.api.parts.IPartItem;
 import appeng.core.AEConfig;
-import appeng.core.definitions.AEParts;
-import appeng.facade.IFacadeItem;
-import appeng.items.parts.FacadeItem;
 import appeng.parts.BusCollisionHelper;
 import appeng.parts.PartPlacement;
 
@@ -81,51 +77,13 @@ public class RenderBlockOutlineHook {
         // Hit test against all attached parts to highlight the part that is relevant
         var pos = hitResult.getBlockPos();
         if (level.getBlockEntity(pos) instanceof IPartHost partHost) {
-
-            // Rendering a preview of what is currently in hand has priority
-            // If the item in hand is a facade and a block is hit, attempt facade placement
-            if (AEConfig.instance().isPlacementPreviewEnabled()) {
-                var itemInHand = player.getItemInHand(InteractionHand.MAIN_HAND);
-                showFacadePlacementPreview(poseStack, buffers, camera, hitResult, partHost, itemInHand);
-            }
-
             var selectedPart = partHost.selectPartWorld(hitResult.getLocation());
-            if (selectedPart.facade != null) {
-                renderFacade(poseStack, buffers, camera, pos, selectedPart.facade, selectedPart.side, false);
-                return true;
-            }
             if (selectedPart.part != null) {
                 renderPart(poseStack, buffers, camera, pos, selectedPart.part, selectedPart.side, false);
                 return true;
             }
         }
 
-        return false;
-    }
-
-    private static boolean showFacadePlacementPreview(PoseStack poseStack,
-            MultiBufferSource buffers,
-            Camera camera,
-            BlockHitResult blockHitResult,
-            IPartHost partHost,
-            ItemStack itemInHand) {
-        var pos = blockHitResult.getBlockPos();
-
-        if (itemInHand.getItem() instanceof IFacadeItem facadeItem) {
-            var side = blockHitResult.getDirection();
-            var facade = facadeItem.createPartFromItemStack(itemInHand, side);
-            if (facade != null && FacadeItem.canPlaceFacade(partHost, facade)) {
-                // Maybe a bit hacky, but if there's no part on the side to support the facade
-                // We would render a cable anchor implicitly
-                if (partHost.getPart(side) == null) {
-                    var cableAnchor = AEParts.CABLE_ANCHOR.asItem().createPart();
-                    renderPart(poseStack, buffers, camera, pos, cableAnchor, side, true);
-                }
-
-                renderFacade(poseStack, buffers, camera, pos, facade, side, true);
-                return true;
-            }
-        }
         return false;
     }
 
@@ -160,19 +118,6 @@ public class RenderBlockOutlineHook {
         var boxes = new ArrayList<AABB>();
         var helper = new BusCollisionHelper(boxes, side, true);
         part.getBoxes(helper);
-        renderBoxes(poseStack, buffers, camera, pos, boxes, preview);
-    }
-
-    private static void renderFacade(PoseStack poseStack,
-            MultiBufferSource buffers,
-            Camera camera,
-            BlockPos pos,
-            IFacadePart facade,
-            Direction side,
-            boolean preview) {
-        var boxes = new ArrayList<AABB>();
-        var helper = new BusCollisionHelper(boxes, side, true);
-        facade.getBoxes(helper, false);
         renderBoxes(poseStack, buffers, camera, pos, boxes, preview);
     }
 

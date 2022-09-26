@@ -41,7 +41,6 @@ public class QuartzGrowthAcceleratorBlockEntity extends AENetworkBlockEntity
         super(blockEntityType, pos, blockState);
         this.getMainNode().setExposedOnSides(EnumSet.noneOf(Direction.class));
         this.getMainNode().setFlags();
-        this.getMainNode().setIdlePowerUsage(8);
     }
 
     @Override

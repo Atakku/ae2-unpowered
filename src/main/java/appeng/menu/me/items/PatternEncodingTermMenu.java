@@ -42,7 +42,6 @@ import appeng.api.stacks.GenericStack;
 import appeng.client.gui.Icon;
 import appeng.client.gui.me.items.PatternEncodingTermScreen;
 import appeng.core.definitions.AEItems;
-import appeng.crafting.pattern.AECraftingPattern;
 import appeng.helpers.IMenuCraftingPacket;
 import appeng.helpers.IPatternTerminalMenuHost;
 import appeng.menu.SlotSemantics;
@@ -130,7 +129,7 @@ public class PatternEncodingTermMenu extends MEStorageMenu implements IMenuCraft
             this.addSlot(this.craftingGridSlots[i] = slot, SlotSemantics.CRAFTING_GRID);
         }
         // Create the output slot used for crafting mode patterns
-        this.addSlot(this.craftOutputSlot = new PatternTermSlot(ip.player, this.getActionSource(), this.powerSource,
+        this.addSlot(this.craftOutputSlot = new PatternTermSlot(ip.player, this.getActionSource(),
                 host.getInventory(), encodedInputs, this),
                 SlotSemantics.CRAFTING_RESULT);
         this.craftOutputSlot.setIcon(null);
@@ -190,7 +189,6 @@ public class PatternEncodingTermMenu extends MEStorageMenu implements IMenuCraft
                 this.currentRecipe = level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, ic, level).orElse(null);
             }
             this.currentMode = this.mode;
-            checkFluidSubstitutionSupport();
         }
 
         final ItemStack is;
@@ -203,27 +201,6 @@ public class PatternEncodingTermMenu extends MEStorageMenu implements IMenuCraft
 
         this.craftOutputSlot.setDisplayedCraftingOutput(is);
         return is;
-    }
-
-    private void checkFluidSubstitutionSupport() {
-        this.slotsSupportingFluidSubstitution.clear();
-
-        if (this.currentRecipe == null) {
-            return; // No recipe -> no substitution
-        }
-
-        var encodedPattern = encodePattern();
-        if (encodedPattern != null) {
-            var decodedPattern = PatternDetailsHelper.decodePattern(encodedPattern,
-                    this.getPlayerInventory().player.level);
-            if (decodedPattern instanceof AECraftingPattern craftingPattern) {
-                for (int i = 0; i < craftingPattern.getSparseInputs().length; i++) {
-                    if (craftingPattern.getValidFluid(i) != null) {
-                        slotsSupportingFluidSubstitution.add(i);
-                    }
-                }
-            }
-        }
     }
 
     public void encode() {

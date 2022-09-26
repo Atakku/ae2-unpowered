@@ -54,8 +54,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 
 import appeng.api.util.AEColor;
 import appeng.core.AppEng;
@@ -136,37 +134,6 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 .addCriterion("certus",
                         InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.CERTUS_QUARTZ_CRYSTAL))
                 .save(consumer, "ae2:main/quartz_crystal");
-
-        var chargedQuartz = Advancement.Builder.advancement()
-                .display(
-                        AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED,
-                        localization.component("achievement.ae2.ChargedQuartz", "Shocking"),
-                        localization.component("achievement.ae2.ChargedQuartz.desc", "Charge Quartz with a Charger"),
-                        null /* background */,
-                        FrameType.TASK,
-                        true /* showToast */,
-                        true /* announceChat */,
-                        false /* hidden */
-                )
-                .parent(quartzCrystal)
-                .addCriterion("certus",
-                        InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED))
-                .save(consumer, "ae2:main/charged_quartz");
-
-        var charger = Advancement.Builder.advancement()
-                .display(
-                        AEBlocks.CHARGER,
-                        localization.component("achievement.ae2.Charger", "Fluix Production"),
-                        localization.component("achievement.ae2.Charger.desc", "Craft a Charger"),
-                        null /* background */,
-                        FrameType.TASK,
-                        true /* showToast */,
-                        true /* announceChat */,
-                        false /* hidden */
-                )
-                .parent(chargedQuartz)
-                .addCriterion("certus", InventoryChangeTrigger.TriggerInstance.hasItems(AEBlocks.CHARGER))
-                .save(consumer, "ae2:main/charger");
 
         var compass = Advancement.Builder.advancement()
                 .display(
@@ -310,7 +277,7 @@ public class AdvancementGenerator implements IAE2DataProvider {
                         true /* announceChat */,
                         false /* hidden */
                 )
-                .parent(chargedQuartz)
+                .parent(quartzCrystal)
                 .addCriterion("certus", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.FLUIX_DUST))
                 .save(consumer, "ae2:main/fluix");
 
@@ -330,21 +297,6 @@ public class AdvancementGenerator implements IAE2DataProvider {
                         InventoryChangeTrigger.TriggerInstance
                                 .hasItems(ItemPredicate.Builder.item().of(ConventionTags.GLASS_CABLE).build()))
                 .save(consumer, "ae2:main/glass_cable");
-
-        var facade = Advancement.Builder.advancement()
-                .display(
-                        AEItems.FACADE.asItem().createFacadeForItemUnchecked(new ItemStack(Items.STONE)),
-                        localization.component("achievement.ae2.Facade", "Network Aesthetics"),
-                        localization.component("achievement.ae2.Facade.desc", "Craft a Cable Facade"),
-                        null /* background */,
-                        FrameType.TASK,
-                        true /* showToast */,
-                        true /* announceChat */,
-                        false /* hidden */
-                )
-                .parent(glassCable)
-                .addCriterion("facade", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.FACADE))
-                .save(consumer, "ae2:main/facade");
 
         var growthAccelerator = Advancement.Builder.advancement()
                 .display(
@@ -410,22 +362,7 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 )
                 .parent(network2)
                 .addCriterion("cable", AdvancementTriggers.NETWORK_ADMIN.instance())
-                .save(consumer, "ae2:main/network3");
-
-        var networkTool = Advancement.Builder.advancement()
-                .display(
-                        AEItems.NETWORK_TOOL,
-                        localization.component("achievement.ae2.NetworkTool", "Network Diagnostics"),
-                        localization.component("achievement.ae2.NetworkTool.desc", "Craft a Network Tool"),
-                        null /* background */,
-                        FrameType.TASK,
-                        true /* showToast */,
-                        true /* announceChat */,
-                        false /* hidden */
-                )
-                .parent(controller)
-                .addCriterion("network_tool", InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.NETWORK_TOOL))
-                .save(consumer, "ae2:main/network_tool");
+                .save(consumer, "ae2:main/network3");;
 
         var p2p = Advancement.Builder.advancement()
                 .display(
@@ -441,75 +378,6 @@ public class AdvancementGenerator implements IAE2DataProvider {
                 .parent(glassCable)
                 .addCriterion("certus", InventoryChangeTrigger.TriggerInstance.hasItems(AEParts.ME_P2P_TUNNEL))
                 .save(consumer, "ae2:main/p2p");
-
-        var portableCell = Advancement.Builder.advancement()
-                .display(
-                        AEItems.PORTABLE_ITEM_CELL1K,
-                        localization.component("achievement.ae2.PortableCell", "Storage Nomad"),
-                        localization.component("achievement.ae2.PortableCell.desc", "Craft a Portable Cell"),
-                        null /* background */,
-                        FrameType.TASK,
-                        false,
-                        false,
-                        false)
-                .parent(storageCell)
-                .addCriterion("pc_1k",
-                        InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.PORTABLE_ITEM_CELL1K))
-                .addCriterion("pc_4k",
-                        InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.PORTABLE_ITEM_CELL4K))
-                .addCriterion("pc_16k",
-                        InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.PORTABLE_ITEM_CELL16K))
-                .addCriterion("pc_64k",
-                        InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.PORTABLE_ITEM_CELL64K))
-                .addCriterion("pc_256k",
-                        InventoryChangeTrigger.TriggerInstance.hasItems(AEItems.PORTABLE_ITEM_CELL256K))
-                .requirements(RequirementsStrategy.OR)
-                .save(consumer, "ae2:main/portable_cell");
-
-        var qnb = Advancement.Builder.advancement()
-                .display(
-                        AEBlocks.QUANTUM_LINK,
-                        localization.component("achievement.ae2.QNB", "Quantum Tunneling"),
-                        localization.component("achievement.ae2.QNB.desc", "Craft a Quantum Link"),
-                        null /* background */,
-                        FrameType.TASK,
-                        true /* showToast */,
-                        true /* announceChat */,
-                        false /* hidden */
-                )
-                .parent(p2p)
-                .addCriterion("certus", InventoryChangeTrigger.TriggerInstance.hasItems(AEBlocks.QUANTUM_LINK))
-                .save(consumer, "ae2:main/qnb");
-
-        var spatialIoport = Advancement.Builder.advancement()
-                .display(
-                        AEBlocks.SPATIAL_IO_PORT,
-                        localization.component("achievement.ae2.SpatialIO", "Spatial Coordination"),
-                        localization.component("achievement.ae2.SpatialIO.desc", "Craft a Spatial IO Port"),
-                        null /* background */,
-                        FrameType.TASK,
-                        true /* showToast */,
-                        true /* announceChat */,
-                        false /* hidden */
-                )
-                .parent(ioport)
-                .addCriterion("certus", InventoryChangeTrigger.TriggerInstance.hasItems(AEBlocks.SPATIAL_IO_PORT))
-                .save(consumer, "ae2:main/spatial_ioport");
-
-        var spatialExplorer = Advancement.Builder.advancement()
-                .display(
-                        AEItems.SPATIAL_128_CELL_COMPONENT,
-                        localization.component("achievement.ae2.SpatialIOExplorer", "To boldly go"),
-                        localization.component("achievement.ae2.SpatialIOExplorer.desc",
-                                "Get stored in a spatial storage cell"),
-                        null /* background */,
-                        FrameType.TASK,
-                        false,
-                        false,
-                        false)
-                .parent(spatialIoport)
-                .addCriterion("explorer", AdvancementTriggers.SPATIAL_EXPLORER.instance())
-                .save(consumer, "ae2:main/spatial_explorer");
 
         var storageBus = Advancement.Builder.advancement()
                 .display(

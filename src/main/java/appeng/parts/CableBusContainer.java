@@ -55,25 +55,19 @@ import appeng.api.exceptions.SecurityConnectionException;
 import appeng.api.implementations.parts.ICablePart;
 import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGridNode;
-import appeng.api.parts.IFacadeContainer;
-import appeng.api.parts.IFacadePart;
 import appeng.api.parts.IPart;
 import appeng.api.parts.IPartCollisionHelper;
 import appeng.api.parts.IPartHost;
 import appeng.api.parts.IPartItem;
-import appeng.api.parts.PartHelper;
 import appeng.api.parts.SelectedPart;
 import appeng.api.util.AECableType;
 import appeng.api.util.AEColor;
 import appeng.api.util.DimensionalBlockPos;
 import appeng.client.render.cablebus.CableBusRenderState;
 import appeng.client.render.cablebus.CableCoreType;
-import appeng.client.render.cablebus.FacadeRenderState;
 import appeng.core.AELog;
-import appeng.facade.FacadeContainer;
 import appeng.helpers.AEMultiBlockEntity;
 import appeng.hooks.ticking.TickHandler;
-import appeng.items.parts.FacadeItem;
 import appeng.me.GridConnection;
 import appeng.me.GridNode;
 import appeng.parts.networking.CablePart;
@@ -108,16 +102,6 @@ public class CableBusContainer implements AEMultiBlockEntity, ICableBusContainer
         this.tcb = host;
     }
 
-    @Override
-    public IFacadeContainer getFacadeContainer() {
-        return new FacadeContainer(this.storage, this::facadeChanged);
-    }
-
-    private void facadeChanged(Direction side) {
-        invalidateShapes();
-        updateNeighborShapeOnSide(side);
-    }
-
     private ICablePart getCable() {
         return this.storage.getCenter();
     }
@@ -133,10 +117,6 @@ public class CableBusContainer implements AEMultiBlockEntity, ICableBusContainer
 
     @Override
     public boolean canAddPart(ItemStack is, Direction side) {
-        if (FacadeItem.createFacade(is, side) != null) {
-            return true;
-        }
-
         if (is.getItem() instanceof IPartItem<?>partItem) {
             var part = partItem.createPart();
             if (part == null) {
@@ -362,25 +342,6 @@ public class CableBusContainer implements AEMultiBlockEntity, ICableBusContainer
             }
         }
 
-        if (PartHelper.getCableRenderMode().opaqueFacades) {
-            var fc = this.getFacadeContainer();
-            for (var side : Direction.values()) {
-                var p = fc.getFacade(side);
-                if (p != null) {
-                    var boxes = new ArrayList<AABB>();
-
-                    var bch = new BusCollisionHelper(boxes, side, true);
-                    p.getBoxes(bch, true);
-                    for (AABB bb : boxes) {
-                        bb = bb.inflate(0.01, 0.01, 0.01);
-                        if (bb.contains(pos)) {
-                            return new SelectedPart(p, side);
-                        }
-                    }
-                }
-            }
-        }
-
         return new SelectedPart();
     }
 
@@ -391,25 +352,6 @@ public class CableBusContainer implements AEMultiBlockEntity, ICableBusContainer
 
     @Override
     public void partChanged() {
-        // Drop all facades if no center to attach them to exists anymore
-        if (this.storage.getCenter() == null) {
-            var facades = new ArrayList<ItemStack>();
-
-            var fc = this.getFacadeContainer();
-            for (Direction d : Direction.values()) {
-                final IFacadePart fp = fc.getFacade(d);
-                if (fp != null) {
-                    facades.add(fp.getItemStack());
-                    fc.removeFacade(this.tcb, d);
-                }
-            }
-
-            if (!facades.isEmpty()) {
-                var te = this.tcb.getBlockEntity();
-                Platform.spawnDrops(te.getLevel(), te.getBlockPos(), facades);
-            }
-        }
-
         // Update the exposed sides of exposed nodes
         for (var direction : Direction.values()) {
             var part = getPart(direction);
@@ -435,18 +377,10 @@ public class CableBusContainer implements AEMultiBlockEntity, ICableBusContainer
 
     @Override
     public boolean isEmpty() {
-        var fc = this.getFacadeContainer();
         for (var s : Platform.DIRECTIONS_WITH_NULL) {
             var part = this.getPart(s);
             if (part != null) {
                 return false;
-            }
-
-            if (s != null) {
-                var fp = fc.getFacade(s);
-                if (fp != null) {
-                    return false;
-                }
             }
         }
         return true;
@@ -714,8 +648,6 @@ public class CableBusContainer implements AEMultiBlockEntity, ICableBusContainer
                 p.writeToStream(data);
             }
         }
-
-        this.getFacadeContainer().writeToStream(data);
     }
 
     public boolean readFromStream(FriendlyByteBuf data) {
@@ -751,8 +683,6 @@ public class CableBusContainer implements AEMultiBlockEntity, ICableBusContainer
             }
         }
 
-        updateBlock |= this.getFacadeContainer().readFromStream(data);
-
         // Updating block entities may change the collision shape
         this.invalidateShapes();
 
@@ -762,10 +692,7 @@ public class CableBusContainer implements AEMultiBlockEntity, ICableBusContainer
     public void writeToNBT(CompoundTag data) {
         data.putInt("hasRedstone", this.hasRedstone.ordinal());
 
-        final IFacadeContainer fc = this.getFacadeContainer();
         for (Direction s : Platform.DIRECTIONS_WITH_NULL) {
-            fc.writeToNBT(data);
-
             var part = this.getPart(s);
             if (part != null) {
                 var itemId = IPartItem.getId(part.getPartItem());
@@ -848,8 +775,6 @@ public class CableBusContainer implements AEMultiBlockEntity, ICableBusContainer
                 this.removePart(side);
             }
         }
-
-        this.getFacadeContainer().readFromNBT(data);
     }
 
     public List<ItemStack> addPartDrops(List<ItemStack> drops) {
@@ -857,13 +782,6 @@ public class CableBusContainer implements AEMultiBlockEntity, ICableBusContainer
             var part = this.getPart(side);
             if (part != null) {
                 part.addPartDrop(drops, false);
-            }
-
-            if (side != null) {
-                final IFacadePart fp = this.getFacadeContainer().getFacade(side);
-                if (fp != null) {
-                    drops.add(fp.getItemStack());
-                }
             }
         }
 
@@ -950,14 +868,8 @@ public class CableBusContainer implements AEMultiBlockEntity, ICableBusContainer
             }
         }
 
-        // Determine attachments and facades
+        // Determine attachments
         for (var side : Direction.values()) {
-            final FacadeRenderState facadeState = this.getFacadeRenderState(side);
-
-            if (facadeState != null) {
-                renderState.getFacades().put(side, facadeState);
-            }
-
             final IPart part = this.getPart(side);
 
             if (part == null) {
@@ -987,24 +899,6 @@ public class CableBusContainer implements AEMultiBlockEntity, ICableBusContainer
         }
 
         return renderState;
-    }
-
-    private FacadeRenderState getFacadeRenderState(Direction side) {
-        // Store the "masqueraded" itemstack for the given side, if there is a facade
-        final IFacadePart facade = this.storage.getFacade(side);
-
-        if (facade != null) {
-            final ItemStack textureItem = facade.getTextureItem();
-            final BlockState blockState = facade.getBlockState();
-
-            Level level = getBlockEntity().getLevel();
-            if (blockState != null && textureItem != null && level != null) {
-                return new FacadeRenderState(blockState,
-                        !facade.getBlockState().isSolidRender(level, getBlockEntity().getBlockPos()));
-            }
-        }
-
-        return null;
     }
 
     /**
@@ -1042,21 +936,12 @@ public class CableBusContainer implements AEMultiBlockEntity, ICableBusContainer
     private VoxelShape createShape(boolean forCollision, boolean forItemEntity) {
         final List<AABB> boxes = new ArrayList<>();
 
-        final IFacadeContainer fc = this.getFacadeContainer();
         for (Direction s : Platform.DIRECTIONS_WITH_NULL) {
             final IPartCollisionHelper bch = new BusCollisionHelper(boxes, s, !forCollision);
 
             final IPart part = this.getPart(s);
             if (part != null) {
                 part.getBoxes(bch);
-            }
-
-            if ((PartHelper.getCableRenderMode().opaqueFacades || forCollision)
-                    && s != null) {
-                final IFacadePart fp = fc.getFacade(s);
-                if (fp != null) {
-                    fp.getBoxes(bch, forItemEntity);
-                }
             }
         }
 

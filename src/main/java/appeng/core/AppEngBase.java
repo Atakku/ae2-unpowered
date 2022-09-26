@@ -31,7 +31,6 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleType;
-import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.gametest.framework.GameTestRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
@@ -44,7 +43,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -64,7 +62,6 @@ import appeng.hooks.ticking.TickHandler;
 import appeng.init.InitApiLookup;
 import appeng.init.InitBlockEntities;
 import appeng.init.InitBlocks;
-import appeng.init.InitDispenserBehavior;
 import appeng.init.InitEntityTypes;
 import appeng.init.InitItems;
 import appeng.init.InitMenuTypes;
@@ -76,15 +73,11 @@ import appeng.init.internal.InitP2PAttunements;
 import appeng.init.internal.InitStorageCells;
 import appeng.init.internal.InitUpgrades;
 import appeng.init.worldgen.InitBiomeModifications;
-import appeng.init.worldgen.InitBiomes;
 import appeng.init.worldgen.InitFeatures;
 import appeng.init.worldgen.InitStructures;
-import appeng.items.tools.NetworkToolItem;
 import appeng.server.AECommand;
 import appeng.server.services.ChunkLoadingService;
 import appeng.server.testworld.GameTestPlotAdapter;
-import appeng.spatial.SpatialStorageChunkGenerator;
-import appeng.spatial.SpatialStorageDimensionIds;
 
 /**
  * Mod functionality that is common to both dedicated server and client.
@@ -128,10 +121,6 @@ public abstract class AppEngBase implements AppEng {
         InitGridLinkables.init();
         InitStorageCells.init();
 
-        FacadeCreativeTab.init(); // This call has a side-effect (adding it to the creative screen)
-
-        registerDimension();
-        registerBiomes(BuiltinRegistries.BIOME);
         registerBlocks(Registry.BLOCK);
         registerItems(Registry.ITEM);
         registerEntities(Registry.ENTITY_TYPE);
@@ -164,7 +153,6 @@ public abstract class AppEngBase implements AppEng {
         InitP2PAttunements.init();
 
         InitApiLookup.init();
-        InitDispenserBehavior.init();
 
         AEConfig.instance().save();
         InitUpgrades.init();
@@ -175,10 +163,6 @@ public abstract class AppEngBase implements AppEng {
 
     protected void initNetworkHandler() {
         new ServerNetworkHandler();
-    }
-
-    public void registerBiomes(Registry<Biome> registry) {
-        InitBiomes.init(registry);
     }
 
     public void registerBlocks(Registry<Block> registry) {
@@ -220,11 +204,6 @@ public abstract class AppEngBase implements AppEng {
     public void registerCommands(MinecraftServer server) {
         CommandDispatcher<CommandSourceStack> dispatcher = server.getCommands().getDispatcher();
         new AECommand().register(dispatcher);
-    }
-
-    public void registerDimension() {
-        Registry.register(Registry.CHUNK_GENERATOR, SpatialStorageDimensionIds.CHUNK_GENERATOR_ID,
-                SpatialStorageChunkGenerator.CODEC);
     }
 
     private void onServerAboutToStart(MinecraftServer server) {
@@ -289,19 +268,6 @@ public abstract class AppEngBase implements AppEng {
     }
 
     protected final CableRenderMode getCableRenderModeForPlayer(@Nullable Player player) {
-        if (player != null) {
-            for (int x = 0; x < Inventory.getSelectionSize(); x++) {
-                final ItemStack is = player.getInventory().getItem(x);
-
-                if (!is.isEmpty() && is.getItem() instanceof NetworkToolItem) {
-                    final CompoundTag c = is.getTag();
-                    if (c != null && c.getBoolean("hideFacades")) {
-                        return CableRenderMode.CABLE_VIEW;
-                    }
-                }
-            }
-        }
-
         return CableRenderMode.STANDARD;
     }
 

@@ -30,14 +30,9 @@ public final class StackWorldBehaviors {
 
     static {
         registerImportStrategy(AEKeyType.items(), StorageImportStrategy::createItem);
-        registerImportStrategy(AEKeyType.fluids(), StorageImportStrategy::createFluid);
         registerExportStrategy(AEKeyType.items(), StorageExportStrategy::createItem);
-        registerExportStrategy(AEKeyType.fluids(), StorageExportStrategy::createFluid);
         registerExternalStorageStrategy(AEKeyType.items(), FabricExternalStorageStrategy::createItem);
-        registerExternalStorageStrategy(AEKeyType.fluids(), FabricExternalStorageStrategy::createFluid);
-        registerPlacementStrategy(AEKeyType.fluids(), FluidPlacementStrategy::new);
         registerPlacementStrategy(AEKeyType.items(), ItemPlacementStrategy::new);
-        registerPickupStrategy(AEKeyType.fluids(), FluidPickupStrategy::new);
         registerPickupStrategy(AEKeyType.items(), ItemPickupStrategy::new);
     }
 

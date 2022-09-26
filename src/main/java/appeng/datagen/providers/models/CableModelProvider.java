@@ -28,7 +28,7 @@ public class CableModelProvider extends AE2BlockStateProvider {
 
     }
 
-    private void buildCableItems(ColoredItemDefinition cable, String baseModel, String textureBase) {
+    private void buildCableItems(ColoredItemDefinition<?> cable, String baseModel, String textureBase) {
         for (AEColor color : AEColor.values()) {
             itemModels().withExistingParent(
                     cable.id(color).getPath(),

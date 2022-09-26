@@ -46,8 +46,6 @@ public class BasePacketHandler {
 
         LIGHTNING(LightningPacket.class, LightningPacket::new),
 
-        MATTER_CANNON(MatterCannonPacket.class, MatterCannonPacket::new),
-
         MOCK_EXPLOSION(MockExplosionPacket.class, MockExplosionPacket::new),
 
         VALUE_CONFIG(ConfigValuePacket.class, ConfigValuePacket::new),
@@ -72,15 +70,11 @@ public class BasePacketHandler {
 
         ME_INTERFACE_UPDATE(InterfaceTerminalPacket.class, InterfaceTerminalPacket::new),
 
-        NETWORK_STATUS(NetworkStatusPacket.class, NetworkStatusPacket::new),
-
         CRAFT_CONFIRM_PLAN(CraftConfirmPlanPacket.class, CraftConfirmPlanPacket::new),
 
         CRAFTING_STATUS(CraftingStatusPacket.class, CraftingStatusPacket::new),
 
         MOUSE_WHEEL(MouseWheelPacket.class, MouseWheelPacket::new),
-
-        COLOR_APPLICATOR_SELECT_COLOR(ColorApplicatorSelectColorPacket.class, ColorApplicatorSelectColorPacket::new),
 
         HOTKEY(HotkeyPacket.class, HotkeyPacket::new);
 

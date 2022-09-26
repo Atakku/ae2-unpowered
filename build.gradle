@@ -18,10 +18,6 @@
 
 plugins {
     id 'fabric-loom' version '0.12-SNAPSHOT'
-    id 'maven-publish'
-    id "com.diffplug.spotless" version "5.12.4"
-    id "com.matthewprenger.cursegradle" version "1.4.0"
-    id "com.modrinth.minotaur" version "1.2.1"
     id 'io.github.juuxel.loom-quiltflower' version '1.7.1'
 }
 
@@ -56,22 +52,6 @@ repositories {
             includeGroup "me.luligabi"
         }
     }
-
-    maven {
-        name 'modmaven'
-        url "https://modmaven.dev/"
-        content {
-            includeGroup "mezz.jei"
-        }
-    }
-
-    maven {
-        name 'cursemaven'
-        url "https://www.cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
 }
 
 dependencies {
@@ -97,9 +77,6 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
-    include modImplementation("teamreborn:energy:${project.tr_energy_version}") {
-        exclude group: "net.fabricmc.fabric-api"
-    }
 
     // Include No Indium? https://github.com/Luligabi1/NoIndium
     include "me.luligabi:NoIndium:${project.no_indium_version}"
@@ -194,11 +171,6 @@ test {
     useJUnitPlatform()
 }
 
-dependencies {
-    crowdinImplementation 'de.siegmar:fastcsv:2.1.0'
-    crowdinImplementation 'com.google.code.gson:gson:2.8.9'
-}
-
 ////////////////////
 // Forge/Minecraft
 loom {
@@ -217,7 +189,7 @@ loom {
             property "appeng.generateData.existingData", file("src/main/resources").absolutePath
         }
 
-        // Use to run the tests
+        // Use to run the tests 
         gametest {
             server()
             name "Game Test"
@@ -305,169 +277,6 @@ artifacts {
     archives javadocJar
     archives sourcesJar
     archives apiJar
-}
-
-//////////////////
-// Maven publish
-publishing {
-    if (!version.endsWith("-SNAPSHOT")) {
-        publications {
-            maven(MavenPublication) {
-                groupId = project.group
-                artifactId = 'appliedenergistics2-fabric'
-                version = project.version
-
-                // add all the jars that should be included when publishing to maven
-                artifact(remapJar) {
-                    builtBy remapJar
-                }
-                artifact(sourcesJar) {
-                    builtBy remapSourcesJar
-                }
-                artifact javadocJar
-                artifact apiJar
-            }
-        }
-    }
-    repositories {
-        maven {
-            credentials {
-                username System.getenv("GITHUB_ACTOR")
-                password System.getenv("GITHUB_TOKEN")
-            }
-            name = "GitHubPackages"
-            url = "https://maven.pkg.github.com/AppliedEnergistics/Applied-Energistics-2"
-        }
-        maven {
-            credentials {
-                username System.getenv("MODMAVEN_USER")
-                password System.getenv("MODMAVEN_PASSWORD")
-            }
-            name = "modmaven"
-            url = "https://modmaven.dev/artifactory/local-releases/"
-        }
-    }
-}
-
-/////////////
-// Spotless
-spotless {
-
-    java {
-        target 'src/*/java/appeng/**/*.java'
-
-        endWithNewline()
-        indentWithSpaces()
-        // I can handle this myself
-        //removeUnusedImports()
-        toggleOffOn()
-        eclipse().configFile 'codeformat/codeformat.xml'
-        importOrderFile 'codeformat/ae2.importorder'
-    }
-
-    format 'json', {
-        target 'src/*/resources/**/*.json'
-        targetExclude 'src/generated/resources/**'
-        prettier().config(['parser': 'json'])
-    }
-}
-
-import com.modrinth.minotaur.TaskModrinthUpload
-
-////////////////
-// Crowdin
-task uploadToCrowdin(type: JavaExec) {
-    classpath = sourceSets.crowdin.runtimeClasspath
-    mainClass = 'Crowdin'
-    args 'upload_source'
-    workingDir "."
-}
-task uploadTranslations(type: JavaExec) {
-    classpath = sourceSets.crowdin.runtimeClasspath
-    mainClass = 'Crowdin'
-    args 'upload_translations'
-    workingDir "."
-}
-task downloadFromCrowdin(type: JavaExec) {
-    classpath = sourceSets.crowdin.runtimeClasspath
-    mainClass = 'Crowdin'
-    args 'update_translations'
-    workingDir "."
-}
-
-////////////////
-// Curse Forge
-if (System.getenv("CURSEFORGE") && !version.endsWith("-SNAPSHOT") && project.version != "0.0.0") {
-    def cfReleaseType = "release"
-    if (ext.isAlpha) {
-        cfReleaseType = "alpha"
-    } else if (ext.isBeta) {
-        cfReleaseType = "beta"
-    }
-
-    curseforge {
-        apiKey = System.getenv("CURSEFORGE")
-        project {
-            id = project.curseforge_project
-            changelogType = "markdown"
-            changelog = System.getenv("CHANGELOG") ?: "Please visit our [releases](https://github.com/AppliedEnergistics/Applied-Energistics-2/releases) for a changelog"
-            releaseType = cfReleaseType
-            addGameVersion project.minecraft_version
-            addGameVersion "Fabric"
-            mainArtifact(remapJar.archiveFile) {
-                displayName = "AE2 ${project.version} [FABRIC]"
-            }
-        }
-        options {
-            forgeGradleIntegration = false
-        }
-        afterEvaluate {
-            tasks.getByName("curseforge${project.curseforge_project}").dependsOn remapJar
-        }
-    }
-}
-
-////////////////
-// Modrinth
-
-import com.modrinth.minotaur.request.VersionType
-
-if (!version.endsWith("-SNAPSHOT") && project.version != "0.0.0") {
-    def mrVersionType = VersionType.RELEASE
-    if (ext.isAlpha) {
-        mrVersionType = VersionType.ALPHA
-    } else if (ext.isBeta) {
-        mrVersionType = VersionType.BETA
-    }
-
-    task publishModrinth(type: TaskModrinthUpload) {
-        onlyIf {
-            System.getenv("MODRINTH")
-        }
-
-        token = System.getenv("MODRINTH")
-        changelog = System.getenv("CHANGELOG") ?: "Please visit our [releases](https://github.com/AppliedEnergistics/Applied-Energistics-2/releases) for a changelog"
-        projectId = 'XxWD5pD3'
-        versionName = project.version + " [FABRIC]"
-        versionNumber = "fabric-" + project.version
-        versionType = mrVersionType
-        uploadFile = remapJar
-        addGameVersion(project.minecraft_version)
-        addLoader('fabric')
-    }
-    publishModrinth.dependsOn remapJar
-}
-
-////////////////
-// IntelliJ Project Import
-// The Mixin annotation process does not have an obfuscation source when running through the IntelliJ compiler,
-// thus we have to prevent it from being activated as part of importing this Gradle project into IntelliJ.
-if (System.getProperty("idea.sync.active") == "true") {
-    afterEvaluate {
-        tasks.withType(JavaCompile).all {
-            it.options.annotationProcessorPath = files()
-        }
-    }
 }
 
 // See https://github.com/AppliedEnergistics/Applied-Energistics-2/issues/5259

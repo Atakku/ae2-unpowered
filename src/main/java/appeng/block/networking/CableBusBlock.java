@@ -68,8 +68,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import appeng.api.parts.IFacadeContainer;
-import appeng.api.parts.IFacadePart;
 import appeng.api.parts.SelectedPart;
 import appeng.api.util.AEColor;
 import appeng.block.AEBaseEntityBlock;
@@ -83,12 +81,11 @@ import appeng.hooks.ICustomBlockHitEffect;
 import appeng.hooks.ICustomPickBlock;
 import appeng.hooks.IDynamicLadder;
 import appeng.hooks.INeighborChangeSensitive;
-import appeng.integration.abstraction.IAEFacade;
 import appeng.parts.ICableBusContainer;
 import appeng.parts.NullCableBusContainer;
 import appeng.util.Platform;
 
-public class CableBusBlock extends AEBaseEntityBlock<CableBusBlockEntity> implements IAEFacade, SimpleWaterloggedBlock,
+public class CableBusBlock extends AEBaseEntityBlock<CableBusBlockEntity> implements SimpleWaterloggedBlock,
         ICustomBlockHitEffect, ICustomBlockDestroyEffect, INeighborChangeSensitive, IDynamicLadder, ICustomPickBlock {
 
     private static final ICableBusContainer NULL_CABLE_BUS = new NullCableBusContainer();
@@ -189,8 +186,6 @@ public class CableBusBlock extends AEBaseEntityBlock<CableBusBlockEntity> implem
 
         if (sp.part != null) {
             return new ItemStack(sp.part.getPartItem());
-        } else if (sp.facade != null) {
-            return sp.facade.getItemStack();
         }
 
         return ItemStack.EMPTY;
@@ -213,18 +208,6 @@ public class CableBusBlock extends AEBaseEntityBlock<CableBusBlockEntity> implem
         }
 
         return out == null ? NULL_CABLE_BUS : out;
-    }
-
-    @Nullable
-    private IFacadeContainer fc(BlockGetter level, BlockPos pos) {
-        final BlockEntity te = level.getBlockEntity(pos);
-        IFacadeContainer out = null;
-
-        if (te instanceof CableBusBlockEntity) {
-            out = ((CableBusBlockEntity) te).getCableBus().getFacadeContainer();
-        }
-
-        return out;
     }
 
     @Override
@@ -252,20 +235,6 @@ public class CableBusBlock extends AEBaseEntityBlock<CableBusBlockEntity> implem
     @Environment(EnvType.CLIENT)
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> itemStacks) {
         // do nothing
-    }
-
-    @Override
-    public BlockState getFacadeState(BlockGetter level, BlockPos pos, Direction side) {
-        if (side != null) {
-            IFacadeContainer container = this.fc(level, pos);
-            if (container != null) {
-                IFacadePart facade = container.getFacade(side);
-                if (facade != null) {
-                    return facade.getBlockState();
-                }
-            }
-        }
-        return level.getBlockState(pos);
     }
 
     @Override

@@ -29,7 +29,6 @@ import net.minecraft.world.level.block.Block;
 /**
  * Contains {@link Block} ids for various blocks defined by Ae2.
  */
-@SuppressWarnings("unused")
 public final class AEBlockIds {
 
     ///
@@ -37,50 +36,27 @@ public final class AEBlockIds {
     ///
     public static final ResourceLocation QUARTZ_ORE = id("quartz_ore");
     public static final ResourceLocation DEEPSLATE_QUARTZ_ORE = id("deepslate_quartz_ore");
-    public static final ResourceLocation QUARTZ_FIXTURE = id("quartz_fixture");
     public static final ResourceLocation SKY_STONE_CHEST = id("sky_stone_chest");
     public static final ResourceLocation SMOOTH_SKY_STONE_CHEST = id("smooth_sky_stone_chest");
-    public static final ResourceLocation SKY_STONE_TANK = id("sky_stone_tank");
     public static final ResourceLocation SKY_COMPASS = id("sky_compass");
-    public static final ResourceLocation LIGHT_DETECTOR = id("light_detector");
-    public static final ResourceLocation PAINT = id("paint");
 
     ///
     /// ME NETWORK
     ///
     public static final ResourceLocation INSCRIBER = id("inscriber");
-    public static final ResourceLocation WIRELESS_ACCESS_POINT = id("wireless_access_point");
-    public static final ResourceLocation CHARGER = id("charger");
     public static final ResourceLocation SECURITY_STATION = id("security_station");
-    public static final ResourceLocation QUANTUM_RING = id("quantum_ring");
-    public static final ResourceLocation QUANTUM_LINK = id("quantum_link");
     public static final ResourceLocation CONTROLLER = id("controller");
     public static final ResourceLocation DRIVE = id("drive");
     public static final ResourceLocation CHEST = id("chest");
     public static final ResourceLocation INTERFACE = id("interface");
     public static final ResourceLocation CELL_WORKBENCH = id("cell_workbench");
     public static final ResourceLocation IO_PORT = id("io_port");
-    public static final ResourceLocation CONDENSER = id("condenser");
-    public static final ResourceLocation ENERGY_ACCEPTOR = id("energy_acceptor");
-    public static final ResourceLocation VIBRATION_CHAMBER = id("vibration_chamber");
     public static final ResourceLocation QUARTZ_GROWTH_ACCELERATOR = id("quartz_growth_accelerator");
-    public static final ResourceLocation ENERGY_CELL = id("energy_cell");
-    public static final ResourceLocation DENSE_ENERGY_CELL = id("dense_energy_cell");
     public static final ResourceLocation CABLE_BUS = id("cable_bus");
-
-    ///
-    /// SPATIAL
-    ///
-    public static final ResourceLocation MATRIX_FRAME = id("matrix_frame");
-    public static final ResourceLocation TINY_TNT = id("tiny_tnt");
-    public static final ResourceLocation SPATIAL_PYLON = id("spatial_pylon");
-    public static final ResourceLocation SPATIAL_IO_PORT = id("spatial_io_port");
-    public static final ResourceLocation SPATIAL_ANCHOR = id("spatial_anchor");
 
     ///
     /// AUTO CRAFTING
     ///
-    public static final ResourceLocation CREATIVE_ENERGY_CELL = id("creative_energy_cell");
     public static final ResourceLocation CRAFTING_UNIT = id("crafting_unit");
     public static final ResourceLocation CRAFTING_ACCELERATOR = id("crafting_accelerator");
     public static final ResourceLocation CRAFTING_STORAGE_1K = id("1k_crafting_storage");

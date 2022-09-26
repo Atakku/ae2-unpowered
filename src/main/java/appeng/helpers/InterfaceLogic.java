@@ -41,7 +41,6 @@ import appeng.api.networking.IGridNode;
 import appeng.api.networking.IManagedGridNode;
 import appeng.api.networking.crafting.ICraftingLink;
 import appeng.api.networking.crafting.ICraftingRequester;
-import appeng.api.networking.energy.IEnergyService;
 import appeng.api.networking.security.IActionHost;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.networking.ticking.IGridTickable;
@@ -412,7 +411,6 @@ public class InterfaceLogic implements ICraftingRequester, IUpgradeableObject, I
         }
 
         var networkInv = grid.getStorageService().getInventory();
-        var energySrc = grid.getEnergyService();
 
         // Always move out unwanted items before handling crafting or restocking
         if (amount < 0) {
@@ -425,7 +423,7 @@ public class InterfaceLogic implements ICraftingRequester, IUpgradeableObject, I
                 return true; // Replan
             }
 
-            var inserted = (int) StorageHelper.poweredInsert(energySrc, networkInv, what, amount,
+            var inserted = (int) StorageHelper.insert(networkInv, what, amount,
                     this.interfaceRequestSource);
 
             // Remove the items we just injected somewhere else into the network.
@@ -447,7 +445,7 @@ public class InterfaceLogic implements ICraftingRequester, IUpgradeableObject, I
             }
 
             // Try to pull the exact item
-            if (acquireFromNetwork(energySrc, networkInv, slot, what, amount)) {
+            if (acquireFromNetwork(networkInv, slot, what, amount)) {
                 return true;
             }
 
@@ -457,7 +455,7 @@ public class InterfaceLogic implements ICraftingRequester, IUpgradeableObject, I
                 for (var entry : grid.getStorageService().getCachedInventory().findFuzzy(what, fuzzyMode)) {
                     // Simulate insertion first in case the stack size is different
                     long maxAmount = storage.insert(slot, entry.getKey(), amount, Actionable.SIMULATE);
-                    if (acquireFromNetwork(energySrc, networkInv, slot, entry.getKey(), maxAmount)) {
+                    if (acquireFromNetwork(networkInv, slot, entry.getKey(), maxAmount)) {
                         return true;
                     }
                 }
@@ -473,9 +471,9 @@ public class InterfaceLogic implements ICraftingRequester, IUpgradeableObject, I
     /**
      * @return true if something was acquired
      */
-    private boolean acquireFromNetwork(IEnergyService energySrc, MEStorage networkInv, int slot, AEKey what,
+    private boolean acquireFromNetwork(MEStorage networkInv, int slot, AEKey what,
             long amount) {
-        var acquired = StorageHelper.poweredExtraction(energySrc, networkInv, what, amount,
+        var acquired = StorageHelper.extract(networkInv, what, amount,
                 this.interfaceRequestSource);
         if (acquired > 0) {
             var inserted = storage.insert(slot, what, acquired, Actionable.MODULATE);

@@ -34,7 +34,6 @@ public final class InitParticleTypes {
         register(registry, ParticleTypes.ENERGY, "energy_fx");
         register(registry, ParticleTypes.LIGHTNING_ARC, "lightning_arc_fx");
         register(registry, ParticleTypes.LIGHTNING, "lightning_fx");
-        register(registry, ParticleTypes.MATTER_CANNON, "matter_cannon_fx");
         register(registry, ParticleTypes.VIBRANT, "vibrant_fx");
     }
 

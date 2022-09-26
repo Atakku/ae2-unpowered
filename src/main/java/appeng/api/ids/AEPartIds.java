@@ -229,7 +229,6 @@ public final class AEPartIds {
     ///
     /// Buses
     ///
-    public static final ResourceLocation QUARTZ_FIBER = id("quartz_fiber");
     public static final ResourceLocation TOGGLE_BUS = id("toggle_bus");
     public static final ResourceLocation INVERTED_TOGGLE_BUS = id("inverted_toggle_bus");
     public static final ResourceLocation CABLE_ANCHOR = id("cable_anchor");
@@ -241,7 +240,6 @@ public final class AEPartIds {
     public static final ResourceLocation PATTERN_PROVIDER = id("cable_pattern_provider");
     public static final ResourceLocation INTERFACE = id("cable_interface");
     public static final ResourceLocation CONVERSION_MONITOR = id("conversion_monitor");
-    public static final ResourceLocation ENERGY_ACCEPTOR = id("cable_energy_acceptor");
 
     ///
     /// Monitors and terminals
@@ -256,20 +254,11 @@ public final class AEPartIds {
     public static final ResourceLocation STORAGE_MONITOR = id("storage_monitor");
 
     ///
-    /// Planes
-    ///
-    public static final ResourceLocation FORMATION_PLANE = id("formation_plane");
-    public static final ResourceLocation ANNIHILATION_PLANE = id("annihilation_plane");
-    public static final ResourceLocation IDENTITY_ANNIHILATION_PLANE = id("identity_annihilation_plane");
-
-    ///
     /// P2P
     ///
     public static final ResourceLocation ME_P2P_TUNNEL = id("me_p2p_tunnel");
     public static final ResourceLocation REDSTONE_P2P_TUNNEL = id("redstone_p2p_tunnel");
     public static final ResourceLocation ITEM_P2P_TUNNEL = id("item_p2p_tunnel");
-    public static final ResourceLocation FLUID_P2P_TUNNEL = id("fluid_p2p_tunnel");
-    public static final ResourceLocation FE_P2P_TUNNEL = id("fe_p2p_tunnel");
     public static final ResourceLocation LIGHT_P2P_TUNNEL = id("light_p2p_tunnel");
 
     private static ResourceLocation id(String id) {

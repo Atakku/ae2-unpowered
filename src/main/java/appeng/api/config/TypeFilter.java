@@ -8,8 +8,7 @@ import appeng.api.storage.AEKeyFilter;
  */
 public enum TypeFilter {
     ALL(AEKeyFilter.none()),
-    ITEMS(AEKeyType.items().filter()),
-    FLUIDS(AEKeyType.fluids().filter());
+    ITEMS(AEKeyType.items().filter());
 
     private final AEKeyFilter filter;
 

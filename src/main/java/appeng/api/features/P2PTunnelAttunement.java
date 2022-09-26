@@ -72,20 +72,9 @@ public final class P2PTunnelAttunement {
     public static final ItemLike ME_TUNNEL = AEParts.ME_P2P_TUNNEL;
 
     /**
-     * The default tunnel part for energy (i.e. Forge Energy) tunnels. Use this to register additional attunement
-     * options.
-     */
-    public static final ItemLike ENERGY_TUNNEL = AEParts.FE_P2P_TUNNEL;
-
-    /**
      * The default tunnel part for redstone tunnels. Use this to register additional attunement options.
      */
     public static final ItemLike REDSTONE_TUNNEL = AEParts.REDSTONE_P2P_TUNNEL;
-
-    /**
-     * The default tunnel part for fluid tunnels. Use this to register additional attunement options.
-     */
-    public static final ItemLike FLUID_TUNNEL = AEParts.FLUID_P2P_TUNNEL;
 
     /**
      * The default tunnel part for item tunnels. Use this to register additional attunement options.

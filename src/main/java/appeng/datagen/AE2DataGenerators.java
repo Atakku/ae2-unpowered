@@ -33,14 +33,10 @@ import appeng.datagen.providers.models.PartModelProvider;
 import appeng.datagen.providers.recipes.CraftingRecipes;
 import appeng.datagen.providers.recipes.DecorationBlockRecipes;
 import appeng.datagen.providers.recipes.DecorationRecipes;
-import appeng.datagen.providers.recipes.EntropyRecipes;
 import appeng.datagen.providers.recipes.InscriberRecipes;
-import appeng.datagen.providers.recipes.MatterCannonAmmoProvider;
 import appeng.datagen.providers.recipes.SmeltingRecipes;
-import appeng.datagen.providers.recipes.SmithingRecipes;
 import appeng.datagen.providers.tags.BiomeTagsProvider;
 import appeng.datagen.providers.tags.BlockTagsProvider;
-import appeng.datagen.providers.tags.FluidTagsProvider;
 import appeng.datagen.providers.tags.ItemTagsProvider;
 
 public class AE2DataGenerators {
@@ -56,7 +52,6 @@ public class AE2DataGenerators {
         BlockTagsProvider blockTagsProvider = new BlockTagsProvider(generator);
         generator.addProvider(blockTagsProvider);
         generator.addProvider(new ItemTagsProvider(generator, blockTagsProvider));
-        generator.addProvider(new FluidTagsProvider(generator));
         generator.addProvider(new BiomeTagsProvider(generator));
 
         // Models
@@ -72,12 +67,9 @@ public class AE2DataGenerators {
         // Recipes
         generator.addProvider(new DecorationRecipes(generator));
         generator.addProvider(new DecorationBlockRecipes(generator));
-        generator.addProvider(new MatterCannonAmmoProvider(generator));
-        generator.addProvider(new EntropyRecipes(generator));
         generator.addProvider(new InscriberRecipes(generator));
         generator.addProvider(new SmeltingRecipes(generator));
         generator.addProvider(new CraftingRecipes(generator));
-        generator.addProvider(new SmithingRecipes(generator));
 
         // Must run last
         generator.addProvider(localization);

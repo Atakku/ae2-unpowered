@@ -31,7 +31,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-import appeng.api.ids.AETags;
 import appeng.core.AppEng;
 import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.BlockDefinition;
@@ -44,15 +43,6 @@ public class BlockTagsProvider extends net.minecraft.data.tags.BlockTagsProvider
 
     @Override
     protected void addTags() {
-        // Black- and whitelist tags
-        tag(AETags.SPATIAL_BLACKLIST).add(Blocks.BEDROCK);
-        tag(AETags.ANNIHILATION_PLANE_BLOCK_BLACKLIST);
-        tag(AETags.FACADE_BLOCK_WHITELIST)
-                .add(Blocks.GLASS,
-                        AEBlocks.QUARTZ_GLASS.block(),
-                        AEBlocks.QUARTZ_VIBRANT_GLASS.block())
-                .addTag(ConventionTags.STAINED_GLASS_BLOCK);
-
         tag(ConventionTags.CERTUS_QUARTZ_ORE_BLOCK)
                 .add(AEBlocks.QUARTZ_ORE.block())
                 .add(AEBlocks.DEEPSLATE_QUARTZ_ORE.block());

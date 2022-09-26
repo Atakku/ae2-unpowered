@@ -45,7 +45,6 @@ public final class ParticleTypes {
         }
     };
     public static final SimpleParticleType LIGHTNING = FabricParticleTypes.simple();
-    public static final SimpleParticleType MATTER_CANNON = FabricParticleTypes.simple();
     public static final SimpleParticleType VIBRANT = FabricParticleTypes.simple();
 
 }

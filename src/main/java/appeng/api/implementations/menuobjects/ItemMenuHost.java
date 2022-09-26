@@ -25,9 +25,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 
-import appeng.api.config.Actionable;
-import appeng.api.config.PowerMultiplier;
-import appeng.api.networking.energy.IEnergySource;
 import appeng.api.upgrades.IUpgradeInventory;
 import appeng.api.upgrades.IUpgradeableItem;
 import appeng.api.upgrades.IUpgradeableObject;
@@ -43,8 +40,6 @@ public class ItemMenuHost implements IUpgradeableObject {
     private final Integer slot;
     private final ItemStack itemStack;
     private final IUpgradeInventory upgrades;
-    private int powerTicks = 0;
-    private double powerDrainPerTick = 0.5;
 
     public ItemMenuHost(Player player, @Nullable Integer slot, ItemStack itemStack) {
         this.player = player;
@@ -123,28 +118,6 @@ public class ItemMenuHost implements IUpgradeableObject {
             }
         }
         return false;
-    }
-
-    /**
-     * Can only be used with a host that implements {@link IEnergySource} only call once per broadcastChanges()
-     */
-    public boolean drainPower() {
-        if (this instanceof IEnergySource energySource) {
-            this.powerTicks++;
-            if (this.powerTicks > 10) {
-                var amt = this.powerTicks * this.powerDrainPerTick;
-                this.powerTicks = 0;
-                return energySource.extractAEPower(amt, Actionable.MODULATE, PowerMultiplier.CONFIG) > 0;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Sets how much AE is drained per tick.
-     */
-    protected void setPowerDrainPerTick(double powerDrainPerTick) {
-        this.powerDrainPerTick = powerDrainPerTick;
     }
 
     @Override

@@ -37,8 +37,6 @@ public class InvertedToggleBusPart extends ToggleBusPart {
 
     public InvertedToggleBusPart(IPartItem<?> partItem) {
         super(partItem);
-        this.getMainNode().setIdlePowerUsage(0.0);
-        this.getOuterNode().setIdlePowerUsage(0.0);
         this.getMainNode().setFlags();
         this.getOuterNode().setFlags();
     }

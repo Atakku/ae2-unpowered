@@ -2,7 +2,6 @@ package appeng.server.subcommands;
 
 import static net.minecraft.commands.Commands.literal;
 
-import java.util.Collections;
 import java.util.Objects;
 
 import javax.annotation.Nullable;
@@ -18,13 +17,10 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.levelgen.FlatLevelSource;
 
 import appeng.core.AELog;
-import appeng.core.definitions.AEItems;
-import appeng.items.tools.powered.ColorApplicatorItem;
 import appeng.server.ISubCommand;
 import appeng.server.testworld.TestPlots;
 import appeng.server.testworld.TestWorldGenerator;
@@ -74,8 +70,6 @@ public class SetupTestWorldCommand implements ISubCommand {
             player.getAbilities().flying = true;
             player.onUpdateAbilities();
 
-            kitOutPlayer(player);
-
             // Only teleport the player if they're not within the bounds already
             if (!generator.isWithinBounds(player.blockPosition())) {
                 var goodStartPos = generator.getSuitableStartPos();
@@ -86,14 +80,6 @@ public class SetupTestWorldCommand implements ISubCommand {
         } catch (RuntimeException | CommandSyntaxException e) {
             AELog.error(e);
             sender.sendFailure(new TextComponent("Setting up the test world failed: " + e));
-        }
-    }
-
-    private void kitOutPlayer(ServerPlayer player) {
-        var playerInv = player.getInventory();
-        var fullApplicator = ColorApplicatorItem.createFullColorApplicator();
-        if (!playerInv.hasAnyOf(Collections.singleton(AEItems.COLOR_APPLICATOR.asItem()))) {
-            playerInv.placeItemBackInInventory(fullApplicator);
         }
     }
 

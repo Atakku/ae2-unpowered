@@ -24,7 +24,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 
 import appeng.core.definitions.AEEntities;
-import appeng.entity.TinyTNTPrimedRenderer;
 
 /**
  * Registers custom renderers for our {@link AEEntities}.
@@ -35,10 +34,7 @@ public final class InitEntityRendering {
     }
 
     public static void init(RendererConsumer consumer) {
-        consumer.register(AEEntities.TINY_TNT_PRIMED, TinyTNTPrimedRenderer::new);
-        consumer.register(AEEntities.SINGULARITY, ItemEntityRenderer::new);
         consumer.register(AEEntities.GROWING_CRYSTAL, ItemEntityRenderer::new);
-        consumer.register(AEEntities.CHARGED_QUARTZ, ItemEntityRenderer::new);
     }
 
     @FunctionalInterface

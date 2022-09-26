@@ -74,15 +74,6 @@ public abstract class AEKeyType {
         Preconditions.checkArgument(id >= 0 && id <= Byte.MAX_VALUE, "id out of range: %d", id);
         return AEKeyTypesInternal.getRegistry().byId(id);
     }
-
-    /**
-     * @return AE2's key space for {@link AEFluidKey}.
-     */
-
-    public static AEKeyType fluids() {
-        return AEFluidKeys.INSTANCE;
-    }
-
     /**
      * @return The unique ID of this storage channel.
      */

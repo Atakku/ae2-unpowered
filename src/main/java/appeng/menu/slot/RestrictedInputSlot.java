@@ -29,14 +29,12 @@ import appeng.api.features.GridLinkables;
 import appeng.api.features.IGridLinkableHandler;
 import appeng.api.ids.AETags;
 import appeng.api.implementations.items.IBiometricCard;
-import appeng.api.implementations.items.ISpatialStorageCell;
 import appeng.api.implementations.items.IStorageComponent;
 import appeng.api.inventories.InternalInventory;
 import appeng.api.storage.StorageCells;
 import appeng.api.storage.cells.ICellWorkbenchItem;
 import appeng.api.upgrades.Upgrades;
 import appeng.blockentity.misc.InscriberRecipes;
-import appeng.blockentity.misc.VibrationChamberBlockEntity;
 import appeng.client.gui.Icon;
 import appeng.core.definitions.AEItems;
 import appeng.crafting.pattern.EncodedPatternItem;
@@ -112,10 +110,6 @@ public class RestrictedInputSlot extends AppEngSlot {
                 return AEItems.BLANK_PATTERN.isSameAs(stack);
 
             case INSCRIBER_PLATE:
-                if (AEItems.NAME_PRESS.isSameAs(stack)) {
-                    return true;
-                }
-
                 return InscriberRecipes.isValidOptionalIngredient(getLevel(), stack);
 
             case INSCRIBER_INPUT:
@@ -130,19 +124,9 @@ public class RestrictedInputSlot extends AppEngSlot {
 
             case VIEW_CELL:
                 return AEItems.VIEW_CELL.isSameAs(stack);
-            case FUEL:
-                return VibrationChamberBlockEntity.hasBurnTime(stack);
             case POWERED_TOOL:
                 return Platform.isChargeable(stack);
-            case QE_SINGULARITY:
-                return AEItems.QUANTUM_ENTANGLED_SINGULARITY.isSameAs(stack);
 
-            case RANGE_BOOSTER:
-                return AEItems.WIRELESS_BOOSTER.isSameAs(stack);
-
-            case SPATIAL_STORAGE_CELLS:
-                return stack.getItem() instanceof ISpatialStorageCell
-                        && ((ISpatialStorageCell) stack.getItem()).isSpatialStorage(stack);
             case STORAGE_CELLS:
                 return StorageCells.isCellHandled(stack);
             case WORKBENCH_CELL:

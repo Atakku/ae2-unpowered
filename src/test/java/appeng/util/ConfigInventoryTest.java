@@ -8,9 +8,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.material.Fluids;
 
-import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.GenericStack;
 import appeng.helpers.externalstorage.GenericStackInv;
@@ -33,7 +31,6 @@ public class ConfigInventoryTest {
         void loadMixedStacks() {
             var mixedInv = new GenericStackInv(null, 2);
             mixedInv.setStack(0, ONE_STICK);
-            mixedInv.setStack(1, new GenericStack(AEFluidKey.of(Fluids.WATER), 1));
             inv.readFromTag(mixedInv.writeToTag());
         }
 

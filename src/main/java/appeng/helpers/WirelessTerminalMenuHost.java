@@ -27,10 +27,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 
-import appeng.api.config.Actionable;
-import appeng.api.config.PowerMultiplier;
 import appeng.api.features.Locatables;
-import appeng.api.implementations.blockentities.IWirelessAccessPoint;
+import appeng.api.implementations.blockentities.IAcessPoint;
 import appeng.api.implementations.menuobjects.IPortableTerminal;
 import appeng.api.implementations.menuobjects.ItemMenuHost;
 import appeng.api.networking.IGrid;
@@ -39,8 +37,7 @@ import appeng.api.networking.security.IActionHost;
 import appeng.api.networking.storage.IStorageService;
 import appeng.api.storage.MEStorage;
 import appeng.api.util.IConfigManager;
-import appeng.blockentity.networking.WirelessBlockEntity;
-import appeng.core.AEConfig;
+import appeng.blockentity.misc.SecurityStationBlockEntity;
 import appeng.core.localization.PlayerMessages;
 import appeng.items.tools.powered.WirelessTerminalItem;
 import appeng.menu.ISubMenu;
@@ -51,12 +48,7 @@ public class WirelessTerminalMenuHost extends ItemMenuHost implements IPortableT
     private final BiConsumer<Player, ISubMenu> returnToMainMenu;
     private IGrid targetGrid;
     private IStorageService sg;
-    private IWirelessAccessPoint myWap;
-    private double sqRange = Double.MAX_VALUE;
-    /**
-     * The distance to the currently connected access point in blocks.
-     */
-    private double currentDistanceFromGrid = Double.MAX_VALUE;
+    private IAcessPoint ap;
 
     public WirelessTerminalMenuHost(Player player, @Nullable Integer slot, ItemStack itemStack,
             BiConsumer<Player, ISubMenu> returnToMainMenu) {
@@ -88,89 +80,56 @@ public class WirelessTerminalMenuHost extends ItemMenuHost implements IPortableT
     }
 
     @Override
-    public double extractAEPower(double amt, Actionable mode, PowerMultiplier usePowerMultiplier) {
-        if (this.terminal != null) {
-            if (mode == Actionable.SIMULATE) {
-                return this.terminal.hasPower(getPlayer(), amt, getItemStack()) ? amt : 0;
-            }
-            return this.terminal.usePower(getPlayer(), amt, getItemStack()) ? amt : 0;
-        }
-        return 0.0;
-    }
-
-    @Override
     public IConfigManager getConfigManager() {
         return this.terminal.getConfigManager(getItemStack());
     }
 
     @Override
     public IGridNode getActionableNode() {
-        this.rangeCheck();
-        if (this.myWap != null) {
-            return this.myWap.getActionableNode();
+        this.checkAP();
+        if (this.ap != null) {
+            return this.ap.getActionableNode();
         }
         return null;
     }
 
-    public boolean rangeCheck() {
-        this.sqRange = this.currentDistanceFromGrid = Double.MAX_VALUE;
-
+    public boolean checkAP() {
         if (this.targetGrid != null) {
-            if (this.myWap != null) {
-                return this.myWap.getGrid() == this.targetGrid && this.testWap(this.myWap);
+            if (this.ap != null) {
+                return this.ap.getActionableNode().getGrid() == this.targetGrid && this.testAP(this.ap);
             }
 
-            for (var wap : this.targetGrid.getMachines(WirelessBlockEntity.class)) {
-                if (this.testWap(wap)) {
-                    this.myWap = wap;
+            for (var ap : this.targetGrid.getMachines(SecurityStationBlockEntity.class)) {
+                if (this.testAP(ap)) {
+                    this.ap = ap;
                 }
             }
 
-            return this.myWap != null;
+            return this.ap != null;
         }
         return false;
     }
 
-    protected boolean testWap(IWirelessAccessPoint wap) {
-        double rangeLimit = wap.getRange();
-        rangeLimit *= rangeLimit;
-
-        var dc = wap.getLocation();
-
-        if (dc.getLevel() == this.getPlayer().level) {
-            var offX = dc.getPos().getX() - this.getPlayer().getX();
-            var offY = dc.getPos().getY() - this.getPlayer().getY();
-            var offZ = dc.getPos().getZ() - this.getPlayer().getZ();
-
-            final double r = offX * offX + offY * offY + offZ * offZ;
-            if (r < rangeLimit && this.sqRange > r && wap.isActive()) {
-                this.sqRange = r;
-                this.currentDistanceFromGrid = Math.sqrt(r);
-                return true;
-            }
-        }
-        return false;
+    protected boolean testAP(IAcessPoint ap) {
+        return ap.isActive();
     }
 
     @Override
     public boolean onBroadcastChanges(AbstractContainerMenu menu) {
         return super.onBroadcastChanges(menu)
-                && checkWirelessRange(menu)
-                && drainPower();
+                && checkWirelessRange(menu);
     }
 
     /**
      * Can only be used with a host that extends {@link WirelessTerminalMenuHost}
      */
     private boolean checkWirelessRange(AbstractContainerMenu menu) {
-        if (!rangeCheck()) {
+        if (!checkAP()) {
             if (!isClientSide()) {
                 getPlayer().sendMessage(PlayerMessages.OutOfRange.text(), Util.NIL_UUID);
             }
             return false;
         }
-
-        setPowerDrainPerTick(AEConfig.instance().wireless_getDrainRate(currentDistanceFromGrid));
         return true;
     }
 

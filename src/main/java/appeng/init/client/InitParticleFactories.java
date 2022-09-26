@@ -24,7 +24,6 @@ import appeng.client.render.effects.CraftingFx;
 import appeng.client.render.effects.EnergyFx;
 import appeng.client.render.effects.LightningArcFX;
 import appeng.client.render.effects.LightningFX;
-import appeng.client.render.effects.MatterCannonFX;
 import appeng.client.render.effects.ParticleTypes;
 import appeng.client.render.effects.VibrantFX;
 
@@ -39,7 +38,6 @@ public final class InitParticleFactories {
         particles.register(ParticleTypes.ENERGY, EnergyFx.Factory::new);
         particles.register(ParticleTypes.LIGHTNING_ARC, LightningArcFX.Factory::new);
         particles.register(ParticleTypes.LIGHTNING, LightningFX.Factory::new);
-        particles.register(ParticleTypes.MATTER_CANNON, MatterCannonFX.Factory::new);
         particles.register(ParticleTypes.VIBRANT, VibrantFX.Factory::new);
     }
 

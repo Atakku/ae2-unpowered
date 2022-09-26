@@ -36,7 +36,6 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 
 import appeng.api.config.Actionable;
-import appeng.api.config.PowerMultiplier;
 import appeng.api.config.SecurityPermissions;
 import appeng.api.config.Setting;
 import appeng.api.config.Settings;
@@ -44,7 +43,6 @@ import appeng.api.config.SortDir;
 import appeng.api.config.SortOrder;
 import appeng.api.config.TypeFilter;
 import appeng.api.config.ViewItems;
-import appeng.api.implementations.blockentities.IMEChest;
 import appeng.api.implementations.blockentities.IViewCellStorage;
 import appeng.api.implementations.menuobjects.IPortableTerminal;
 import appeng.api.implementations.menuobjects.ItemMenuHost;
@@ -52,8 +50,6 @@ import appeng.api.networking.IGrid;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.crafting.ICraftingCPU;
 import appeng.api.networking.crafting.ICraftingService;
-import appeng.api.networking.energy.IEnergyService;
-import appeng.api.networking.energy.IEnergySource;
 import appeng.api.networking.security.IActionHost;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKey;
@@ -71,7 +67,6 @@ import appeng.core.sync.packets.ConfigValuePacket;
 import appeng.core.sync.packets.MEInteractionPacket;
 import appeng.core.sync.packets.MEInventoryUpdatePacket;
 import appeng.helpers.InventoryAction;
-import appeng.me.helpers.ChannelPowerSrc;
 import appeng.menu.AEBaseMenu;
 import appeng.menu.SlotSemantics;
 import appeng.menu.ToolboxMenu;
@@ -94,13 +89,6 @@ public class MEStorageMenu extends AEBaseMenu
     public static final MenuType<MEStorageMenu> TYPE = MenuTypeBuilder
             .<MEStorageMenu, ITerminalHost>create(MEStorageMenu::new, ITerminalHost.class)
             .build("item_terminal");
-
-    public static final MenuType<MEStorageMenu> PORTABLE_ITEM_CELL_TYPE = MenuTypeBuilder
-            .<MEStorageMenu, IPortableTerminal>create(MEStorageMenu::new, IPortableTerminal.class)
-            .build("portable_item_cell");
-    public static final MenuType<MEStorageMenu> PORTABLE_FLUID_CELL_TYPE = MenuTypeBuilder
-            .<MEStorageMenu, IPortableTerminal>create(MEStorageMenu::new, IPortableTerminal.class)
-            .build("portable_fluid_cell");
 
     public static final MenuType<MEStorageMenu> WIRELESS_TYPE = MenuTypeBuilder
             .<MEStorageMenu, IPortableTerminal>create(MEStorageMenu::new, IPortableTerminal.class)
@@ -126,9 +114,6 @@ public class MEStorageMenu extends AEBaseMenu
     // This is null on the client-side and can be null on the server too
     @Nullable
     protected final MEStorage storage;
-
-    @Nullable
-    protected final IEnergySource powerSource;
 
     private final IncrementalUpdateHelper updateHelper = new IncrementalUpdateHelper();
 
@@ -167,21 +152,16 @@ public class MEStorageMenu extends AEBaseMenu
         this.clientCM.registerSetting(Settings.TYPE_FILTER, TypeFilter.ALL);
         this.clientCM.registerSetting(Settings.SORT_DIRECTION, SortDir.ASCENDING);
 
-        IEnergySource powerSource = null;
         if (isServerSide()) {
             this.serverCM = host.getConfigManager();
 
             this.storage = host.getInventory();
             if (this.storage != null) {
-
-                if (host instanceof IPortableTerminal || host instanceof IMEChest) {
-                    powerSource = (IEnergySource) host;
-                } else if (host instanceof IActionHost actionHost) {
+                if (host instanceof IActionHost actionHost) {
                     var node = actionHost.getActionableNode();
                     if (node != null) {
                         this.networkNode = node;
                         var g = node.getGrid();
-                        powerSource = new ChannelPowerSrc(this.networkNode, g.getEnergyService());
                     }
                 }
             } else {
@@ -190,7 +170,6 @@ public class MEStorageMenu extends AEBaseMenu
         } else {
             this.storage = null;
         }
-        this.powerSource = powerSource;
 
         // Create slots for the view cells, in case the terminal host supports those
         if (!hideViewCells() && host instanceof IViewCellStorage) {
@@ -343,12 +322,8 @@ public class MEStorageMenu extends AEBaseMenu
     protected void updatePowerStatus() {
         if (this.networkNode != null) {
             this.hasPower = this.networkNode.isActive();
-        } else if (this.powerSource instanceof IEnergyService energyService) {
-            this.hasPower = energyService.isNetworkPowered();
-        } else if (this.powerSource != null) {
-            this.hasPower = this.powerSource.extractAEPower(1, Actionable.SIMULATE, PowerMultiplier.CONFIG) > 0.8;
         } else {
-            this.hasPower = false;
+            this.hasPower = true;
         }
     }
 
@@ -416,7 +391,7 @@ public class MEStorageMenu extends AEBaseMenu
      * Checks that the inventory monitor is connected, a power source exists and that it is powered.
      */
     protected final boolean canInteractWithGrid() {
-        return this.storage != null && this.powerSource != null && this.isPowered();
+        return this.storage != null && this.isPowered();
     }
 
     @Override
@@ -469,11 +444,11 @@ public class MEStorageMenu extends AEBaseMenu
 
         if (action == InventoryAction.FILL_ITEM) {
             handleFillingHeldItem(
-                    (amount, mode) -> StorageHelper.poweredExtraction(powerSource, storage, clickedKey, amount,
+                    (amount, mode) -> StorageHelper.extract(storage, clickedKey, amount,
                             getActionSource(), mode),
                     clickedKey);
         } else if (action == InventoryAction.EMPTY_ITEM) {
-            handleEmptyHeldItem((what, amount, mode) -> StorageHelper.poweredInsert(powerSource, storage, what, amount,
+            handleEmptyHeldItem((what, amount, mode) -> StorageHelper.insert(storage, what, amount,
                     getActionSource(), mode));
         } else if (action == InventoryAction.AUTO_CRAFT) {
             var locator = getLocator();
@@ -508,7 +483,7 @@ public class MEStorageMenu extends AEBaseMenu
                 var carried = getCarried();
                 if (!carried.isEmpty()) {
                     var what = AEItemKey.of(carried);
-                    var inserted = StorageHelper.poweredInsert(powerSource, storage, what, 1, this.getActionSource());
+                    var inserted = StorageHelper.insert(storage, what, 1, this.getActionSource());
                     if (inserted > 0) {
                         getCarried().shrink(1);
                     }
@@ -529,7 +504,7 @@ public class MEStorageMenu extends AEBaseMenu
                     }
                 }
 
-                var extracted = StorageHelper.poweredExtraction(powerSource, storage, clickedItem, 1,
+                var extracted = StorageHelper.extract(storage, clickedItem, 1,
                         this.getActionSource());
                 if (extracted > 0) {
                     if (item.isEmpty()) {
@@ -545,8 +520,7 @@ public class MEStorageMenu extends AEBaseMenu
                 if (!getCarried().isEmpty()) {
                     putCarriedItemIntoNetwork(false);
                 } else {
-                    var extracted = StorageHelper.poweredExtraction(
-                            powerSource,
+                    var extracted = StorageHelper.extract(
                             storage,
                             clickedItem,
                             clickedItem.getItem().getMaxStackSize(),
@@ -572,7 +546,7 @@ public class MEStorageMenu extends AEBaseMenu
                     if (extracted > 0) {
                         // Half
                         extracted = extracted + 1 >> 1;
-                        extracted = StorageHelper.poweredExtraction(powerSource, storage, clickedItem, extracted,
+                        extracted = StorageHelper.extract(storage, clickedItem, extracted,
                                 this.getActionSource());
                     }
 
@@ -618,7 +592,7 @@ public class MEStorageMenu extends AEBaseMenu
             amount = 1;
         }
 
-        var inserted = StorageHelper.poweredInsert(powerSource, storage, what, amount,
+        var inserted = StorageHelper.insert(storage, what, amount,
                 this.getActionSource());
         setCarried(Platform.getInsertionRemainder(heldStack, inserted));
     }
@@ -643,7 +617,7 @@ public class MEStorageMenu extends AEBaseMenu
             return false;
         }
 
-        var extracted = StorageHelper.poweredExtraction(powerSource, storage, stack, toExtract, getActionSource());
+        var extracted = StorageHelper.extract(storage, stack, toExtract, getActionSource());
         if (extracted == 0) {
             return false; // No items available
         }
@@ -698,7 +672,7 @@ public class MEStorageMenu extends AEBaseMenu
             return input;
         }
 
-        var inserted = StorageHelper.poweredInsert(powerSource, storage,
+        var inserted = StorageHelper.insert(storage,
                 key, input.getCount(),
                 this.getActionSource());
         return Platform.getInsertionRemainder(input, inserted);

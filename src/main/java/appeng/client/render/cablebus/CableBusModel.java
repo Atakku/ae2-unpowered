@@ -74,14 +74,12 @@ public class CableBusModel implements BasicUnbakedModel {
 
         BakedModel translucentFacadeModel = bakery.bake(TRANSLUCENT_FACADE_MODEL, modelState);
 
-        FacadeBuilder facadeBuilder = new FacadeBuilder(bakery, translucentFacadeModel);
-
         // This should normally not be used, but we *have* to provide a particle texture
         // or otherwise damage models will
         // crash
         TextureAtlasSprite particleTexture = cableBuilder.getCoreTexture(CableCoreType.GLASS, AEColor.TRANSPARENT);
 
-        return new CableBusBakedModel(cableBuilder, facadeBuilder, partModels, particleTexture);
+        return new CableBusBakedModel(cableBuilder, partModels, particleTexture);
     }
 
     private Map<ResourceLocation, BakedModel> loadPartModels(ModelBakery bakery, ModelState transformIn) {

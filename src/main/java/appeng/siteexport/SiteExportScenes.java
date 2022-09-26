@@ -9,14 +9,11 @@ import java.util.function.Function;
 import com.mojang.math.Vector3f;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 import appeng.api.util.AEColor;
 import appeng.block.crafting.CraftingUnitBlock;
-import appeng.block.misc.QuartzFixtureBlock;
-import appeng.block.misc.VibrationChamberBlock;
 import appeng.core.AppEng;
 import appeng.core.definitions.AEBlockEntities;
 import appeng.core.definitions.AEBlocks;
@@ -47,28 +44,20 @@ final class SiteExportScenes {
                 singleBlock(AEBlocks.CELL_WORKBENCH),
                 singleBlock(AEBlocks.QUARTZ_ORE),
                 singleBlock(AEBlocks.QUARTZ_BLOCK),
-                singleBlock(AEBlocks.QUARTZ_FIXTURE, b -> b.setValue(QuartzFixtureBlock.FACING, Direction.UP)),
-                singleBlock(AEBlocks.QUARTZ_FIXTURE, b -> b.setValue(QuartzFixtureBlock.FACING, Direction.EAST)),
                 singleBlock(AEBlocks.CHISELED_QUARTZ_BLOCK),
                 singleBlock(AEBlocks.FLUIX_BLOCK),
                 createInscriberScene(),
                 singleBlock(AEBlocks.INTERFACE),
                 singleBlock(AEBlocks.IO_PORT),
-                singleBlock(AEBlocks.CONDENSER),
                 singleBlock(AEBlocks.CHEST),
                 singleBlock(AEBlocks.DRIVE),
-                singleBlock(AEBlocks.QUANTUM_LINK),
-                singleBlock(AEBlocks.QUANTUM_RING),
                 singleBlock(AEBlocks.QUARTZ_GLASS),
                 singleBlock(AEBlocks.SECURITY_STATION),
                 singleBlock(AEBlocks.SKY_STONE_BLOCK),
                 singleBlock(AEBlocks.SMOOTH_SKY_STONE_CHEST),
                 singleBlock(AEBlocks.SKY_STONE_BRICK),
-                singleBlock(AEBlocks.SKY_STONE_SMALL_BRICK),
-                singleBlock(AEBlocks.SPATIAL_IO_PORT),
-                singleBlock(AEBlocks.VIBRATION_CHAMBER, b -> b.setValue(VibrationChamberBlock.ACTIVE, true)));
+                singleBlock(AEBlocks.SKY_STONE_SMALL_BRICK));
 
-        scenes.add(createQnbScene());
         scenes.add(createColoredCablesScene());
         scenes.add(plotScene("inscriber_hoppers", TestPlots::inscriber));
 
@@ -103,21 +92,6 @@ final class SiteExportScenes {
         coloredCables.waitTicks = 3;
         coloredCables.centerOn = new Vector3f(2.5f, 0, 1.5f);
         return coloredCables;
-    }
-
-    private static Scene createQnbScene() {
-        Scene qnbScenes = new Scene(blockArea(), "large/qnb.png");
-        qnbScenes.blocks.put(new BlockPos(-1, 0, 0), AEBlocks.QUANTUM_RING.block().defaultBlockState());
-        qnbScenes.blocks.put(new BlockPos(0, 0, 0), AEBlocks.QUANTUM_RING.block().defaultBlockState());
-        qnbScenes.blocks.put(new BlockPos(1, 0, 0), AEBlocks.QUANTUM_RING.block().defaultBlockState());
-        qnbScenes.blocks.put(new BlockPos(-1, 1, 0), AEBlocks.QUANTUM_RING.block().defaultBlockState());
-        qnbScenes.blocks.put(new BlockPos(0, 1, 0), AEBlocks.QUANTUM_LINK.block().defaultBlockState());
-        qnbScenes.blocks.put(new BlockPos(1, 1, 0), AEBlocks.QUANTUM_RING.block().defaultBlockState());
-        qnbScenes.blocks.put(new BlockPos(-1, 2, 0), AEBlocks.QUANTUM_RING.block().defaultBlockState());
-        qnbScenes.blocks.put(new BlockPos(0, 2, 0), AEBlocks.QUANTUM_RING.block().defaultBlockState());
-        qnbScenes.blocks.put(new BlockPos(1, 2, 0), AEBlocks.QUANTUM_RING.block().defaultBlockState());
-        qnbScenes.centerOn = new Vector3f(0.5f, 1.5f, 0.5f);
-        return qnbScenes;
     }
 
     private static Scene singleBlock(BlockDefinition<?> block) {

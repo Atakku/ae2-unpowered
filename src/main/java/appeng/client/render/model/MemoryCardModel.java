@@ -44,31 +44,10 @@ import appeng.core.AppEng;
  */
 public class MemoryCardModel implements BasicUnbakedModel {
 
-    public static final Map<AEColor, ResourceLocation> MODELS_BASE = new HashMap<>();
-    private final AEColor memoryCardColor;
-
-    static {
-        for (AEColor color : AEColor.values()) {
-            if (color != AEColor.TRANSPARENT) {
-                MODELS_BASE.put(color,
-                        new ResourceLocation(AppEng.MOD_ID, "item/memory_card_" + color.registryPrefix + "_base"));
-            } else {
-                MODELS_BASE.put(color, new ResourceLocation(AppEng.MOD_ID, "item/memory_card_base"));
-            }
-        }
-    }
+    public static final ResourceLocation MODEL_BASE = new ResourceLocation(AppEng.MOD_ID, "item/memory_card_base");
 
     private static final Material TEXTURE = new Material(TextureAtlas.LOCATION_BLOCKS,
             new ResourceLocation(AppEng.MOD_ID, "item/memory_card_hash"));
-
-    public MemoryCardModel(AEColor memoryCardColor) {
-        this.memoryCardColor = memoryCardColor;
-    }
-
-    @Override
-    public Collection<ResourceLocation> getDependencies() {
-        return Collections.singleton(MODELS_BASE.get(memoryCardColor));
-    }
 
     @Nullable
     @Override
@@ -76,7 +55,7 @@ public class MemoryCardModel implements BasicUnbakedModel {
             ModelState rotationContainer, ResourceLocation modelId) {
         TextureAtlasSprite texture = textureGetter.apply(TEXTURE);
 
-        BakedModel baseModel = loader.bake(MODELS_BASE.get(memoryCardColor), rotationContainer);
+        BakedModel baseModel = loader.bake(MODEL_BASE, rotationContainer);
 
         return new MemoryCardBakedModel(baseModel, texture);
     }

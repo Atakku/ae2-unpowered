@@ -29,8 +29,6 @@ import net.minecraft.world.phys.AABB;
 import appeng.api.behaviors.PickupSink;
 import appeng.api.behaviors.PickupStrategy;
 import appeng.api.config.Actionable;
-import appeng.api.config.PowerMultiplier;
-import appeng.api.networking.energy.IEnergySource;
 import appeng.api.stacks.AEItemKey;
 import appeng.core.AppEng;
 import appeng.core.sync.packets.BlockTransitionEffectPacket;
@@ -70,7 +68,7 @@ public class ItemPickupStrategy implements PickupStrategy {
         return entity instanceof ItemEntity;
     }
 
-    public boolean pickUpEntity(IEnergySource energySource, PickupSink sink, Entity entity) {
+    public boolean pickUpEntity(PickupSink sink, Entity entity) {
         if (!this.isAccepting || !(entity instanceof ItemEntity itemEntity)) {
             return false;
         }
@@ -91,19 +89,14 @@ public class ItemPickupStrategy implements PickupStrategy {
     }
 
     @Override
-    public Result tryStartPickup(IEnergySource energySource, PickupSink sink) {
+    public Result tryStartPickup(PickupSink sink) {
         if (this.isAccepting) {
             var blockState = level.getBlockState(pos);
             if (this.canHandleBlock(level, pos, blockState)) {
                 // Query the loot-table and get a potential outcome of the loot-table evaluation
                 var items = this.obtainBlockDrops(level, pos);
-                var requiredPower = this.calculateEnergyUsage(level, pos, items);
 
-                var hasPower = energySource.extractAEPower(requiredPower, Actionable.SIMULATE,
-                        PowerMultiplier.CONFIG) > requiredPower - 0.1;
-                var canStore = this.canStoreItemStacks(sink, items);
-
-                if (hasPower && canStore) {
+                if (this.canStoreItemStacks(sink, items)) {
                     return Result.PICKED_UP;
                 } else {
                     return Result.CANT_STORE;
@@ -115,7 +108,7 @@ public class ItemPickupStrategy implements PickupStrategy {
     }
 
     @Override
-    public void completePickup(IEnergySource energySource, PickupSink sink) {
+    public void completePickup(PickupSink sink) {
 
         var blockState = level.getBlockState(pos);
         if (!this.canHandleBlock(level, pos, blockState)) {
@@ -123,7 +116,6 @@ public class ItemPickupStrategy implements PickupStrategy {
         }
 
         var items = this.obtainBlockDrops(level, pos);
-        var requiredPower = this.calculateEnergyUsage(level, pos, items);
 
         if (!this.breakBlockAndStoreExtraItems(sink, level, pos)) {
             // We failed to actually replace the block with air, or it already was the case
@@ -139,8 +131,6 @@ public class ItemPickupStrategy implements PickupStrategy {
                 Platform.spawnDrops(level, pos, Collections.singletonList(item));
             }
         }
-
-        energySource.extractAEPower(requiredPower, Actionable.MODULATE, PowerMultiplier.CONFIG);
 
         AppEng.instance().sendToAllNearExcept(null, pos.getX(), pos.getY(), pos.getZ(), 64, level,
                 new BlockTransitionEffectPacket(pos, blockState, side, BlockTransitionEffectPacket.SoundMode.NONE));

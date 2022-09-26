@@ -20,7 +20,6 @@ package appeng.items.tools.powered;
 
 import java.util.List;
 import java.util.OptionalLong;
-import java.util.function.DoubleSupplier;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -41,7 +40,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
-import appeng.api.config.Actionable;
 import appeng.api.config.Settings;
 import appeng.api.config.SortDir;
 import appeng.api.config.SortOrder;
@@ -51,34 +49,26 @@ import appeng.api.features.IGridLinkableHandler;
 import appeng.api.features.Locatables;
 import appeng.api.implementations.menuobjects.IMenuItem;
 import appeng.api.implementations.menuobjects.ItemMenuHost;
-import appeng.api.upgrades.IUpgradeInventory;
 import appeng.api.upgrades.IUpgradeableItem;
-import appeng.api.upgrades.UpgradeInventories;
 import appeng.api.util.IConfigManager;
-import appeng.core.definitions.AEItems;
 import appeng.core.localization.GuiText;
 import appeng.core.localization.PlayerMessages;
 import appeng.core.localization.Tooltips;
 import appeng.helpers.WirelessTerminalMenuHost;
-import appeng.items.tools.powered.powersink.AEBasePoweredItem;
+import appeng.items.AEBaseItem;
 import appeng.menu.MenuOpener;
 import appeng.menu.locator.MenuLocators;
 import appeng.menu.me.common.MEStorageMenu;
 import appeng.util.ConfigManager;
 
-public class WirelessTerminalItem extends AEBasePoweredItem implements IMenuItem, IUpgradeableItem {
+public class WirelessTerminalItem extends AEBaseItem implements IMenuItem, IUpgradeableItem {
 
     public static final IGridLinkableHandler LINKABLE_HANDLER = new LinkableHandler();
 
     private static final String TAG_GRID_KEY = "gridKey";
 
-    public WirelessTerminalItem(DoubleSupplier powerCapacity, Item.Properties props) {
-        super(powerCapacity, props);
-    }
-
-    @Override
-    public double getChargeRate(ItemStack stack) {
-        return 800d + 800d * getUpgrades(stack).getInstalledUpgrades(AEItems.ENERGY_CARD);
+    public WirelessTerminalItem(Item.Properties props) {
+        super(props);
     }
 
     /**
@@ -194,23 +184,12 @@ public class WirelessTerminalItem extends AEBasePoweredItem implements IMenuItem
     }
 
     /**
-     * use an amount of power, in AE units
-     *
-     * @param amount is in AE units ( 5 per MJ ), if you return false, the item should be dead and return false for
-     *               hasPower
-     * @return true if wireless terminal uses power
-     */
-    public boolean usePower(Player player, double amount, ItemStack is) {
-        return extractAEPower(is, amount, Actionable.MODULATE) >= amount - 0.5;
-    }
-
-    /**
      * gets the power status of the item.
      *
      * @return returns true if there is any power left.
      */
     public boolean hasPower(Player player, double amt, ItemStack is) {
-        return getAECurrentPower(is) >= amt;
+        return true;
     }
 
     /**
@@ -230,15 +209,6 @@ public class WirelessTerminalItem extends AEBasePoweredItem implements IMenuItem
 
         out.readFromNBT(target.getOrCreateTag().copy());
         return out;
-    }
-
-    @Override
-    public IUpgradeInventory getUpgrades(ItemStack stack) {
-        return UpgradeInventories.forItem(stack, 2, this::onUpgradesChanged);
-    }
-
-    private void onUpgradesChanged(ItemStack stack, IUpgradeInventory upgrades) {
-        setAEMaxPowerMultiplier(stack, 1 + upgrades.getInstalledUpgrades(AEItems.ENERGY_CARD));
     }
 
     private static class LinkableHandler implements IGridLinkableHandler {

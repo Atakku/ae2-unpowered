@@ -58,7 +58,6 @@ import appeng.api.networking.crafting.ICraftingSimulationRequester;
 import appeng.api.networking.crafting.ICraftingSubmitResult;
 import appeng.api.networking.crafting.ICraftingWatcherNode;
 import appeng.api.networking.crafting.UnsuitableCpus;
-import appeng.api.networking.energy.IEnergyService;
 import appeng.api.networking.events.GridCraftingCpuChange;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.networking.storage.IStorageService;
@@ -119,13 +118,11 @@ public class CraftingService implements ICraftingService, IGridServiceProvider {
     private final Multimap<AEKey, StackWatcher<ICraftingWatcherNode>> interests = HashMultimap.create();
     private final InterestManager<StackWatcher<ICraftingWatcherNode>> interestManager = new InterestManager<>(
             this.interests);
-    private final IEnergyService energyGrid;
     private final Set<AEKey> currentlyCrafting = new HashSet<>();
     private boolean updateList = false;
 
-    public CraftingService(IGrid grid, IStorageService storageGrid, IEnergyService energyGrid) {
+    public CraftingService(IGrid grid, IStorageService storageGrid) {
         this.grid = grid;
-        this.energyGrid = energyGrid;
 
         storageGrid.addGlobalStorageProvider(new CraftingServiceStorage(this));
     }
@@ -142,7 +139,7 @@ public class CraftingService implements ICraftingService, IGridServiceProvider {
         var previouslyCrafting = new HashSet<>(currentlyCrafting);
         this.currentlyCrafting.clear();
         for (CraftingCPUCluster cpu : this.craftingCPUClusters) {
-            cpu.craftingLogic.tickCraftingLogic(energyGrid, this);
+            cpu.craftingLogic.tickCraftingLogic(this);
 
             cpu.craftingLogic.getAllWaitingFor(this.currentlyCrafting);
         }

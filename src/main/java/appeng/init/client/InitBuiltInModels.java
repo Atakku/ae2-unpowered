@@ -28,21 +28,16 @@ import net.minecraft.resources.ResourceLocation;
 
 import appeng.api.util.AEColor;
 import appeng.block.crafting.CraftingUnitType;
-import appeng.block.paint.PaintSplotchesModel;
-import appeng.block.qnb.QnbFormedModel;
-import appeng.client.render.FacadeItemModel;
 import appeng.client.render.SimpleModelLoader;
 import appeng.client.render.cablebus.CableBusModel;
 import appeng.client.render.cablebus.P2PTunnelFrequencyModel;
 import appeng.client.render.crafting.CraftingCubeModel;
 import appeng.client.render.crafting.CraftingUnitModelProvider;
 import appeng.client.render.model.BiometricCardModel;
-import appeng.client.render.model.ColorApplicatorModel;
 import appeng.client.render.model.DriveModel;
 import appeng.client.render.model.GlassModel;
 import appeng.client.render.model.MemoryCardModel;
 import appeng.client.render.model.SkyCompassModel;
-import appeng.client.render.spatial.SpatialPylonModel;
 import appeng.core.AppEng;
 import appeng.parts.automation.PlaneModel;
 
@@ -56,19 +51,10 @@ public final class InitBuiltInModels {
         addBuiltInModel("block/quartz_glass", GlassModel::new);
         addBuiltInModel("block/sky_compass", SkyCompassModel::new);
         addBuiltInModel("item/sky_compass", SkyCompassModel::new);
-        for (AEColor color : AEColor.values()) {
-            String builtInItemModelName = "memory_card"
-                    + (color != AEColor.TRANSPARENT ? ("_" + color.registryPrefix) : "");
-            addBuiltInModel("item/" + builtInItemModelName, () -> new MemoryCardModel(color));
-        }
+        addBuiltInModel("item/memory_card", MemoryCardModel::new);
         addBuiltInModel("item/biometric_card", BiometricCardModel::new);
         addBuiltInModel("block/drive", DriveModel::new);
-        addBuiltInModel("color_applicator", ColorApplicatorModel::new);
-        addBuiltInModel("block/spatial_pylon", SpatialPylonModel::new);
-        addBuiltInModel("block/paint", PaintSplotchesModel::new);
-        addBuiltInModel("block/qnb/qnb_formed", QnbFormedModel::new);
         addBuiltInModel("part/p2p/p2p_tunnel_frequency", P2PTunnelFrequencyModel::new);
-        addBuiltInModel("item/facade", FacadeItemModel::new);
 
         // Fabric doesn't have model-loaders, so we register the models by hand instead
         addPlaneModel("part/annihilation_plane", "part/annihilation_plane");

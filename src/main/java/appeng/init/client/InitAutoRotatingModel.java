@@ -46,9 +46,6 @@ public final class InitAutoRotatingModel {
     private static final Set<BlockDefinition<?>> NO_AUTO_ROTATION = ImmutableSet.of(
             AEBlocks.CABLE_BUS,
             AEBlocks.CONTROLLER,
-            AEBlocks.PAINT,
-            AEBlocks.QUANTUM_LINK,
-            AEBlocks.QUANTUM_RING,
             AEBlocks.CRAFTING_UNIT,
             AEBlocks.CRAFTING_ACCELERATOR,
             AEBlocks.CRAFTING_MONITOR,

@@ -2,10 +2,8 @@ package appeng.server.testworld;
 
 import java.util.Objects;
 
-import org.apache.commons.lang3.mutable.MutableDouble;
 import org.apache.commons.lang3.mutable.MutableInt;
 
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -13,11 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.Fluids;
 
-import appeng.blockentity.networking.EnergyCellBlockEntity;
-import appeng.blockentity.storage.SkyStoneTankBlockEntity;
-import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.AEParts;
 import appeng.core.definitions.ItemDefinition;
 import appeng.items.parts.PartItem;
@@ -53,8 +47,6 @@ public class P2PTestPlots {
 
         // Energy connection between the P2P-net and the carrier net
         plot.cable(origin.east().above());
-        plot.cable(origin.east().east().above())
-                .part(Direction.WEST, AEParts.QUARTZ_FIBER);
 
         plot.test(helper -> {
             helper.succeedWhen(() -> {
@@ -78,64 +70,6 @@ public class P2PTestPlots {
             helper.succeedWhen(() -> {
                 helper.assertContainerContains(chestPos, Items.BEDROCK);
             });
-        });
-    }
-
-    /**
-     * Builds a system that uses an export bus to export fluids into a tank via a P2P fluid tunnel.
-     */
-    public static void fluid(PlotBuilder plot) {
-        var origin = BlockPos.ZERO;
-        placeTunnel(plot, AEParts.FLUID_P2P_TUNNEL);
-
-        var outputPos = origin.east().east();
-        plot.block(outputPos, AEBlocks.SKY_STONE_TANK);
-        plot.cable(origin.west().west())
-                .part(Direction.EAST, AEParts.EXPORT_BUS, part -> {
-                    part.getConfig().addFilter(Fluids.WATER);
-                });
-        plot.creativeEnergyCell(origin.west().west().below());
-        plot.drive(origin.west().west().above())
-                .addCreativeCell()
-                .add(Fluids.WATER);
-        plot.test(helper -> {
-            helper.succeedWhen(() -> {
-                var tank = (SkyStoneTankBlockEntity) helper.getBlockEntity(outputPos);
-                var storage = tank.getStorage();
-                helper.check(
-                        FluidVariant.of(Fluids.WATER).equals(storage.variant),
-                        "No water stored");
-                helper.check(
-                        storage.amount > 0,
-                        "No amount >0 stored");
-            });
-        });
-    }
-
-    public static void energy(PlotBuilder plot) {
-        var origin = BlockPos.ZERO;
-        placeTunnel(plot, AEParts.FE_P2P_TUNNEL);
-
-        plot.block(origin.west().west(), AEBlocks.DEBUG_ENERGY_GEN);
-        plot.block(origin.east().east(), AEBlocks.ENERGY_ACCEPTOR);
-        var cellPos = origin.east().east().above();
-        plot.block(cellPos, AEBlocks.ENERGY_CELL);
-        var cellEnergy = new MutableDouble(0);
-        plot.test(helper -> {
-            helper.startSequence()
-                    .thenIdle(10)
-                    .thenWaitUntil(() -> {
-                        var cell = (EnergyCellBlockEntity) helper.getBlockEntity(cellPos);
-                        cellEnergy.setValue(cell.getAECurrentPower());
-                    })
-                    .thenIdle(10)
-                    .thenWaitUntil(() -> {
-                        var cell = (EnergyCellBlockEntity) helper.getBlockEntity(cellPos);
-                        helper.check(
-                                cell.getAECurrentPower() > cellEnergy.getValue(),
-                                "Cell should start charging through the P2P tunnel");
-                    })
-                    .thenSucceed();
         });
     }
 
@@ -176,7 +110,6 @@ public class P2PTestPlots {
 
     private static <T extends P2PTunnelPart<?>> void placeTunnel(PlotBuilder plot, ItemDefinition<PartItem<T>> tunnel) {
         var origin = BlockPos.ZERO;
-        plot.creativeEnergyCell(origin.below());
         plot.cable(origin);
         plot.cable(origin.west()).part(Direction.WEST, tunnel);
         plot.cable(origin.east()).part(Direction.EAST, tunnel);

@@ -54,9 +54,6 @@ import appeng.me.helpers.MachineSource;
 import appeng.util.ConfigManager;
 
 public final class CraftingCPUCluster implements IAECluster, ICraftingCPU {
-
-    private static final String LOG_MARK_AS_COMPLETE = "Completed job for %s.";
-
     private final BlockPos boundsMin;
     private final BlockPos boundsMax;
     // INSTANCE sate

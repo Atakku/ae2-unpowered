@@ -35,7 +35,6 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 import appeng.datagen.providers.tags.ConventionTags;
-import appeng.items.tools.NetworkToolItem;
 
 /**
  * Utility functions revolving around using or placing items.
@@ -49,7 +48,6 @@ public final class InteractionUtil {
      * Checks if the given tool is a wrench capable of disassembling.
      */
     public static boolean canWrenchDisassemble(ItemStack tool) {
-        // TODO FABRIC 117 Currently Fabric cannot dynamically distinguish tools / tool actions
         return tool.is(ConventionTags.WRENCH);
     }
 
@@ -57,12 +55,6 @@ public final class InteractionUtil {
      * Checks if the given tool is a wrench capable of rotating.
      */
     public static boolean canWrenchRotate(ItemStack tool) {
-        // TODO FABRIC 117 Currently Fabric cannot dynamically distinguish tools / tool actions
-        // Special case to stop the network tool from rotating things instead of opening the appropriate UI
-        if (tool.getItem() instanceof NetworkToolItem) {
-            return false;
-        }
-
         return tool.is(ConventionTags.WRENCH);
     }
 

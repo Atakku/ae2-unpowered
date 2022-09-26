@@ -19,7 +19,7 @@ class GridNodeTest extends AbstractGridNodeTest {
      */
     @Test
     public void rebootNotificationIsPostedAfterGridBeginsBooting() {
-        var node = makePoweredNode();
+        var node = makeReadyNode();
         assertTrue(node.hasGridBooted());
         reset(listener);
         var calls = new ArrayList<Boolean>();

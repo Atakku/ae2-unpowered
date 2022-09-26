@@ -82,7 +82,7 @@ public class ClassInstantiation<T> {
 
     private Class<?> condense(Class<?> expected, Class<?>... wrappers) {
         if (expected.isPrimitive()) {
-            for (Class clz : wrappers) {
+            for (Class<?> clz : wrappers) {
                 try {
                     if (expected == clz.getField("TYPE").get(null)) {
                         return clz;

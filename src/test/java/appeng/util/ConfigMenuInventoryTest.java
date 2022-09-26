@@ -13,9 +13,7 @@ import org.junit.jupiter.api.TestFactory;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.material.Fluids;
 
-import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKeyType;
 import appeng.api.stacks.GenericStack;
@@ -26,7 +24,6 @@ class ConfigMenuInventoryTest {
     private static final GenericStack STICK = new GenericStack(AEItemKey.of(Items.STICK), 1);
     private static final GenericStack STONE = new GenericStack(AEItemKey.of(Items.STONE), 1);
     private static final GenericStack ZERO_STICK = new GenericStack(AEItemKey.of(Items.STICK), 0);
-    private static final GenericStack WATER = new GenericStack(AEFluidKey.of(Fluids.WATER), AEFluidKey.AMOUNT_BUCKET);
     private static final GenericStack WATER_BUCKET = new GenericStack(AEItemKey.of(Items.WATER_BUCKET), 1);
 
     @TestFactory
@@ -39,31 +36,7 @@ class ConfigMenuInventoryTest {
                 itemTest("Insert stone on stick changes filter", new ItemStack(Items.STONE), STONE, STICK),
                 itemTest("Water bucket wont be converted into fluid", new ItemStack(Items.WATER_BUCKET), WATER_BUCKET,
                         null),
-                itemTest("Wrapped item will be unwrapped", GenericStack.wrapInItemStack(STICK), STICK, null),
-                itemTest("Wrapped fluid will be rejected", GenericStack.wrapInItemStack(WATER), STICK, STICK));
-    }
-
-    @TestFactory
-    @DisplayName("Test fluid based config inventory")
-    Iterable<DynamicTest> fluidTests() {
-        return List.of(
-                fluidTest("Insert empty changes nothing", ItemStack.EMPTY, null, null),
-                fluidTest("Insert empty clears existing filter", ItemStack.EMPTY, null, WATER),
-                fluidTest("Stick gets rejected", new ItemStack(Items.STICK), WATER, WATER),
-                fluidTest("Water bucket is not converted into fluid", new ItemStack(Items.WATER_BUCKET), null, null),
-                fluidTest("Wrapped item will be rejected", GenericStack.wrapInItemStack(STICK), WATER, WATER),
-                fluidTest("Wrapped fluid will be unwrapped", GenericStack.wrapInItemStack(WATER), WATER, null));
-    }
-
-    @Test
-    void testFluidConfigReadsAsWrappedStackOfCount1() {
-        var inv = ConfigInventory.configTypes(AEFluidKey.filter(), 1, null);
-        inv.setStack(0, WATER);
-        var wrappedStack = inv.createMenuWrapper().getStackInSlot(0);
-        assertEquals(1, wrappedStack.getCount());
-        var unwrapped = GenericStack.unwrapItemStack(wrappedStack);
-        // Types config sets amounts to 0
-        assertEquals(new GenericStack(WATER.what(), 0), unwrapped);
+                itemTest("Wrapped item will be unwrapped", GenericStack.wrapInItemStack(STICK), STICK, null));
     }
 
     /**
@@ -82,11 +55,6 @@ class ConfigMenuInventoryTest {
     private DynamicTest itemTest(String displayName, ItemStack inserted, @Nullable GenericStack expectedStack,
             @Nullable GenericStack initialStack) {
         return test(displayName, AEKeyType.items(), inserted, expectedStack, initialStack);
-    }
-
-    private DynamicTest fluidTest(String displayName, ItemStack inserted, @Nullable GenericStack expectedStack,
-            @Nullable GenericStack initialStack) {
-        return test(displayName, AEKeyType.fluids(), inserted, expectedStack, initialStack);
     }
 
     private DynamicTest test(String displayName, AEKeyType channel, ItemStack inserted,

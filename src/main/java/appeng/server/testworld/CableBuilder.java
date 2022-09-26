@@ -4,12 +4,10 @@ import java.util.function.Consumer;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.material.Fluid;
 
 import appeng.api.config.Settings;
 import appeng.api.config.YesNo;
 import appeng.api.parts.IPart;
-import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKey;
 import appeng.core.definitions.AEItems;
@@ -51,9 +49,5 @@ public class CableBuilder {
 
     public CableBuilder craftingEmitter(Direction side, ItemLike what) {
         return craftingEmitter(side, AEItemKey.of(what));
-    }
-
-    public CableBuilder craftingEmitter(Direction side, Fluid what) {
-        return craftingEmitter(side, AEFluidKey.of(what));
     }
 }

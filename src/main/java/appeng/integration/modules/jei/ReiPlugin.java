@@ -51,14 +51,12 @@ import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.plugin.common.BuiltinPlugin;
 import me.shedaniel.rei.plugin.common.displays.DefaultInformationDisplay;
 
-import appeng.api.config.CondenserOutput;
 import appeng.api.features.P2PTunnelAttunementInternal;
 import appeng.api.integrations.rei.IngredientConverters;
 import appeng.api.util.AEColor;
 import appeng.client.gui.AEBaseScreen;
 import appeng.client.gui.implementations.InscriberScreen;
 import appeng.core.AEConfig;
-import appeng.core.FacadeCreativeTab;
 import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.AEItems;
 import appeng.core.definitions.AEParts;
@@ -83,7 +81,6 @@ public class ReiPlugin implements REIClientPlugin {
 
     public ReiPlugin() {
         IngredientConverters.register(new ItemIngredientConverter());
-        IngredientConverters.register(new FluidIngredientConverter());
 
         REIFacade.setInstance(new ReiRuntimeAdapter());
     }
@@ -96,14 +93,11 @@ public class ReiPlugin implements REIClientPlugin {
     @Override
     public void registerCategories(CategoryRegistry registry) {
         registry.add(new ThrowingInWaterCategory());
-        registry.add(new CondenserCategory());
         registry.add(new InscriberRecipeCategory());
-        registry.add(new FacadeRecipeCategory());
         registry.add(new AttunementCategory());
 
         registry.removePlusButton(ThrowingInWaterCategory.ID);
         registry.removePlusButton(InscriberRecipeCategory.ID);
-        registry.removePlusButton(CondenserCategory.ID);
 
         registerWorkingStations(registry);
     }
@@ -112,12 +106,7 @@ public class ReiPlugin implements REIClientPlugin {
     public void registerDisplays(DisplayRegistry registry) {
         registry.registerRecipeFiller(InscriberRecipe.class, InscriberRecipe.TYPE, InscriberRecipeWrapper::new);
 
-        registry.add(new CondenserOutputDisplay(CondenserOutput.MATTER_BALLS));
-        registry.add(new CondenserOutputDisplay(CondenserOutput.SINGULARITY));
-
         registerDescriptions(registry);
-
-        registry.registerGlobalDisplayGenerator(new FacadeRegistryGenerator());
 
         // Add displays for crystal growth
         if (AEConfig.instance().isInWorldCrystalGrowthEnabled()) {
@@ -139,7 +128,7 @@ public class ReiPlugin implements REIClientPlugin {
                     new ThrowingInWaterDisplay(
                             List.of(
                                     Ingredient.of(Items.REDSTONE),
-                                    Ingredient.of(AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED),
+                                    Ingredient.of(AEItems.CERTUS_QUARTZ_CRYSTAL),
                                     Ingredient.of(Items.QUARTZ)),
                             AEItems.FLUIX_DUST.stack(2),
                             false));
@@ -179,19 +168,6 @@ public class ReiPlugin implements REIClientPlugin {
 
     @Override
     public void registerEntries(EntryRegistry registry) {
-        // Will be hidden if developer items are disabled in the config
-        developerItems = ImmutableList.of(
-                AEBlocks.DEBUG_CUBE_GEN::isSameAs,
-                AEBlocks.DEBUG_CHUNK_LOADER::isSameAs,
-                AEBlocks.DEBUG_ENERGY_GEN::isSameAs,
-                AEBlocks.DEBUG_ITEM_GEN::isSameAs,
-                AEBlocks.DEBUG_PHANTOM_NODE::isSameAs,
-
-                AEItems.DEBUG_CARD::isSameAs,
-                AEItems.DEBUG_ERASER::isSameAs,
-                AEItems.DEBUG_METEORITE_PLACER::isSameAs,
-                AEItems.DEBUG_REPLICATOR_CARD::isSameAs);
-
         // Will be hidden if colored cables are hidden
         List<Predicate<ItemStack>> predicates = new ArrayList<>();
 
@@ -204,17 +180,11 @@ public class ReiPlugin implements REIClientPlugin {
             predicates.add(stack -> stack.getItem() == AEParts.GLASS_CABLE.item(color));
             predicates.add(stack -> stack.getItem() == AEParts.SMART_CABLE.item(color));
             predicates.add(stack -> stack.getItem() == AEParts.SMART_DENSE_CABLE.item(color));
-            predicates.add(stack -> stack.getItem() == AEItems.MEMORY_CARDS.item(color));
         }
+
         coloredCables = ImmutableList.copyOf(predicates);
 
         registry.removeEntryIf(this::shouldEntryBeHidden);
-
-        if (AEConfig.instance().isEnableFacadesInJEI()) {
-            for (ItemStack stack : FacadeCreativeTab.getSubTypes()) {
-                registry.addEntry(EntryStacks.of(stack));
-            }
-        }
     }
 
     @Override
@@ -232,9 +202,6 @@ public class ReiPlugin implements REIClientPlugin {
     }
 
     private void registerWorkingStations(CategoryRegistry registry) {
-        ItemStack condenser = AEBlocks.CONDENSER.stack();
-        registry.addWorkstations(CondenserCategory.ID, EntryStacks.of(condenser));
-
         ItemStack inscriber = AEBlocks.INSCRIBER.stack();
         registry.addWorkstations(InscriberRecipeCategory.ID, EntryStacks.of(inscriber));
         registry.setPlusButtonArea(InscriberRecipeCategory.ID, ButtonArea.defaultArea());
@@ -264,10 +231,6 @@ public class ReiPlugin implements REIClientPlugin {
                     ItemModText.P2P_TAG_ATTUNEMENT.text()));
         }
 
-        if (AEConfig.instance().isGenerateQuartzOre()) {
-            addDescription(registry, AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED, GuiText.ChargedQuartz.getTranslationKey());
-        }
-
         if (AEConfig.instance().isSpawnPressesInMeteoritesEnabled()) {
             addDescription(registry, AEItems.LOGIC_PROCESSOR_PRESS, GuiText.inWorldCraftingPresses.getTranslationKey());
             addDescription(registry, AEItems.CALCULATION_PROCESSOR_PRESS,
@@ -275,11 +238,6 @@ public class ReiPlugin implements REIClientPlugin {
             addDescription(registry, AEItems.ENGINEERING_PROCESSOR_PRESS,
                     GuiText.inWorldCraftingPresses.getTranslationKey());
             addDescription(registry, AEItems.SILICON_PRESS, GuiText.inWorldCraftingPresses.getTranslationKey());
-        }
-
-        if (AEConfig.instance().isInWorldSingularityEnabled()) {
-            addDescription(registry, AEItems.QUANTUM_ENTANGLED_SINGULARITY,
-                    GuiText.inWorldSingularity.getTranslationKey());
         }
     }
 
@@ -297,10 +255,7 @@ public class ReiPlugin implements REIClientPlugin {
         ItemStack stack = entryStack.castValue();
 
         if (AEItems.WRAPPED_GENERIC_STACK.isSameAs(stack)
-                || AEItems.FACADE.isSameAs(stack) // REI will add a broken facade with no NBT
-                || AEBlocks.CABLE_BUS.isSameAs(stack)
-                || AEBlocks.MATRIX_FRAME.isSameAs(stack)
-                || AEBlocks.PAINT.isSameAs(stack)) {
+                || AEBlocks.CABLE_BUS.isSameAs(stack)) {
             return true;
         }
 

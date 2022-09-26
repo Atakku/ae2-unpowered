@@ -141,7 +141,6 @@ public class FillCraftingGridFromRecipePacket extends BasePacket {
 
         var storageService = grid.getStorageService();
         var security = grid.getSecurityService();
-        var energy = grid.getEnergyService();
         var craftMatrix = cct.getCraftingMatrix();
 
         // We'll try to use the best possible ingredients based on what's available in the network
@@ -170,7 +169,7 @@ public class FillCraftingGridFromRecipePacket extends BasePacket {
                 } else {
                     if (security.hasPermission(player, SecurityPermissions.INJECT)) {
                         var in = AEItemKey.of(currentItem);
-                        var inserted = StorageHelper.poweredInsert(energy, storage, in, currentItem.getCount(),
+                        var inserted = StorageHelper.insert(storage, in, currentItem.getCount(),
                                 cct.getActionSource());
                         if (inserted > 0) {
                             touchedGridStorage = true;
@@ -198,7 +197,7 @@ public class FillCraftingGridFromRecipePacket extends BasePacket {
             if (currentItem.isEmpty() && security.hasPermission(player, SecurityPermissions.EXTRACT)) {
                 var request = findBestMatchingItemStack(ingredient, filter, cachedStorage);
                 for (var what : request) {
-                    var extracted = StorageHelper.poweredExtraction(energy, storage, what, 1, cct.getActionSource());
+                    var extracted = StorageHelper.extract(storage, what, 1, cct.getActionSource());
                     if (extracted > 0) {
                         touchedGridStorage = true;
                         currentItem = what.toStack(Ints.saturatedCast(extracted));

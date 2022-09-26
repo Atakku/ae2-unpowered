@@ -2,7 +2,6 @@ package appeng.parts.automation;
 
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiCache;
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.TransferVariant;
@@ -123,15 +122,6 @@ public class StorageImportStrategy<V extends TransferVariant<?>> implements Stac
         return new StorageImportStrategy<>(
                 ItemStorage.SIDED,
                 IVariantConversion.ITEM,
-                level,
-                fromPos,
-                fromSide);
-    }
-
-    public static StackImportStrategy createFluid(ServerLevel level, BlockPos fromPos, Direction fromSide) {
-        return new StorageImportStrategy<>(
-                FluidStorage.SIDED,
-                IVariantConversion.FLUID,
                 level,
                 fromPos,
                 fromSide);

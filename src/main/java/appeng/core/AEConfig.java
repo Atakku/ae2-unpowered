@@ -37,11 +37,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 
-import appeng.api.config.CondenserOutput;
-import appeng.api.config.PowerMultiplier;
-import appeng.api.config.PowerUnits;
 import appeng.api.config.SearchBoxMode;
-import appeng.api.config.Settings;
 import appeng.api.config.TerminalStyle;
 import appeng.api.config.YesNo;
 import appeng.api.features.AEWorldGenInternal;
@@ -56,7 +52,6 @@ import appeng.core.config.IntegerOption;
 import appeng.core.config.StringListOption;
 import appeng.core.config.StringOption;
 import appeng.core.settings.TickRates;
-import appeng.util.EnumCycler;
 
 public final class AEConfig {
 
@@ -106,9 +101,6 @@ public final class AEConfig {
         return result;
     }
 
-    // Default Energy Conversion Rates
-    private static final double DEFAULT_TR_EXCHANGE = 2.0;
-
     // Config instance
     private static AEConfig instance;
 
@@ -138,10 +130,6 @@ public final class AEConfig {
     private boolean isEnableFacadesInJEI;
     private int craftingCalculationTimePerTick;
     private boolean craftingSimulatedExtraction;
-
-    // Spatial IO/Dimension
-    private double spatialPowerExponent;
-    private double spatialPowerMultiplier;
 
     // Batteries
     private int wirelessTerminalBattery;
@@ -175,11 +163,6 @@ public final class AEConfig {
     }
 
     private void syncCommonConfig() {
-        PowerUnits.TR.conversionRatio = COMMON.powerRatioTechReborn.get();
-        PowerMultiplier.CONFIG.multiplier = COMMON.powerUsageMultiplier.get();
-
-        CondenserOutput.MATTER_BALLS.requiredPower = COMMON.condenserMatterBallsPower.get();
-        CondenserOutput.SINGULARITY.requiredPower = COMMON.condenserSingularityPower.get();
 
         this.wirelessBaseCost = COMMON.wirelessBaseCost.get();
         this.wirelessCostMultiplier = COMMON.wirelessCostMultiplier.get();
@@ -202,9 +185,6 @@ public final class AEConfig {
             tr.setMin(COMMON.tickRateMin.get(tr).get());
             tr.setMax(COMMON.tickRateMax.get(tr).get());
         }
-
-        this.spatialPowerMultiplier = COMMON.spatialPowerMultiplier.get();
-        this.spatialPowerExponent = COMMON.spatialPowerExponent.get();
 
         this.craftingCalculationTimePerTick = COMMON.craftingCalculationTimePerTick.get();
         this.craftingSimulatedExtraction = COMMON.craftingSimulatedExtraction.get();
@@ -259,21 +239,6 @@ public final class AEConfig {
     public void save() {
     }
 
-    public PowerUnits getSelectedPowerUnit() {
-        return this.CLIENT.selectedPowerUnit.get();
-    }
-
-    public void nextPowerUnit(boolean backwards) {
-        PowerUnits selectedPowerUnit = EnumCycler.rotateEnum(getSelectedPowerUnit(), backwards,
-                Settings.POWER_UNITS.getValues());
-        CLIENT.selectedPowerUnit.set(selectedPowerUnit);
-    }
-
-    // Getters
-    public boolean isBlockEntityFacadesEnabled() {
-        return COMMON.allowBlockEntityFacades.get();
-    }
-
     public boolean isDebugToolsEnabled() {
         return COMMON.debugTools.get();
     }
@@ -308,14 +273,6 @@ public final class AEConfig {
 
     public boolean isCraftingSimulatedExtraction() {
         return this.craftingSimulatedExtraction;
-    }
-
-    public double getSpatialPowerExponent() {
-        return this.spatialPowerExponent;
-    }
-
-    public double getSpatialPowerMultiplier() {
-        return this.spatialPowerMultiplier;
     }
 
     public double getChargerChargeRate() {
@@ -485,7 +442,6 @@ public final class AEConfig {
         public final BooleanOption useColoredCraftingStatus;
         public final BooleanOption disableColoredCableRecipesInJEI;
         public final BooleanOption enableFacadesInJEI;
-        public final EnumOption<PowerUnits> selectedPowerUnit;
         public final BooleanOption debugGuiOverlays;
         public final BooleanOption showPlacementPreview;
 
@@ -506,7 +462,6 @@ public final class AEConfig {
             this.enableEffects = client.addBoolean("enableEffects", true);
             this.useLargeFonts = client.addBoolean("useTerminalUseLargeFont", false);
             this.useColoredCraftingStatus = client.addBoolean("useColoredCraftingStatus", true);
-            this.selectedPowerUnit = client.addEnum("PowerUnit", PowerUnits.AE, "Power unit shown in AE UIs");
             this.debugGuiOverlays = client.addBoolean("showDebugGuiOverlays", false, "Show debugging GUI overlays");
             this.showPlacementPreview = client.addBoolean("showPlacementPreview", true,
                     "Show a preview of part and facade placement");
@@ -534,7 +489,6 @@ public final class AEConfig {
         public final IntegerOption formationPlaneEntityLimit;
         public final IntegerOption craftingCalculationTimePerTick;
         public final BooleanOption craftingSimulatedExtraction;
-        public final BooleanOption allowBlockEntityFacades;
         public final BooleanOption debugTools;
         public final BooleanOption matterCannonBlockDamage;
         public final BooleanOption tinyTntBlockDamage;
@@ -547,10 +501,6 @@ public final class AEConfig {
         public final BooleanOption inWorldFluix;
         public final BooleanOption inWorldCrystalGrowth;
         public final BooleanOption disassemblyCrafting;
-
-        // Spatial IO/Dimension
-        public final DoubleOption spatialPowerExponent;
-        public final DoubleOption spatialPowerMultiplier;
 
         // Logging
         public final BooleanOption securityAuditLog;
@@ -592,14 +542,6 @@ public final class AEConfig {
         // Portable Cells
         public final BooleanOption portableCellDisassembly;
 
-        // Power Ratios
-        public final DoubleOption powerRatioTechReborn;
-        public final DoubleOption powerUsageMultiplier;
-
-        // Condenser Power Requirement
-        public final IntegerOption condenserMatterBallsPower;
-        public final IntegerOption condenserSingularityPower;
-
         // In-World Crystal Growth
         // Settings for improved speed depending on fluid the crystal is in
         public final StringOption improvedFluidTag;
@@ -627,9 +569,6 @@ public final class AEConfig {
             ConfigSection automation = root.subsection("automation");
             formationPlaneEntityLimit = automation.addInt("formationPlaneEntityLimit", 128);
 
-            ConfigSection facades = root.subsection("facades");
-            allowBlockEntityFacades = facades.addBoolean("allowBlockEntities", false,
-                    "Unsupported: Allows whitelisting block entities as facades. Could work, have render issues, or corrupt your world. USE AT YOUR OWN RISK.");
 
             ConfigSection craftingCPU = root.subsection("craftingCPU");
             this.craftingCalculationTimePerTick = craftingCPU.addInt("craftingCalculationTimePerTick", 5);
@@ -644,10 +583,6 @@ public final class AEConfig {
                     "Enable the in-world crafting of crystals.");
             disassemblyCrafting = crafting.addBoolean("disassemblyCrafting", true,
                     "Enable shift-clicking with the crafting units in hand to disassemble them.");
-
-            ConfigSection spatialio = root.subsection("spatialio");
-            this.spatialPowerMultiplier = spatialio.addDouble("spatialPowerMultiplier", 1250.0);
-            this.spatialPowerExponent = spatialio.addDouble("spatialPowerExponent", 1.35);
 
             var logging = root.subsection("logging");
             securityAuditLog = logging.addBoolean("securityAuditLog", false);
@@ -693,14 +628,6 @@ public final class AEConfig {
             ConfigSection portableCells = root.subsection("PortableCells");
             portableCellDisassembly = portableCells.addBoolean("allowDisassembly", true,
                     "Allow disassembly of portable cells into the recipe ingredients using shift+right-click");
-
-            ConfigSection PowerRatios = root.subsection("PowerRatios");
-            powerRatioTechReborn = PowerRatios.addDouble("TechReborn", DEFAULT_TR_EXCHANGE);
-            powerUsageMultiplier = PowerRatios.addDouble("UsageMultiplier", 1.0, 0.01, Double.MAX_VALUE);
-
-            ConfigSection Condenser = root.subsection("Condenser");
-            condenserMatterBallsPower = Condenser.addInt("MatterBalls", 256);
-            condenserSingularityPower = Condenser.addInt("Singularity", 256000);
 
             ConfigSection tickrates = root.subsection("tickRates",
                     " Min / Max Tickrates for dynamic ticking, most of these components also use sleeping, to prevent constant ticking, adjust with care, non standard rates are not supported or tested.");

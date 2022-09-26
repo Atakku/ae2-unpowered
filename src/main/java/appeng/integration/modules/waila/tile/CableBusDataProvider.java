@@ -44,7 +44,6 @@ import appeng.api.parts.IPartHost;
 import appeng.api.parts.SelectedPart;
 import appeng.block.networking.CableBusBlock;
 import appeng.blockentity.networking.CableBusBlockEntity;
-import appeng.integration.modules.waila.part.AnnihilationPlaneDataProvider;
 import appeng.integration.modules.waila.part.ChannelDataProvider;
 import appeng.integration.modules.waila.part.GridNodeStateProvider;
 import appeng.integration.modules.waila.part.IPartDataProvider;
@@ -57,10 +56,8 @@ public final class CableBusDataProvider {
     private static final List<IPartDataProvider> PROVIDERS = List.of(
             new ChannelDataProvider(),
             new StorageMonitorDataProvider(),
-            new AnnihilationPlaneDataProvider(),
             new GridNodeStateProvider(),
-            new P2PStateDataProvider(),
-            new DebugDataProvider());
+            new P2PStateDataProvider());
 
     private CableBusDataProvider() {
     }
@@ -83,9 +80,7 @@ public final class CableBusDataProvider {
             var selected = getPart(blockEntity, hitResult);
 
             Component name = null;
-            if (selected.facade != null) {
-                name = selected.facade.getItemStack().getHoverName();
-            } else if (selected.part != null) {
+            if (selected.part != null) {
                 name = selected.part.getPartItem().asItem().getDescription();
             }
 
@@ -111,9 +106,7 @@ public final class CableBusDataProvider {
             var hitResult = accessor.getHitResult();
 
             var selected = getPart(blockEntity, hitResult);
-            if (selected.facade != null) {
-                return selected.facade.getItemStack();
-            } else if (selected.part != null) {
+            if (selected.part != null) {
                 var item = selected.part.getPartItem();
                 return new ItemStack(item);
             }

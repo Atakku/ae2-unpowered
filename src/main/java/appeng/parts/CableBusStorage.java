@@ -23,7 +23,6 @@ import javax.annotation.Nullable;
 import net.minecraft.core.Direction;
 
 import appeng.api.implementations.parts.ICablePart;
-import appeng.api.parts.IFacadePart;
 import appeng.api.parts.IPart;
 
 /**
@@ -35,8 +34,6 @@ public class CableBusStorage {
     private ICablePart center;
     @Nullable
     private IPart[] parts;
-    @Nullable
-    private IFacadePart[] facades;
 
     protected ICablePart getCenter() {
         return this.center;
@@ -74,42 +71,6 @@ public class CableBusStorage {
 
         if (isNullArray(this.parts)) {
             this.parts = null;
-        }
-    }
-
-    public IFacadePart getFacade(Direction side) {
-        if (this.facades == null) {
-            return null;
-        }
-
-        var index = side.ordinal();
-        return this.facades[index];
-    }
-
-    public void setFacade(Direction side, @Nullable IFacadePart facade) {
-        if (facade == null) {
-            removeFacade(side);
-            return;
-        }
-
-        if (facades == null) {
-            this.facades = new IFacadePart[Direction.values().length];
-        }
-
-        var index = side.ordinal();
-        this.facades[index] = facade;
-    }
-
-    public void removeFacade(Direction side) {
-        if (this.facades == null) {
-            return;
-        }
-
-        var index = side.ordinal();
-        this.facades[index] = null;
-
-        if (isNullArray(this.facades)) {
-            this.facades = null;
         }
     }
 

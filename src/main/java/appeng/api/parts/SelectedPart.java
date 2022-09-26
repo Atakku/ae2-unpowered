@@ -39,11 +39,6 @@ public class SelectedPart {
     public final IPart part;
 
     /**
-     * facade part.
-     */
-    public final IFacadePart facade;
-
-    /**
      * side the part is mounted too, or null for cables.
      */
     @Nullable
@@ -51,19 +46,11 @@ public class SelectedPart {
 
     public SelectedPart() {
         this.part = null;
-        this.facade = null;
         this.side = null;
     }
 
     public SelectedPart(IPart part, Direction side) {
         this.part = part;
-        this.facade = null;
-        this.side = side;
-    }
-
-    public SelectedPart(IFacadePart facade, Direction side) {
-        this.part = null;
-        this.facade = facade;
         this.side = side;
     }
 }

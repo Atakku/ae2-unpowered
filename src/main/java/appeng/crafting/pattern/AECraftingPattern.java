@@ -27,22 +27,17 @@ import javax.annotation.Nullable;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.CraftingContainer;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.MilkBucketItem;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 
-import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKey;
 import appeng.api.stacks.GenericStack;
-import appeng.helpers.FluidContainerHelper;
 import appeng.menu.AutoCraftingMenu;
 
 public class AECraftingPattern implements IAEPatternDetails {
@@ -216,24 +211,6 @@ public class AECraftingPattern implements IAEPatternDetails {
         return Ingredient.EMPTY;
     }
 
-    /**
-     * Return the fluid stack for the passed slot, or null if no fluid stack is accepted in the given slot.
-     */
-    @Nullable
-    public GenericStack getValidFluid(int slot) {
-        int compressed = sparseToCompressed[slot];
-
-        if (compressed != -1) {
-            var itemOrFluid = inputs[compressed].possibleInputs[0];
-
-            if (itemOrFluid.what() instanceof AEFluidKey) {
-                return itemOrFluid;
-            }
-        }
-
-        return null;
-    }
-
     public boolean isItemValid(int slot, AEItemKey key, Level level) {
         if (!canSubstitute) {
             return sparseInputs[slot] == null && key == null
@@ -329,15 +306,6 @@ public class AECraftingPattern implements IAEPatternDetails {
             for (int x = 0; x < container.getContainerSize(); ++x) {
                 ItemStack item = container.getItem(x);
                 var stack = GenericStack.unwrapItemStack(item);
-                if (stack != null) {
-                    // If we receive a pure fluid stack, we convert it to the appropriate container item
-                    // If it matches the allowable input
-                    var validFluid = getValidFluid(x);
-                    if (validFluid != null && validFluid.equals(stack)) {
-                        specialRecipeTestFrame.setItem(x, ((AEItemKey) sparseInputs[x].what()).toStack());
-                        continue;
-                    }
-                }
                 specialRecipeTestFrame.setItem(x, item.copy());
             }
 
@@ -347,15 +315,6 @@ public class AECraftingPattern implements IAEPatternDetails {
         for (int x = 0; x < container.getContainerSize(); x++) {
             ItemStack item = container.getItem(x);
             var stack = GenericStack.unwrapItemStack(item);
-            if (stack != null) {
-                // If we receive a pure fluid stack, we'll convert it to the appropriate container item
-                // If it matches the allowable input
-                var validFluid = getValidFluid(x);
-                if (validFluid != null && validFluid.equals(stack)) {
-                    continue;
-                }
-            }
-
             if (!isItemValid(x, AEItemKey.of(item), level)) {
                 return ItemStack.EMPTY;
             }
@@ -371,29 +330,6 @@ public class AECraftingPattern implements IAEPatternDetails {
         if (!(item.what() instanceof AEItemKey itemKey)) {
             return item;
         }
-
-        var containedFluid = FluidContainerHelper.getContainedStack(itemKey.toStack());
-        // Milk is not natively a fluid container, but it might be made one by other mods
-        var isBucket = itemKey.getItem() instanceof BucketItem || itemKey.getItem() instanceof MilkBucketItem;
-
-        if (canSubstituteFluids && containedFluid != null && isBucket) {
-            // We only support buckets since we can't predict the behavior of other kinds of containers (ender tanks...)
-
-            // Check that the remaining item is indeed the emptied container.
-            var testFrameCopy = new CraftingContainer(new AutoCraftingMenu(), 3, 3);
-            for (int i = 0; i < 9; ++i) {
-                testFrameCopy.setItem(i, testFrame.getItem(i).copy());
-            }
-            // Note: the following call might do a performed extraction with mods that have native fluid container
-            // support (such as immersive engineering "fluid aware" recipes). This is only safe because we restrict this
-            // code path to buckets.
-            var remainingItems = recipe.getRemainingItems(testFrameCopy);
-            var slotRemainder = remainingItems.get(slot);
-            if (slotRemainder.getCount() == 1 && slotRemainder.is(Items.BUCKET)) {
-                return new GenericStack(containedFluid.what(), containedFluid.amount());
-            }
-        }
-
         return item;
     }
 

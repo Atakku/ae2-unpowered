@@ -141,7 +141,6 @@ public class ConversionMonitorPart extends AbstractMonitorPart {
 
     private void insertItem(Player player, InteractionHand hand, boolean allItems) {
         getMainNode().ifPresent(grid -> {
-            var energy = grid.getEnergyService();
             var cell = grid.getStorageService().getInventory();
 
             if (allItems) {
@@ -153,7 +152,7 @@ public class ConversionMonitorPart extends AbstractMonitorPart {
                         if (itemKey.matches(targetStack)) {
                             var canExtract = inv.extractItem(x, targetStack.getCount(), true);
                             if (!canExtract.isEmpty()) {
-                                var inserted = StorageHelper.poweredInsert(energy, cell, itemKey,
+                                var inserted = StorageHelper.insert(cell, itemKey,
                                         canExtract.getCount(), new PlayerSource(player, this));
                                 inv.extractItem(x, (int) inserted, false);
                             }
@@ -163,7 +162,7 @@ public class ConversionMonitorPart extends AbstractMonitorPart {
             } else {
                 var input = player.getItemInHand(hand);
                 if (!input.isEmpty()) {
-                    var inserted = StorageHelper.poweredInsert(energy, cell, AEItemKey.of(input),
+                    var inserted = StorageHelper.insert(cell, AEItemKey.of(input),
                             input.getCount(), new PlayerSource(player, this));
                     input.shrink((int) inserted);
                 }
@@ -181,10 +180,9 @@ public class ConversionMonitorPart extends AbstractMonitorPart {
         }
 
         getMainNode().ifPresent(grid -> {
-            var energy = grid.getEnergyService();
             var cell = grid.getStorageService().getInventory();
 
-            var retrieved = StorageHelper.poweredExtraction(energy, cell, itemKey, count,
+            var retrieved = StorageHelper.extract(cell, itemKey, count,
                     new PlayerSource(player, this));
             if (retrieved != 0) {
                 ItemStack newItems = itemKey.toStack((int) retrieved);

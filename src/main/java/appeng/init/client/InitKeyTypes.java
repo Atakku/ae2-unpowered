@@ -24,6 +24,5 @@ public final class InitKeyTypes {
         AEKeyTypesInternal.setRegistry(registry);
 
         AEKeyTypes.register(AEKeyType.items());
-        AEKeyTypes.register(AEKeyType.fluids());
     }
 }

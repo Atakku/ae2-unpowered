@@ -80,9 +80,6 @@ public class SetProcessingPatternAmountScreen<C extends PatternEncodingTermMenu>
     @Override
     protected void init() {
         super.init();
-
-        // The screen JSON includes the toolbox, but we don't actually have a need for it here
-        setSlotsHidden(SlotSemantics.TOOLBOX, true);
     }
 
     private void confirm() {

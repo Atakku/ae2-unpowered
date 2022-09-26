@@ -32,7 +32,6 @@ import appeng.api.networking.IGridNode;
 import appeng.api.networking.IGridService;
 import appeng.api.networking.IGridServiceProvider;
 import appeng.api.networking.events.GridBootingStatusChange;
-import appeng.api.networking.events.GridPowerStatusChange;
 import appeng.core.AELog;
 import appeng.parts.p2p.MEP2PTunnelPart;
 import appeng.parts.p2p.P2PTunnelPart;
@@ -45,10 +44,6 @@ public class P2PService implements IGridService, IGridServiceProvider {
                         service.wakeInputTunnels();
                     }
                 });
-        GridHelper.addGridServiceEventHandler(GridPowerStatusChange.class, P2PService.class,
-                (service, evt) -> {
-                    service.wakeInputTunnels();
-                });
     }
 
     public static P2PService get(IGrid grid) {
@@ -56,8 +51,8 @@ public class P2PService implements IGridService, IGridServiceProvider {
     }
 
     private final IGrid myGrid;
-    private final HashMap<Short, P2PTunnelPart> inputs = new HashMap<>();
-    private final Multimap<Short, P2PTunnelPart> outputs = LinkedHashMultimap.create();
+    private final HashMap<Short, P2PTunnelPart<?>> inputs = new HashMap<>();
+    private final Multimap<Short, P2PTunnelPart<?>> outputs = LinkedHashMultimap.create();
     private final Random frequencyGenerator;
 
     public P2PService(IGrid g) {
@@ -113,14 +108,14 @@ public class P2PService implements IGridService, IGridServiceProvider {
     }
 
     private void updateTunnel(short freq, boolean updateOutputs, boolean configChange) {
-        for (P2PTunnelPart p : this.outputs.get(freq)) {
+        for (P2PTunnelPart<?> p : this.outputs.get(freq)) {
             if (configChange) {
                 p.onTunnelConfigChange();
             }
             p.onTunnelNetworkChange();
         }
 
-        final P2PTunnelPart in = this.inputs.get(freq);
+        final P2PTunnelPart<?> in = this.inputs.get(freq);
         if (in != null) {
             if (configChange) {
                 in.onTunnelConfigChange();
@@ -129,7 +124,7 @@ public class P2PService implements IGridService, IGridServiceProvider {
         }
     }
 
-    public void updateFreq(P2PTunnelPart t, short newFrequency) {
+    public void updateFreq(P2PTunnelPart<?> t, short newFrequency) {
         if (this.outputs.containsValue(t)) {
             this.outputs.remove(t.getFrequency(), t);
         }
@@ -180,7 +175,7 @@ public class P2PService implements IGridService, IGridServiceProvider {
                 .map(c::cast);
     }
 
-    public P2PTunnelPart getInput(short freq) {
+    public P2PTunnelPart<?> getInput(short freq) {
         return this.inputs.get(freq);
     }
 }

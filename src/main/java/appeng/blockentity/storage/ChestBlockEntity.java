@@ -18,21 +18,12 @@
 
 package appeng.blockentity.storage;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Objects;
 
 import javax.annotation.Nullable;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
-import net.fabricmc.fabric.api.transfer.v1.storage.StoragePreconditions;
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.BlankVariantView;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.InsertionOnlyStorage;
-import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
-import net.fabricmc.fabric.api.transfer.v1.transaction.base.SnapshotParticipant;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -44,9 +35,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import appeng.api.config.AccessRestriction;
 import appeng.api.config.Actionable;
-import appeng.api.config.PowerMultiplier;
 import appeng.api.config.SecurityPermissions;
 import appeng.api.config.Settings;
 import appeng.api.config.SortDir;
@@ -58,13 +47,9 @@ import appeng.api.implementations.blockentities.IMEChest;
 import appeng.api.inventories.InternalInventory;
 import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGridNodeListener;
-import appeng.api.networking.events.GridPowerStorageStateChanged;
-import appeng.api.networking.events.GridPowerStorageStateChanged.PowerEventType;
 import appeng.api.networking.security.IActionSource;
-import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKey;
-import appeng.api.stacks.GenericStack;
 import appeng.api.storage.IStorageMonitorableAccessor;
 import appeng.api.storage.IStorageMounts;
 import appeng.api.storage.IStorageProvider;
@@ -78,7 +63,7 @@ import appeng.api.storage.cells.StorageCell;
 import appeng.api.util.AEColor;
 import appeng.api.util.IConfigManager;
 import appeng.blockentity.ServerTickingBlockEntity;
-import appeng.blockentity.grid.AENetworkPowerBlockEntity;
+import appeng.blockentity.grid.AENetworkInvBlockEntity;
 import appeng.core.definitions.AEBlocks;
 import appeng.helpers.IPriorityHost;
 import appeng.me.helpers.MachineSource;
@@ -93,7 +78,7 @@ import appeng.util.inv.AppEngInternalInventory;
 import appeng.util.inv.CombinedInternalInventory;
 import appeng.util.inv.filter.IAEItemFilter;
 
-public class ChestBlockEntity extends AENetworkPowerBlockEntity
+public class ChestBlockEntity extends AENetworkInvBlockEntity
         implements IMEChest, ITerminalHost, IPriorityHost, IColorableBlockEntity,
         ServerTickingBlockEntity, IStorageProvider {
 
@@ -126,7 +111,6 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
 
     public ChestBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
         super(blockEntityType, pos, blockState);
-        this.setInternalMaxPower(PowerMultiplier.CONFIG.multiply(500));
         this.getMainNode()
                 .addService(IStorageProvider.class, this)
                 .setFlags(GridFlags.REQUIRE_CHANNEL);
@@ -134,9 +118,6 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
         this.config.registerSetting(Settings.VIEW_MODE, ViewItems.ALL);
         this.config.registerSetting(Settings.TYPE_FILTER, TypeFilter.ALL);
         this.config.registerSetting(Settings.SORT_DIRECTION, SortDir.ASCENDING);
-
-        this.setInternalPublicPowerStorage(true);
-        this.setInternalPowerFlow(AccessRestriction.WRITE);
 
         this.inputInventory.setFilter(new InputInventoryFilter());
         this.cellInventory.setFilter(new CellInventoryFilter());
@@ -148,16 +129,6 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
 
     public void setCell(ItemStack stack) {
         this.cellInventory.setItemDirect(0, Objects.requireNonNull(stack));
-    }
-
-    @Override
-    protected void PowerEvent(PowerEventType x) {
-        if (x == PowerEventType.REQUEST_POWER) {
-            this.getMainNode().ifPresent(
-                    grid -> grid.postEvent(new GridPowerStorageStateChanged(this, PowerEventType.REQUEST_POWER)));
-        } else {
-            this.recalculateDisplay();
-        }
     }
 
     private void recalculateDisplay() {
@@ -198,12 +169,7 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
                     idlePowerUsage = 1.0 + newCell.getIdleDrain();
                     this.cellHandler = this.wrap(newCell);
 
-                    this.getMainNode().setIdlePowerUsage(idlePowerUsage);
                     this.accessor = new Accessor();
-
-                    if (this.cellHandler != null) {
-                        this.fluidHandler = new FluidHandler();
-                    }
                 }
             }
         }
@@ -254,14 +220,7 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
         if (isClientSide()) {
             return (this.state & BIT_POWER_MASK) == BIT_POWER_MASK;
         }
-
-        boolean gridPowered = this.getAECurrentPower() > 64;
-
-        if (!gridPowered) {
-            gridPowered = this.getMainNode().isPowered();
-        }
-
-        return super.getAECurrentPower() > 1 || gridPowered;
+        return true;
     }
 
     @Override
@@ -270,35 +229,10 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
     }
 
     @Override
-    protected double extractAEPower(double amt, Actionable mode) {
-        double stash = 0.0;
-
-        var grid = getMainNode().getGrid();
-        if (grid != null) {
-            var eg = grid.getEnergyService();
-            stash = eg.extractAEPower(amt, mode, PowerMultiplier.ONE);
-            if (stash >= amt) {
-                return stash;
-            }
-        }
-
-        // local battery!
-        return super.extractAEPower(amt - stash, mode) + stash;
-    }
-
-    @Override
     public void serverTick() {
         var grid = getMainNode().getGrid();
-        if (grid != null) {
-            if (!grid.getEnergyService().isNetworkPowered()) {
-                final double powerUsed = this.extractAEPower(idlePowerUsage, Actionable.MODULATE,
-                        PowerMultiplier.CONFIG); // drain
-                if (powerUsed + 0.1 >= idlePowerUsage != (this.state & BIT_POWER_MASK) > 0) {
-                    this.recalculateDisplay();
-                }
-            }
-        } else {
-            final double powerUsed = this.extractAEPower(idlePowerUsage, Actionable.MODULATE, PowerMultiplier.CONFIG); // drain
+        if (grid == null) {
+            final double powerUsed = idlePowerUsage; // drain
             if (powerUsed + 0.1 >= idlePowerUsage != (this.state & BIT_POWER_MASK) > 0) {
                 this.recalculateDisplay();
             }
@@ -429,7 +363,7 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
                     return;
                 }
 
-                var inserted = StorageHelper.poweredInsert(this, this.cellHandler,
+                var inserted = StorageHelper.insert(this.cellHandler,
                         AEItemKey.of(stack), stack.getCount(), this.mySrc);
 
                 if (inserted >= stack.getCount()) {
@@ -584,82 +518,6 @@ public class ChestBlockEntity extends AENetworkPowerBlockEntity
                 return ChestBlockEntity.this.getInventory();
             }
             return null;
-        }
-    }
-
-    private class FluidHandler extends SnapshotParticipant<Boolean>
-            implements InsertionOnlyStorage<FluidVariant> {
-        private GenericStack queuedInsert;
-
-        /**
-         * If we accept fluids, simulate that we have an empty tank with 1 bucket capacity at all times.
-         */
-        private final List<StorageView<FluidVariant>> fakeInputTanks = Collections.singletonList(
-                new BlankVariantView<>(FluidVariant.blank(), AEFluidKey.AMOUNT_BUCKET));
-
-        private boolean canAcceptLiquids() {
-            return ChestBlockEntity.this.cellHandler != null;
-        }
-
-        @Override
-        public long insert(FluidVariant resource, long maxAmount, TransactionContext transaction) {
-            StoragePreconditions.notBlankNotNegative(resource, maxAmount);
-
-            if (queuedInsert != null) {
-                return 0; // Can only insert once per action
-            }
-
-            ChestBlockEntity.this.updateHandler();
-            if (canAcceptLiquids()) {
-                var what = AEFluidKey.of(resource);
-                var inserted = pushToNetwork(what, maxAmount, Actionable.SIMULATE);
-                if (inserted > 0) {
-                    updateSnapshots(transaction);
-                    queuedInsert = new GenericStack(what, inserted);
-                }
-                return inserted;
-            }
-            return 0;
-        }
-
-        @Override
-        public Iterator<StorageView<FluidVariant>> iterator(TransactionContext transaction) {
-            if (canAcceptLiquids()) {
-                return fakeInputTanks.iterator();
-            } else {
-                return Collections.emptyIterator();
-            }
-        }
-
-        @Override
-        protected final Boolean createSnapshot() {
-            // Null snapshots are not allowed even though this is what we really want, so we just use Boolean instead.
-            return Boolean.TRUE;
-        }
-
-        @Override
-        protected final void readSnapshot(Boolean snapshot) {
-            queuedInsert = null;
-        }
-
-        @Override
-        protected final void onFinalCommit() {
-            pushToNetwork(queuedInsert.what(), queuedInsert.amount(), Actionable.MODULATE);
-            queuedInsert = null;
-        }
-
-        private long pushToNetwork(AEKey what, long amount, Actionable mode) {
-            ChestBlockEntity.this.updateHandler();
-            if (canAcceptLiquids()) {
-                return StorageHelper.poweredInsert(
-                        ChestBlockEntity.this,
-                        ChestBlockEntity.this.cellHandler,
-                        what,
-                        amount,
-                        ChestBlockEntity.this.mySrc,
-                        mode);
-            }
-            return 0;
         }
     }
 

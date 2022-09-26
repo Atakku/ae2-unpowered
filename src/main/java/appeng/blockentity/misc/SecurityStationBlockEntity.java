@@ -41,6 +41,7 @@ import appeng.api.config.SortOrder;
 import appeng.api.config.ViewItems;
 import appeng.api.features.IPlayerRegistry;
 import appeng.api.features.Locatables;
+import appeng.api.implementations.blockentities.IAcessPoint;
 import appeng.api.implementations.blockentities.IColorableBlockEntity;
 import appeng.api.inventories.InternalInventory;
 import appeng.api.networking.GridFlags;
@@ -64,8 +65,8 @@ import appeng.util.ConfigManager;
 import appeng.util.inv.AppEngInternalInventory;
 import appeng.util.inv.InternalInventoryHost;
 
-public class SecurityStationBlockEntity extends AENetworkBlockEntity implements ITerminalHost, InternalInventoryHost,
-        ISecurityProvider, IColorableBlockEntity {
+public class SecurityStationBlockEntity extends AENetworkBlockEntity
+        implements IAcessPoint, ITerminalHost, InternalInventoryHost, ISecurityProvider, IColorableBlockEntity {
 
     private static int difference = 0;
     private final AppEngInternalInventory configSlot = new AppEngInternalInventory(this, 1);
@@ -79,7 +80,6 @@ public class SecurityStationBlockEntity extends AENetworkBlockEntity implements 
         super(blockEntityType, pos, blockState);
         this.getMainNode()
                 .setFlags(GridFlags.REQUIRE_CHANNEL)
-                .setIdlePowerUsage(2.0)
                 .addService(ISecurityProvider.class, this);
         difference++;
 

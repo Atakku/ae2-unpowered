@@ -86,16 +86,13 @@ public class CableBusBakedModel implements BakedModel, FabricBakedModel {
 
     private final CableBuilder cableBuilder;
 
-    private final FacadeBuilder facadeBuilder;
-
     private final Map<ResourceLocation, BakedModel> partModels;
 
     private final TextureAtlasSprite particleTexture;
 
-    CableBusBakedModel(CableBuilder cableBuilder, FacadeBuilder facadeBuilder,
+    CableBusBakedModel(CableBuilder cableBuilder,
             Map<ResourceLocation, BakedModel> partModels, TextureAtlasSprite particleTexture) {
         this.cableBuilder = cableBuilder;
-        this.facadeBuilder = facadeBuilder;
         this.partModels = partModels;
         this.particleTexture = particleTexture;
         this.cableModelCache = CacheBuilder.newBuilder()//
@@ -171,9 +168,6 @@ public class CableBusBakedModel implements BakedModel, FabricBakedModel {
                 context.popTransform();
             }
         }
-
-        Mesh mesh = this.facadeBuilder.getFacadeMesh(renderState, randomSupplier, this.partModels::get);
-        context.meshConsumer().accept(mesh);
     }
 
     // Determines whether a cable is connected to exactly two sides that are

@@ -40,7 +40,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import appeng.api.networking.IGridNode;
-import appeng.api.parts.IFacadeContainer;
 import appeng.api.parts.IPart;
 import appeng.api.parts.IPartItem;
 import appeng.api.parts.SelectedPart;
@@ -173,11 +172,6 @@ public class CableBusBlockEntity extends AEBaseBlockEntity implements AEMultiBlo
         } else {
             this.getCableBus().addToWorld();
         }
-    }
-
-    @Override
-    public IFacadeContainer getFacadeContainer() {
-        return this.getCableBus().getFacadeContainer();
     }
 
     @Nullable
@@ -313,7 +307,7 @@ public class CableBusBlockEntity extends AEBaseBlockEntity implements AEMultiBlo
                 AppEng.instance().setPartInteractionPlayer(null);
             }
 
-            // SelectedPart contains either a facade or a part. Never both.
+            // SelectedPart contains a part. Never both.
             if (sp.part != null) {
                 sp.part.addPartDrop(is, true);
                 sp.part.addAdditionalDrops(is, true);
@@ -321,13 +315,6 @@ public class CableBusBlockEntity extends AEBaseBlockEntity implements AEMultiBlo
             }
 
             var pos = getBlockPos();
-
-            // A facade cannot exist without a cable part, no host cleanup needed.
-            if (sp.facade != null) {
-                is.add(sp.facade.getItemStack());
-                cb.getFacadeContainer().removeFacade(cb, sp.side);
-                Platform.notifyBlocksOfNeighbors(level, pos);
-            }
 
             if (!is.isEmpty()) {
                 Platform.spawnDrops(level, pos, is);

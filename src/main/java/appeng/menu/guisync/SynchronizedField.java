@@ -55,7 +55,6 @@ public abstract class SynchronizedField<T> {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private T getCurrentValue() {
         try {
             return (T) this.getter.invoke(source);

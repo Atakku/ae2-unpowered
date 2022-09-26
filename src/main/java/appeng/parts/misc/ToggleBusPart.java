@@ -68,7 +68,6 @@ public class ToggleBusPart extends BasicStatePart {
             .createManagedNode(this, NodeListener.INSTANCE)
             .setTagName("outer")
             .setInWorldNode(true)
-            .setIdlePowerUsage(0.0)
             .setFlags();
 
     private IGridConnection connection;
@@ -77,7 +76,6 @@ public class ToggleBusPart extends BasicStatePart {
     public ToggleBusPart(IPartItem<?> partItem) {
         super(partItem);
 
-        this.getMainNode().setIdlePowerUsage(0.0);
         this.getMainNode().setFlags();
     }
 

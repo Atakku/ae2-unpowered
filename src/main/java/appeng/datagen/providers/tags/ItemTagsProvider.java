@@ -49,27 +49,21 @@ public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider i
         copyBlockTags();
 
         // Provide empty blacklist tags
-        tag(AETags.ANNIHILATION_PLANE_ITEM_BLACKLIST);
-
         tag(ConventionTags.CERTUS_QUARTZ_DUST)
                 .add(AEItems.CERTUS_QUARTZ_DUST.asItem());
-        tag(ConventionTags.ENDER_PEARL_DUST)
-                .add(AEItems.ENDER_DUST.asItem());
 
         tag(ConventionTags.ALL_QUARTZ_DUST)
                 .addTag(ConventionTags.CERTUS_QUARTZ_DUST);
 
         tag(ConventionTags.ALL_CERTUS_QUARTZ)
-                .addTag(ConventionTags.CERTUS_QUARTZ)
-                .add(AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED.asItem());
+                .addTag(ConventionTags.CERTUS_QUARTZ);
         tag(ConventionTags.ALL_FLUIX)
                 .add(AEItems.FLUIX_CRYSTAL.asItem());
         tag(ConventionTags.ALL_NETHER_QUARTZ)
                 .addTag(ConventionTags.NETHER_QUARTZ);
         tag(ConventionTags.ALL_QUARTZ)
                 .addTag(ConventionTags.NETHER_QUARTZ)
-                .addTag(ConventionTags.CERTUS_QUARTZ)
-                .add(AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED.asItem());
+                .addTag(ConventionTags.CERTUS_QUARTZ);
 
         for (AEColor color : AEColor.values()) {
             tag(ConventionTags.SMART_DENSE_CABLE).add(AEParts.SMART_DENSE_CABLE.item(color));
@@ -77,37 +71,13 @@ public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider i
             tag(ConventionTags.GLASS_CABLE).add(AEParts.GLASS_CABLE.item(color));
             tag(ConventionTags.COVERED_CABLE).add(AEParts.COVERED_CABLE.item(color));
             tag(ConventionTags.COVERED_DENSE_CABLE).add(AEParts.COVERED_DENSE_CABLE.item(color));
-            tag(ConventionTags.MEMORY_CARDS).add(AEItems.MEMORY_CARDS.item(color));
-        }
-
-        for (AEColor color : AEColor.VALID_COLORS) {
-            tag(ConventionTags.PAINT_BALLS).add(AEItems.COLORED_PAINT_BALL.item(color));
         }
 
         tag(ConventionTags.SILICON)
                 .add(AEItems.SILICON.asItem());
 
-        tag(ConventionTags.QUARTZ_AXE)
-                .add(AEItems.CERTUS_QUARTZ_AXE.asItem())
-                .add(AEItems.NETHER_QUARTZ_AXE.asItem());
-        tag(ConventionTags.QUARTZ_HOE)
-                .add(AEItems.CERTUS_QUARTZ_HOE.asItem())
-                .add(AEItems.NETHER_QUARTZ_HOE.asItem());
-        tag(ConventionTags.QUARTZ_PICK)
-                .add(AEItems.CERTUS_QUARTZ_PICK.asItem())
-                .add(AEItems.NETHER_QUARTZ_PICK.asItem());
-        tag(ConventionTags.QUARTZ_SHOVEL)
-                .add(AEItems.CERTUS_QUARTZ_SHOVEL.asItem())
-                .add(AEItems.NETHER_QUARTZ_SHOVEL.asItem());
-        tag(ConventionTags.QUARTZ_SWORD)
-                .add(AEItems.CERTUS_QUARTZ_SWORD.asItem())
-                .add(AEItems.NETHER_QUARTZ_SWORD.asItem());
-        tag(ConventionTags.QUARTZ_WRENCH)
-                .add(AEItems.CERTUS_QUARTZ_WRENCH.asItem())
-                .add(AEItems.NETHER_QUARTZ_WRENCH.asItem());
         tag(ConventionTags.QUARTZ_KNIFE)
-                .add(AEItems.CERTUS_QUARTZ_KNIFE.asItem())
-                .add(AEItems.NETHER_QUARTZ_KNIFE.asItem());
+                .add(AEItems.CERTUS_QUARTZ_KNIFE.asItem());
 
         tag(AETags.METAL_INGOTS)
                 .addOptionalTag(ConventionTags.IRON_INGOT.location())
@@ -139,25 +109,19 @@ public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider i
         tag(ConventionTags.FLUIX_CRYSTAL)
                 .add(AEItems.FLUIX_CRYSTAL.asItem());
         tag(ConventionTags.CERTUS_QUARTZ)
-                .add(AEItems.CERTUS_QUARTZ_CRYSTAL.asItem())
-                .add(AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED.asItem());
+                .add(AEItems.CERTUS_QUARTZ_CRYSTAL.asItem());
 
         tag(ConventionTags.DUSTS)
                 .add(AEItems.CERTUS_QUARTZ_DUST.asItem())
-                .add(AEItems.ENDER_DUST.asItem())
                 .add(AEItems.FLUIX_DUST.asItem())
                 .add(AEItems.SKY_DUST.asItem());
 
         tag(ConventionTags.GEMS)
                 .add(AEItems.CERTUS_QUARTZ_CRYSTAL.asItem())
-                .add(AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED.asItem())
                 .add(AEItems.FLUIX_CRYSTAL.asItem());
 
         // Fabric replacement for ToolActions for now
-        tag(ConventionTags.WRENCH).add(
-                AEItems.CERTUS_QUARTZ_WRENCH.asItem(),
-                AEItems.NETHER_QUARTZ_WRENCH.asItem(),
-                AEItems.NETWORK_TOOL.asItem());
+        tag(ConventionTags.WRENCH);
 
         addConventionTags();
 
@@ -287,10 +251,6 @@ public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider i
         tag(P2PTunnelAttunement.getAttunementTag(P2PTunnelAttunement.LIGHT_TUNNEL))
                 .add(Items.TORCH, Items.GLOWSTONE);
 
-        tag(P2PTunnelAttunement.getAttunementTag(P2PTunnelAttunement.ENERGY_TUNNEL))
-                .add(AEBlocks.DENSE_ENERGY_CELL.asItem(), AEBlocks.ENERGY_ACCEPTOR.asItem(),
-                        AEBlocks.ENERGY_CELL.asItem(), AEBlocks.CREATIVE_ENERGY_CELL.asItem());
-
         tag(P2PTunnelAttunement.getAttunementTag(P2PTunnelAttunement.REDSTONE_TUNNEL))
                 .add(Items.REDSTONE, Items.REPEATER, Items.REDSTONE_LAMP, Items.COMPARATOR, Items.DAYLIGHT_DETECTOR,
                         Items.REDSTONE_TORCH, Items.REDSTONE_BLOCK, Items.LEVER);
@@ -299,9 +259,6 @@ public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider i
                 .add(AEParts.STORAGE_BUS.asItem(), AEParts.EXPORT_BUS.asItem(), AEParts.IMPORT_BUS.asItem(),
                         Items.HOPPER, Items.CHEST, Items.TRAPPED_CHEST)
                 .addTag(ConventionTags.INTERFACE);
-
-        tag(P2PTunnelAttunement.getAttunementTag(P2PTunnelAttunement.FLUID_TUNNEL))
-                .add(Items.BUCKET, Items.MILK_BUCKET, Items.WATER_BUCKET, Items.LAVA_BUCKET);
 
         tag(P2PTunnelAttunement.getAttunementTag(P2PTunnelAttunement.ME_TUNNEL))
                 .addTag(ConventionTags.COVERED_CABLE)

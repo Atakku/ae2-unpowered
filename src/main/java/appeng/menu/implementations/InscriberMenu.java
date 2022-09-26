@@ -25,8 +25,6 @@ import net.minecraft.world.item.ItemStack;
 
 import appeng.blockentity.misc.InscriberBlockEntity;
 import appeng.blockentity.misc.InscriberRecipes;
-import appeng.core.definitions.AEItems;
-import appeng.core.definitions.ItemDefinition;
 import appeng.core.localization.Side;
 import appeng.core.localization.Tooltips;
 import appeng.menu.SlotSemantics;
@@ -96,11 +94,6 @@ public class InscriberMenu extends UpgradeableMenu<InscriberBlockEntity> impleme
         final ItemStack bot = getHost().getInternalInventory().getStackInSlot(1);
 
         if (s == this.middle) {
-            ItemDefinition<?> press = AEItems.NAME_PRESS;
-            if (press.isSameAs(top) || press.isSameAs(bot)) {
-                return !press.isSameAs(is);
-            }
-
             return InscriberRecipes.findRecipe(getHost().getLevel(), is, top, bot, false) != null;
         } else if (s == this.top && !bot.isEmpty() || s == this.bottom && !top.isEmpty()) {
             ItemStack otherSlot;
@@ -108,12 +101,6 @@ public class InscriberMenu extends UpgradeableMenu<InscriberBlockEntity> impleme
                 otherSlot = this.bottom.getItem();
             } else {
                 otherSlot = this.top.getItem();
-            }
-
-            // name presses
-            ItemDefinition<?> namePress = AEItems.NAME_PRESS;
-            if (namePress.isSameAs(otherSlot)) {
-                return namePress.isSameAs(is);
             }
 
             // everything else

@@ -33,13 +33,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import appeng.api.config.Actionable;
-import appeng.api.config.PowerMultiplier;
 import appeng.api.inventories.ISegmentedInventory;
 import appeng.api.inventories.InternalInventory;
 import appeng.api.networking.IGridNode;
-import appeng.api.networking.energy.IEnergyService;
-import appeng.api.networking.energy.IEnergySource;
 import appeng.api.networking.ticking.IGridTickable;
 import appeng.api.networking.ticking.TickRateModulation;
 import appeng.api.networking.ticking.TickingRequest;
@@ -47,7 +43,7 @@ import appeng.api.upgrades.IUpgradeInventory;
 import appeng.api.upgrades.IUpgradeableObject;
 import appeng.api.upgrades.UpgradeInventories;
 import appeng.api.util.AECableType;
-import appeng.blockentity.grid.AENetworkPowerBlockEntity;
+import appeng.blockentity.grid.AENetworkInvBlockEntity;
 import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.AEItems;
 import appeng.core.settings.TickRates;
@@ -64,7 +60,7 @@ import appeng.util.inv.filter.IAEItemFilter;
  * @version rv2
  * @since rv0
  */
-public class InscriberBlockEntity extends AENetworkPowerBlockEntity implements IGridTickable, IUpgradeableObject {
+public class InscriberBlockEntity extends AENetworkInvBlockEntity implements IGridTickable, IUpgradeableObject {
     private final int maxProcessingTime = 100;
 
     private final IUpgradeInventory upgrades;
@@ -93,9 +89,7 @@ public class InscriberBlockEntity extends AENetworkPowerBlockEntity implements I
 
         this.getMainNode()
                 .setExposedOnSides(EnumSet.noneOf(Direction.class))
-                .setIdlePowerUsage(0)
                 .addService(IGridTickable.class, this);
-        this.setInternalMaxPower(1600);
 
         this.upgrades = UpgradeInventories.forMachine(AEBlocks.INSCRIBER, 3, this::saveChanges);
 
@@ -164,7 +158,6 @@ public class InscriberBlockEntity extends AENetworkPowerBlockEntity implements I
     public void setOrientation(Direction inForward, Direction inUp) {
         super.setOrientation(inForward, inUp);
         this.getMainNode().setExposedOnSides(EnumSet.complementOf(EnumSet.of(this.getForward())));
-        this.setPowerSides(EnumSet.complementOf(EnumSet.of(this.getForward())));
     }
 
     @Override
@@ -257,28 +250,13 @@ public class InscriberBlockEntity extends AENetworkPowerBlockEntity implements I
             }
         } else {
             getMainNode().ifPresent(grid -> {
-                IEnergyService eg = grid.getEnergyService();
-                IEnergySource src = this;
-
                 // Base 1, increase by 1 for each card
                 final int speedFactor = 1 + this.upgrades.getInstalledUpgrades(AEItems.SPEED_CARD);
-                final int powerConsumption = 10 * speedFactor;
-                final double powerThreshold = powerConsumption - 0.01;
-                double powerReq = this.extractAEPower(powerConsumption, Actionable.SIMULATE, PowerMultiplier.CONFIG);
 
-                if (powerReq <= powerThreshold) {
-                    src = eg;
-                    powerReq = eg.extractAEPower(powerConsumption, Actionable.SIMULATE, PowerMultiplier.CONFIG);
-                }
-
-                if (powerReq > powerThreshold) {
-                    src.extractAEPower(powerConsumption, Actionable.MODULATE, PowerMultiplier.CONFIG);
-
-                    if (this.getProcessingTime() == 0) {
-                        this.setProcessingTime(this.getProcessingTime() + speedFactor);
-                    } else {
-                        this.setProcessingTime(this.getProcessingTime() + ticksSinceLastCall * speedFactor);
-                    }
+                if (this.getProcessingTime() == 0) {
+                    this.setProcessingTime(this.getProcessingTime() + speedFactor);
+                } else {
+                    this.setProcessingTime(this.getProcessingTime() + ticksSinceLastCall * speedFactor);
                 }
             });
 
@@ -383,9 +361,6 @@ public class InscriberBlockEntity extends AENetworkPowerBlockEntity implements I
             }
 
             if (inv == InscriberBlockEntity.this.topItemHandler || inv == InscriberBlockEntity.this.bottomItemHandler) {
-                if (AEItems.NAME_PRESS.isSameAs(stack)) {
-                    return true;
-                }
                 return InscriberRecipes.isValidOptionalIngredient(getLevel(), stack);
             }
             return true;

@@ -29,7 +29,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-import dev.architectury.fluid.FluidStack;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.drag.DraggableStack;
 import me.shedaniel.rei.api.client.gui.drag.DraggableStackVisitor;
@@ -38,7 +37,6 @@ import me.shedaniel.rei.api.client.gui.drag.DraggingContext;
 import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 
-import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.GenericStack;
 import appeng.client.gui.AEBaseScreen;
 import appeng.core.sync.network.NetworkHandler;
@@ -144,14 +142,6 @@ class GhostIngredientHandler implements DraggableStackVisitor<AEBaseScreen> {
                 ItemStack itemStack = entryStack.castValue();
                 NetworkHandler.instance().sendToServer(new InventoryActionPacket(InventoryAction.SET_FILTER,
                         slot.index, itemStack));
-            } else if (entryStack.getType() == VanillaEntryTypes.FLUID) {
-                FluidStack fluidStack = entryStack.castValue();
-
-                // Wrap in a generic stack to set it anyway
-                var wrappedFluid = GenericStack.wrapInItemStack(
-                        new GenericStack(AEFluidKey.of(fluidStack.getFluid()), fluidStack.getAmount()));
-                NetworkHandler.instance().sendToServer(new InventoryActionPacket(InventoryAction.SET_FILTER,
-                        slot.index, wrappedFluid));
             }
             return false;
         }

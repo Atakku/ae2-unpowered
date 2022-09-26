@@ -22,16 +22,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
-import appeng.core.AppEng;
-import appeng.core.definitions.AEItems;
-import appeng.items.parts.FacadeItem;
-import appeng.recipes.entropy.EntropyRecipe;
-import appeng.recipes.entropy.EntropyRecipeSerializer;
-import appeng.recipes.game.FacadeRecipe;
 import appeng.recipes.handlers.InscriberRecipe;
 import appeng.recipes.handlers.InscriberRecipeSerializer;
-import appeng.recipes.mattercannon.MatterCannonAmmo;
-import appeng.recipes.mattercannon.MatterCannonAmmoSerializer;
 
 public final class InitRecipeSerializers {
 
@@ -39,11 +31,7 @@ public final class InitRecipeSerializers {
     }
 
     public static void init(Registry<RecipeSerializer<?>> registry) {
-        FacadeItem facadeItem = AEItems.FACADE.asItem();
         register(registry, InscriberRecipe.TYPE_ID, InscriberRecipeSerializer.INSTANCE);
-        register(registry, AppEng.makeId("facade"), FacadeRecipe.getSerializer(facadeItem));
-        register(registry, EntropyRecipe.TYPE_ID, EntropyRecipeSerializer.INSTANCE);
-        register(registry, MatterCannonAmmo.TYPE_ID, MatterCannonAmmoSerializer.INSTANCE);
     }
 
     private static void register(Registry<RecipeSerializer<?>> registry, ResourceLocation id,

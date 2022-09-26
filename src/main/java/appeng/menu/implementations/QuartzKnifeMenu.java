@@ -18,7 +18,6 @@
 
 package appeng.menu.implementations;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
@@ -27,8 +26,6 @@ import net.minecraft.world.item.ItemStack;
 import appeng.api.implementations.menuobjects.ItemMenuHost;
 import appeng.api.inventories.InternalInventory;
 import appeng.client.gui.Icon;
-import appeng.core.definitions.AEItems;
-import appeng.items.materials.NamePressItem;
 import appeng.menu.AEBaseMenu;
 import appeng.menu.SlotSemantics;
 import appeng.menu.slot.OutputSlot;
@@ -89,14 +86,6 @@ public class QuartzKnifeMenu extends AEBaseMenu {
             final ItemStack input = baseInv.getStackInSlot(0);
             if (input == ItemStack.EMPTY) {
                 return ItemStack.EMPTY;
-            }
-
-            if (RestrictedInputSlot.isMetalIngot(input) && QuartzKnifeMenu.this.currentName.length() > 0) {
-                ItemStack namePressStack = AEItems.NAME_PRESS.stack();
-                final CompoundTag compound = namePressStack.getOrCreateTag();
-                compound.putString(NamePressItem.TAG_INSCRIBE_NAME, QuartzKnifeMenu.this.currentName);
-
-                return namePressStack;
             }
             return ItemStack.EMPTY;
         }

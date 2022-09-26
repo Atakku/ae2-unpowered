@@ -8,7 +8,6 @@ import com.google.common.io.RecursiveDeleteOption;
 
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
-import org.junit.jupiter.api.extension.Extension;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
 import net.fabricmc.loader.impl.launch.LauncherAccessor;
@@ -19,7 +18,7 @@ import appeng.core.AEConfig;
 import appeng.core.AppEngBootstrap;
 import appeng.init.client.InitKeyTypes;
 
-public class BootstrapMinecraftExtension implements Extension, BeforeAllCallback, AfterAllCallback {
+public class BootstrapMinecraftExtension implements BeforeAllCallback, AfterAllCallback {
 
     private static boolean keyTypesInitialized;
 

@@ -20,11 +20,9 @@ package appeng.client.gui;
 
 import javax.annotation.Nullable;
 
-import appeng.api.config.PowerUnits;
 import appeng.api.stacks.AEKey;
 
 public record NumberEntryType(int amountPerUnit, @Nullable String unit) {
-    public static final NumberEntryType ENERGY = new NumberEntryType(1, PowerUnits.AE.getSymbolName());
     public static final NumberEntryType UNITLESS = new NumberEntryType(1, null);
 
     public static NumberEntryType of(@Nullable AEKey key) {

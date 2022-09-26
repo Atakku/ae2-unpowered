@@ -8,10 +8,8 @@ import com.google.common.base.Preconditions;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.material.Fluid;
 
 import appeng.api.config.Actionable;
-import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKey;
 import appeng.api.stacks.GenericStack;
@@ -149,11 +147,6 @@ public class ConfigInventory extends GenericStackInv {
 
     public ConfigInventory addFilter(ItemLike item) {
         addFilter(AEItemKey.of(item));
-        return this;
-    }
-
-    public ConfigInventory addFilter(Fluid fluid) {
-        addFilter(AEFluidKey.of(fluid));
         return this;
     }
 

@@ -84,7 +84,6 @@ public class LocalizationProvider implements IAE2DataProvider {
 
     private void generateLocalizations() {
         add("ae2.permission_denied", "You lack permission to access this.");
-        add("biome.ae2.spatial_storage", "Spatial Storage");
         add("commands.ae2.ChunkLoggerOff", "Chunk Logging is now off");
         add("commands.ae2.ChunkLoggerOn", "Chunk Logging is now on");
         add("commands.ae2.permissions", "You do not have adequate permissions to run this command.");
@@ -109,11 +108,8 @@ public class LocalizationProvider implements IAE2DataProvider {
         add("gui.ae2.security.security.tip", "User can access and modify the security terminal of the network.");
         add("gui.ae2.units.appliedenergistics", "AE");
         add("gui.ae2.units.tr", "E");
-        add("itemGroup.ae2.facades", "Applied Energistics 2 - Facades");
         add("itemGroup.ae2.main", "Applied Energistics 2");
         add("key.ae2.category", "Applied Energistics 2");
-        add("key.ae2.portable_fluid_cell", "Open Portable Fluid Cell");
-        add("key.ae2.portable_item_cell", "Open Portable Item Cell");
         add("key.ae2.wireless_terminal", "Open Wireless Terminal");
         add("key.toggle_focus.desc", "Toggle search box focus");
         add("stat.ae2.items_extracted", "Items extracted from ME Storage");

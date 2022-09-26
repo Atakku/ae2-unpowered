@@ -57,7 +57,6 @@ import appeng.datagen.providers.IAE2DataProvider;
 
 public class BlockDropProvider extends BlockLoot implements IAE2DataProvider {
     private final Map<Block, Function<Block, LootTable.Builder>> overrides = ImmutableMap.<Block, Function<Block, LootTable.Builder>>builder()
-            .put(AEBlocks.MATRIX_FRAME.block(), $ -> LootTable.lootTable())
             .put(AEBlocks.QUARTZ_ORE.block(), BlockDropProvider::createQuartzOreLootTable)
             .put(AEBlocks.DEEPSLATE_QUARTZ_ORE.block(), BlockDropProvider::createQuartzOreLootTable)
             .build();

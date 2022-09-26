@@ -161,9 +161,7 @@ public final class SiteExporter {
 
         var tunnelTypes = new ItemLike[] {
                 P2PTunnelAttunement.ME_TUNNEL,
-                P2PTunnelAttunement.ENERGY_TUNNEL,
                 P2PTunnelAttunement.ITEM_TUNNEL,
-                P2PTunnelAttunement.FLUID_TUNNEL,
                 P2PTunnelAttunement.REDSTONE_TUNNEL,
                 P2PTunnelAttunement.LIGHT_TUNNEL
         };
@@ -193,7 +191,7 @@ public final class SiteExporter {
         }
     }
 
-    private static void dumpColoredItem(ColoredItemDefinition itemDefinition, SiteExportWriter siteExport) {
+    private static void dumpColoredItem(ColoredItemDefinition<?> itemDefinition, SiteExportWriter siteExport) {
         var baseItem = itemDefinition.item(AEColor.TRANSPARENT);
         if (baseItem == null) {
             return;

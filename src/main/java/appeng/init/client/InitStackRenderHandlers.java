@@ -25,25 +25,19 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
 
-import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
 import appeng.api.client.AEStackRendering;
 import appeng.api.client.IAEStackRenderHandler;
-import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKeyType;
-import appeng.client.gui.style.FluidBlitter;
-import appeng.util.Platform;
 
 public class InitStackRenderHandlers {
     private InitStackRenderHandlers() {
@@ -51,7 +45,6 @@ public class InitStackRenderHandlers {
 
     public static void init() {
         AEStackRendering.register(AEKeyType.items(), AEItemKey.class, new ItemKeyRenderHandler());
-        AEStackRendering.register(AEKeyType.fluids(), AEFluidKey.class, new FluidKeyRenderHandler());
     }
 
     private static class ItemKeyRenderHandler implements IAEStackRenderHandler<AEItemKey> {
@@ -103,93 +96,6 @@ public class InitStackRenderHandlers {
             return stack.toStack().getTooltipLines(Minecraft.getInstance().player,
                     Minecraft.getInstance().options.advancedItemTooltips ? TooltipFlag.Default.ADVANCED
                             : TooltipFlag.Default.NORMAL);
-        }
-    }
-
-    private static class FluidKeyRenderHandler implements IAEStackRenderHandler<AEFluidKey> {
-        @Override
-        public void drawInGui(Minecraft minecraft, PoseStack poseStack, int x, int y, int zIndex,
-                AEFluidKey what) {
-            FluidBlitter.create(what)
-                    .dest(x, y, 16, 16)
-                    .blit(poseStack, 100 + zIndex);
-        }
-
-        @Override
-        public void drawOnBlockFace(PoseStack poseStack, MultiBufferSource buffers, AEFluidKey what, float scale,
-                int combinedLight) {
-            var variant = what.toVariant();
-            var color = FluidVariantRendering.getColor(variant);
-            var sprite = FluidVariantRendering.getSprite(variant);
-
-            if (sprite == null) {
-                return;
-            }
-
-            poseStack.pushPose();
-            // Push it out of the block face a bit to avoid z-fighting
-            poseStack.translate(0, 0, 0.01f);
-
-            var buffer = buffers.getBuffer(RenderType.solid());
-
-            // In comparison to items, make it _slightly_ smaller because item icons
-            // usually don't extend to the full size.
-            scale -= 0.05f;
-
-            // y is flipped here
-            var x0 = -scale / 2;
-            var y0 = scale / 2;
-            var x1 = scale / 2;
-            var y1 = -scale / 2;
-
-            var transform = poseStack.last().pose();
-            buffer.vertex(transform, x0, y1, 0)
-                    .color(color)
-                    .uv(sprite.getU0(), sprite.getV1())
-                    .overlayCoords(OverlayTexture.NO_OVERLAY)
-                    .uv2(combinedLight)
-                    .normal(0, 0, 1)
-                    .endVertex();
-            buffer.vertex(transform, x1, y1, 0)
-                    .color(color)
-                    .uv(sprite.getU1(), sprite.getV1())
-                    .overlayCoords(OverlayTexture.NO_OVERLAY)
-                    .uv2(combinedLight)
-                    .normal(0, 0, 1)
-                    .endVertex();
-            buffer.vertex(transform, x1, y0, 0)
-                    .color(color)
-                    .uv(sprite.getU1(), sprite.getV0())
-                    .overlayCoords(OverlayTexture.NO_OVERLAY)
-                    .uv2(combinedLight)
-                    .normal(0, 0, 1)
-                    .endVertex();
-            buffer.vertex(transform, x0, y0, 0)
-                    .color(color)
-                    .uv(sprite.getU0(), sprite.getV0())
-                    .overlayCoords(OverlayTexture.NO_OVERLAY)
-                    .uv2(combinedLight)
-                    .normal(0, 0, 1)
-                    .endVertex();
-            poseStack.popPose();
-        }
-
-        @Override
-        public Component getDisplayName(AEFluidKey stack) {
-            return FluidVariantRendering.getName(stack.toVariant());
-        }
-
-        @Override
-        public List<Component> getTooltip(AEFluidKey stack) {
-            var tooltip = FluidVariantRendering.getTooltip(stack.toVariant());
-
-            // Heuristic: If the last line doesn't include the modname, add it ourselves
-            var modName = Platform.formatModName(stack.getModId());
-            if (tooltip.isEmpty() || !tooltip.get(tooltip.size() - 1).getString().equals(modName)) {
-                tooltip.add(new TextComponent(modName));
-            }
-
-            return tooltip;
         }
     }
 }

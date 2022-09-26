@@ -69,22 +69,6 @@ public class DecorationBlockRecipes extends AE2RecipeProvider {
                 .unlockedBy(criterionName(AEItems.FLUIX_CRYSTAL), has(AEItems.FLUIX_CRYSTAL))
                 .save(consumer, AppEng.makeId("decorative/fluix_block"));
 
-        ShapedRecipeBuilder.shaped(AEBlocks.LIGHT_DETECTOR)
-                .pattern("ab")
-                .define('a', ConventionTags.ALL_NETHER_QUARTZ)
-                .define('b', Items.IRON_INGOT)
-                .unlockedBy("has_nether_quartz", has(ConventionTags.ALL_NETHER_QUARTZ))
-                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
-                .save(consumer, AppEng.makeId("decorative/light_detector"));
-
-        ShapedRecipeBuilder.shaped(AEBlocks.QUARTZ_FIXTURE, 2)
-                .pattern("ab")
-                .define('a', AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED)
-                .define('b', Items.IRON_INGOT)
-                .unlockedBy(criterionName(AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED),
-                        has(AEItems.CERTUS_QUARTZ_CRYSTAL_CHARGED))
-                .save(consumer, AppEng.makeId("decorative/quartz_fixture"));
-
         ShapedRecipeBuilder.shaped(AEBlocks.QUARTZ_GLASS, 4)
                 .pattern("aba")
                 .pattern("bab")

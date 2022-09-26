@@ -95,7 +95,6 @@ public class SkyChestBlock extends AEBaseEntityBlock<SkyChestBlockEntity> implem
         builder.add(WATERLOGGED);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.ENTITYBLOCK_ANIMATED;

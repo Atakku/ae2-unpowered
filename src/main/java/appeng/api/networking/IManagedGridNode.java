@@ -27,7 +27,6 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-import javax.annotation.Nonnegative;
 import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -124,11 +123,6 @@ public interface IManagedGridNode {
      * Changes the sides of the node's host this node is exposed on.
      */
     IManagedGridNode setExposedOnSides(Set<Direction> directions);
-
-    /**
-     * @param usagePerTick The power in AE/t that will be drained by this node.
-     */
-    IManagedGridNode setIdlePowerUsage(@Nonnegative double usagePerTick);
 
     /**
      * Sets an itemstack that will only be used to represent this grid node in user interfaces. Can be set to

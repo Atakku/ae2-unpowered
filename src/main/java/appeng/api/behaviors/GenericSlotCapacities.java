@@ -8,7 +8,6 @@ import org.jetbrains.annotations.ApiStatus;
 
 import net.minecraft.world.Container;
 
-import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.AEKeyType;
 import appeng.util.CowMap;
 
@@ -21,7 +20,6 @@ public class GenericSlotCapacities {
 
     static {
         register(AEKeyType.items(), (long) Container.LARGE_MAX_STACK_SIZE);
-        register(AEKeyType.fluids(), 4L * AEFluidKey.AMOUNT_BUCKET);
     }
 
     public static void register(AEKeyType type, Long capacity) {

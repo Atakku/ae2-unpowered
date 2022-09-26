@@ -4,7 +4,6 @@ import org.jetbrains.annotations.Nullable;
 
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiCache;
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.TransferVariant;
@@ -55,15 +54,6 @@ public class FabricExternalStorageStrategy<V extends TransferVariant<?>> impleme
         return new FabricExternalStorageStrategy<>(
                 ItemStorage.SIDED,
                 IVariantConversion.ITEM,
-                level,
-                fromPos,
-                fromSide);
-    }
-
-    public static ExternalStorageStrategy createFluid(ServerLevel level, BlockPos fromPos, Direction fromSide) {
-        return new FabricExternalStorageStrategy<>(
-                FluidStorage.SIDED,
-                IVariantConversion.FLUID,
                 level,
                 fromPos,
                 fromSide);

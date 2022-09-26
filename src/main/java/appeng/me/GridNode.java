@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.annotation.Nonnegative;
 import javax.annotation.Nullable;
 
 import com.google.common.base.Preconditions;
@@ -54,7 +53,6 @@ import appeng.api.networking.IGridNode;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.networking.IGridNodeService;
 import appeng.api.networking.IGridVisitor;
-import appeng.api.networking.events.GridPowerIdleChange;
 import appeng.api.networking.pathing.ChannelMode;
 import appeng.api.parts.IPart;
 import appeng.api.stacks.AEItemKey;
@@ -254,16 +252,6 @@ public class GridNode implements IGridNode, IPathItem {
     }
 
     /**
-     * @param usagePerTick The power in AE/t that will be drained by this node.
-     */
-    public void setIdlePowerUsage(@Nonnegative double usagePerTick) {
-        this.idlePowerUsage = usagePerTick;
-        if (myGrid != null && ready) {
-            myGrid.postEvent(new GridPowerIdleChange(this));
-        }
-    }
-
-    /**
      * Sets an itemstack that will only be used to represent this grid node in user interfaces. Can be set to
      * <code>null</code> to hide the node from UIs.
      */
@@ -419,7 +407,7 @@ public class GridNode implements IGridNode, IPathItem {
         if (myGrid == null) {
             return false;
         }
-        return myGrid.getEnergyService().isNetworkPowered();
+        return true;
     }
 
     public void loadFromNBT(String name, CompoundTag nodeData) {

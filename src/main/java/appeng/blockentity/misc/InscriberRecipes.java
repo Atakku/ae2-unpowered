@@ -24,19 +24,13 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Iterables;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 
 import appeng.core.AppEng;
-import appeng.core.definitions.AEItems;
-import appeng.items.materials.NamePressItem;
-import appeng.recipes.handlers.InscriberProcessType;
 import appeng.recipes.handlers.InscriberRecipe;
 
 /**
@@ -62,17 +56,6 @@ public final class InscriberRecipes {
     @Nullable
     public static InscriberRecipe findRecipe(Level level, ItemStack input, ItemStack plateA, ItemStack plateB,
             boolean supportNamePress) {
-        if (supportNamePress) {
-            boolean isNameA = AEItems.NAME_PRESS.isSameAs(plateA);
-            boolean isNameB = AEItems.NAME_PRESS.isSameAs(plateB);
-
-            if (isNameA && isNameB || isNameA && plateB.isEmpty()) {
-                return makeNamePressRecipe(input, plateA, plateB);
-            } else if (plateA.isEmpty() && isNameB) {
-                return makeNamePressRecipe(input, plateB, plateA);
-            }
-        }
-
         for (InscriberRecipe recipe : getRecipes(level)) {
             // The recipe can be flipped at will
             final boolean matchA = recipe.getTopOptional().test(plateA) && recipe.getBottomOptional().test(plateB);
@@ -84,35 +67,6 @@ public final class InscriberRecipes {
         }
 
         return null;
-    }
-
-    private static InscriberRecipe makeNamePressRecipe(ItemStack input, ItemStack plateA, ItemStack plateB) {
-        String name = "";
-
-        if (!plateA.isEmpty()) {
-            final CompoundTag tag = plateA.getOrCreateTag();
-            name += tag.getString(NamePressItem.TAG_INSCRIBE_NAME);
-        }
-
-        if (!plateB.isEmpty()) {
-            final CompoundTag tag = plateB.getOrCreateTag();
-            name += " " + tag.getString(NamePressItem.TAG_INSCRIBE_NAME);
-        }
-
-        final Ingredient startingItem = Ingredient.of(input.copy());
-        final ItemStack renamedItem = input.copy();
-
-        if (!name.isEmpty()) {
-            renamedItem.setHoverName(new TextComponent(name));
-        } else {
-            renamedItem.setHoverName(null);
-        }
-
-        final InscriberProcessType type = InscriberProcessType.INSCRIBE;
-
-        return new InscriberRecipe(NAMEPLATE_RECIPE_ID, startingItem, renamedItem,
-                plateA.isEmpty() ? Ingredient.EMPTY : Ingredient.of(plateA),
-                plateB.isEmpty() ? Ingredient.EMPTY : Ingredient.of(plateB), type);
     }
 
     /**

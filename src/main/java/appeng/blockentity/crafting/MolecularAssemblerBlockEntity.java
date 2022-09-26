@@ -38,8 +38,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import appeng.api.config.Actionable;
-import appeng.api.config.PowerMultiplier;
 import appeng.api.crafting.IPatternDetails;
 import appeng.api.crafting.PatternDetailsHelper;
 import appeng.api.implementations.IPowerChannelState;
@@ -52,7 +50,6 @@ import appeng.api.networking.ticking.IGridTickable;
 import appeng.api.networking.ticking.TickRateModulation;
 import appeng.api.networking.ticking.TickingRequest;
 import appeng.api.stacks.AEItemKey;
-import appeng.api.stacks.GenericStack;
 import appeng.api.stacks.KeyCounter;
 import appeng.api.upgrades.IUpgradeInventory;
 import appeng.api.upgrades.IUpgradeableObject;
@@ -106,7 +103,6 @@ public class MolecularAssemblerBlockEntity extends AENetworkInvBlockEntity
         super(blockEntityType, pos, blockState);
 
         this.getMainNode()
-                .setIdlePowerUsage(0.0)
                 .addService(IGridTickable.class, this);
         this.upgrades = UpgradeInventories.forMachine(AEBlocks.MOLECULAR_ASSEMBLER, getUpgradeSlots(),
                 this::saveChanges);
@@ -156,20 +152,6 @@ public class MolecularAssemblerBlockEntity extends AENetworkInvBlockEntity
             int inputId = adapter.getCompressedIndexFromSparse(sparseIndex);
             if (inputId != -1) {
                 var list = table[inputId];
-
-                // Try substituting with a fluid, if allowed and available
-                var validFluid = myPlan.getValidFluid(sparseIndex);
-                if (validFluid != null) {
-                    var validFluidKey = validFluid.what();
-                    var amount = list.get(validFluidKey);
-                    int requiredAmount = (int) validFluid.amount();
-                    if (amount >= requiredAmount) {
-                        this.gridInv.setItemDirect(sparseIndex,
-                                GenericStack.wrapInItemStack(validFluidKey, requiredAmount));
-                        list.remove(validFluidKey, requiredAmount);
-                        continue;
-                    }
-                }
 
                 // Try falling back to whatever is available
                 for (var entry : list) {
@@ -485,8 +467,7 @@ public class MolecularAssemblerBlockEntity extends AENetworkInvBlockEntity
     private int userPower(int ticksPassed, int bonusValue, double acceleratorTax) {
         var grid = getMainNode().getGrid();
         if (grid != null) {
-            return (int) (grid.getEnergyService().extractAEPower(ticksPassed * bonusValue * acceleratorTax,
-                    Actionable.MODULATE, PowerMultiplier.CONFIG) / acceleratorTax);
+            return ticksPassed * bonusValue;
         } else {
             return 0;
         }
@@ -543,8 +524,7 @@ public class MolecularAssemblerBlockEntity extends AENetworkInvBlockEntity
 
             var grid = getMainNode().getGrid();
             if (grid != null) {
-                newState = this.getMainNode().isPowered() && grid.getEnergyService().extractAEPower(1,
-                        Actionable.SIMULATE, PowerMultiplier.CONFIG) > 0.0001;
+                newState = this.getMainNode().isPowered();
             }
 
             if (newState != this.isPowered) {

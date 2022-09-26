@@ -24,7 +24,6 @@ import appeng.server.services.compass.TestCompassCommand;
 import appeng.server.subcommands.ChannelModeCommand;
 import appeng.server.subcommands.ChunkLogger;
 import appeng.server.subcommands.SetupTestWorldCommand;
-import appeng.server.subcommands.SpatialStorageCommand;
 import appeng.server.subcommands.Supporters;
 import appeng.server.subcommands.TestMeteoritesCommand;
 import appeng.server.subcommands.TestOreGenCommand;
@@ -36,7 +35,6 @@ public enum Commands {
 
     // Admin
     Chunklogger(4, new ChunkLogger()),
-    Spatial(4, new SpatialStorageCommand()),
     CHANNEL_MODE(4, "channelmode", new ChannelModeCommand()),
     TICK_MONITORING(4, "tickmonitor", new TickMonitoring()),
 

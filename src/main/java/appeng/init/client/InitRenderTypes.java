@@ -42,12 +42,6 @@ public final class InitRenderTypes {
             AEBlocks.MOLECULAR_ASSEMBLER,
             AEBlocks.QUARTZ_GLASS,
             AEBlocks.QUARTZ_VIBRANT_GLASS,
-            AEBlocks.QUARTZ_FIXTURE,
-            AEBlocks.LIGHT_DETECTOR,
-            AEBlocks.WIRELESS_ACCESS_POINT,
-            AEBlocks.PAINT,
-            AEBlocks.QUANTUM_RING,
-            AEBlocks.QUANTUM_LINK,
             AEBlocks.CHEST,
             AEBlocks.DRIVE,
             AEBlocks.CRAFTING_UNIT,
@@ -56,9 +50,7 @@ public final class InitRenderTypes {
             AEBlocks.CRAFTING_STORAGE_4K,
             AEBlocks.CRAFTING_STORAGE_16K,
             AEBlocks.CRAFTING_STORAGE_64K,
-            AEBlocks.CRAFTING_STORAGE_256K,
-            AEBlocks.SPATIAL_PYLON,
-            AEBlocks.SKY_STONE_TANK
+            AEBlocks.CRAFTING_STORAGE_256K
     };
 
     private InitRenderTypes() {

@@ -60,11 +60,7 @@ public class CableAnchorPart implements IPart {
 
     @Override
     public void getBoxes(IPartCollisionHelper bch) {
-        if (this.host != null && this.host.getFacadeContainer().getFacade(this.mySide) != null) {
-            bch.addBox(7, 7, 10, 9, 9, 14);
-        } else {
-            bch.addBox(7, 7, 10, 9, 9, 16);
-        }
+        bch.addBox(7, 7, 10, 9, 9, 16);
     }
 
     @Override
@@ -95,11 +91,7 @@ public class CableAnchorPart implements IPart {
 
     @Override
     public IPartModel getStaticModels() {
-        if (this.host != null && this.host.getFacadeContainer().getFacade(this.mySide) != null) {
-            return FACADE_MODELS;
-        } else {
-            return DEFAULT_MODELS;
-        }
+        return DEFAULT_MODELS;
     }
 
 }

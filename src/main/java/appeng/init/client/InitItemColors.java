@@ -20,7 +20,6 @@ package appeng.init.client;
 
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
 import appeng.api.util.AEColor;
@@ -28,12 +27,9 @@ import appeng.client.render.StaticItemColor;
 import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.AEItems;
 import appeng.core.definitions.ItemDefinition;
-import appeng.items.misc.PaintBallItem;
 import appeng.items.parts.ColoredPartItem;
 import appeng.items.parts.PartItem;
 import appeng.items.storage.BasicStorageCell;
-import appeng.items.tools.powered.ColorApplicatorItem;
-import appeng.items.tools.powered.PortableCellItem;
 
 public final class InitItemColors {
     private InitItemColors() {
@@ -44,19 +40,11 @@ public final class InitItemColors {
         // I checked, the ME chest doesn't keep its color in item form
         itemColors.register(new StaticItemColor(AEColor.TRANSPARENT), AEBlocks.CHEST.asItem());
 
-        itemColors.register(InitItemColors::getColorApplicatorColor, AEItems.COLOR_APPLICATOR);
-
-        itemColors.register(PortableCellItem::getColor, AEItems.PORTABLE_ITEM_CELL1K, AEItems.PORTABLE_FLUID_CELL1K,
-                AEItems.PORTABLE_ITEM_CELL4K, AEItems.PORTABLE_FLUID_CELL4K,
-                AEItems.PORTABLE_ITEM_CELL16K, AEItems.PORTABLE_FLUID_CELL16K,
-                AEItems.PORTABLE_ITEM_CELL64K, AEItems.PORTABLE_FLUID_CELL64K,
-                AEItems.PORTABLE_ITEM_CELL256K, AEItems.PORTABLE_FLUID_CELL256K);
-
-        itemColors.register(BasicStorageCell::getColor, AEItems.ITEM_CELL_1K, AEItems.FLUID_CELL_1K,
-                AEItems.ITEM_CELL_4K, AEItems.FLUID_CELL_4K,
-                AEItems.ITEM_CELL_16K, AEItems.FLUID_CELL_16K,
-                AEItems.ITEM_CELL_64K, AEItems.FLUID_CELL_64K,
-                AEItems.ITEM_CELL_256K, AEItems.FLUID_CELL_256K);
+        itemColors.register(BasicStorageCell::getColor, AEItems.ITEM_CELL_1K,
+                AEItems.ITEM_CELL_4K,
+                AEItems.ITEM_CELL_16K,
+                AEItems.ITEM_CELL_64K,
+                AEItems.ITEM_CELL_256K);
 
         // Automatically register colors for certain items we register
         for (ItemDefinition<?> definition : AEItems.getItems()) {
@@ -67,52 +55,8 @@ public final class InitItemColors {
                     color = ((ColoredPartItem<?>) item).getColor();
                 }
                 itemColors.register(new StaticItemColor(color), item);
-            } else if (item instanceof PaintBallItem) {
-                registerPaintBall(itemColors, (PaintBallItem) item);
             }
         }
-    }
-
-    /**
-     * We use a white base item icon for paint balls. This applies the correct color to it.
-     */
-    private static void registerPaintBall(Registry colors, PaintBallItem item) {
-        AEColor color = item.getColor();
-        final int colorValue = item.isLumen() ? color.mediumVariant : color.mediumVariant;
-        final int r = colorValue >> 16 & 0xff;
-        final int g = colorValue >> 8 & 0xff;
-        final int b = colorValue & 0xff;
-
-        int renderColor;
-        if (item.isLumen()) {
-            final float fail = 0.7f;
-            final int full = (int) (255 * 0.3);
-            renderColor = (int) (full + r * fail) << 16 | (int) (full + g * fail) << 8 | (int) (full + b * fail)
-                    | 0xff << 24;
-        } else {
-            renderColor = r << 16 | g << 8 | b | 0xff << 24;
-        }
-
-        colors.register((is, tintIndex) -> renderColor, item);
-    }
-
-    private static int getColorApplicatorColor(ItemStack itemStack, int idx) {
-        if (idx == 0) {
-            return -1;
-        }
-
-        final AEColor col = ((ColorApplicatorItem) itemStack.getItem()).getActiveColor(itemStack);
-
-        if (col == null) {
-            return -1;
-        }
-
-        return switch (idx) {
-            case 1 -> col.blackVariant;
-            case 2 -> col.mediumVariant;
-            case 3 -> col.whiteVariant;
-            default -> -1;
-        };
     }
 
     @FunctionalInterface

@@ -23,10 +23,7 @@ import net.minecraft.world.inventory.MenuType;
 
 import appeng.menu.implementations.CellWorkbenchMenu;
 import appeng.menu.implementations.ChestMenu;
-import appeng.menu.implementations.CondenserMenu;
 import appeng.menu.implementations.DriveMenu;
-import appeng.menu.implementations.EnergyLevelEmitterMenu;
-import appeng.menu.implementations.FormationPlaneMenu;
 import appeng.menu.implementations.IOBusMenu;
 import appeng.menu.implementations.IOPortMenu;
 import appeng.menu.implementations.InscriberMenu;
@@ -35,25 +32,17 @@ import appeng.menu.implementations.InterfaceTerminalMenu;
 import appeng.menu.implementations.MolecularAssemblerMenu;
 import appeng.menu.implementations.PatternProviderMenu;
 import appeng.menu.implementations.PriorityMenu;
-import appeng.menu.implementations.QNBMenu;
 import appeng.menu.implementations.QuartzKnifeMenu;
 import appeng.menu.implementations.SecurityStationMenu;
 import appeng.menu.implementations.SetStockAmountMenu;
 import appeng.menu.implementations.SkyChestMenu;
-import appeng.menu.implementations.SpatialAnchorMenu;
-import appeng.menu.implementations.SpatialIOPortMenu;
 import appeng.menu.implementations.StorageBusMenu;
 import appeng.menu.implementations.StorageLevelEmitterMenu;
-import appeng.menu.implementations.VibrationChamberMenu;
-import appeng.menu.implementations.WirelessMenu;
-import appeng.menu.me.common.MEStorageMenu;
 import appeng.menu.me.crafting.CraftAmountMenu;
 import appeng.menu.me.crafting.CraftConfirmMenu;
 import appeng.menu.me.crafting.CraftingCPUMenu;
 import appeng.menu.me.crafting.CraftingStatusMenu;
 import appeng.menu.me.items.*;
-import appeng.menu.me.networktool.NetworkStatusMenu;
-import appeng.menu.me.networktool.NetworkToolMenu;
 
 public final class InitMenuTypes {
 
@@ -64,43 +53,29 @@ public final class InitMenuTypes {
         registerAll(registry,
                 CellWorkbenchMenu.TYPE,
                 ChestMenu.TYPE,
-                CondenserMenu.TYPE,
                 CraftAmountMenu.TYPE,
                 CraftConfirmMenu.TYPE,
                 CraftingCPUMenu.TYPE,
                 CraftingStatusMenu.TYPE,
                 CraftingTermMenu.TYPE,
                 DriveMenu.TYPE,
-                EnergyLevelEmitterMenu.TYPE,
-                FormationPlaneMenu.TYPE,
                 IOBusMenu.EXPORT_TYPE,
                 IOBusMenu.IMPORT_TYPE,
                 IOPortMenu.TYPE,
                 InscriberMenu.TYPE,
                 InterfaceMenu.TYPE,
                 InterfaceTerminalMenu.TYPE,
-                MEStorageMenu.TYPE,
-                MEStorageMenu.PORTABLE_FLUID_CELL_TYPE,
-                MEStorageMenu.PORTABLE_ITEM_CELL_TYPE,
-                MEStorageMenu.WIRELESS_TYPE,
                 MolecularAssemblerMenu.TYPE,
-                NetworkStatusMenu.TYPE,
-                NetworkToolMenu.TYPE,
                 PatternProviderMenu.TYPE,
                 PatternEncodingTermMenu.TYPE,
                 PriorityMenu.TYPE,
-                QNBMenu.TYPE,
                 QuartzKnifeMenu.TYPE,
                 SecurityStationMenu.TYPE,
                 SetStockAmountMenu.TYPE,
                 SkyChestMenu.TYPE,
-                SpatialAnchorMenu.TYPE,
-                SpatialIOPortMenu.TYPE,
                 StorageBusMenu.TYPE,
                 StorageLevelEmitterMenu.TYPE,
-                VibrationChamberMenu.TYPE,
-                WirelessCraftingTermMenu.TYPE,
-                WirelessMenu.TYPE);
+                WirelessCraftingTermMenu.TYPE);
     }
 
     private static void registerAll(Registry<MenuType<?>> registry, MenuType<?>... types) {

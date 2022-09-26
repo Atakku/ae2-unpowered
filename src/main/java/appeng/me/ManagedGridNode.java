@@ -87,7 +87,6 @@ public class ManagedGridNode implements IManagedGridNode {
             }
             node.setGridColor(gridColor);
             node.setOwningPlayerId(owner);
-            node.setIdlePowerUsage(idlePowerUsage);
             node.setVisualRepresentation(visualRepresentation);
             if (services != null) {
                 for (var serviceClass : services.keySet()) {
@@ -227,7 +226,7 @@ public class ManagedGridNode implements IManagedGridNode {
     @Override
     public boolean isPowered() {
         var grid = getGrid();
-        return grid != null && grid.getEnergyService().isNetworkPowered();
+        return grid != null;
     }
 
     @Override
@@ -270,16 +269,6 @@ public class ManagedGridNode implements IManagedGridNode {
             getInitData().exposedOnSides = ImmutableSet.copyOf(directions);
         } else {
             node.setExposedOnSides(directions);
-        }
-        return this;
-    }
-
-    @Override
-    public ManagedGridNode setIdlePowerUsage(double usagePerTick) {
-        if (node == null) {
-            getInitData().idlePowerUsage = usagePerTick;
-        } else {
-            node.setIdlePowerUsage(usagePerTick);
         }
         return this;
     }

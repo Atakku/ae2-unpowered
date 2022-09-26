@@ -23,12 +23,11 @@
 
 package appeng.api.implementations.menuobjects;
 
-import appeng.api.networking.energy.IEnergySource;
 import appeng.api.storage.ITerminalHost;
 
 /**
  * Obtained via {@link IMenuItem} getMenuHost
  */
-public interface IPortableTerminal extends ITerminalHost, IEnergySource {
+public interface IPortableTerminal extends ITerminalHost {
 
 }

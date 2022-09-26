@@ -87,7 +87,6 @@ public final class ConventionTags {
     public static TagKey<Item> GLOWSTONE = tag("c:glowstone_dusts");
 
     public static TagKey<Item> ENDER_PEARL = tag("c:ender_pearls");
-    public static TagKey<Item> ENDER_PEARL_DUST = tag("c:ender_pearl_dusts");
 
     public static TagKey<Item> WOOD_STICK = tag("c:wooden_rods");
     public static TagKey<Item> CHEST = tag("c:wooden_chests");
@@ -104,15 +103,7 @@ public final class ConventionTags {
     public static TagKey<Item> ILLUMINATED_PANEL = tag("ae2:illuminated_panel");
     public static TagKey<Item> INTERFACE = tag("ae2:interface");
     public static TagKey<Item> PATTERN_PROVIDER = tag("ae2:pattern_provider");
-    public static TagKey<Item> QUARTZ_AXE = tag("ae2:quartz_axe");
-    public static TagKey<Item> QUARTZ_HOE = tag("ae2:quartz_hoe");
-    public static TagKey<Item> QUARTZ_PICK = tag("ae2:quartz_pickaxe");
-    public static TagKey<Item> QUARTZ_SHOVEL = tag("ae2:quartz_shovel");
-    public static TagKey<Item> QUARTZ_SWORD = tag("ae2:quartz_sword");
-    public static TagKey<Item> QUARTZ_WRENCH = tag("ae2:quartz_wrench");
     public static TagKey<Item> QUARTZ_KNIFE = tag("ae2:knife");
-    public static TagKey<Item> PAINT_BALLS = tag("ae2:paint_balls");
-    public static TagKey<Item> MEMORY_CARDS = tag("ae2:memory_cards");
     /**
      * Items that can be used in recipes to remove color from colored items.
      */

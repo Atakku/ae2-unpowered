@@ -23,32 +23,11 @@
 
 package appeng.api.implementations.blockentities;
 
-import javax.annotation.Nullable;
+import appeng.me.helpers.IGridConnectedBlockEntity;
 
-import appeng.api.networking.IGrid;
-import appeng.api.networking.security.IActionHost;
-import appeng.api.util.DimensionalBlockPos;
-
-public interface IWirelessAccessPoint extends IActionHost {
-
+public interface IAcessPoint extends IGridConnectedBlockEntity {
     /**
-     * @return location of WAP
-     */
-    DimensionalBlockPos getLocation();
-
-    /**
-     * @return max range for this WAP
-     */
-    double getRange();
-
-    /**
-     * @return can you use this WAP?
+     * @return can you use this AP
      */
     boolean isActive();
-
-    /**
-     * @return grid of linked WAP
-     */
-    @Nullable
-    IGrid getGrid();
 }

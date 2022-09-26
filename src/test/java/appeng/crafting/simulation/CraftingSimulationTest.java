@@ -11,13 +11,10 @@ import org.junit.jupiter.api.Test;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
 
 import appeng.api.crafting.IPatternDetails;
 import appeng.api.networking.crafting.CalculationStrategy;
 import appeng.api.networking.crafting.ICraftingPlan;
-import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.GenericStack;
 import appeng.api.stacks.KeyCounter;
@@ -69,40 +66,6 @@ public class CraftingSimulationTest {
     }
 
     @Test
-    public void testWaterSubstitution() {
-        var env = new SimulationEnv();
-
-        var waterBucket = item(Items.WATER_BUCKET);
-        var dirt = item(Items.DIRT);
-        var grass = item(Items.GRASS);
-        var water1mb = fluid(Fluids.WATER, 1);
-        var water1000mb = mult(water1mb, 1000);
-
-        // 1 dirt + 2x [1000 water or 1 water bucket] -> 1 grass.
-        var grassPattern = env.addPattern(new ProcessingPatternBuilder(grass)
-                .addPreciseInput(1, dirt)
-                .addPreciseInput(2, water1000mb, waterBucket)
-                .build());
-
-        // Dirt is infinite.
-        env.addEmitable(dirt.what());
-
-        // Let's add 1 stored water bucket and 3500 mb.
-        // We add a little bit more water to test that exact multiples of the template get extracted.
-        env.addStoredItem(waterBucket);
-        env.addStoredItem(fluid(Fluids.WATER, 3500));
-
-        // Crafting should use the water bucket from the network and then the water directly.
-        var plan = env.runSimulation(new GenericStack(grass.what(), 2), CalculationStrategy.REPORT_MISSING_ITEMS);
-        assertThatPlan(plan)
-                .succeeded()
-                .patternsMatch(grassPattern, 2)
-                .emittedMatch(mult(dirt, 2))
-                .usedMatch(mult(waterBucket, 1), mult(water1mb, 3000))
-                .bytesMatch(3, 8, 0);
-    }
-
-    @Test
     public void testMultiplePlanks() {
         var env = new SimulationEnv();
 
@@ -149,58 +112,9 @@ public class CraftingSimulationTest {
     }
 
     @Test
-    public void testReusedBuckets() {
-        var env = new SimulationEnv();
-
-        var emptyBucket = item(Items.BUCKET);
-        var waterBucket = item(Items.WATER_BUCKET);
-        var grass = item(Items.GRASS);
-        var dirt = item(Items.DIRT);
-        var water1000mb = fluid(Fluids.WATER, 1000);
-
-        var grassPattern = env.addPattern(new ProcessingPatternBuilder(grass)
-                .addPreciseInput(1, dirt)
-                .addPreciseInput(1, true, waterBucket)
-                .build());
-        var bucketFilling = env.addPattern(new ProcessingPatternBuilder(waterBucket)
-                .addPreciseInput(1, emptyBucket)
-                .addPreciseInput(1, water1000mb)
-                .build());
-
-        env.addStoredItem(emptyBucket);
-        env.addStoredItem(mult(dirt, 10000));
-        env.addEmitable(water1000mb.what());
-
-        var plan = env.runSimulation(mult(grass, 100), CalculationStrategy.REPORT_MISSING_ITEMS);
-        assertThatPlan(plan)
-                .succeeded()
-                .patternsMatch(grassPattern, 100, bucketFilling, 100)
-                .emittedMatch(mult(water1000mb, 100))
-                .usedMatch(emptyBucket, mult(dirt, 100))
-                .bytesMatch(5, 500, 100);
-        // the important thing is that the bucket was reused, so only 1 needed to be extracted from the network!
-    }
-
-    @Test
     public void testDamagedOutput() {
         testDamagedOutput(false);
         testDamagedOutput(true);
-    }
-
-    @Test
-    public void testNonsensicalRecursivePattern() {
-        var env = new SimulationEnv();
-
-        var water1B = fluid(Fluids.WATER, 1000);
-
-        env.addPattern(new ProcessingPatternBuilder(water1B)
-                .addPreciseInput(1, water1B)
-                .build());
-
-        env.addStoredItem(water1B);
-
-        var plan = env.runSimulation(water1B, CalculationStrategy.REPORT_MISSING_ITEMS);
-        assertThatPlan(plan).failed();
     }
 
     public void testDamagedOutput(boolean branching) {
@@ -356,8 +270,7 @@ public class CraftingSimulationTest {
         var alternativeIngredient = item(Items.GOLD_INGOT);
 
         var targetPattern = env.addPattern(new ProcessingPatternBuilder(output).addPreciseInput(3, reusedItem).build());
-        var alternativePattern = env
-                .addPattern(new ProcessingPatternBuilder(output).addPreciseInput(1, alternativeIngredient).build());
+        env.addPattern(new ProcessingPatternBuilder(output).addPreciseInput(1, alternativeIngredient).build());
         var sourcePattern = env
                 .addPattern(new ProcessingPatternBuilder(mult(reusedItem, 4)).addPreciseInput(1, sourceItem).build());
 
@@ -372,11 +285,6 @@ public class CraftingSimulationTest {
 
     private static GenericStack item(Item item) {
         return GenericStack.fromItemStack(new ItemStack(item));
-    }
-
-    private static GenericStack fluid(Fluid fluid, int amount) {
-        // The tag prevents a ClassCastException when Fluid is cast to FluidVariantCache
-        return new GenericStack(AEFluidKey.of(fluid), amount * AEFluidKey.AMOUNT_BUCKET / 1000);
     }
 
     private static GenericStack mult(GenericStack template, long multiplier) {

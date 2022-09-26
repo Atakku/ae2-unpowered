@@ -98,7 +98,7 @@ public class CraftingTermMenu extends MEStorageMenu implements IMenuCraftingPack
         }
 
         this.addSlot(this.outputSlot = new CraftingTermSlot(this.getPlayerInventory().player, this.getActionSource(),
-                this.powerSource, host.getInventory(), craftingGridInv, craftingGridInv, this),
+                host.getInventory(), craftingGridInv, craftingGridInv, this),
                 SlotSemantics.CRAFTING_RESULT);
 
         updateCurrentRecipeAndOutput(true);

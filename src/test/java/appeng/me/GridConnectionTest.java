@@ -143,9 +143,9 @@ class GridConnectionTest extends AbstractGridNodeTest {
          */
         @Test
         void testMergeGridsPreferPoweredGridA() throws Exception {
-            var a = makePoweredNode();
+            var a = makeReadyNode();
             var gridA = a.getInternalGrid();
-            var b = makePoweredNode();
+            var b = makeReadyNode();
             b.getInternalGrid();
             assertNotNull(b.getGrid());
 
@@ -162,7 +162,7 @@ class GridConnectionTest extends AbstractGridNodeTest {
             var a = makeNode();
             a.getInternalGrid();
             assertNotNull(a.getGrid());
-            var b = makePoweredNode();
+            var b = makeReadyNode();
             var gridB = b.getInternalGrid();
 
             GridConnection.create(a, b, null);

@@ -34,6 +34,7 @@ import appeng.api.networking.IGridNode;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.util.AEColor;
 import appeng.core.AELog;
+import appeng.core.AppEngServerStartup;
 import appeng.hooks.ticking.TickHandler;
 
 /**
@@ -55,6 +56,9 @@ public class InWorldGridNode extends GridNode {
 
     @Override
     protected void findInWorldConnections() {
+        if (AppEngServerStartup.DISABLE_AE2_NETWORKS) {
+            return;
+        }
         final EnumSet<Direction> newSecurityConnections = EnumSet.noneOf(Direction.class);
 
         // Clean up any connections that we might have left over to nodes that we can no longer reach

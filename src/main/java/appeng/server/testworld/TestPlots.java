@@ -74,7 +74,7 @@ public final class TestPlots {
             .put(AppEng.makeId("insert_item_into_mechest"), TestPlots::testInsertItemsIntoMEChest)
             .put(AppEng.makeId("maxchannels_adhoctest"), TestPlots::maxChannelsAdHocTest)
             //.put(AppEng.makeId("blockingmode_subnetwork_chesttest"), TestPlots::blockingModeSubnetworkChestTest)
-            //.put(AppEng.makeId("canceling_jobs_from_interfacecrash"), TestPlots::cancelingJobsFromInterfaceCrash)
+            .put(AppEng.makeId("canceling_jobs_from_interfacecrash"), TestPlots::cancelingJobsFromInterfaceCrash)
             .put(AppEng.makeId("terminal_fullof_enchanteditems"), TestPlots::terminalFullOfEnchantedItems)
             .put(AppEng.makeId("p2p_me"), P2PTestPlots::me)
             .put(AppEng.makeId("p2p_items"), P2PTestPlots::item)
@@ -532,7 +532,9 @@ public final class TestPlots {
                                     new GenericStack[] { output }));
                     pp.getLogic().getConfigManager().putSetting(Settings.BLOCKING_MODE, YesNo.YES);
                 });
-        plot.drive(new BlockPos(2, 0, -1));
+        plot.drive(new BlockPos(2, 0, -1))
+            .addItemCell64k().add(input);
+        plot.cable("3 -1 0");
         // Subnetwork
         plot.cable("3 0 0")
                 .part(Direction.WEST, AEParts.INTERFACE)
@@ -560,6 +562,7 @@ public final class TestPlots {
      */
     public static void cancelingJobsFromInterfaceCrash(PlotBuilder plot) {
         var origin = BlockPos.ZERO;
+        plot.cable(origin);
 
         // Stock 1 oak_plank via crafting
         plot.blockEntity(origin.above(), AEBlocks.INTERFACE, iface -> {

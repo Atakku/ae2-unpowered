@@ -47,7 +47,7 @@ public final class AEEntities {
             "Growing Crystal",
             GrowingCrystalEntity::new,
             MobCategory.MISC,
-            builder -> builder.sized(0.25F, 0.4F));
+            builder -> builder.sized(0.25f, 0.25f));
 
     private static <T extends Entity> EntityType<T> create(String id,
             String englishName,

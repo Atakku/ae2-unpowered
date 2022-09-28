@@ -194,4 +194,25 @@ public final class GrowingCrystalEntity extends AEBaseItemEntity {
 
         return te instanceof ICrystalGrowthAccelerator && ((ICrystalGrowthAccelerator) te).isPowered();
     }
+
+    @Override
+    protected void setUnderwaterMovement() {
+        ItemStack item = getItem();
+
+        // Make ungrown seeds sink, and fully grown seeds bouyant allowing for
+        // automation based around dropping seeds between 5 CGAs, then catchiung
+        // them on their way up.
+        if (item.getItem() instanceof CrystalSeedItem) {
+            Vec3 v = this.getDeltaMovement();
+
+            // Apply a much smaller acceleration to make them slowly sink
+            double yAccel = this.isNoGravity() ? 0 : -0.002;
+
+            // Apply the x/z slow-down, and the y acceleration
+            this.setDeltaMovement(v.x * 0.99, v.y + yAccel, v.z * 0.99);
+
+            return;
+        }
+        super.setUnderwaterMovement();
+    }
 }

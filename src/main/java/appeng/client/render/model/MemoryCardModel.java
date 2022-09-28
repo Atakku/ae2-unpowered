@@ -35,7 +35,6 @@ import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelState;
 import net.minecraft.resources.ResourceLocation;
 
-import appeng.api.util.AEColor;
 import appeng.client.render.BasicUnbakedModel;
 import appeng.core.AppEng;
 
